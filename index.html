@@ -531,9 +531,42 @@ The [[HED|http://code.google.com/p/edla-hed/]] theorem prover is free software, 
 <pre>Welcome to [[EDLA|http://www.edla.org]]
 This site focus on automated theorem proving (ATP) or automated deduction which is a subfield of automated reasoning. </pre>
 </div>
+<div title="Handbook of practical logic and automated reasoning : resume" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104232119" tags="atp book resume" changecount="1">
+<pre>* Preface
+** What's not in the book
+*** model checking
+*** inductive theorem proving
+*** many-sorted logic
+*** modal logic
+*** description logics
+*** intuitionistic logic
+*** lambda calculus
+*** higher-order logic
+*** type theory
+* Introduction</pre>
+</div>
 <div title="MainMenu" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201103191830" changecount="1">
 <pre>[[About]]
 [[Resources]]</pre>
+</div>
+<div title="Programming in Scala 2nd : resume" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104232118" tags="scala book resume" changecount="1">
+<pre>* Chapter 1 · A Scalable Language
+** Functional programming is guided by two main ideas
+*** functions are first-class values
+*** methods should not have any side effects
+* Chapter 2 · First Steps in Scala
+** recursive function =&gt; explicit result type
+** function literal : args.foreach(arg =&gt; println(arg))
+** You can say “in” for the &lt;- symbol. You’d read for (arg &lt;- args), therefore, as “for arg in args.”
+* Chapter 3 · Next Steps in Scala
+** If a method name ends in a colon, the method is invoked on the right operand
+** arrays are always mutable; lists are always immutable
+** Scala provides mutable and immutable alternatives for sets and maps, but uses the same simple names for both versions
+** The telltale sign of a function with side effects is that its result type is Unit
+** Prefer vals, immutable objects, and methods without side effects
+* Chapter 4 · Classes and Objects
+** Public is Scala’s default access level
+** One important characteristic of method parameters in Scala is that they are vals, not vars</pre>
 </div>
 <div title="Resources" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201103191829" modified="201104231601" changecount="7">
 <pre>* SCALA
@@ -554,6 +587,26 @@ This site focus on automated theorem proving (ATP) or automated deduction which 
 </div>
 <div title="SiteTitle" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201103191829" modified="201103191832" changecount="2">
 <pre>[[Etat De L'Art]]</pre>
+</div>
+<div title="howto haskell-atp" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104232124" modified="201104232134" tags="haskell-atp" changecount="4">
+<pre>interpreted 
+{{{
+cd haskell-atp/src/ATP
+ghci ../Main.lhs
+:main resolution -f &quot;(exists y. forall x. P(x, y)) ==&gt; forall x. exists y. P(x, y)&quot;
+}}}
+compiled
+{{{
+~/.cabal/bin/atp resolution -f &quot;(exists y. forall x. P(x, y)) ==&gt; forall x. exists y. P(x, y)&quot;
+}}}</pre>
+</div>
+<div title="howto ocaml-atp" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104232134" modified="201104232137" tags="ocaml-atp" changecount="2">
+<pre>{{{
+cd Ocaml
+ocaml
+#use &quot;init.ml&quot;;;
+resolution &lt;&lt;(exists y. forall x. P(x, y)) ==&gt; forall x. exists y. P(x, y)&gt;&gt;;;
+}}}</pre>
 </div>
 </div>
 <!--POST-STOREAREA-->
