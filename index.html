@@ -524,12 +524,13 @@ This new theorem prover is called : [[HED|http://code.google.com/p/edla-hed/]] (
 
 The [[HED|http://code.google.com/p/edla-hed/]] theorem prover is free software, released under the GNU General Public License version 3 (GPLv3)</pre>
 </div>
-<div title="Content Management System" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104241315" modified="201104241405" tags="phase1 tools" changecount="10">
+<div title="Content Management System" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104241315" modified="201104241416" tags="phase1 tools" changecount="11">
 <pre>The two main pieces from which this site is built are [[TiddlyWiki|http://www.tiddlywiki.com/]], created by Jeremy Ruston, and [[MathJax|http://www.mathjax.org/]] a joint project of the American Mathematical Society, Design Science, Inc., and the Society for Industrial and Applied Mathematics.  Both of these excellent open source software packages are under continuing development and have supportive communities.
 
 Thank's to [[Lizao Li|http://math.umn.edu/~lixx1445]] for the [[MathJax Plugin for TiddlyWiki|MathJax plugin]]
 See [[demo|MathJaxTiddlyPluginDemo]]
- </pre>
+
+Some hints about MathJax [[here|http://wiki.math.toronto.edu/TorontoMathWiki/index.php/JsMath/MathJax_(TeX_for_Web)]] </pre>
 </div>
 <div title="DefaultTiddlers" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201103191837" changecount="1">
 <pre>[[Etat De L'Art]]</pre>
@@ -807,17 +808,27 @@ disturbing the spacing between lines.</pre>
 *** Haskell port of the OCaml code : http://github.com/seanmcl/haskell-atp  
 ** General framework in Scala for applied proof theory : http://code.google.com/p/gapt/</pre>
 </div>
-<div title="Roadmap" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104241247" modified="201104241404" changecount="13">
+<div title="Roadmap" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104241247" modified="201104241412" changecount="14">
 <pre>*Phase 1 : initialization
 ** Identify resources (books, article, thesis, blog, etc ...) that are available (started, WIP)
 ** Identify people/organisation also working on ATP (done)
-** Select the appropriate Content Management System ([[done|CMS]])
+** Select the appropriate Content Management System ([[done|Content Management System]])
 ** Select the appropriate programming language ([[done|Scala]])
 ** Select additional tools (done)
 ** Select authoritative book on each subject and make a resume (started WIP)
 ** Use the selected CMS to consolidate knowledge (started, WIP)
 *Phase 2 : Scala port of [[Handbook of Practical Logic and Automated Reasoning|http://www.cambridge.org/catalogue/catalogue.asp?isbn=9780521899574]] (started, WIP)
 *Phase 3 : make [[HED|http://code.google.com/p/edla-hed/]] (hoper edei deixai) a state of the art theorem prover (not yet started)
+</pre>
+</div>
+<div title="Scala" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104241415" modified="201104241428" changecount="3">
+<pre>Why Scala ?
+
+This extract from [[Daniel Spiewak's blog|http://www.codecommit.com/blog/scala/algorithm-proof-inference-in-scala]] is a good summarize to the answer of this question. 
+
+Scala can be the salvation for the program prover.  It’s hybrid functional / object-oriented nature lends itself beautifully to the expression of highly mathematical concepts of intense precision.  Theoreticians have long suspected this, but the research simply has not been there to back it up.  After all, most PhDs write all their proofs on a blackboard, making use of a character set extension to ASCII.  Fortunately for the world, that is no longer an issue.
+
+The answer is to to turn the problem on its ear (as it were) and eschew mathematical expressions altogether.  Instead of the developer expressing intent in terms of epsilon, delta and gamma-transitions, a simple framework in Scala will infer intent just based on the input code.  All of the rules will be built dynamically using an internal DSL, without any need to mess about in low-level character encodings.  Scala is the perfect language for this effort.  Not only does its flexible syntax allow for powerful expressiveness, but it even supports UTF-8 string literals! 
 </pre>
 </div>
 <div title="SiteSubtitle" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201103191828" changecount="1">
