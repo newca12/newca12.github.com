@@ -539,6 +539,11 @@ Some hints about MathJax [[here|http://wiki.math.toronto.edu/TorontoMathWiki/ind
 <pre>Welcome to [[EDLA|http://www.edla.org]]
 This site focus on automated theorem proving (ATP) or automated deduction which is a subfield of automated reasoning. </pre>
 </div>
+<div title="Getting started" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104242212" modified="201104242218" changecount="4">
+<pre>*[[What is it ?|http://www.cs.miami.edu/~tptp/OverviewOfATP.html]]
+*[[An overview|http://www.search.com/reference/Automated_theorem_proving]]
+*[[Great introduction in French|http://images.math.cnrs.fr/La-verite-et-la-machine.html]]</pre>
+</div>
 <div title="Handbook of practical logic and automated reasoning : resume" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104232119" tags="atp book resume" changecount="1">
 <pre>* Preface
 ** What's not in the book
@@ -553,8 +558,9 @@ This site focus on automated theorem proving (ATP) or automated deduction which 
 *** type theory
 * Introduction</pre>
 </div>
-<div title="MainMenu" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201103191830" modified="201104241236" changecount="2">
+<div title="MainMenu" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201103191830" modified="201104242210" changecount="3">
 <pre>[[About]]
+[[Getting started]]
 [[Resources]]
 [[Roadmap]]</pre>
 </div>
@@ -891,7 +897,7 @@ The answer is to to turn the problem on its ear (as it were) and eschew mathemat
 ***[[Adam Chlipala|http://adam.chlipala.net/]]
 ****Coq</pre>
 </div>
-<div title="howto haskell-atp" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104232124" modified="201104232134" tags="haskell-atp" changecount="4">
+<div title="howto haskell-atp" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104232124" modified="201104242149" tags="haskell-atp" changecount="5">
 <pre>interpreted 
 {{{
 cd haskell-atp/src/ATP
@@ -901,14 +907,36 @@ ghci ../Main.lhs
 compiled
 {{{
 ~/.cabal/bin/atp resolution -f &quot;(exists y. forall x. P(x, y)) ==&gt; forall x. exists y. P(x, y)&quot;
-}}}</pre>
+}}}
+
+Nota: interpreted mode need to escape backslash whereas compiled version did not. See example above.
+
+interpreted 
+{{{
+cd haskell-atp/src/ATP
+ghci ../Main.lhs
+:main form &quot;(forall x. x &lt; 2 ==&gt; 2 * x &lt;= 3) \\/ false&quot;
+}}}
+compiled
+{{{
+~/.cabal/bin/atp form &quot;(forall x. x &lt; 2 ==&gt; 2 * x &lt;= 3) \/ false&quot;
+}}}
+</pre>
 </div>
-<div title="howto ocaml-atp" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104232134" modified="201104232137" tags="ocaml-atp" changecount="2">
+<div title="howto ocaml-atp" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104232134" modified="201104242206" tags="ocaml-atp" changecount="10">
 <pre>{{{
 cd Ocaml
 ocaml
 #use &quot;init.ml&quot;;;
 resolution &lt;&lt;(exists y. forall x. P(x, y)) ==&gt; forall x. exists y. P(x, y)&gt;&gt;;;
+}}}
+
+Nota : anything in quotations with | gets passed to secondary_parser, while anthing else in quotations gets passed to default_parser.
+{{{
+# &lt;&lt;(forall x. x &lt; 2 ==&gt; 2 * x &lt;= 3) \/ false&gt;&gt;;;
+- : fol formula = &lt;&lt;(forall x. x &lt; 2 ==&gt; 2 * x &lt;= 3) \/ false&gt;&gt;
+# &lt;&lt;|2 * x|&gt;&gt;;;
+- : term = &lt;&lt;|2 * x|&gt;&gt;
 }}}</pre>
 </div>
 <div title="ocaml-atp vs haskell-atp files" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104240954" modified="201104241234" tags="ocaml-atp haskell-atp" changecount="31">
