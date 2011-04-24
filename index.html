@@ -524,6 +524,13 @@ This new theorem prover is called : [[HED|http://code.google.com/p/edla-hed/]] (
 
 The [[HED|http://code.google.com/p/edla-hed/]] theorem prover is free software, released under the GNU General Public License version 3 (GPLv3)</pre>
 </div>
+<div title="Content Management System" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104241315" modified="201104241405" tags="phase1 tools" changecount="10">
+<pre>The two main pieces from which this site is built are [[TiddlyWiki|http://www.tiddlywiki.com/]], created by Jeremy Ruston, and [[MathJax|http://www.mathjax.org/]] a joint project of the American Mathematical Society, Design Science, Inc., and the Society for Industrial and Applied Mathematics.  Both of these excellent open source software packages are under continuing development and have supportive communities.
+
+Thank's to [[Lizao Li|http://math.umn.edu/~lixx1445]] for the [[MathJax Plugin for TiddlyWiki|MathJax plugin]]
+See [[demo|MathJaxTiddlyPluginDemo]]
+ </pre>
+</div>
 <div title="DefaultTiddlers" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201103191837" changecount="1">
 <pre>[[Etat De L'Art]]</pre>
 </div>
@@ -545,9 +552,227 @@ This site focus on automated theorem proving (ATP) or automated deduction which 
 *** type theory
 * Introduction</pre>
 </div>
-<div title="MainMenu" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201103191830" changecount="1">
+<div title="MainMenu" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201103191830" modified="201104241236" changecount="2">
 <pre>[[About]]
-[[Resources]]</pre>
+[[Resources]]
+[[Roadmap]]</pre>
+</div>
+<div title="MathJax plugin" modifier="Olivier ROLAND" created="201104241346" modified="201104241357" tags="systemServer plugins" changecount="3">
+<pre>|''Type:''|file|
+|''URL:''|http://www.math.umn.edu/~lixx1445/MainPage/index.html|
+|''Workspace:''|(default)|
+
+This tiddler was automatically created to record the details of this server</pre>
+</div>
+<div title="MathJaxTiddlyPlugin" modifier="Lizao Li" created="201009232141" modified="201104191517" tags="systemConfig math" server.type="file" server.host="http://www.math.umn.edu/~lixx1445/MainPage/index.html" server.page.revision="201104191517">
+<pre>/***
+|''Name''|MathJaxTiddlyPlugin|
+|''Description''|This plugin enables Tiddlywiki to use [[MathJax|http://www.mathjax.org/]] to render mathematical expressions.|
+|''Author''|[[Lizao Li|http://math.umn.edu/~lixx1445]]|
+|''Version''|1.50|
+|''Created''|Jan 23, 2011|
+|''Last updated'' |Apr 18, 2011|
+|''Status''|stable|
+|''Source''|http://math.umn.edu/~lixx1445|
+|''Copyright''|[[GPLv3|http://www.gnu.org/licenses/gpl-3.0.html]]|
+|''CoreVersion''|2.6.1|
+|''Feedback''|[[creatorlarryli@gmail.com|mailto:creatorlarryli@gmail.com]]|
+|''Keywords''|MathJax, Tiddlywiki, MathJaxTiddlyPlugin|
+!Installation
+Backstage (top-right corner) -&gt; import -&gt; use the URL of this page -&gt; choose &quot;MathJaxTiddlyPlugin&quot; -&gt; import
+!Configuration
+* &lt;&lt;option chkMathJaxUseCustomizedSettings&gt;&gt; Enable the dollar sign for inline math.
+* Configuration file to use &lt;&lt;option txtMathJaxConfigurationFile&gt;&gt;. 
+** There are 4 possible choices: @@TeX-AMS-MML_HTMLorMML@@ (default), @@TeX-AMS_HTML@@, @@MML_HTMLorMML@@, @@Accessible@@
+** You can find details about these settings from [[MathJax website|http://www.mathjax.org/docs/1.1/config-files.html#common-configurations]].
+* Use MathJax to render tiddlers with tag &lt;&lt;option txtMathJaxTag&gt;&gt;.
+''A note for authors:'' The above settings are actually for readers of the webpage, which are only saved in the local cookies. To save these settings so that all the readers will see the same, authors should set these settings persistently. You can add the following to the system tiddler [[SystemSettings]]:
+{{{
+chkMathJaxUseCustomizedSettings: false
+txtMathJaxConfigurationFile: TeX-AMS-MML_HTMLorMML
+txtMathJaxTag: math
+}}}
+More about persistent settings can be found on the [[official website|http://tiddlywiki.com/#PersistentOptions]]. 
+!Usage
+Tag the tiddlers need math rendering with &quot;math&quot; or the name set in the configuration.
+!Examples
+{{{
+*Inline math test
+**syntax 1: $\int_1^4 \sqrt{1+\sin(x)}\,dx$ 
+**syntax 2: \(\alpha^{\beta^\gamma}\)
+*Display-style math test: 
+**syntax 1:$$\frac{\partial v}{\partial t}+(v\cdot\nabla)v=-\nabla p+v\Delta v+f(x,t)$$
+**syntax 2:\[\int_{\mathbb{R}}\frac{f(y)}{|x-y|^{3/2}}\,dy\]
+}}}
+The result should look like this:
+*Inline math test
+**syntax 1: $\int_1^4 \sqrt{1+\sin(x)}\,dx$ 
+**syntax 2: \(\alpha^{\beta^\gamma}\)
+*Display-style math test: 
+**syntax 1:$$\frac{\partial v}{\partial t}+(v\cdot\nabla)v=-\nabla p+v\Delta v+f(x,t)$$
+**syntax 2:\[\int_{\mathbb{R}}\frac{f(y)}{|x-y|^{3/2}}\,dy\]
+* There is also a more complicated [[demo|MathJaxTiddlyPluginDemo]]
+!Revision History
+* v1.50 (2011-04-18) - Bugs fixed. Thanks to James Montaldi to point out that WikiTexts inside the math blocks are wrongly rendered. The fix was inspired by [[Bob McElrath's jsMath|http://bob.mcelrath.org/tiddlyjsmath-2.0.3.html]] and [[Martin Budden's FormatterPlugin|http://www.martinswiki.com/]].
+* v1.15 (2011-03-31) - Added configurations. Now renders math according to the tag (Thanks to Patrick Ion for the suggestions).
+* v1.1 (2011-03-17) - Updated after MathJax was updated to 1.1. Now MathJax is loading from the CDN, instead of the local server.
+* v1.0 (2011-01-23) - Created.
+!Code
+***/
+//{{{
+if(!version.extensions.MathJaxPlugin) { // [ensure that the plugin is only installed once]
+    version.extensions.MathJaxPlugin = { installed: true };
+
+    if(config.options.chkMathJaxUseCustomizedSettings == undefined) config.options.chkMathJaxUseCustomizedSettings = false;
+    if(config.options.txtMathJaxConfigurationFile == undefined) config.options.txtMathJaxConfigurationFile = 'TeX-AMS-MML_HTMLorMML';
+    if(config.options.txtMathJaxTag == undefined) config.options.txtMathJaxTag = 'math';
+			
+    // [hijack refreshTiddler() to render mathjax]
+    (function() {  
+	// [backup the original function]
+	Story.prototype.oldrefreshfunction = Story.prototype.refreshTiddler;
+	// [override the original function]
+	Story.prototype.refreshTiddler = function(title,template,force,customFields,defaultText) {
+	    Story.prototype.oldrefreshfunction.apply(this,arguments);
+	    if(window.MathJax) {
+		for(var i=0;i&lt;tiddler.tags.length;i++){
+		    if(tiddler.tags[i] == config.options.txtMathJaxTag){
+			window.MathJax.Hub.Queue([&quot;Typeset&quot;,window.MathJax.Hub]);
+		    }
+		}
+	    }
+	}					      
+    })();
+
+    (function () {
+	// [add the mathjax settings to the header]
+	var mathjax_config = document.createElement(&quot;script&quot;);
+	mathjax_config.type = &quot;text/x-mathjax-config&quot;;    
+	var content_mathjax_config = &quot;&quot;;
+						     
+	// [enable the dollar sign for inline math rendering]
+	if(config.options.chkMathJaxUseCustomizedSettings == true){
+	    content_mathjax_config = content_mathjax_config + 
+		&quot;MathJax.Hub.Config({ tex2jax: { inlineMath: [ ['$','$'], ['\\\\(','\\\\)'] ], displayMath: [ ['$$','$$'], ['\\\\[','\\\\]'] ], processEscapes: true }});&quot;;
+	}
+						     
+	content_mathjax_config = content_mathjax_config + 'MathJax.Hub.Startup.onload();';
+						     
+	if (window.opera) {mathjax_config.innerHTML = content_mathjax_config}
+	else {mathjax_config.text = content_mathjax_config}
+						     
+	document.getElementsByTagName(&quot;head&quot;)[0].appendChild(mathjax_config);
+
+	//# Add the mathjax main script to the header
+	var script = document.createElement(&quot;script&quot;);
+	script.type = &quot;text/javascript&quot;;
+	script.src = &quot;http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=&quot;+config.options.txtMathJaxConfigurationFile;
+	document.getElementsByTagName(&quot;head&quot;)[0].appendChild(script);
+    })();
+	
+    config.extensions.MathJaxPlugin = {
+    };
+    
+    config.MathJax = {};
+
+    // Render matched text as plain text without wikification (adapted from Bob McElrath's jsMath and Martin Budden's FormatterPlugin)
+    config.MathJax.OutputPlainText = function(w) {
+	createTiddlyElement(w.output);
+	var e = document.createElement(this.element);
+	var endRegExp = new RegExp(this.termRegExp, &quot;mg&quot;);
+	endRegExp.lastIndex = w.matchStart+w.matchLength;
+	var matched = endRegExp.exec(w.source);
+	if(matched) {
+	    var txt = w.source.substr(w.matchStart, matched.index+matched[0].length-w.matchStart);
+	    if(this.keepdelim) {
+		txt = w.source.substr(w.matchStart, matched.index+matched[0].length-w.matchStart);
+	    }
+	    e.appendChild(document.createTextNode(txt));
+	    w.output.appendChild(e);
+	    w.nextMatch = endRegExp.lastIndex;
+	}		    	
+    }
+
+    config.MathJax.formatters = config.formatters;
+
+    // Match the math blocks
+    config.MathJax.formatters.push({
+	    name: &quot;mathjaxDisplay1&quot;,
+		match: &quot;\\\$\\\$&quot;,
+		termRegExp: &quot;\\\$\\\$&quot;,
+		handler: config.MathJax.OutputPlainText
+		}); 
+
+    config.MathJax.formatters.push({
+	    name: &quot;mathjaxDisplay2&quot;,
+		match: &quot;\\\\\\\[&quot;,
+		termRegExp: &quot;\\\\\\\]&quot;,
+		handler: config.MathJax.OutputPlainText
+		}); 
+
+    config.MathJax.formatters.push({
+	    name: &quot;mathjaxInline1&quot;,
+		match: &quot;\\\$&quot;, 
+		termRegExp: &quot;\\\$&quot;,
+		handler: config.MathJax.OutputPlainText
+		});
+
+    config.MathJax.formatters.push({
+	    name: &quot;mathjaxInline2&quot;,
+		match: &quot;\\\\\\\(&quot;,
+		termRegExp: &quot;\\\\\\\)&quot;,
+		handler: config.MathJax.OutputPlainText
+		}); 
+    
+    config.parsers.MathJaxFormatter = new Formatter(config.MathJax.formatters);
+    config.parsers.MathJaxFormatter.format = 'MathJax';
+    config.parsers.MathJaxFormatter.formatTag = config.options.txtMathJaxTag;
+						     
+}//# end of &quot;install only once&quot;
+						    
+//}}}
+</pre>
+</div>
+<div title="MathJaxTiddlyPluginDemo" modifier="Lizao Li" created="201103310639" modified="201104180830" tags="math" server.type="file" server.host="http://www.math.umn.edu/~lixx1445/MainPage/index.html" server.page.revision="201104180830">
+<pre>$A_B$ now renders correctly, so does $A_{B}$.
+Similarly, $ABc$, $AB c$, $A Bc$, $aBCd$, $ABC$ work now.
+!The Lorenz Equations
+\[\begin{eqnarray}
+\dot{x} &amp; = &amp; \sigma(y-x) \\
+\dot{y} &amp; = &amp; \rho x - y - xz \\
+\dot{z} &amp; = &amp; -\beta z + xy
+\end{eqnarray}\]
+!The ~Cauchy-Schwarz Inequality
+\[ \left( \sum_{k=1}^n a_k b_k \right)^2 \leq \left( \sum_{k=1}^n a_k^2
+\right) \left( \sum_{k=1}^n b_k^2 \right) \]
+!A Cross Product Formula
+\[\mathbf{V}_1 \times \mathbf{V}_2 =  \left|\begin{array}{ccc}
+\mathbf{i} &amp; \mathbf{j} &amp; \mathbf{k} \\
+\frac{\partial X}{\partial u} &amp;  \frac{\partial Y}{\partial u} &amp; 0 \\
+            \frac{\partial X}{\partial v} &amp;  \frac{\partial Y}{\partial v}
+&amp; 0
+\end{array}\right|  \]
+!The probability of getting \(k\) heads when flipping \(n\) coins is:
+\[P(E)   = {n \choose k} p^k (1-p)^{ n-k} \]
+!An Identity of Ramanujan
+\[ \frac{1}{\left(\sqrt{\phi \sqrt{5}}-\phi\right) e^{\frac25 \pi}} =
+1+\frac{e^{-2\pi}} {1+\frac{e^{-4\pi}} {1+\frac{e^{-6\pi}}
+{1+\frac{e^{-8\pi}} {1+\ldots} } } } \]
+!A ~Rogers-Ramanujan Identity
+\[  1 +  \frac{q^2}{(1-q)}+\frac{q^6}{(1-q)(1-q^2)}+\cdots =
+\prod_{j=0}^{\infty}\frac{1}{(1-q^{5j+2})(1-q^{5j+3})},
+\quad\quad \textrm{for}\quad |q|&lt;1. \]
+!Maxwell's Equations
+\[\begin{eqnarray}
+\nabla \times \vec{\mathbf{B}} -\, \frac1c\,\frac{\partial\vec{\mathbf{E}}}{\partial t} &amp; = &amp; \frac{4\pi}{c}\vec{\mathbf{j}} \\
+\nabla \cdot \vec{\mathbf{E}} &amp; = &amp; 4 \pi \rho \\
+\nabla \times \vec{\mathbf{E}}\, +\, \frac1c\,\frac{\partial\vec{\mathbf{B}}}{\partial t} &amp; = &amp;\vec{\mathbf{0}} \\
+\nabla \cdot \vec{\mathbf{B}} &amp; = &amp; 0
+\end{eqnarray}\]
+Finally, while display equations look good for a page of samples, the ability to mix math and text
+in a paragraph is also important. This expression \(\sqrt{3x-1}+(1+x)^2\) is an example of an
+inline equation.  As you see, ~MathJax equations can be used this way as well, without unduly
+disturbing the spacing between lines.</pre>
 </div>
 <div title="Programming in Scala 2nd : resume" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104232118" tags="scala book resume" changecount="1">
 <pre>* Chapter 1 · A Scalable Language
@@ -582,6 +807,19 @@ This site focus on automated theorem proving (ATP) or automated deduction which 
 *** Haskell port of the OCaml code : http://github.com/seanmcl/haskell-atp  
 ** General framework in Scala for applied proof theory : http://code.google.com/p/gapt/</pre>
 </div>
+<div title="Roadmap" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104241247" modified="201104241404" changecount="13">
+<pre>*Phase 1 : initialization
+** Identify resources (books, article, thesis, blog, etc ...) that are available (started, WIP)
+** Identify people/organisation also working on ATP (done)
+** Select the appropriate Content Management System ([[done|CMS]])
+** Select the appropriate programming language ([[done|Scala]])
+** Select additional tools (done)
+** Select authoritative book on each subject and make a resume (started WIP)
+** Use the selected CMS to consolidate knowledge (started, WIP)
+*Phase 2 : Scala port of [[Handbook of Practical Logic and Automated Reasoning|http://www.cambridge.org/catalogue/catalogue.asp?isbn=9780521899574]] (started, WIP)
+*Phase 3 : make [[HED|http://code.google.com/p/edla-hed/]] (hoper edei deixai) a state of the art theorem prover (not yet started)
+</pre>
+</div>
 <div title="SiteSubtitle" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201103191828" changecount="1">
 <pre>.  .  .  a site about Automated Theorem Proving</pre>
 </div>
@@ -608,8 +846,9 @@ ocaml
 resolution &lt;&lt;(exists y. forall x. P(x, y)) ==&gt; forall x. exists y. P(x, y)&gt;&gt;;;
 }}}</pre>
 </div>
-<div title="ocaml-atp vs haskell-atp files" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104240954" modified="201104241222" tags="ocaml-atp haskell-atp" changecount="29">
-<pre>|Example formulas for testing the algorithms|atp_interactive.ml|TestFormulas.lhs|
+<div title="ocaml-atp vs haskell-atp files" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104240954" modified="201104241234" tags="ocaml-atp haskell-atp" changecount="31">
+<pre>| Description | OCaml | Haskell |h
+|Example formulas for testing the algorithms|atp_interactive.ml|TestFormulas.lhs|
 |Binary Decision Diagram|bdd.ml|Bdd.lhs|
 |Nelson-Oppen combined decision procedure|combining.ml|Combining.lhs|
 |Knuth-Bendix completion|completion.ml|Completion.lhs|
