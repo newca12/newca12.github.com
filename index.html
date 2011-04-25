@@ -555,9 +555,10 @@ This site focus on automated theorem proving (ATP) or automated deduction which 
 *** type theory
 * Introduction</pre>
 </div>
-<div title="MainMenu" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201103191830" modified="201104251017" tags="meta editing systemNotes" changecount="6">
+<div title="MainMenu" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201103191830" modified="201104252210" tags="meta editing systemNotes" changecount="7">
 <pre>[[About]]
 [[Getting started]]
+[[The Big Picture]]
 [[Resources]]
 [[Roadmap]]
 [[Tags]]</pre>
@@ -779,11 +780,16 @@ in a paragraph is also important. This expression \(\sqrt{3x-1}+(1+x)^2\) is an 
 inline equation.  As you see, ~MathJax equations can be used this way as well, without unduly
 disturbing the spacing between lines.</pre>
 </div>
-<div title="Parsing" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104250925" modified="201104251016" tags="parsing scala-atp" changecount="7">
-<pre>different parsers are needed
-*expression
-*term
-*formula</pre>
+<div title="Parsing" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104250925" modified="201104251406" tags="parsing scala-atp" changecount="10">
+<pre>*Different parsers are needed
+**expression
+***x + y * 7
+**term
+***p(x, y) + 8
+**formula
+***⊤ ∧ f(c) ⊃ ∀ x. P(x)
+*In Scala, operator names can be characters from the unicode 
+**[[Boolean Algebra Internal DSL|http://gabrielsw.blogspot.com/2009/06/boolean-algebra-internal-dsl-in-scala.html]]</pre>
 </div>
 <div title="Programming in Scala 2nd : resume" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104232118" modified="201104251015" tags="scala book resume scala-atp" changecount="2">
 <pre>* Chapter 1 · A Scalable Language
@@ -847,6 +853,729 @@ The answer is to to turn the problem on its ear (as it were) and eschew mathemat
 <div title="SiteTitle" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201103191829" modified="201104251010" tags="systemNotes" changecount="3">
 <pre>[[Etat De L'Art]]</pre>
 </div>
+<div title="TWikiFormatterPlugin" modifier="MartinBudden" created="200607210000" tags="systemConfig excludeLists excludeSearch" server.type="file" server.host="http://www.martinswiki.com" server.page.revision="200607210000">
+<pre>/***
+|''Name:''|TWikiFormatterPlugin|
+|''Description:''|Allows Tiddlers to use [[TWiki|http://twiki.org/cgi-bin/view/TWiki/TextFormattingRules]] text formatting|
+|''Author:''|Martin Budden (mjbudden (at) gmail (dot) com)|
+|''Source:''|http://www.martinswiki.com/#TWikiFormatterPlugin|
+|''CodeRepository:''|http://svn.tiddlywiki.org/Trunk/contributors/MartinBudden/formatters/TWikiFormatterPlugin.js|
+|''Version:''|0.2.5|
+|''Date:''|Nov 5, 2006|
+|''Comments:''|Please make comments at http://groups.google.co.uk/group/TiddlyWikiDev|
+|''License:''|[[Creative Commons Attribution-ShareAlike 2.5 License|http://creativecommons.org/licenses/by-sa/2.5/]]|
+|''~CoreVersion:''|2.1.3|
+
+|''Display unsupported TWiki variables''|&lt;&lt;option chkDisplayTWikiVariables&gt;&gt;|
+
+This the TWikiFormatterPlugin, which allows you to insert TWiki formated text into a TiddlyWiki.
+
+The aim is not to fully emulate TWiki, but to allow you to work with TWiki content off-line and then resync the content with your TWiki later on, with the expectation that only minor edits will be required.
+
+To use TWiki format in a Tiddler, tag the Tiddler with TWikiFormat or set the tiddler's {{{wikiformat}}} extended field to {{{twiki}}}.
+
+Please report any defects you find at http://groups.google.co.uk/group/TiddlyWikiDev
+
+!!!Issues
+There are (at least) the following known issues:
+# Table code is incomplete.
+## Table headings not yet supported.
+# Anchors not yet supported.
+# TWiki variables not supported
+
+***/
+
+//{{{
+// Ensure that the TWikiFormatter Plugin is only installed once.
+if(!version.extensions.TWikiFormatterPlugin) {
+version.extensions.TWikiFormatterPlugin = {installed:true};
+
+if(version.major &lt; 2 || (version.major == 2 &amp;&amp; version.minor &lt; 1))
+	{alertAndThrow('TWikiFormatterPlugin requires TiddlyWiki 2.1 or later.');}
+
+if(config.options.chkDisplayTWikiVariables == undefined)
+	{config.options.chkDisplayTWikiVariables = false;}
+
+TWikiFormatter = {}; // 'namespace' for local functions
+
+twDebug = function(out,str)
+{
+	createTiddlyText(out,str.replace(/\n/mg,'\\n').replace(/\r/mg,'RR'));
+	createTiddlyElement(out,'br');
+};
+
+TWikiFormatter.Tiddler_changed = Tiddler.prototype.changed;
+Tiddler.prototype.changed = function()
+{
+	if((this.fields.wikiformat==config.parsers.twikiFormatter.format) || this.isTagged(config.parsers.twikiFormatter.formatTag)) {
+		this.links = [];
+		var tiddlerLinkRegExp = /\[\[(.*?)(?:\]\[(?:.*?))?\]\]/mg;
+		tiddlerLinkRegExp.lastIndex = 0;
+		var match = tiddlerLinkRegExp.exec(this.text);
+		while(match) {
+			this.links.pushUnique(match[1]);
+			match = tiddlerLinkRegExp.exec(this.text);
+		}
+	} else if(!this.isTagged('systemConfig')) {
+		TWikiFormatter.Tiddler_changed.apply(this,arguments);
+		return;
+	}
+	this.linksUpdated = true;
+};
+
+Tiddler.prototype.escapeLineBreaks = function()
+{
+	var r = this.text.escapeLineBreaks();
+	if(this.isTagged(config.parsers.twikiFormatter.formatTag)) {
+		r = r.replace(/\x20\x20\x20/mg,'\\b \\b');
+		r = r.replace(/\x20\x20/mg,'\\b ');
+	}
+	return r;
+};
+
+config.textPrimitives.twikiLink = '(?:' + 
+		config.textPrimitives.upperLetter + '+' + config.textPrimitives.lowerLetter + '+' +
+		config.textPrimitives.upperLetter + config.textPrimitives.anyLetter + '*)';
+
+TWikiFormatter.setAttributesFromParams = function(e,p)
+{
+	var re = /\s*(.*?)=(?:(?:&quot;(.*?)&quot;)|(?:'(.*?)')|((?:\w|%|#)*))/mg;
+	var match = re.exec(p);
+	while(match) {
+		var s = match[1].unDash();
+		if(s == 'bgcolor') {
+			s = 'backgroundColor';
+		}
+		try {
+			if(match[2]) {
+				e.setAttribute(s,match[2]);
+			} else if(match[3]) {
+				e.setAttribute(s,match[3]);
+			} else {
+				e.setAttribute(s,match[4]);
+			}
+		}
+		catch(ex) {}
+		match = re.exec(p);
+	}
+};
+
+config.formatterHelpers.singleCharFormat = function(w)
+{
+	this.lookaheadRegExp.lastIndex = w.matchStart;
+	var lookaheadMatch = this.lookaheadRegExp.exec(w.source);
+	if(lookaheadMatch &amp;&amp; lookaheadMatch.index == w.matchStart &amp;&amp; lookaheadMatch[0].substr(lookaheadMatch[0].length-2,1) != ' ') {
+		w.subWikifyTerm(createTiddlyElement(w.output,this.element),this.termRegExp);
+		w.nextMatch = this.lookaheadRegExp.lastIndex;
+	} else {
+		w.outputText(w.output,w.matchStart,w.nextMatch);
+	}
+};
+
+config.formatterHelpers.doubleCharFormat = function(w)
+{
+	this.lookaheadRegExp.lastIndex = w.matchStart;
+	var lookaheadMatch = this.lookaheadRegExp.exec(w.source);
+//twDebug(w.output,'dcmt:'+w.matchText);
+//twDebug(w.output,'lm:'+lookaheadMatch);
+//twDebug(w.output,'lm0:'+lookaheadMatch[0]+' lm:'+lookaheadMatch[0].length);
+	if(lookaheadMatch &amp;&amp; lookaheadMatch.index == w.matchStart &amp;&amp;
+			lookaheadMatch[0].substr(lookaheadMatch[0].length-3,1) != ' ') {
+		var e = createTiddlyElement(w.output,this.element);
+		w.subWikifyTerm(createTiddlyElement(e,this.element2),this.termRegExp);
+		w.nextMatch = this.lookaheadRegExp.lastIndex;
+	} else {
+		w.outputText(w.output,w.matchStart,w.nextMatch);
+	}
+};
+
+config.twiki = {};
+config.twiki.formatters = [
+{
+	name: 'twikiTable',
+	match: '^\\|(?:[^\\n]*)\\|$',
+	lookaheadRegExp: /^\|([^\n]*)\|$/mg,
+	rowTermRegExp: /(\|$\n?)/mg,
+	cellRegExp: /(?:\|([^\n\|]*)\|)|(\|$\n?)/mg,
+	cellTermRegExp: /((?:\x20*)\|)/mg,
+	handler: function(w)
+	{
+		var table = createTiddlyElement(w.output,'table');
+		var rowContainer = table;//createTiddlyElement(table,'tbody');
+		var prevColumns = [];
+		var rowCount = 0;
+		w.nextMatch = w.matchStart;
+		this.lookaheadRegExp.lastIndex = w.nextMatch;
+		var lookaheadMatch = this.lookaheadRegExp.exec(w.source);
+		while(lookaheadMatch &amp;&amp; lookaheadMatch.index == w.nextMatch) {
+			var rowClass = (rowCount&amp;1) ? 'TD.odd' : 'TD.even';
+			if(rowCount==1) rowClass = 'TD.heading';
+			if(rowCount==3) rowClass = 'TD.third';
+			this.rowHandler(w,createTiddlyElement(rowContainer,'tr',null,rowClass),prevColumns);
+			rowCount++;
+			this.lookaheadRegExp.lastIndex = w.nextMatch;
+			lookaheadMatch = this.lookaheadRegExp.exec(w.source);
+		}
+	},
+	rowHandler: function(w,e,prevColumns)
+	{
+		var col = 0;
+		var colSpanCount = 1;
+		var prevCell = null;
+		this.cellRegExp.lastIndex = w.nextMatch;
+		var cellMatch = this.cellRegExp.exec(w.source);
+		while(cellMatch &amp;&amp; cellMatch.index == w.nextMatch) {
+			if(cellMatch[1] == '^') {
+				// Rowspan
+				var last = prevColumns[col];
+				if(last) {
+					last.rowSpanCount++;
+					last.element.setAttribute('rowspan',last.rowSpanCount);
+					last.element.setAttribute('rowSpan',last.rowSpanCount); // Needed for IE
+					last.element.valign = 'center';
+				}
+				w.nextMatch = this.cellRegExp.lastIndex-1;
+			} else if(cellMatch[1] === '') {
+				// Colspan
+				colSpanCount++;
+				w.nextMatch = this.cellRegExp.lastIndex-1;
+			} else if(cellMatch[2]) {
+				// End of row
+				if(prevCell &amp;&amp; colSpanCount &gt; 1) {
+					prevCell.setAttribute('colspan',colSpanCount);
+					prevCell.setAttribute('colSpan',colSpanCount); // Needed for IE
+				}
+				w.nextMatch = this.cellRegExp.lastIndex;
+				break;
+			} else {
+				// Cell
+				w.nextMatch++;
+				var spaceLeft = false;
+				var chr = w.source.substr(w.nextMatch,1);
+				while(chr == ' ') {
+					spaceLeft = true;
+					w.nextMatch++;
+					chr = w.source.substr(w.nextMatch,1);
+				}
+				var cell = createTiddlyElement(e,'td');
+				prevCell = cell;
+				prevColumns[col] = {rowSpanCount:1, element:cell};
+				if(colSpanCount &gt; 1) {
+					cell.setAttribute('colspan',colSpanCount);
+					cell.setAttribute('colSpan',colSpanCount); // Needed for IE
+					colSpanCount = 1;
+				}
+				
+				w.subWikifyTerm(cell,this.cellTermRegExp);
+				if(w.matchText.substr(w.matchText.length-2,1) == ' ') {
+					// spaceRight
+					cell.align = spaceLeft ? 'center' : 'left';
+				} else if(spaceLeft) {
+					cell.align = 'right';
+				}
+				w.nextMatch--;
+			}
+			col++;
+			this.cellRegExp.lastIndex = w.nextMatch;
+			cellMatch = this.cellRegExp.exec(w.source);
+		}
+	}
+},
+
+{
+	name: 'twikiRule',
+	match: '^---+$\\n?',
+	handler: function(w)
+	{
+		createTiddlyElement(w.output,'hr');
+	}
+},
+
+{
+//&lt;h1&gt;&lt;a name='TWiki_Text_Formatting'&gt;&lt;/a&gt; TWiki Text Formatting &lt;/h1&gt;
+	name: 'twikiHeading',
+	match: '^---[\\+#]{0,5}',
+	lookaheadRegExp: /^---[\+#]{0,5}(?:!!)? ?(.*?)\n/mg,
+	termRegExp: /(\n)/mg,
+	handler: function(w)
+	{
+		var h = createTiddlyElement(w.output,'h' + (w.matchLength-2));
+		this.lookaheadRegExp.lastIndex = w.matchStart;
+		var lookaheadMatch = this.lookaheadRegExp.exec(w.source);
+		if(lookaheadMatch &amp;&amp; lookaheadMatch.index == w.matchStart) {
+			var a = createTiddlyElement(w.output,'a');
+			var prefix = w.tiddler ? w.tiddler.title : '';
+			var name = '#'+ prefix + lookaheadMatch[1];
+			name = name.replace(/ /g,'_');
+			a.name = name;
+			w.nextMatch = this.lookaheadRegExp.lastIndex - lookaheadMatch[1].length - 1;
+			w.subWikifyTerm(h,this.termRegExp);
+		}
+	}
+},
+
+{
+	name: 'twikiAnchor',
+	match: '^#' + config.textPrimitives.wikiLink + '\\s',
+	lookaheadRegExp: /^#(.*?)\s/mg,
+	handler: function(w)
+	{
+		this.lookaheadRegExp.lastIndex = w.matchStart;
+		var lookaheadMatch = this.lookaheadRegExp.exec(w.source);
+		if(lookaheadMatch &amp;&amp; lookaheadMatch.index == w.matchStart) {
+			var a = createTiddlyElement(w.output,'a');
+			var prefix = w.tiddler ? w.tiddler.title : '';
+			var name = '#'+ prefix + lookaheadMatch[1];
+			name = name.replace(/ /g,'_');
+			a.name = name;
+			w.nextMatch = this.lookaheadRegExp.lastIndex;
+		}
+	}
+},
+
+{
+	name: 'twikiDefinitionList',
+	match: '^   \\$ .+?:.+?\\n',
+	lookaheadRegExp: /^   \$ (.+?):(.+?)\n/mg,
+	termRegExp: /(\n)/mg,
+	handler: function(w)
+	{
+		var li = createTiddlyElement(w.output,'dl');
+		w.nextMatch = w.matchStart;
+		this.lookaheadRegExp.lastIndex = w.nextMatch;
+		var lookaheadMatch = this.lookaheadRegExp.exec(w.source);
+		while(lookaheadMatch &amp;&amp; lookaheadMatch.index == w.nextMatch) {
+			w.nextMatch += 5;
+			w.subWikifyTerm(createTiddlyElement(li,'dt'),/(:)/mg);
+			w.subWikifyTerm(createTiddlyElement(li,'dd'),this.termRegExp);
+			lookaheadMatch = this.lookaheadRegExp.exec(w.source);
+		}
+	}
+},
+
+{
+	name: 'twikiList',
+	match: '^(?:   )+(?:(?:\\*)|(?:[1AaIi](?:\\.)?)) ',
+	lookaheadRegExp: /^(?:   )+(?:(\*)|(?:([1AaIi])(\.)?)) /mg,
+	//termRegExp: /(\n\n|\n(?=(?:   )+[\\*1AaIi]))/mg,
+	termRegExp: /(\n)/mg,
+	handler: function(w)
+	{
+//twDebug(w.output,'mt:'+w.matchText);
+		var stack = [w.output];
+		var currLevel = 0;
+		var currType = null;
+		var listLevel, listType;
+		var itemType = 'li';
+		w.nextMatch = w.matchStart;
+		this.lookaheadRegExp.lastIndex = w.nextMatch;
+		var lookaheadMatch = this.lookaheadRegExp.exec(w.source);
+		while(lookaheadMatch &amp;&amp; lookaheadMatch.index == w.nextMatch) {
+//twDebug(w.output,'lm0:'+lookaheadMatch[0]);
+			listType = 'ol';
+			listLevel = (lookaheadMatch[0].length-(lookaheadMatch[3]?3:2))/3;
+			var style = null;
+			if(lookaheadMatch[1]=='*') {
+				listType = 'ul';
+			} else if(lookaheadMatch[2]=='1') {
+				style = 'decimal';
+			} else if(lookaheadMatch[2]=='A') {
+				style = 'upper-alpha';
+			} else if(lookaheadMatch[2]=='a') {
+				style = 'lower-alpha';
+			} else if(lookaheadMatch[2]=='I') {
+				style = 'upper-roman';
+			} else if(lookaheadMatch[2]=='i') {
+				style = 'lower-roman';
+			}
+			w.nextMatch += lookaheadMatch[0].length;
+			if(listLevel &gt; currLevel) {
+				for(var i=currLevel; i&lt;listLevel; i++) {
+					stack.push(createTiddlyElement(stack[stack.length-1],listType));
+				}
+			} else if(listLevel &lt; currLevel) {
+				for(i=currLevel; i&gt;listLevel; i--) {
+					stack.pop();
+				}
+			} else if(listLevel == currLevel &amp;&amp; listType != currType) {
+				stack.pop();
+				stack.push(createTiddlyElement(stack[stack.length-1],listType));
+			}
+			currLevel = listLevel;
+			currType = listType;
+			var e = createTiddlyElement(stack[stack.length-1],itemType);
+			e.style[config.browser.isIE ? 'list-style-type' : 'listStyleType'] = style;
+			w.subWikifyTerm(e,this.termRegExp);
+			this.lookaheadRegExp.lastIndex = w.nextMatch;
+			lookaheadMatch = this.lookaheadRegExp.exec(w.source);
+		}
+	}
+},
+
+{
+	name: 'twikiNoAutoLink',
+	match: '^\\s*&lt;noautolink&gt;',
+	lookaheadRegExp: /\s*&lt;noautolink&gt;((?:.|\n)*?)&lt;\/noautolink&gt;/mg,
+	termRegExp: /(&lt;\/noautolink&gt;)/mg,
+	handler: function(w)
+	{
+		this.lookaheadRegExp.lastIndex = w.matchStart;
+		var lookaheadMatch = this.lookaheadRegExp.exec(w.source);
+		if(lookaheadMatch &amp;&amp; lookaheadMatch.index == w.matchStart) {
+			var autoLinkWikiWords = w.autoLinkWikiWords;
+			w.autoLinkWikiWords = false;
+			w.subWikifyTerm(w.output,this.termRegExp);
+			w.autoLinkWikiWords = autoLinkWikiWords;
+			w.nextMatch = this.lookaheadRegExp.lastIndex;
+		} else {
+			w.outputText(w.output,w.matchStart,w.nextMatch);
+		}
+	}
+},
+
+{
+	name: 'macro',
+	match: '&lt;&lt;',
+	lookaheadRegExp: /&lt;&lt;([^&gt;\s]+)(?:\s*)((?:[^&gt;]|(?:&gt;(?!&gt;)))*)&gt;&gt;/mg,
+	handler: function(w)
+	{
+		this.lookaheadRegExp.lastIndex = w.matchStart;
+		var lookaheadMatch = this.lookaheadRegExp.exec(w.source);
+		if(lookaheadMatch &amp;&amp; lookaheadMatch.index == w.matchStart &amp;&amp; lookaheadMatch[1]) {
+			w.nextMatch = this.lookaheadRegExp.lastIndex;
+			invokeMacro(w.output,lookaheadMatch[1],lookaheadMatch[2],w,w.tiddler);
+		}
+	}
+},
+
+{
+	name: 'twikiNotExplicitLink',
+	match: '!\\[\\[',
+	handler: function(w)
+	{
+		w.outputText(w.output,w.matchStart+1,w.nextMatch);
+	}
+},
+
+//[[WikiWord#NotThere]]
+//[[#MyAnchor][Jump]]
+//&lt;a href='/cgi-bin/view/Sandbox/WebHome#Sandbox_Web_Site_Tools'&gt; Sandbox Web Site Tools &lt;/a&gt;
+//&lt;a href='/cgi-bin/view/Sandbox/MeetingMinutes' class='twikiLink'&gt;MeetingMinutes&lt;/a&gt;
+{
+	name: 'twikiAnchorLink',
+	match: '\\[\\[(?:'+ config.textPrimitives.twikiLink +')?#',
+	lookaheadRegExp: /\[\[(.*?)?#(.*?)(?:\]\[(.*?))?\]\]/mg,
+	handler: function(w)
+	{
+//twDebug(w.output,'al:'+w.matchText);
+//twDebug(w.output,'lm:'+lookaheadMatch);
+		this.lookaheadRegExp.lastIndex = w.matchStart;
+		var lookaheadMatch = this.lookaheadRegExp.exec(w.source);
+		if(lookaheadMatch &amp;&amp; lookaheadMatch.index == w.matchStart) {
+//twDebug(w.output,'lm0:'+lookaheadMatch[0]);
+			var a = createTiddlyElement(w.output,'a');
+			var prefix = w.tiddler ? w.tiddler.title : '';
+			var href = lookaheadMatch[1] ? lookaheadMatch[1] : '';
+			href += '#' + prefix + lookaheadMatch[2];
+			href = href.replace(/ /g,'_');
+//twDebug(w.output,'hr:'+href);
+			a.href = href;
+			a.innerHTML = lookaheadMatch[3] ? lookaheadMatch[3] : lookaheadMatch[2];
+			w.nextMatch = this.lookaheadRegExp.lastIndex;
+		}
+	}
+},
+
+{
+	name: 'twikiExplicitLink',
+	match: '\\[\\[',
+	lookaheadRegExp: /\[\[(.*?)(?:\]\[(.*?))?\]\]/mg,
+	handler: function(w)
+	{
+		this.lookaheadRegExp.lastIndex = w.matchStart;
+		var lookaheadMatch = this.lookaheadRegExp.exec(w.source);
+		if(lookaheadMatch &amp;&amp; lookaheadMatch.index == w.matchStart) {
+			var e = null;
+			var link = lookaheadMatch[1];
+			if (lookaheadMatch[2]) {
+				// titled bracketted link
+				var text = lookaheadMatch[2];
+				e = config.formatterHelpers.isExternalLink(link) ? createExternalLink(w.output,link) : createTiddlyLink(w.output,link,false,null,w.isStatic,w.tiddler);
+			} else {
+				// simple bracketted link
+				text = link;
+				var s = text.indexOf(' ');
+				if(s!=-1) {
+					link = text.substring(0,s).trim();
+					if(config.formatterHelpers.isExternalLink(link)) {
+						e = createExternalLink(w.output,link);
+						text = text.substring(s+1).trim();
+					} else {
+						e = createTiddlyLink(w.output,text,false,null,w.isStatic,w.tiddler);
+					}
+				} else {
+					e = createTiddlyLink(w.output,link,false,null,w.isStatic,w.tiddler);
+				}
+			}
+			createTiddlyText(e,text);
+			w.nextMatch = this.lookaheadRegExp.lastIndex;
+		}
+	}
+},
+
+{
+	name: 'twikiNotWikiLink',
+	match: '(?:!|&lt;nop&gt;)' + config.textPrimitives.wikiLink,
+	handler: function(w)
+	{
+		w.outputText(w.output,w.matchStart+(w.matchText.substr(0,1)=='!'?1:5),w.nextMatch);
+	}
+},
+
+{
+	name: 'twikiWikiLink',
+	match: config.textPrimitives.twikiLink,
+	handler: function(w)
+	{
+		if(w.matchStart &gt; 0) {
+			var preRegExp = new RegExp(config.textPrimitives.anyLetter,'mg');
+			preRegExp.lastIndex = w.matchStart-1;
+			var preMatch = preRegExp.exec(w.source);
+			if(preMatch.index == w.matchStart-1) {
+				w.outputText(w.output,w.matchStart,w.nextMatch);
+				return;
+			}
+		}
+		if(w.autoLinkWikiWords == true || store.isShadowTiddler(w.matchText)) {
+			var link = createTiddlyLink(w.output,w.matchText,false,null,w.isStatic,w.tiddler);
+			w.outputText(link,w.matchStart,w.nextMatch);
+		} else {
+			w.outputText(w.output,w.matchStart,w.nextMatch);
+		}
+	}
+},
+
+{
+	name: 'twikiUrlLink',
+	match: config.textPrimitives.urlPattern,
+	handler: function(w)
+	{
+		w.outputText(createExternalLink(w.output,w.matchText),w.matchStart,w.nextMatch);
+	}
+},
+
+{
+	name: 'twikiBoldByChar',
+	match: '\\*(?!\\s)',
+	lookaheadRegExp: /\*(?!\s)(?:.*?)(?!\s)\*(?=\W)/mg,
+	termRegExp: /((?!\s)\*(?=\W))/mg,
+	element: 'strong',
+	handler: config.formatterHelpers.singleCharFormat
+},
+
+{
+	name: 'twikiBoldTag',
+	match: '&lt;b&gt;',
+	termRegExp: /(&lt;\/b&gt;)/mg,
+	element: 'b',
+	handler: config.formatterHelpers.createElementAndWikify
+},
+
+{
+	name: 'twikiBoldItalicByChar',
+	match: '__(?!\\s)',
+	lookaheadRegExp: /__(?!\s)(?:.*?)(?!\s)__(?=\W)/mg,
+	termRegExp: /((?!\s)__(?=\W))/mg,
+	element: 'strong',
+	element2: 'em',
+	handler: config.formatterHelpers.doubleCharFormat
+},
+
+{
+	name: 'twikiItalicByChar',
+	match: '_(?![\\s|_])',
+	lookaheadRegExp: /_(?!\s)(?:.*?)(?!\s)_(?=\W)/mg,
+	termRegExp: /((?!\s)_(?=\W))/mg,
+	element: 'em',
+	handler: config.formatterHelpers.singleCharFormat
+},
+
+{
+	name: 'twikiBoldMonoSpacedByChar',
+	match: '==(?!\\s)',
+	lookaheadRegExp: /==(?!\s)(?:.*?)(?!\s)==(?=\W)/mg,
+	termRegExp: /((?!\s)==(?=\W))/mg,
+	element: 'strong',
+	element2: 'code',
+	handler: config.formatterHelpers.doubleCharFormat
+},
+
+{
+	name: 'twikiMonoSpacedByChar',
+	match: '=(?![\\s=])',
+	lookaheadRegExp: /=(?!\s)(?:.*?)(?!\s)=(?!\w|\'|\&quot;)/mg,
+	termRegExp: /((?!\s)=(?!\w|\'|\&quot;))/mg,
+	element: 'code',
+	handler: config.formatterHelpers.singleCharFormat
+},
+
+{
+	name: 'twikiPreByChar',
+	match: '&lt;pre&gt;',
+	lookaheadRegExp: /&lt;pre&gt;((?:.|\n)*?)&lt;\/pre&gt;/mg,
+	handler: function(w)
+	{
+		this.lookaheadRegExp.lastIndex = w.matchStart;
+		var lookaheadMatch = this.lookaheadRegExp.exec(w.source);
+		if(lookaheadMatch &amp;&amp; lookaheadMatch.index == w.matchStart) {
+			createTiddlyElement(w.output,'pre',null,null,lookaheadMatch[1]);
+			w.nextMatch = this.lookaheadRegExp.lastIndex;
+		}
+	}
+},
+
+{
+	name: 'twikiVerbatimByChar',
+	match: '&lt;verbatim&gt;',
+	lookaheadRegExp: /\&lt;verbatim&gt;((?:.|\n)*?)&lt;\/verbatim&gt;/mg,
+	handler: function(w)
+	{
+		this.lookaheadRegExp.lastIndex = w.matchStart;
+		var lookaheadMatch = this.lookaheadRegExp.exec(w.source);
+		if(lookaheadMatch &amp;&amp; lookaheadMatch.index == w.matchStart) {
+			createTiddlyElement(w.output,'span',null,null,lookaheadMatch[1]);
+			w.nextMatch = this.lookaheadRegExp.lastIndex;
+		}
+	}
+},
+
+{
+	name: 'twikiParagraph',
+	match: '\\n{2,}',
+	handler: function(w)
+	{
+		createTiddlyElement(w.output,'p');
+	}
+},
+
+{
+	name: 'twikiNop',
+	match: '&lt;nop&gt;',
+	handler: function(w)
+	{
+		w.outputText(w.output,w.matchStart+5,w.nextMatch);
+	}
+},
+
+{
+	name: 'twikiExplicitLineBreak',
+	match: '%BR%|&lt;br ?/?&gt;|&lt;BR ?/?&gt;',
+	handler: function(w)
+	{
+		createTiddlyElement(w.output,'br');
+	}
+},
+
+{
+	name: 'twikiColorByChar',
+	match: '%(?:YELLOW|ORANGE|RED|PINK|PURPLE|TEAL|NAVY|BLUE|AQUA|LIME|GREEN|OLIVE|MAROON|BROWN|BLACK|GRAY|SILVER|WHITE)%',
+	lookaheadRegExp: /%(YELLOW|ORANGE|RED|PINK|PURPLE|TEAL|NAVY|BLUE|AQUA|LIME|GREEN|OLIVE|MAROON|BROWN|BLACK|GRAY|SILVER|WHITE)/mg,
+	termRegExp: /(%ENDCOLOR%)/mg,
+	handler:  function(w)
+	{
+		this.lookaheadRegExp.lastIndex = w.matchStart;
+		var lookaheadMatch = this.lookaheadRegExp.exec(w.source);
+		if(lookaheadMatch &amp;&amp; lookaheadMatch.index == w.matchStart) {
+			var e = createTiddlyElement(w.output,'span');
+			e.style.color = lookaheadMatch[1];
+			w.subWikifyTerm(e,this.termRegExp);
+		}
+	}
+},
+
+{
+	name: 'twikiVariable',
+	match: '(?:!)?%(?:&lt;nop&gt;)?[A-Z]+(?:\\{.*?\\})?%',
+	lookaheadRegExp: /(!)?%(&lt;nop&gt;)?([A-Z]+)(?:\{(.*?)\})?%/mg,
+	handler: function(w)
+	{
+		this.lookaheadRegExp.lastIndex = w.matchStart;
+		var lookaheadMatch = this.lookaheadRegExp.exec(w.source);
+		if(lookaheadMatch &amp;&amp; lookaheadMatch.index == w.matchStart) {
+			if(lookaheadMatch[1]) {
+				// ! - escape variable
+				w.outputText(w.output,w.matchStart+1,w.nextMatch);
+			} else if(lookaheadMatch[2]) {
+				//nop
+				var text = w.matchText.replace(/&lt;nop&gt;/g,'');
+				createTiddlyText(w.output,text);
+			} else {
+				// deal with variables by name here
+				if(lookaheadMatch[3]=='BB') {
+					createTiddlyElement(w.output,'br');
+					createTiddlyElement(w.output,'span').innerHTML = '&amp;bull;';
+				} else if(config.options.chkDisplayTWikiVariables) {
+					// just output the text of any variables that are not understood
+					w.outputText(w.output,w.matchStart,w.nextMatch);
+				}
+			}
+			w.nextMatch = this.lookaheadRegExp.lastIndex;
+		}
+	}
+},
+
+{
+	name: 'twikiHtmlEntitiesEncoding',
+	match: '&amp;#?[a-zA-Z0-9]{2,8};',
+	handler: function(w)
+	{
+		createTiddlyElement(w.output,'span').innerHTML = w.matchText;
+	}
+},
+
+{
+	name: 'twikiComment',
+	match: '&lt;!\\-\\-',
+	lookaheadRegExp: /&lt;!\-\-((?:.|\n)*?)\-\-&gt;/mg,
+	handler: function(w)
+	{
+		this.lookaheadRegExp.lastIndex = w.matchStart;
+		var lookaheadMatch = this.lookaheadRegExp.exec(w.source);
+		if(lookaheadMatch &amp;&amp; lookaheadMatch.index == w.matchStart) {
+			w.nextMatch = this.lookaheadRegExp.lastIndex;
+		}
+	}
+},
+
+{
+	name: 'twikiHtmlTag',
+	match: &quot;&lt;(?:[a-zA-Z]{2,}|a)(?:\\s*(?:[a-zA-Z]*?=[\&quot;']?[^&gt;]*?[\&quot;']?))*?&gt;&quot;,
+	lookaheadRegExp: /&lt;([a-zA-Z]+)((?:\s+[a-zA-Z]*?=[&quot;']?[^&gt;\/\&quot;\']*?[&quot;']?)*?)?\s*(\/)?&gt;/mg,
+	handler: function(w)
+	{
+		this.lookaheadRegExp.lastIndex = w.matchStart;
+		var lookaheadMatch = this.lookaheadRegExp.exec(w.source);
+		if(lookaheadMatch &amp;&amp; lookaheadMatch.index == w.matchStart) {
+			var e =createTiddlyElement(w.output,lookaheadMatch[1]);
+			if(lookaheadMatch[2]) {
+				TWikiFormatter.setAttributesFromParams(e,lookaheadMatch[2]);
+			}
+			if(lookaheadMatch[3]) {
+				w.nextMatch = this.lookaheadRegExp.lastIndex;// empty tag
+			} else {
+				w.subWikify(e,'&lt;/'+lookaheadMatch[1]+'&gt;');
+			}
+		}
+	}
+}
+];
+
+config.parsers.twikiFormatter = new Formatter(config.twiki.formatters);
+config.parsers.twikiFormatter.format = 'twiki';
+config.parsers.twikiFormatter.formatTag = 'TWikiFormat';
+} // end of 'install only once'
+//}}}</pre>
+</div>
 <div title="Tags" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104250931" modified="201104251242" tags="meta editing" changecount="14">
 <pre>*&lt;&lt;tag atp&gt;&gt;- Automated Theorem Proving, what this site is all about
 **&lt;&lt;tag intro&gt;&gt;- Getting started
@@ -863,6 +1592,216 @@ The answer is to to turn the problem on its ear (as it were) and eschew mathemat
 ***&lt;&lt;tag plugins&gt;&gt;- code snippets enhancing functionality, and containing descriptions of what they do
 
 The tags group collections of notes into sets — they're adjectives, directories, or folders. By selecting a tag, visible in the upper right of each note, you can jump to any note labeled with that tag — a navigational convenience. It's efficacious to build a flexible hierarchy of tagged content. Each note should be labeled by its most appropriate, &quot;lowest&quot; leaf tags — more than one as appropriate. Click on the tag to see a popup menu of notes with that tag. Alternatively, these folders and their contents may be selectively displayed in the &quot;Contents&quot; tab to the left.</pre>
+</div>
+<div title="The Big Picture" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104252117" modified="201104252207" tags="TWikiFormat intro" changecount="6">
+<pre>---+ [[http://en.wikipedia.org/wiki/Automated_theorem_proving Automated theorem proving]]
+
+   * [[http://en.wikipedia.org/wiki/automated_reasoning automated reasoning]]
+
+   * [[http://en.wikipedia.org/wiki/mathematical_proof mathematical proof / proving]]
+
+   * [[http://en.wikipedia.org/wiki/mathematical_theorem mathematical theorem]]
+
+   * [[http://en.wikipedia.org/wiki/computer_program computer program]]
+
+   * [[http://en.wikipedia.org/wiki/Automated_theorem_proving#Decidability_of_the_problem  Decidability of the problem ]]
+      * [[http://en.wikipedia.org/wiki/propositional_logic propositional logic]]
+      * [[http://en.wikipedia.org/wiki/NP-complete NP-complete]]
+      * [[http://en.wikipedia.org/wiki/first-order_logic first-order logic / first order predicate calculus]]
+      * [[http://en.wikipedia.org/wiki/Gˆdel's_completeness_theorem Gödels completeness theorem]]
+      * [[http://en.wikipedia.org/wiki/well-formed_formula well-formed formula]]
+      * [[http://en.wikipedia.org/wiki/recursively_enumerable recursively enumerable]]
+      * [[http://en.wikipedia.org/wiki/first-order_theory_of_the_natural_numbers first-order theory of the natural numbers]]
+      * [[http://en.wikipedia.org/wiki/Gˆdel's_incompleteness_theorem Gödels incompleteness theorem]]
+
+   * [[http://en.wikipedia.org/wiki/Automated_theorem_proving#Related_problems  Related problems ]]
+      * [[http://en.wikipedia.org/wiki/proof_verification proof verification]]
+      * [[http://en.wikipedia.org/wiki/primitive_recursive_function primitive recursive function]]
+      * [[http://en.wikipedia.org/wiki/Interactive_theorem_proving Interactive theorem proving / Interactive theorem provers]]
+      * [[http://en.wikipedia.org/wiki/model_checking model checking]]
+      * [[http://en.wikipedia.org/wiki/four_color_theorem four color theorem]]
+      * [[http://en.wikipedia.org/wiki/non-surveyable_proofs non-surveyable proofs]]
+      * [[http://en.wikipedia.org/wiki/Connect_Four Connect Four]]
+
+   * [[http://en.wikipedia.org/wiki/Automated_theorem_proving#Industrial_uses  Industrial uses ]]
+      * [[http://en.wikipedia.org/wiki/Pentium_FDIV_bug Pentium FDIV bug]]
+      * [[http://en.wikipedia.org/wiki/floating_point_unit floating point unit]]
+      * [[http://en.wikipedia.org/wiki/AMD AMD]]
+      * [[http://en.wikipedia.org/wiki/Intel Intel]]
+
+   * [[http://en.wikipedia.org/wiki/Automated_theorem_proving#First-order_theorem_proving First-order theorem proving]]
+      * [[http://en.wikipedia.org/wiki/First-order_logic First-order logic / First-order]]
+      * [[http://en.wikipedia.org/wiki/CADE_ATP_System_Competition CADE ATP System Competition]]
+      * [[http://en.wikipedia.org/wiki/E_equational_theorem_prover E equational theorem prover / E]]
+      * [[http://en.wikipedia.org/wiki/superposition_calculus superposition calculus / purely equational calculus]]
+      * [[http://en.wikipedia.org/wiki/Technical_University_of_Munich Technical University of Munich]]
+      * [[http://en.wikipedia.org/wiki/Otter_theorem_prover Otter theorem prover / Otter]]
+      * [[http://en.wikipedia.org/wiki/Argonne_National_Laboratory Argonne National Laboratory]]
+      * [[http://en.wikipedia.org/wiki/first-order_resolution first-order resolution]]
+      * [[http://en.wikipedia.org/wiki/paramodulation paramodulation]]
+      * [[http://en.wikipedia.org/wiki/Prover9_theorem_prover Prover9 theorem prover / Prover9]]
+      * [[http://en.wikipedia.org/wiki/Mace4 Mace4]]
+      * [[http://en.wikipedia.org/wiki/SETHEO SETHEO]]
+      * [[http://en.wikipedia.org/wiki/model_elimination model elimination]]
+      * [[http://en.wikipedia.org/wiki/Vampire_theorem_prover Vampire theorem prover / Vampire]]
+      * [[http://www.manchester.ac.uk/  Manchester University]]
+      * [[http://www.cs.man.ac.uk/~voronkov/  Andrei Voronkov]]
+      * [[http://www.freewebs.com/riazanov/  Alexandre Riazanov]]
+
+   * [[http://en.wikipedia.org/wiki/Automated_theorem_proving#Deontic_theorem_proving Deontic theorem proving]]
+      * [[http://en.wikipedia.org/wiki/Deontic_logic Deontic logic]]
+
+   * [[http://en.wikipedia.org/wiki/Automated_theorem_proving#Popular_techniques  Popular techniques ]]
+      * [[http://en.wikipedia.org/wiki/First-order_resolution First-order resolution]]
+      * [[http://en.wikipedia.org/wiki/unification unification]]
+      * [[http://en.wikipedia.org/wiki/Lean_theorem_prover Lean theorem prover / Lean theorem proving]]
+      * [[http://en.wikipedia.org/wiki/Model_elimination Model elimination]]
+      * [[http://en.wikipedia.org/wiki/Method_of_analytic_tableaux Method of analytic tableaux]]
+      * [[http://en.wikipedia.org/wiki/Superposition_calculus Superposition calculus / Superposition]]
+      * [[http://en.wikipedia.org/wiki/rewriting rewriting]]
+      * [[http://en.wikipedia.org/wiki/Model_checking Model checking]]
+      * [[http://en.wikipedia.org/wiki/Mathematical_induction Mathematical induction]]
+      * [[http://en.wikipedia.org/wiki/Binary_decision_diagram Binary decision diagram]]
+      * [[http://en.wikipedia.org/wiki/DPLL_algorithm DPLL algorithm / DPLL]]
+      * [[http://en.wikipedia.org/wiki/Unification#Higher-order_unification Unification#Higher-order unification / Higher-order unification]]
+
+   * [[http://en.wikipedia.org/wiki/Automated_theorem_proving#Available_implementations  Available implementations ]]
+      * [[http://en.wikipedia.org/wiki/:Category:Theorem_proving_software_systems :Category:Theorem proving software systems]]
+      * [[http://en.wikipedia.org/wiki/Automated_theorem_proving#Free_software  Free software ]]
+         * [[http://en.wikipedia.org/wiki/ACL2 ACL2]]
+         * [[http://en.wikipedia.org/wiki/Alt-Ergo Alt-Ergo]]
+         * [[http://en.wikipedia.org/wiki/Automath Automath]]
+         * [[http://en.wikipedia.org/wiki/CVC_(theorem_prover) CVC (theorem prover) / CVC]]
+         * [[http://en.wikipedia.org/wiki/E_equational_theorem_prover E equational theorem prover / E]]
+         * [[http://en.wikipedia.org/wiki/EQP EQP]]
+         * [[http://en.wikipedia.org/wiki/Gandalf_(theorem_prover) Gandalf (theorem prover) / Gandalf]]
+         * [[http://en.wikipedia.org/wiki/Gˆdel-machines Gödel-machines]]
+         * [[http://en.wikipedia.org/wiki/HOL_theorem_prover_family HOL theorem prover family / HOL]]
+         * [[http://en.wikipedia.org/wiki/HOL_Light HOL Light]]
+         * [[http://en.wikipedia.org/wiki/Isabelle_(theorem_prover) Isabelle (theorem prover) / Isabelle]]
+         * [[http://en.wikipedia.org/wiki/IsaPlanner IsaPlanner]]
+         * [[http://en.wikipedia.org/wiki/Jape Jape]]
+         * [[http://en.wikipedia.org/wiki/KED KED]]
+         * [[http://en.wikipedia.org/wiki/KeY KeY]]
+         * [[http://en.wikipedia.org/wiki/KeYmaera KeYmaera]]
+         * [[http://en.wikipedia.org/wiki/LCF_(theorem_prover) LCF (theorem prover) / LCF]]
+         * [[http://www.leoprover.org  Leo II]]
+         * [[http://en.wikipedia.org/wiki/LoTREC LoTREC]]
+         * [[http://en.wikipedia.org/wiki/MetaPRL MetaPRL]]
+         * [[http://en.wikipedia.org/wiki/Matita Matita]]
+         * [[http://en.wikipedia.org/wiki/NuPRL NuPRL]]
+         * [[http://en.wikipedia.org/wiki/Otter_(theorem_prover) Otter (theorem prover) / Otter]]
+         * [[http://en.wikipedia.org/wiki/Paradox_(theorem_prover) Paradox (theorem prover) / Paradox]]
+         * [[http://en.wikipedia.org/wiki/PhoX PhoX]]
+         * [[http://en.wikipedia.org/wiki/Prover9 Prover9]]
+         * [[http://en.wikipedia.org/wiki/Prototype_Verification_System Prototype Verification System / PVS]]
+         * [[http://nevidal.org/sad.en.html  SAD]]
+         * [[http://en.wikipedia.org/wiki/SNARK_theorem_prover SNARK theorem prover / SNARK]]
+         * [[http://en.wikipedia.org/wiki/SPASS SPASS]]
+         * [[http://en.wikipedia.org/wiki/Tau_(theorem_prover) Tau (theorem prover) / Tau]]
+         * [[http://en.wikipedia.org/wiki/Theorema Theorema]]
+         * [[http://en.wikipedia.org/wiki/Theorem_Checker Theorem Checker]]
+      * [[http://en.wikipedia.org/wiki/Automated_theorem_proving#Proprietary_software_including_Share-alike_Non-commercial  Proprietary software including Share-alike Non-commercial]]
+         * [[http://en.wikipedia.org/wiki/Acumen_RuleManager Acumen RuleManager]]
+         * [[http://en.wikipedia.org/wiki/Alligator_(software) Alligator (software) / Alligator]]
+         * [[http://en.wikipedia.org/wiki/CARINE CARINE]]
+         * [[http://en.wikipedia.org/wiki/KIV KIV]]
+         * [[http://en.wikipedia.org/wiki/Mizar_system Mizar system / Mizar]]
+         * [[http://en.wikipedia.org/wiki/Prover_Plug-In Prover Plug-In]]
+         * [[http://en.wikipedia.org/wiki/ProverBox ProverBox]]
+         * [[http://en.wikipedia.org/wiki/Cyc#ResearchCyc Cyc#ResearchCyc / ResearchCyc]]
+         * [[http://en.wikipedia.org/wiki/Simplify_(software) Simplify (software) / Simplify]]
+         * [[http://en.wikipedia.org/wiki/SPARK_(programming_language) SPARK (programming language)]]
+         * [[http://en.wikipedia.org/wiki/Spear_modular_arithmetic_theorem_prover Spear modular arithmetic theorem prover]]
+         * [[http://en.wikipedia.org/wiki/Theorem_Proving_System Theorem Proving System]]
+         * [[http://en.wikipedia.org/wiki/Twelf Twelf]]
+         * [[http://en.wikipedia.org/wiki/Vampire_theorem_prover Vampire theorem prover / Vampire/Vampyre]]
+         * [[http://en.wikipedia.org/wiki/Waldmeister Waldmeister]]
+
+   * [[http://en.wikipedia.org/wiki/Automated_theorem_proving#Notable_people  Notable people ]]
+      * [[http://en.wikipedia.org/wiki/Leo_Bachmair Leo Bachmair]]
+      * [[http://en.wikipedia.org/wiki/superposition_calculus superposition calculus]]
+      * [[http://en.wikipedia.org/wiki/Woody_Bledsoe Woody Bledsoe]]
+      * [[http://en.wikipedia.org/wiki/artificial_intelligence artificial intelligence]]
+      * [[http://en.wikipedia.org/wiki/Robert_S._Boyer Robert S. Boyer]]
+      * [[http://en.wikipedia.org/wiki/Nqthm Nqthm / Boyer-Moore theorem prover]]
+      * [[http://en.wikipedia.org/wiki/Herbrand_Award Herbrand Award]]
+      * [[http://en.wikipedia.org/wiki/Alan_Bundy Alan Bundy]]
+      * [[http://en.wikipedia.org/wiki/University_of_Edinburgh University of Edinburgh]]
+      * [[http://en.wikipedia.org/wiki/IJCAI_Award_for_Research_Excellence IJCAI Award for Research Excellence]]
+      * [[http://en.wikipedia.org/wiki/Donald_E._Walker_Distinguished_Service_Award Donald E. Walker Distinguished Service Award]]
+      * [[http://www-unix.mcs.anl.gov/~mccune/  William McCune]]
+      * [[http://www.lsv.ens-cachan.fr/~comon/  Hubert Comon]]
+      * [[http://en.wikipedia.org/wiki/CNRS CNRS]]
+      * [[http://en.wikipedia.org/wiki/ENS_Cachan ENS Cachan]]
+      * [[http://en.wikipedia.org/wiki/Robert_Constable Robert Constable]]
+      * [[http://www.cs.nyu.edu/cs/faculty/davism/  Martin Davis]]
+      * [[http://en.wikipedia.org/wiki/DPLL_algorithm DPLL algorithm]]
+      * [[http://www.fitelson.org/  Branden Fitelson]]
+      * [[http://en.wikipedia.org/wiki/Harald_Ganzinger Harald Ganzinger]]
+      * [[http://logic.stanford.edu/people/genesereth/  Michael Genesereth]]
+      * [[http://en.wikipedia.org/wiki/Stanford_University Stanford University]]
+      * [[http://en.wikipedia.org/wiki/Keith_Goolsbey Keith Goolsbey]]
+      * [[http://en.wikipedia.org/wiki/Cyc Cyc]]
+      * [[http://en.wikipedia.org/wiki/Michael_J._C._Gordon Michael J. C. Gordon]]
+      * [[http://pauillac.inria.fr/~huet/  Gerard Huet]]
+      * [[http://en.wikipedia.org/wiki/Robert_Kowalski Robert Kowalski]]
+      * [[http://en.wikipedia.org/wiki/SLD_resolution SLD resolution]]
+      * [[http://en.wikipedia.org/wiki/logic_programming logic programming / logic programs]]
+      * [[http://www.cs.duke.edu/~dwl/  Donald W. Loveland]]
+      * [[http://en.wikipedia.org/wiki/Metamath Metamath]]
+      * [[http://www.metamath.org  metamath.org]]
+      * [[http://en.wikipedia.org/wiki/J_Strother_Moore J Strother Moore]]
+      * [[http://en.wikipedia.org/wiki/Nqthm Nqthm / Boyer-Moore theorem prover]]
+      * [[http://en.wikipedia.org/wiki/Robert_Nieuwenhuis Robert Nieuwenhuis]]
+      * [[http://en.wikipedia.org/wiki/Tobias_Nipkow Tobias Nipkow]]
+      * [[http://en.wikipedia.org/wiki/Isabelle_theorem_prover Isabelle theorem prover / Isabelle]]
+      * [[http://en.wikipedia.org/wiki/Ross_Overbeek Ross Overbeek]]
+      * [[http://theseed.uchicago.edu/FIG/Html/FIG.html  The Fellowship for Interpretation of Genomes]]
+      * [[http://en.wikipedia.org/wiki/Lawrence_C._Paulson Lawrence C. Paulson]]
+      * [[http://en.wikipedia.org/wiki/University_of_Cambridge University of Cambridge]]
+      * [[http://en.wikipedia.org/wiki/David_A._Plaisted David A. Plaisted]]
+      * [[http://en.wikipedia.org/wiki/University_of_North_Carolina_at_Chapel_Hill University of North Carolina at Chapel Hill]]
+      * [[http://en.wikipedia.org/wiki/Knuth-Bendix_completion_algorithm Knuth-Bendix completion algorithm / completion]]
+      * [[http://www.csl.sri.com/users/rushby/  John Rushby]]
+      * [[http://en.wikipedia.org/wiki/SRI_International SRI International]]
+      * [[http://en.wikipedia.org/wiki/John_Alan_Robinson_(Computer_Scientist) John Alan Robinson (Computer Scientist) / J. Alan Robinson]]
+      * [[http://en.wikipedia.org/wiki/J¸rgen_Schmidhuber Jürgen Schmidhuber]]
+      * [[http://www.idsia.ch/~juergen/goedelmachine.html  G%26#246;del Machines: Self-Referential Universal Problem Solvers Making Provably Optimal Self-Improvements]]
+      * [[http://en.wikipedia.org/wiki/Stephan_Schulz Stephan Schulz]]
+      * [[http://en.wikipedia.org/wiki/Natarajan_Shankar Natarajan Shankar]]
+      * [[http://en.wikipedia.org/wiki/Prototype_Verification_System Prototype Verification System / PVS]]
+      * [[http://en.wikipedia.org/wiki/Mark_Stickel Mark Stickel]]
+      * [[http://en.wikipedia.org/wiki/SRI SRI]]
+      * [[http://en.wikipedia.org/wiki/Geoff_Sutcliffe Geoff Sutcliffe]]
+      * [[http://web.ics.purdue.edu/~dulrich/Home-page.htm  Dolph Ulrich]]
+      * [[http://www.cs.unm.edu/~veroff/  Robert Veroff]]
+      * [[http://www.voronkov.com/  Andrei Voronkov]]
+      * [[http://www-unix.mcs.anl.gov/~wos/  Larry Wos]]
+      * [[http://en.wikipedia.org/wiki/Wen-Tsun_Wu Wen-Tsun Wu]]
+      * [[http://en.wikipedia.org/wiki/Wu's_method Wus method]]
+
+   * [[http://en.wikipedia.org/wiki/Automated_theorem_proving#See_also  See also ]]
+      * [[http://en.wikipedia.org/wiki/Symbolic_computation Symbolic computation]]
+      * [[http://en.wikipedia.org/wiki/Computer-aided_proof Computer-aided proof]]
+      * [[http://en.wikipedia.org/wiki/Automated_reasoning Automated reasoning]]
+      * [[http://en.wikipedia.org/wiki/Formal_verification Formal verification]]
+      * [[http://en.wikipedia.org/wiki/Logic_programming Logic programming]]
+      * [[http://en.wikipedia.org/wiki/Proof_checking Proof checking]]
+      * [[http://en.wikipedia.org/wiki/Proof_complexity Proof complexity]]
+      * [[http://en.wikipedia.org/wiki/Computer_algebra_system Computer algebra system]]
+      * [[http://en.wikipedia.org/wiki/Program_analysis_(computer_science) Program analysis (computer science)]]
+
+   * [[http://en.wikipedia.org/wiki/Automated_theorem_proving#Notes  Notes ]]
+
+   * [[http://en.wikipedia.org/wiki/Automated_theorem_proving#References  References ]]</pre>
+</div>
+<div title="Twiki plugin" modifier="Olivier ROLAND" created="201104252205" modified="201104252209" tags="systemServer plugins editing tools" changecount="2">
+<pre>|''Type:''|file|
+|''URL:''|http://www.martinswiki.com/|
+|''Workspace:''|(default)|
+
+This tiddler was automatically created to record the details of this server</pre>
 </div>
 <div title="Who's who" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104241635" modified="201104251232" tags="person" changecount="20">
 <pre>In no particular order.
@@ -944,7 +1883,7 @@ compiled
 }}}
 </pre>
 </div>
-<div title="howto ocaml-atp" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104232134" modified="201104242206" tags="ocaml-atp" changecount="10">
+<div title="howto ocaml-atp" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104232134" modified="201104252100" tags="ocaml-atp scala-atp" changecount="11">
 <pre>{{{
 cd Ocaml
 ocaml
@@ -1008,6 +1947,31 @@ Nota : anything in quotations with | gets passed to secondary_parser, while anth
 |Optimized version of a Prawitz-like procedure|tableaux.ml|Tableaux.lhs|
 |Goals, LCF-like tactics and Mizar-like proofs|tactics.ml||
 |Unification for first order terms|unif.ml|Unif.lhs|</pre>
+</div>
+<div title="ocaml-atp vs haskell-atp syntax" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104251612" modified="201104251642" tags="ocaml-atp haskell-atp scala-atp" changecount="16">
+<pre>*gilmore_2
+**OCaml
+***&quot;&quot;&quot;&lt;&lt;exists x y. forall z. (F(x,z) &lt;=&gt; F(z,y)) /\ (F(z,y) &lt;=&gt; F(z,z)) /\ (F(x,y) &lt;=&gt; F(y,x)) ==&gt; (F(x,y) &lt;=&gt; F(x,z))&gt;&gt;&quot;&quot;&quot;
+**Haskell
+***∃ x y. ∀ z. (F(x,z) ⇔ F(z,y)) ∧ (F(z,y) ⇔ F(z,z)) ∧ (F(x,y) ⇔ F(y,x))  ⊃ (F(x,y) ⇔ F(x,z)) 
+*p1
+**OCaml
+***&quot;&quot;&quot;&lt;&lt;p ==&gt; q &lt;=&gt; ~q ==&gt; ~p&gt;&gt;&quot;&quot;&quot;
+**Haskell
+***p ⊃ q ⇔ ¬ q ⊃ ¬ p
+*Skolem
+**OCaml 
+{{{
+# skolemize p1;;
+- : fol formula = &lt;&lt;(~p \/ q) /\ (q \/ ~p) \/ (p /\ ~q) /\ ~q /\ p&gt;&gt;
+}}}
+**Haskell
+{{{
+:main skolem p1
+Welcome to Haskell ATP!
+(¬p ∨ q) ∧ (q ∨ ¬p) ∨ (p ∧ ¬q) ∧ ¬q ∧ p
+}}}
+</pre>
 </div>
 </div>
 <!--POST-STOREAREA-->
