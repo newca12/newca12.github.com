@@ -55,6 +55,8 @@ DAMAGE.
 #javascriptWarning {width:100%; text-align:center; font-weight:bold; background-color:#dd1100; color:#fff; padding:1em 0em;}
 </style>
 <!--POST-HEAD-START-->
+<script src="http://www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
 
 <!--POST-HEAD-END-->
 </head>
@@ -529,6 +531,37 @@ See [[demo|MathJaxTiddlyPluginDemo]]
 
 Some hints about MathJax [[here|http://wiki.math.toronto.edu/TorontoMathWiki/index.php/JsMath/MathJax_(TeX_for_Web)]] </pre>
 </div>
+<div title="CustomTracker" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104301217" modified="201104301221" tags="systemConfig" changecount="3">
+<pre>{{{
+// Specify your account number here!
+_uacct = &quot;UA-4646079-1&quot;;
+
+// CustomTracker as a namespace for tracking related functions
+var CustomTracker = {
+// store a reference to the original displayTiddler function
+displayTiddler: story.displayTiddler
+};
+
+CustomTracker.track = function() {
+//if (readOnly) {
+urchinTracker.apply(this, arguments);
+//}
+};
+
+CustomTracker.trackAndDisplayTiddler = function(srcElement, titles) {
+// log with the tracker
+CustomTracker.track('/' + titles);
+// call the original displayTiddler function
+CustomTracker.displayTiddler.apply(this,arguments);
+};
+
+// replace the default displayTiddler function with a tracking version
+story.displayTiddler = CustomTracker.trackAndDisplayTiddler;
+
+// Call once for the initial page load
+CustomTracker.track();
+}}}</pre>
+</div>
 <div title="DefaultTiddlers" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201103191837" modified="201104251010" tags="systemNotes" changecount="2">
 <pre>[[Etat De L'Art]]</pre>
 </div>
@@ -565,6 +598,11 @@ This site focus on automated theorem proving (ATP) or automated deduction which 
 [[Resources]]
 [[Roadmap]]
 [[Tags]]</pre>
+</div>
+<div title="MarkupPostHead" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104301112" modified="201104301217" tags="systemNotes" changecount="5">
+<pre>&lt;script src=&quot;http://www.google-analytics.com/urchin.js&quot; type=&quot;text/javascript&quot;&gt;
+&lt;/script&gt;
+</pre>
 </div>
 <div title="MathJax plugin" modifier="Olivier ROLAND" created="201104241346" modified="201104251238" tags="systemServer plugins editing tools" changecount="5">
 <pre>|''Type:''|file|
@@ -1579,7 +1617,7 @@ config.parsers.twikiFormatter.formatTag = 'TWikiFormat';
 } // end of 'install only once'
 //}}}</pre>
 </div>
-<div title="Tags" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104250931" modified="201104251242" tags="meta editing" changecount="14">
+<div title="Tags" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104250931" modified="201104301209" tags="meta editing" changecount="15">
 <pre>*&lt;&lt;tag atp&gt;&gt;- Automated Theorem Proving, what this site is all about
 **&lt;&lt;tag intro&gt;&gt;- Getting started
 **&lt;&lt;tag scala-atp&gt;&gt;- Scala port of [[Handbook of Practical Logic and Automated Reasoning|http://www.cambridge.org/catalogue/catalogue.asp?isbn=9780521899574]]
@@ -1593,6 +1631,7 @@ config.parsers.twikiFormatter.formatTag = 'TWikiFormat';
 ***&lt;&lt;tag systemConfig&gt;&gt;- this is a special tag, marking notes with code to be loaded at startup
 ***&lt;&lt;tag systemNotes&gt;&gt;- system control notes loaded at startup, used to control content
 ***&lt;&lt;tag plugins&gt;&gt;- code snippets enhancing functionality, and containing descriptions of what they do
+***&lt;&lt;tag systemServer&gt;&gt;- tiddlers automatically created to record the details of source server
 
 The tags group collections of notes into sets — they're adjectives, directories, or folders. By selecting a tag, visible in the upper right of each note, you can jump to any note labeled with that tag — a navigational convenience. It's efficacious to build a flexible hierarchy of tagged content. Each note should be labeled by its most appropriate, &quot;lowest&quot; leaf tags — more than one as appropriate. Click on the tag to see a popup menu of notes with that tag. Alternatively, these folders and their contents may be selectively displayed in the &quot;Contents&quot; tab to the left.</pre>
 </div>
