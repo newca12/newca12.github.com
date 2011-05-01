@@ -531,7 +531,7 @@ See [[demo|MathJaxTiddlyPluginDemo]]
 
 Some hints about MathJax [[here|http://wiki.math.toronto.edu/TorontoMathWiki/index.php/JsMath/MathJax_(TeX_for_Web)]] </pre>
 </div>
-<div title="CustomTracker" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104301217" modified="201104301221" tags="systemConfig" changecount="3">
+<div title="CustomTracker" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104301217" modified="201105012012" tags="systemConfig" changecount="4">
 <pre>{{{
 // Specify your account number here!
 _uacct = &quot;UA-4646079-1&quot;;
@@ -543,9 +543,9 @@ displayTiddler: story.displayTiddler
 };
 
 CustomTracker.track = function() {
-//if (readOnly) {
+if (readOnly) {
 urchinTracker.apply(this, arguments);
-//}
+}
 };
 
 CustomTracker.trackAndDisplayTiddler = function(srcElement, titles) {
@@ -1617,7 +1617,7 @@ config.parsers.twikiFormatter.formatTag = 'TWikiFormat';
 } // end of 'install only once'
 //}}}</pre>
 </div>
-<div title="Tags" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104250931" modified="201104301209" tags="meta editing" changecount="15">
+<div title="Tags" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104250931" modified="201105011659" tags="meta editing" changecount="16">
 <pre>*&lt;&lt;tag atp&gt;&gt;- Automated Theorem Proving, what this site is all about
 **&lt;&lt;tag intro&gt;&gt;- Getting started
 **&lt;&lt;tag scala-atp&gt;&gt;- Scala port of [[Handbook of Practical Logic and Automated Reasoning|http://www.cambridge.org/catalogue/catalogue.asp?isbn=9780521899574]]
@@ -1625,6 +1625,7 @@ config.parsers.twikiFormatter.formatTag = 'TWikiFormat';
 ***&lt;&lt;tag resume&gt;&gt;- Reading notes
 **&lt;&lt;tag person&gt;&gt;- People working on ATP
 *&lt;&lt;tag tools&gt;&gt;- tools drastically selected
+**&lt;&lt;tag duel&gt;&gt;- duels
 *&lt;&lt;tag meta&gt;&gt;- describes the operation of this site
 **&lt;&lt;tag editing&gt;&gt;- tips on editing and authoring notes, including all sorts of tools
 **&lt;&lt;tag system&gt;&gt;- control how the site operates and is layed out
@@ -1838,12 +1839,14 @@ The tags group collections of notes into sets — they're adjectives, directorie
 
    * [[http://en.wikipedia.org/wiki/Automated_theorem_proving#References  References ]]</pre>
 </div>
-<div title="Tools" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104261830" modified="201104262128" tags="tools" changecount="7">
+<div title="Tools" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104261830" modified="201105012037" tags="tools" changecount="9">
 <pre>In no particular order
 *[[TeXmacs|http://www.texmacs.org/]]
 *[[git|http://git-scm.com/]]
 *[[Eclipse|http://www.eclipse.org/]]
 **[[ScalaIDE|http://www.scala-ide.org/]]
+**[[m2eclipse|http://m2eclipse.sonatype.org/]]
+**[[m2eclipse-scala|https://github.com/sonatype/m2eclipse-scala/]]
 *[[Apache Maven|http://maven.apache.org/]]
 **[[maven-scala-plugin|http://scala-tools.org/mvnsites/maven-scala-plugin/index.html]]
 *[[TiddlyWiki|http://tiddlywiki.com/]]</pre>
@@ -2024,6 +2027,26 @@ Welcome to Haskell ATP!
 (¬p ∨ q) ∧ (q ∨ ¬p) ∨ (p ∧ ¬q) ∧ ¬q ∧ p
 }}}
 </pre>
+</div>
+<div title="sbt vs maven" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201105011650" modified="201105012016" tags="duel tools" changecount="16">
+<pre>From Eclipse point of view 
+*sbt pros
+**quicker incremental build (probably useless with eclipse)
+**using scala as build script
+**the majoriity of scala projects use it
+*sbt cons
+**after edition you should run &quot;sbt clean-lib update eclipse&quot; and refresh the project in eclipse
+**no multiproject support (fixed in sbt &gt;= 0.9)
+*maven pros
+**more standard in Java land
+**auto-download of source (and javadoc) of dependencies direct and transitive
+**update via project&gt;maven&gt;update configuration click
+**compatible with many other tools
+**solid eclipse support with m2eclipse
+*maven cons
+**verbose XML syntax
+
+The winner is : [[maven|http://maven.apache.org/]] ([[sbt|http://code.google.com/p/simple-build-tool/]] should be re-evaluated when &gt;= 0.9 will be released)</pre>
 </div>
 </div>
 <!--POST-STOREAREA-->
