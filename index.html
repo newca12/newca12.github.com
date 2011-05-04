@@ -1912,6 +1912,14 @@ This tiddler was automatically created to record the details of this server</pre
 ***[[Adam Chlipala|http://adam.chlipala.net/]]
 ****Coq</pre>
 </div>
+<div title="howto gapt" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201105042106" modified="201105042136" tags="gapt scala-atp" changecount="5">
+<pre>* root pom.xml doesn't build cli. cli need to be build manually with mvn install in cli directory
+* launch cli with : java -jar cli/target/cli-1.0-SNAPSHOT-jar-with-dependencies.jar
+{{{
+scala&gt; parse fol &quot;P(f(x,c),y)&quot;
+res29: at.logic.language.fol.FOLFormula = P(f(x, c), y)
+}}}</pre>
+</div>
 <div title="howto haskell-atp" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104232124" modified="201104250959" tags="haskell-atp scala-atp" changecount="6">
 <pre>interpreted 
 {{{
