@@ -523,6 +523,48 @@ The long term objective is to build a new generation theorem prover with Scala l
 This new theorem prover is called : [[HED|http://code.google.com/p/edla-hed/]] (hoper edei deixai).
 The [[HED|http://code.google.com/p/edla-hed/]] theorem prover is free software, released under the GNU General Public License version 3 (GPLv3)</pre>
 </div>
+<div title="Bison grammar of First Order Logic" creator="YourName" modifier="Olivier ROLAND" created="201105082052" modified="201105082056" tags="parsing" changecount="5">
+<pre>Translation of the description http://www.sju.edu/~jhodgson/ugai/1order.html to Bison
+{{{
+%token PREDICATE FUNCTION CONSTANT VARIABLE 
+%token IMPLIES AND OR IFF THERE_EXISTS FORALL 
+%left '=' 
+%left VARIABLE 
+%left IMPLIES 
+%left IFF 
+%left AND 
+%left OR 
+%left NOT 
+%% 
+sentence 
+        : atomic_sentence 
+        | sentence IMPLIES sentence 
+        | sentence IFF sentence 
+        | sentence AND sentence 
+        | sentence OR sentence 
+        | quantifier VARIABLE sentence 
+        | '~' sentence %prec NOT 
+        | '(' sentence ')' 
+        ; 
+atomic_sentence 
+        : PREDICATE '(' term_list ')' 
+        | term '=' term 
+        ; 
+term 
+        : FUNCTION '(' term_list ')' 
+        | CONSTANT 
+        | VARIABLE 
+        ; 
+term_list 
+        : term_list term 
+        | term 
+        ; 
+quantifier 
+        : THERE_EXISTS 
+        | FORALL 
+        ; 
+}}}</pre>
+</div>
 <div title="Content Management System" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104241315" modified="201104251238" tags="intro tools" changecount="12">
 <pre>The two main pieces from which this site is built are [[TiddlyWiki|http://www.tiddlywiki.com/]], created by Jeremy Ruston, and [[MathJax|http://www.mathjax.org/]] a joint project of the American Mathematical Society, Design Science, Inc., and the Society for Industrial and Applied Mathematics.  Both of these excellent open source software packages are under continuing development and have supportive communities.
 
@@ -821,8 +863,42 @@ in a paragraph is also important. This expression \(\sqrt{3x-1}+(1+x)^2\) is an 
 inline equation.  As you see, ~MathJax equations can be used this way as well, without unduly
 disturbing the spacing between lines.</pre>
 </div>
-<div title="Parsing" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104250925" modified="201104251406" tags="parsing scala-atp" changecount="10">
-<pre>*Different parsers are needed
+<div title="Parser combinators vs others" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201105082059" modified="201105082129" tags="duel parsing tools" changecount="7">
+<pre>*Parser combinators pros
+**in the language itself
+**no external tools
+**part of native Scala library
+*Parser combinators cons
+**implementation tricky for left recursion
+*Parser generators pros
+**code could be auto generated from EBNF
+*Parser generators cons
+**overcomplicated
+**old school method supersed by modern techniques
+*Derivative combinators pros
+**promising
+*Derivative combinators cons
+**too confidential
+*GLL combinators pros
+**solve left recursion problem
+*GLL combinators cons
+**too confidential
+
+The winner is : Parser combinators (but GLL and derivative combinators should be re-evaluated in case of limitation with Scala implementation)</pre>
+</div>
+<div title="Parsing" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104250925" modified="201105082121" tags="parsing scala-atp" changecount="29">
+<pre>*Various techniques and tools are available for parsing
+**Parser generator (Yacc, Bison, ANTLR, JavaCC, SableCC) with scanned generator (Lex, Flex, JFlex)
+**Parser combinators
+**Derivative combinators : https://github.com/djspiewak/derivative-combinators 
+**GLL combinators : https://github.com/djspiewak/gll-combinators
+**Alternative to parser combinators : https://github.com/sirthias/parboiled/wiki
+**Natural language processing : http://www.scalanlp.org/
+**Alternate language processing : http://code.google.com/p/kiama/
+*Old school Initiatives
+**http://www.clt.gu.se/clt-toolkit
+*[[Algebraic data types|http://en.wikipedia.org/wiki/Algebraic_data_type]] are particularly well-suited to the implementation of abstract syntax.
+*Requirements for scala-atp
 **expression
 ***x + y * 7
 **term
@@ -830,9 +906,14 @@ disturbing the spacing between lines.</pre>
 **formula
 ***⊤ ∧ f(c) ⊃ ∀ x. P(x)
 *In Scala, operator names can be characters from the unicode 
-**[[Boolean Algebra Internal DSL|http://gabrielsw.blogspot.com/2009/06/boolean-algebra-internal-dsl-in-scala.html]]</pre>
+**[[Boolean Algebra Internal DSL|http://gabrielsw.blogspot.com/2009/06/boolean-algebra-internal-dsl-in-scala.html]]
+*Threads about pretty printing in Scala
+**http://scala-programming-language.1934581.n4.nabble.com/Converse-concept-to-a-parser-td1934896.html
+**http://scala-programming-language.1934581.n4.nabble.com/scala-pretty-printing-td1995936.html
+
+See also [[Parser combinators vs others]]</pre>
 </div>
-<div title="Programming in Scala 2nd : resume" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104232118" modified="201104251015" tags="scala book resume scala-atp" changecount="2">
+<div title="Programming in Scala 2nd : resume" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104232118" modified="201105070810" tags="scala book resume scala-atp" changecount="8">
 <pre>* Chapter 1 · A Scalable Language
 ** Functional programming is guided by two main ideas
 *** functions are first-class values
@@ -849,23 +930,33 @@ disturbing the spacing between lines.</pre>
 ** Prefer vals, immutable objects, and methods without side effects
 * Chapter 4 · Classes and Objects
 ** Public is Scala’s default access level
-** One important characteristic of method parameters in Scala is that they are vals, not vars</pre>
+** One important characteristic of method parameters in Scala is that they are vals, not vars
+* Chapter 33 · Combinator Parsing
+** Sequential composition is expressed by an explicit operator: ~
+** Repetition is expressed rep( . . . )
+** The ˆˆ operator transforms the result of a parser
+*** examples :
+**** floatingPointNumber ˆˆ (_.toDouble)
+**** &quot;true&quot; ˆˆ (x =&gt; true)</pre>
 </div>
-<div title="Resources" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201103191829" modified="201104250955" tags="intro" changecount="8">
+<div title="Resources" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201103191829" modified="201105081302" tags="intro" changecount="9">
 <pre>* SCALA
 ** Learn Scala for free thanks to O'REILLY : [[Programming Scala|http://programming-scala.labs.oreilly.com/index.html]]
 *** example at the end of Chapter 9 has been updated by edla.org to scala 2.8.1 here : https://github.com/newca12/mailslot
 ** Not free* but far better introduction to Scala : [[Programming in Scala, Second Edition|http://www.artima.com/shop/programming_in_scala_2ed]]
 *** * the first edition is now available for free : http://www.artima.com/pins1ed/ 
-** Nicely written introduction to parsing : http://szeiger.de/blog/2008/07/27/formal-language-processing-in-scala-part-1
  
 * AUTOMATED THEOREM PROVING
 ** Recommended book about ATP : [[Handbook of Practical Logic and Automated Reasoning|http://www.cambridge.org/catalogue/catalogue.asp?isbn=9780521899574]] (the code used in this book is written in Objective CAML but edla.org will convert it to Scala and make it publicly available, see below)  
 *** Scala port of the Ocaml code : http://code.google.com/p/scala-atp  &lt;== Work in progress !
 *** Haskell port of the OCaml code : http://github.com/seanmcl/haskell-atp  
-** General framework in Scala for applied proof theory : http://code.google.com/p/gapt/</pre>
+** General framework in Scala for applied proof theory : http://code.google.com/p/gapt/
+
+* PARSING
+** The whole story : http://matt.might.net/articles/parsing-with-derivatives/
+** Nicely written introduction to parsing : http://szeiger.de/blog/2008/07/27/formal-language-processing-in-scala-part-1</pre>
 </div>
-<div title="Roadmap" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104241247" modified="201104251255" tags="intro" changecount="22">
+<div title="Roadmap" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104241247" modified="201105081136" tags="intro" changecount="23">
 <pre>*Phase 1 : initialization
 ** Identify resources (books, article, thesis, blog, etc ...) that are available (started, WIP)
 ** Identify people/organisation also working on ATP ([[done|Who's who]])
@@ -874,19 +965,55 @@ disturbing the spacing between lines.</pre>
 ** Select additional &lt;&lt;tag tools&gt;&gt; (started, WIP)
 ** Select authoritative &lt;&lt;tag book&gt;&gt; on each subject and make a resume (started WIP)
 ** Use the selected [[CMS|Content Management System]] to consolidate knowledge (started, WIP)
+** Select parsing technique ([[started|Parsing]],WIP)
 *Phase 2 : Scala port of [[Handbook of Practical Logic and Automated Reasoning|http://www.cambridge.org/catalogue/catalogue.asp?isbn=9780521899574]] (started, WIP)
 *Phase 3 : make [[HED|http://code.google.com/p/edla-hed/]] (hoper edei deixai) a state of the art theorem prover (not yet started)
 </pre>
 </div>
-<div title="Scala" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104241415" modified="201104251239" tags="intro tools scala" changecount="5">
+<div title="Scala" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104241415" modified="201105081356" tags="intro tools scala" changecount="9">
 <pre>Why Scala ?
 
 This extract from [[Daniel Spiewak's blog|http://www.codecommit.com/blog/scala/algorithm-proof-inference-in-scala]] is a good summarize to the answer of this question. 
 
 Scala can be the salvation for the program prover.  It’s hybrid functional / object-oriented nature lends itself beautifully to the expression of highly mathematical concepts of intense precision.  Theoreticians have long suspected this, but the research simply has not been there to back it up.  After all, most PhDs write all their proofs on a blackboard, making use of a character set extension to ASCII.  Fortunately for the world, that is no longer an issue.
 
-The answer is to to turn the problem on its ear (as it were) and eschew mathematical expressions altogether.  Instead of the developer expressing intent in terms of epsilon, delta and gamma-transitions, a simple framework in Scala will infer intent just based on the input code.  All of the rules will be built dynamically using an internal DSL, without any need to mess about in low-level character encodings.  Scala is the perfect language for this effort.  Not only does its flexible syntax allow for powerful expressiveness, but it even supports UTF-8 string literals! 
+The answer is to to turn the problem on its ear (as it were) and eschew mathematical expressions altogether.  Instead of the developer expressing intent in terms of epsilon, delta and gamma-transitions, a simple framework in Scala will infer intent just based on the input code.  All of the rules will be built dynamically using an internal DSL, without any need to mess about in low-level character encodings.  Scala is the perfect language for this effort.  Not only does its flexible syntax allow for powerful expressiveness, but it even supports UTF-8 string literals!
+
+See also : [[Scala vs others]] 
 </pre>
+</div>
+<div title="Scala vs others" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201105081358" modified="201105081424" tags="tools duel" changecount="10">
+<pre>*The following programming languages have algebraic data types as a first class notion. This criteria is mandatory.
+**Clean : too confidential/exotic. Too little community.
+**F# : seem OK but Micro$oft world is definitely not my cup of tea.
+**Haskell : seem OK
+**haXe : too confidential/exotic. Too little community.
+**Hope : too confidential/exotic. Too little community.
+**Mercury : too confidential/exotic. Too little community.
+**Miranda : too confidential/exotic. Too little community.
+**Nemerle :too confidential/exotic. Too little community.
+**Objective Caml : seem OK
+**Scala : seem OK
+**Standard ML : supersede by Objective Caml 
+**Visual Prolog : too confidential/exotic. Too little community.
+
+* Objective Caml pros
+** mixed paradigm
+* Objective Caml cons
+** poor IDE support
+* Haskell pros
+** cleanest syntax of all
+** pure formal
+* Haskell cons
+** pure formal
+** poor IDE support
+* Scala pros
+** mixed paradigm
+** the fastest
+** strong IDE support
+* Scala cons
+** syntax is as good as possible but far from the beauty of haskell syntax 
+The winner is : [[Scala]]. The only language of the three with strong IDE support. </pre>
 </div>
 <div title="SiteSubtitle" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201103191828" modified="201104251011" tags="systemNotes" changecount="2">
 <pre>.  .  .  a site about Automated Theorem Proving</pre>
@@ -1617,13 +1744,14 @@ config.parsers.twikiFormatter.formatTag = 'TWikiFormat';
 } // end of 'install only once'
 //}}}</pre>
 </div>
-<div title="Tags" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104250931" modified="201105011659" tags="meta editing" changecount="16">
+<div title="Tags" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104250931" modified="201105081020" tags="meta editing" changecount="17">
 <pre>*&lt;&lt;tag atp&gt;&gt;- Automated Theorem Proving, what this site is all about
 **&lt;&lt;tag intro&gt;&gt;- Getting started
 **&lt;&lt;tag scala-atp&gt;&gt;- Scala port of [[Handbook of Practical Logic and Automated Reasoning|http://www.cambridge.org/catalogue/catalogue.asp?isbn=9780521899574]]
 **&lt;&lt;tag book&gt;&gt;- Some books
 ***&lt;&lt;tag resume&gt;&gt;- Reading notes
 **&lt;&lt;tag person&gt;&gt;- People working on ATP
+*&lt;&lt;tag parsing&gt;&gt;- Related to parsing
 *&lt;&lt;tag tools&gt;&gt;- tools drastically selected
 **&lt;&lt;tag duel&gt;&gt;- duels
 *&lt;&lt;tag meta&gt;&gt;- describes the operation of this site
@@ -1912,12 +2040,38 @@ This tiddler was automatically created to record the details of this server</pre
 ***[[Adam Chlipala|http://adam.chlipala.net/]]
 ****Coq</pre>
 </div>
-<div title="howto gapt" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201105042106" modified="201105042136" tags="gapt scala-atp" changecount="5">
+<div title="howto Princess" creator="YourName" modifier="Olivier ROLAND" created="201105080926" modified="201105081126" tags="scala-atp parsing" changecount="18">
+<pre>[[Princess|http://www.philipp.ruemmer.org/princess.shtml]] is a theorem prover for Presburger arithmetic with uninterpreted predicates.
+
+make the parser
+{{{
+sudo port install hs-platform-cabal
+cabal install bnfc
+export PATH=$PATH:/$HOME/.cabal/bin
+mkdir JLex
+cd JLex
+wget  http://www.cs.princeton.edu/~appel/modern/java/JLex/current/Main.java
+javac Main.java
+cd ..
+jar cvf JLex/JLex.jar *.class
+make parser-jar
+}}}
+
+rmake &amp; run princess GUI
+{{{
+make
+./princessGui
+}}}
+</pre>
+</div>
+<div title="howto gapt" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201105042106" modified="201105051801" tags="gapt scala-atp" changecount="6">
 <pre>* root pom.xml doesn't build cli. cli need to be build manually with mvn install in cli directory
 * launch cli with : java -jar cli/target/cli-1.0-SNAPSHOT-jar-with-dependencies.jar
 {{{
 scala&gt; parse fol &quot;P(f(x,c),y)&quot;
 res29: at.logic.language.fol.FOLFormula = P(f(x, c), y)
+scala&gt; parse hol &quot;g(f(F(a:i):i):i,f(F(a:i):i):i):i&quot;
+res5: at.logic.language.hol.HOLExpression = g(f(F(a:i):i):i, f(F(a:i):i):i):i
 }}}</pre>
 </div>
 <div title="howto haskell-atp" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104232124" modified="201104250959" tags="haskell-atp scala-atp" changecount="6">
