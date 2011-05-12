@@ -55,8 +55,6 @@ DAMAGE.
 #javascriptWarning {width:100%; text-align:center; font-weight:bold; background-color:#dd1100; color:#fff; padding:1em 0em;}
 </style>
 <!--POST-HEAD-START-->
-<script src="http://www.google-analytics.com/urchin.js" type="text/javascript">
-</script>
 
 <!--POST-HEAD-END-->
 </head>
@@ -573,43 +571,72 @@ See [[demo|MathJaxTiddlyPluginDemo]]
 
 Some hints about MathJax [[here|http://wiki.math.toronto.edu/TorontoMathWiki/index.php/JsMath/MathJax_(TeX_for_Web)]] </pre>
 </div>
-<div title="CustomTracker" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104301217" modified="201105012012" tags="systemConfig" changecount="4">
-<pre>{{{
-// Specify your account number here!
-_uacct = &quot;UA-4646079-1&quot;;
-
-// CustomTracker as a namespace for tracking related functions
-var CustomTracker = {
-// store a reference to the original displayTiddler function
-displayTiddler: story.displayTiddler
-};
-
-CustomTracker.track = function() {
-if (readOnly) {
-urchinTracker.apply(this, arguments);
-}
-};
-
-CustomTracker.trackAndDisplayTiddler = function(srcElement, titles) {
-// log with the tracker
-CustomTracker.track('/' + titles);
-// call the original displayTiddler function
-CustomTracker.displayTiddler.apply(this,arguments);
-};
-
-// replace the default displayTiddler function with a tracking version
-story.displayTiddler = CustomTracker.trackAndDisplayTiddler;
-
-// Call once for the initial page load
-CustomTracker.track();
-}}}</pre>
-</div>
 <div title="DefaultTiddlers" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201103191837" modified="201104251010" tags="systemNotes" changecount="2">
 <pre>[[Etat De L'Art]]</pre>
 </div>
 <div title="Etat De L'Art" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201103191831" modified="201104251011" tags="intro" changecount="3">
 <pre>Welcome to [[EDLA|http://www.edla.org]]
 This site focus on automated theorem proving (ATP) or automated deduction which is a subfield of automated reasoning. </pre>
+</div>
+<div title="GATracker" modifier="Olivier ROLAND" created="201105071452" modified="201105122057" tags="systemConfig" server.type="file" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.page.revision="201105071819" changecount="1">
+<pre>//{{{
+/* Google Analytics queue object. Needs to be global. */
+var _gaq = _gaq || [];
+
+/* Only track in readOnly mode */
+if (readOnly &amp;&amp; !config.extensions.GATracker) {(function($) {
+
+/* Insert script tag to load GA */
+$('head').eq(0).prepend($('&lt;script/&gt;').attr({type: 'text/javascript', async: 'true', src: ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'}));
+
+/* Prepare overridden TiddlyWiki displaying */
+var pl = config.extensions.GATracker = {
+	/* Tracking function */
+	track: function() {
+		_gaq.push.apply(_gaq, arguments);
+	},
+	/* New display function */
+	trackAndDisplayTiddler: function(srcElement, tiddler, template, animate, unused, customFields, toggle, animationSrc) {
+		if (toggle !== true) {
+			var title = (tiddler instanceof Tiddler) ? tiddler.title : tiddler;
+			var trackData = ['_trackEvent', 'Tiddlers'];
+			if (story.getTiddler(title)) {
+				/* Tiddler is already displayed */
+				if (template === DEFAULT_EDIT_TEMPLATE) {
+					/* Tiddler is being edited */
+					trackData.push('Edit');
+				}
+				else {
+					trackData.push('Refresh');
+				}
+			}
+			else {
+				/* Tiddler is not yet displayed */
+				trackData.push('Open');
+			}
+			trackData.push(title);
+			pl.track(trackData);
+		}
+		pl.displayTiddler.apply(this, arguments);
+	}
+};
+
+/* Override current TiddlyWiki display function */
+pl.displayTiddler = story.displayTiddler;
+story.displayTiddler = pl.trackAndDisplayTiddler;
+
+/* Initialize tracking */
+pl.track(['_setAccount', '&quot;UA-4646079-1'], ['_trackPageview']);
+
+})(jQuery);}
+//}}}</pre>
+</div>
+<div title="GATracker plugin" modifier="Olivier ROLAND" created="201105122055" modified="201105122059" tags="systemServer plugins" changecount="2">
+<pre>|''Type:''|file|
+|''URL:''|http://suiryc.github.com/TiddlyWiki-dev/|
+|''Workspace:''|(default)|
+
+This tiddler was automatically created to record the details of this server</pre>
 </div>
 <div title="Getting started" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104242212" modified="201104250955" tags="intro" changecount="5">
 <pre>*[[What is it ?|http://www.cs.miami.edu/~tptp/OverviewOfATP.html]]
@@ -640,11 +667,6 @@ This site focus on automated theorem proving (ATP) or automated deduction which 
 [[Resources]]
 [[Roadmap]]
 [[Tags]]</pre>
-</div>
-<div title="MarkupPostHead" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104301112" modified="201104301217" tags="systemNotes" changecount="5">
-<pre>&lt;script src=&quot;http://www.google-analytics.com/urchin.js&quot; type=&quot;text/javascript&quot;&gt;
-&lt;/script&gt;
-</pre>
 </div>
 <div title="MathJax plugin" modifier="Olivier ROLAND" created="201104241346" modified="201104251238" tags="systemServer plugins editing tools" changecount="5">
 <pre>|''Type:''|file|
