@@ -885,7 +885,7 @@ in a paragraph is also important. This expression \(\sqrt{3x-1}+(1+x)^2\) is an 
 inline equation.  As you see, ~MathJax equations can be used this way as well, without unduly
 disturbing the spacing between lines.</pre>
 </div>
-<div title="Parser combinators vs others" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201105082059" modified="201105082129" tags="duel parsing tools" changecount="7">
+<div title="Parser combinators vs others" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201105082059" modified="201105162056" tags="duel parsing tools" changecount="12">
 <pre>*Parser combinators pros
 **in the language itself
 **no external tools
@@ -906,15 +906,17 @@ disturbing the spacing between lines.</pre>
 *GLL combinators cons
 **too confidential
 
-The winner is : Parser combinators (but GLL and derivative combinators should be re-evaluated in case of limitation with Scala implementation)</pre>
+The winner is : Parser combinators (but GLL and derivative combinators should be re-evaluated in case of limitation with Scala implementation*)
+
+(*)[[PEGs|http://en.wikipedia.org/wiki/Parsing_expression_grammar]] [[implementation|https://github.com/sirthias/parboiled/wiki]] should then also be evaluated.</pre>
 </div>
-<div title="Parsing" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104250925" modified="201105082121" tags="parsing scala-atp" changecount="29">
+<div title="Parsing" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104250925" modified="201105162055" tags="parsing scala-atp" changecount="32">
 <pre>*Various techniques and tools are available for parsing
 **Parser generator (Yacc, Bison, ANTLR, JavaCC, SableCC) with scanned generator (Lex, Flex, JFlex)
 **Parser combinators
 **Derivative combinators : https://github.com/djspiewak/derivative-combinators 
 **GLL combinators : https://github.com/djspiewak/gll-combinators
-**Alternative to parser combinators : https://github.com/sirthias/parboiled/wiki
+**[[PEGs|http://en.wikipedia.org/wiki/Parsing_expression_grammar]] an alternative to [[CFGs|http://en.wikipedia.org/wiki/Context-free_grammar]] : https://github.com/sirthias/parboiled/wiki
 **Natural language processing : http://www.scalanlp.org/
 **Alternate language processing : http://code.google.com/p/kiama/
 *Old school Initiatives
@@ -1766,7 +1768,7 @@ config.parsers.twikiFormatter.formatTag = 'TWikiFormat';
 } // end of 'install only once'
 //}}}</pre>
 </div>
-<div title="Tags" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104250931" modified="201105081020" tags="meta editing" changecount="17">
+<div title="Tags" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104250931" modified="201105162122" tags="meta editing" changecount="22">
 <pre>*&lt;&lt;tag atp&gt;&gt;- Automated Theorem Proving, what this site is all about
 **&lt;&lt;tag intro&gt;&gt;- Getting started
 **&lt;&lt;tag scala-atp&gt;&gt;- Scala port of [[Handbook of Practical Logic and Automated Reasoning|http://www.cambridge.org/catalogue/catalogue.asp?isbn=9780521899574]]
@@ -1774,6 +1776,7 @@ config.parsers.twikiFormatter.formatTag = 'TWikiFormat';
 ***&lt;&lt;tag resume&gt;&gt;- Reading notes
 **&lt;&lt;tag person&gt;&gt;- People working on ATP
 *&lt;&lt;tag parsing&gt;&gt;- Related to parsing
+*&lt;&lt;tag howto&gt;&gt;- various how-to
 *&lt;&lt;tag tools&gt;&gt;- tools drastically selected
 **&lt;&lt;tag duel&gt;&gt;- duels
 *&lt;&lt;tag meta&gt;&gt;- describes the operation of this site
@@ -2008,7 +2011,7 @@ The tags group collections of notes into sets — they're adjectives, directorie
 
 This tiddler was automatically created to record the details of this server</pre>
 </div>
-<div title="Who's who" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104241635" modified="201104251232" tags="person" changecount="20">
+<div title="Who's who" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104241635" modified="201105162114" tags="person" changecount="21">
 <pre>In no particular order.
 
 *Intel Corporation
@@ -2018,13 +2021,13 @@ This tiddler was automatically created to record the details of this server</pre
 * Vienna University of Technology
 **Theory and Logic Group
 ***[[Alexander Leitsch|http://www.logic.at/people/leitsch/]]
-****GAPT
+****gapt
 ***[[Bruno Woltzenlogel Paleo|https://sites.google.com/site/brunowp/]]
-****GAPT
+****gapt
 ***[[Mikheil Rukhaia|http://www.logic.at/staff/mrukhaia/]]
 ****GAPT,CERES
 ***[[Tomer Libal (shaolin)|http://www.logic.at/staff/shaolin/]]
-****GAPT
+****gapt
 * University of Miami
 **Department of Computer Science
 ***[[Geoff Sutcliffe|http://www.cs.miami.edu/~geoff/]]
@@ -2062,7 +2065,7 @@ This tiddler was automatically created to record the details of this server</pre
 ***[[Adam Chlipala|http://adam.chlipala.net/]]
 ****Coq</pre>
 </div>
-<div title="howto Princess" creator="YourName" modifier="Olivier ROLAND" created="201105080926" modified="201105081126" tags="scala-atp parsing" changecount="18">
+<div title="howto Princess" creator="YourName" modifier="Olivier ROLAND" created="201105080926" modified="201105162116" tags="scala-atp parsing howto" changecount="19">
 <pre>[[Princess|http://www.philipp.ruemmer.org/princess.shtml]] is a theorem prover for Presburger arithmetic with uninterpreted predicates.
 
 make the parser
@@ -2086,7 +2089,7 @@ make
 }}}
 </pre>
 </div>
-<div title="howto gapt" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201105042106" modified="201105051801" tags="gapt scala-atp" changecount="6">
+<div title="howto gapt" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201105042106" modified="201105162114" tags="gapt scala-atp howto" changecount="7">
 <pre>* root pom.xml doesn't build cli. cli need to be build manually with mvn install in cli directory
 * launch cli with : java -jar cli/target/cli-1.0-SNAPSHOT-jar-with-dependencies.jar
 {{{
@@ -2096,7 +2099,7 @@ scala&gt; parse hol &quot;g(f(F(a:i):i):i,f(F(a:i):i):i):i&quot;
 res5: at.logic.language.hol.HOLExpression = g(f(F(a:i):i):i, f(F(a:i):i):i):i
 }}}</pre>
 </div>
-<div title="howto haskell-atp" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104232124" modified="201104250959" tags="haskell-atp scala-atp" changecount="6">
+<div title="howto haskell-atp" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104232124" modified="201105162115" tags="haskell-atp scala-atp howto" changecount="7">
 <pre>interpreted 
 {{{
 cd haskell-atp/src/ATP
@@ -2122,7 +2125,7 @@ compiled
 }}}
 </pre>
 </div>
-<div title="howto ocaml-atp" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104232134" modified="201104252100" tags="ocaml-atp scala-atp" changecount="11">
+<div title="howto ocaml-atp" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104232134" modified="201105162114" tags="ocaml-atp scala-atp howto" changecount="12">
 <pre>{{{
 cd Ocaml
 ocaml
