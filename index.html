@@ -578,65 +578,233 @@ Some hints about MathJax [[here|http://wiki.math.toronto.edu/TorontoMathWiki/ind
 <pre>Welcome to [[EDLA|http://www.edla.org]]
 This site focus on automated theorem proving (ATP) or automated deduction which is a subfield of automated reasoning. </pre>
 </div>
-<div title="GATracker" modifier="Olivier ROLAND" created="201105071452" modified="201105140705" tags="systemConfig" server.type="file" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.page.revision="201105071819" changecount="2">
-<pre>//{{{
-/* Google Analytics queue object. Needs to be global. */
-var _gaq = _gaq || [];
-
-/* Only track in readOnly mode */
-if (readOnly &amp;&amp; !config.extensions.GATracker) {(function($) {
-
-/* Insert script tag to load GA */
-$('head').eq(0).prepend($('&lt;script/&gt;').attr({type: 'text/javascript', async: 'true', src: ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'}));
-
-/* Prepare overridden TiddlyWiki displaying */
-var pl = config.extensions.GATracker = {
-	/* Tracking function */
-	track: function() {
-		_gaq.push.apply(_gaq, arguments);
-	},
-	/* New display function */
-	trackAndDisplayTiddler: function(srcElement, tiddler, template, animate, unused, customFields, toggle, animationSrc) {
-		if (toggle !== true) {
-			var title = (tiddler instanceof Tiddler) ? tiddler.title : tiddler;
-			var trackData = ['_trackEvent', 'Tiddlers'];
-			if (story.getTiddler(title)) {
-				/* Tiddler is already displayed */
-				if (template === DEFAULT_EDIT_TEMPLATE) {
-					/* Tiddler is being edited */
-					trackData.push('Edit');
-				}
-				else {
-					trackData.push('Refresh');
-				}
-			}
-			else {
-				/* Tiddler is not yet displayed */
-				trackData.push('Open');
-			}
-			trackData.push(title);
-			pl.track(trackData);
-		}
-		pl.displayTiddler.apply(this, arguments);
-	}
-};
-
-/* Override current TiddlyWiki display function */
-pl.displayTiddler = story.displayTiddler;
-story.displayTiddler = pl.trackAndDisplayTiddler;
-
-/* Initialize tracking */
-pl.track(['_setAccount', 'UA-4646079-1'], ['_trackPageview']);
-
-})(jQuery);}
-//}}}</pre>
-</div>
-<div title="GATracker plugin" modifier="Olivier ROLAND" created="201105122055" modified="201105122059" tags="systemServer plugins" changecount="2">
+<div title="GATracker plugin" modifier="Olivier ROLAND" created="201105191755" modified="201105191759" tags="systemServer plugins" changecount="2">
 <pre>|''Type:''|file|
 |''URL:''|http://suiryc.github.com/TiddlyWiki-dev/|
 |''Workspace:''|(default)|
 
 This tiddler was automatically created to record the details of this server</pre>
+</div>
+<div title="GATrackerPlugin" modifier="Julien Coloos" created="201105142206" modified="201105182137" tags="systemConfig" server.type="file" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.page.revision="201105182137">
+<pre>/***
+|Name|GATrackerPlugin|
+|Description|Google Analytics tracker|
+|Author|Julien Coloos|
+|Version|1.2.0|
+|Date|2011-05-18|
+|Status|stable|
+|Source|http://julien.coloos.free.fr/TiddlyWiki-dev/#GATrackerPlugin|
+|License|[img[CC BY-SA 3.0|http://i.creativecommons.org/l/by-sa/3.0/80x15.png][http://creativecommons.org/licenses/by-sa/3.0/]]|
+|CoreVersion|2.6.2|
+|Documentation|http://julien.coloos.free.fr/TiddlyWiki-dev/#GATrackerPlugin|
+
+!Description
+This plugin enables Google Analytics tracking inside TiddlyWiki.
+
+The version used is the asynchronous one ({{{ga.js}}}).
+The plugin comes with its own configuration, which is stored persistently inside the (hidden) [[SystemSettings]] tiddler.
+The configuration has to be set before being effective: it can be done in the plugin tiddler (see below) if TiddlyWiki is not in read-only mode. Tracking works if an account ID has been set, tracking has been enabled, and TiddlyWiki access is non-local.
+
+Tracking can be reported as either:
+* page views
+** pages are named {{{/#Tiddler name}}}
+* events
+** Category: {{{Tiddlers}}}
+** Action: {{{Open}}}, {{{Refresh}}}, {{{Edit}}}, {{{Search}}}, {{{Close}}} or {{{CloseAll}}}
+** Label
+*** for {{{CloseAll}}} action: excluded tiddler
+*** for {{{Search}}} action: searched text
+*** otherwise, tiddler name on which action is performed
+** Value: for the {{{CloseAll}}} action, the number of closed tiddlers
+** Note: Google Analytics script limits the number of events (1 every 5 seconds, with a burst limit of 10)
+Tracking can be globally disabled, or enabled per action on each tiddler:
+* //Open//: when tiddler was not yet displayed
+** Note: default tiddlers do not trigger this action when accessing TiddlyWiki
+* //Refresh//: when tiddler was already displayed
+** Note: this action is automatically triggered after editing a tiddler
+* //Edit//: when editing (or viewing in read-only mode) the tiddler
+* //Close//: when tiddler was displayed
+** this action is never tracked in //pages views// tracking
+** the //CloseAll// action is triggered by the TiddyWiki links //close all// and //close others// if at least one tiddler was closed; individual tiddlers closed are not tracked as //Close// actions
+* //Search//: when searching in tiddlers
+** this action is never tracked in //pages views// tracking
+** {{{CloseAll}}} and {{{Open}}} actions are not taken into account while search is performed: TiddlyWiki automically closes opened tiddlers before searching and opens tiddler that match the searched text
+
+
+!Configuration
+&lt;&lt;GATrackerConfig&gt;&gt;
+
+
+!Revision History
+!!v1.2.0 (2011-05-18)
+Enhancements:
+* do not trigger {{{CloseAll}}} and {{{Open}}} actions when search is performed
+* added the {{{Search}}} action
+
+!!v1.1.0 (2011-05-17)
+Enhancements:
+* do not trigger {{{Open}}} action when displaying default tiddlers
+* added the {{{CloseAll}}} action
+
+!!v1.0.0 (2011-05-14)
+Initial release.
+
+
+!Code
+***/
+//{{{
+/* Google Analytics queue object. Needs to be global. */
+var _gaq = _gaq || [];
+
+if (!config.extensions.GATracker) {(function($) {
+
+version.extensions.GATrackerPlugin = {major: 1, minor: 2, revision: 0, date: new Date(2011, 5, 18)};
+
+/* Prepare overridden TiddlyWiki displaying */
+var trackOptions = {};
+var displayDefault = 0, closingAll = 0, searching = 0;
+var pl = config.extensions.GATracker = {
+getOption: function(optKey) {
+	return (config.optionsSource &amp;&amp; (config.optionsSource[optKey] == &quot;setting&quot;)) ? config.options[optKey] : null;
+},
+setOption: function(optKey, value) {
+	config.options[optKey] = value;
+	config.optionsSource[optKey] = &quot;setting&quot;;
+	saveOption(optKey);
+},
+loadOptions: function() {
+	var gaTrack = (pl.getOption(&quot;txt_GATracker_track&quot;) || &quot;1,0,1,1,1,0,0&quot;).split(&quot;,&quot;);
+	trackOptions = {
+		id: pl.getOption(&quot;txt_GATracker_id&quot;),
+		enabled: parseInt(gaTrack[0] || &quot;1&quot;),
+		type: parseInt(gaTrack[1] || &quot;0&quot;),
+		events: {
+			open: parseInt(gaTrack[2] || &quot;1&quot;),
+			refresh: parseInt(gaTrack[3]) || &quot;1&quot;,
+			edit: parseInt(gaTrack[4] || &quot;1&quot;),
+			close: parseInt(gaTrack[5] || &quot;0&quot;),
+			search: parseInt(gaTrack[6] || &quot;0&quot;)
+		}
+	};
+	if (trackOptions.id &amp;&amp; !trackOptions.id.length) {
+		trackOptions.id = null;
+	}
+},
+saveOptions: function() {
+	var opts = trackOptions.enabled &amp;&amp; &quot;1&quot; || &quot;0&quot;;
+	opts += &quot;,&quot; + trackOptions.type;
+	for (var ev in trackOptions.events) {
+		opts += &quot;,&quot; + (trackOptions.events[ev] &amp;&amp; &quot;1&quot; || &quot;0&quot;);
+	}
+	pl.setOption(&quot;txt_GATracker_id&quot;, trackOptions.id || &quot;&quot;);
+	pl.setOption(&quot;txt_GATracker_track&quot;, opts);
+},
+track: function() {
+	_gaq.push.apply(_gaq, arguments);
+},
+trackAndDisplayDefaultTiddlers: function() {
+	displayDefault = 1;
+	try { pl.displayDefaultTiddlers.apply(this, arguments) } catch(e){};
+	displayDefault = 0;
+},
+trackAndDisplayTiddler: function(srcElement, tiddler, template, animate, unused, customFields, toggle, animationSrc) {
+	if (!displayDefault) {
+		var trackEvent, title = (tiddler instanceof Tiddler) ? tiddler.title : tiddler;
+		if (story.getTiddler(title)) {
+			/* Tiddler is already displayed */
+			if (toggle === true) {
+				/* Closing tiddler: tracked in separate function */
+			}
+			else if (template === DEFAULT_EDIT_TEMPLATE) {
+				if (trackOptions.events.edit) trackEvent = &quot;Edit&quot;;
+			}
+			else if (trackOptions.events.refresh) trackEvent = &quot;Refresh&quot;;
+		}
+		else if (trackOptions.events.open &amp;&amp; !searching) trackEvent = &quot;Open&quot;;
+
+		if (trackEvent) pl.track(trackOptions.type ? [&quot;_trackPageview&quot;, &quot;/#&quot; + title] : [&quot;_trackEvent&quot;, &quot;Tiddlers&quot;, trackEvent, title]);
+	}
+	pl.displayTiddler.apply(this, arguments);
+},
+trackAndCloseTiddler: function(title, animate, unused) {
+	if (closingAll) closingAll++;
+	else pl.track([&quot;_trackEvent&quot;, &quot;Tiddlers&quot;, &quot;Close&quot;, title]);
+	pl.closeTiddler.apply(this, arguments);
+},
+trackAndCloseAllTiddlers: function(excluded) {
+	closingAll = 1;
+	try { pl.closeAllTiddlers.apply(this, arguments) } catch(e){};
+	if ((closingAll &gt; 1) &amp;&amp; !searching) pl.track([&quot;_trackEvent&quot;, &quot;Tiddlers&quot;, &quot;CloseAll&quot;, excluded, closingAll - 1]);
+	closingAll = 0;
+},
+trackAndSearch: function(text, useCaseSensitive, useRegExp) {
+	if (!trackOptions.type &amp;&amp; trackOptions.events.search) pl.track([&quot;_trackEvent&quot;, &quot;Tiddlers&quot;, &quot;Search&quot;, text]);
+	searching = 1;
+	try { pl.search.apply(this, arguments) } catch(e){};
+	searching = 0;
+}
+};
+
+pl.loadOptions();
+
+/* Only track in non-local mode */
+var local = &quot;file:&quot; == document.location.protocol;
+if (!local &amp;&amp; trackOptions.id &amp;&amp; trackOptions.enabled) {
+	/* Insert script tag to load GA */
+	$(&quot;head&quot;).eq(0).prepend($(&quot;&lt;script/&gt;&quot;).attr({type: &quot;text/javascript&quot;, async: &quot;true&quot;, src: (&quot;https:&quot; == document.location.protocol ? &quot;https://ssl&quot; : &quot;http://www&quot;) + &quot;.google-analytics.com/ga.js&quot;}));
+
+	/* Override TiddlyWiki display */
+	pl.displayTiddler = story.displayTiddler;
+	story.displayTiddler = pl.trackAndDisplayTiddler;
+	pl.displayDefaultTiddlers = story.displayDefaultTiddlers;
+	story.displayDefaultTiddlers = pl.trackAndDisplayDefaultTiddlers;
+	if (!trackOptions.type &amp;&amp; trackOptions.events.close) {
+		pl.closeTiddler = story.closeTiddler;
+		story.closeTiddler = pl.trackAndCloseTiddler;
+		pl.closeAllTiddlers = story.closeAllTiddlers;
+		story.closeAllTiddlers = pl.trackAndCloseAllTiddlers;
+	}
+	pl.search = story.search;
+	story.search = pl.trackAndSearch;
+
+	/* Initialize tracking */
+	pl.track([&quot;_setAccount&quot;, trackOptions.id], [&quot;_trackPageview&quot;]);
+}
+
+config.macros.GATrackerConfig = {
+handler: function(place, macroName, params, wikifier, paramString, tiddler) {
+	$(createTiddlyElement(place, &quot;div&quot;)).html(&quot;Tracking status: &lt;span style='color:&quot; + (trackOptions.id &amp;&amp; trackOptions.enabled ? &quot;green'&gt;enabled&quot; : &quot;red'&gt;disabled&quot;) + &quot;&lt;/span&gt; and &lt;span style='color:&quot; + (local ? &quot;red'&gt;&quot; : &quot;green'&gt;non-&quot;) + &quot;local&lt;/span&gt;&quot;);
+	if (readOnly) {
+		$(createTiddlyElement(place, &quot;div&quot;)).html(&quot;Configuration is not available in read-only mode&quot;);
+		return;
+	}
+	var formNode = $(createTiddlyElement(place, &quot;div&quot;)).html(&quot;&lt;div&gt;Google Analytics plugin configuration:&lt;/div&gt;&lt;table&gt;&lt;tr&gt;&lt;td&gt;Account ID:&lt;/td&gt;&lt;td&gt;&lt;input id='ga_id' type='text'/&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Tracking:&lt;/td&gt;&lt;td&gt;&lt;input id='ga_enabled' type='checkbox'/&gt;Enabled&lt;br/&gt;&lt;br/&gt;How: &lt;select id='ga_track'&gt;&lt;option value='0'&gt;Events&lt;/option&gt;&lt;option value='1'&gt;Pages&lt;/option&gt;&lt;/select&gt;&lt;br/&gt;&lt;br/&gt;What:&lt;br/&gt;&lt;input id='ga_track_open' type='checkbox'/&gt;Open&lt;br/&gt;&lt;input id='ga_track_refresh' type='checkbox'/&gt;Refresh&lt;br/&gt;&lt;input id='ga_track_edit' type='checkbox'/&gt;Edit&lt;br/&gt;&lt;input id='ga_track_close' type='checkbox'/&gt;Close&lt;br/&gt;&lt;input id='ga_track_search' type='checkbox'/&gt;Search&lt;br/&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;input id='ga_action_submit' type='submit' value='Apply'/&gt;&quot;);
+	$(&quot;#ga_id&quot;, formNode).val(trackOptions.id);
+	$(&quot;#ga_enabled&quot;, formNode)[0].checked = trackOptions.enabled;
+	$(&quot;#ga_track option&quot;, formNode).eq(trackOptions.type)[0].selected = true;
+	for (var ev in trackOptions.events) {
+		$(&quot;#ga_track_&quot; + ev, formNode)[0].checked = trackOptions.events[ev];
+	}
+	$(&quot;#ga_action_submit&quot;, formNode).click(function() {
+		trackOptions.id = $(&quot;#ga_id&quot;, formNode).val();
+		if (!trackOptions.id.length) trackOptions.id = null;
+		trackOptions.enabled = $(&quot;#ga_enabled&quot;, formNode)[0].checked;
+		trackOptions.type = parseInt($(&quot;#ga_track&quot;, formNode).val());
+		for (var ev in trackOptions.events) {
+			trackOptions.events[ev] = $(&quot;#ga_track_&quot; + ev, formNode)[0].checked;
+		}
+		pl.saveOptions();
+
+		var nodeDisplay = story.findContainingTiddler(place);
+		var tiddlerDisplay;
+		if (nodeDisplay) tiddlerDisplay = store.getTiddler(nodeDisplay.getAttribute(&quot;tiddler&quot;));
+		story.refreshTiddler(tiddlerDisplay ? tiddlerDisplay.title : tiddler.title, null, true);
+	});
+}
+};
+
+})(jQuery);}
+//}}}</pre>
 </div>
 <div title="Getting started" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104242212" modified="201104250955" tags="intro" changecount="5">
 <pre>*[[What is it ?|http://www.cs.miami.edu/~tptp/OverviewOfATP.html]]
@@ -1044,6 +1212,10 @@ The winner is : [[Scala]]. The only language of the three with strong IDE suppor
 </div>
 <div title="SiteTitle" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201103191829" modified="201104251010" tags="systemNotes" changecount="3">
 <pre>[[Etat De L'Art]]</pre>
+</div>
+<div title="SystemSettings" modifier="Olivier ROLAND" created="201105142207" modified="201105191800" tags="excludeLists" server.type="file" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.page.revision="201105142207" changecount="3">
+<pre>txt_GATracker_id: UA-4646079-1
+txt_GATracker_track: 1%2C0%2C1%2C1%2C1%2C1%2C1</pre>
 </div>
 <div title="TWikiFormatterPlugin" modifier="MartinBudden" created="200607210000" tags="systemConfig excludeLists excludeSearch" server.type="file" server.host="http://www.martinswiki.com" server.page.revision="200607210000">
 <pre>/***
@@ -2141,6 +2313,18 @@ Nota : anything in quotations with | gets passed to secondary_parser, while anth
 - : term = &lt;&lt;|2 * x|&gt;&gt;
 }}}</pre>
 </div>
+<div title="m2eclipse-subversive vs m2eclipse-subclipse" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201105182123" modified="201105182126" tags="duel tools" changecount="5">
+<pre>*m2eclipse-subversive pros
+**subversive is eclipse native project
+*m2eclipse-subversive cons
+**import and checkout maven project from SCM is detached from SCM
+*m2eclipse-subclipse pros
+**import and checkout maven project from SCM is OK even with multi-project like gapt
+*m2eclipse-subclipse cons
+**subclipse is not a native eclipse project
+
+The winner is : [[m2eclipse-subclipse|https://github.com/sonatype/m2eclipse-subclipse]] ([[m2eclipse-subversive|https://github.com/sonatype/m2eclipse-subversive]] should be re-evaluated when version &gt; 0.12 will be released)</pre>
+</div>
 <div title="ocaml-atp vs haskell-atp files" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104240954" modified="201104250959" tags="ocaml-atp haskell-atp scala-atp" changecount="32">
 <pre>| Description | OCaml | Haskell |h
 |Example formulas for testing the algorithms|atp_interactive.ml|TestFormulas.lhs|
@@ -2215,7 +2399,7 @@ Welcome to Haskell ATP!
 }}}
 </pre>
 </div>
-<div title="sbt vs maven" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201105011650" modified="201105012016" tags="duel tools" changecount="16">
+<div title="sbt vs maven" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201105011650" modified="201105182126" tags="duel tools" changecount="17">
 <pre>From Eclipse point of view 
 *sbt pros
 **quicker incremental build (probably useless with eclipse)
@@ -2233,7 +2417,7 @@ Welcome to Haskell ATP!
 *maven cons
 **verbose XML syntax
 
-The winner is : [[maven|http://maven.apache.org/]] ([[sbt|http://code.google.com/p/simple-build-tool/]] should be re-evaluated when &gt;= 0.9 will be released)</pre>
+The winner is : [[maven|http://maven.apache.org/]] ([[sbt|http://code.google.com/p/simple-build-tool/]] should be re-evaluated when version &gt;= 0.9 will be released)</pre>
 </div>
 </div>
 <!--POST-STOREAREA-->
