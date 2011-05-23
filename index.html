@@ -574,6 +574,26 @@ Some hints about MathJax [[here|http://wiki.math.toronto.edu/TorontoMathWiki/ind
 <div title="DefaultTiddlers" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201103191837" modified="201104251010" tags="systemNotes" changecount="2">
 <pre>[[Etat De L'Art]]</pre>
 </div>
+<div title="Eclipse vs others" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201105211706" modified="201105211708" tags="duel tools" changecount="3">
+<pre>From Scala point of view
+
+*Scala IDE for Eclipse pros
+**managed by Scala team
+**used to
+*Scala IDE for Eclipse cons
+**need more than 4 gigas to build gapt
+**maven integration need external plugin
+*Netbeans pros
+**good native maven integration
+*Netbeans cons
+**not used to
+*IntelliJ pros
+**used by most of the professional Scala developers
+*IIntelliJ cons
+**not used to
+
+The winner is : Scala IDE for Eclipse (not yet productive ready but the more promising)</pre>
+</div>
 <div title="Etat De L'Art" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201103191831" modified="201104251011" tags="intro" changecount="3">
 <pre>Welcome to [[EDLA|http://www.edla.org]]
 This site focus on automated theorem proving (ATP) or automated deduction which is a subfield of automated reasoning. </pre>
@@ -1053,6 +1073,21 @@ in a paragraph is also important. This expression \(\sqrt{3x-1}+(1+x)^2\) is an 
 inline equation.  As you see, ~MathJax equations can be used this way as well, without unduly
 disturbing the spacing between lines.</pre>
 </div>
+<div title="Optimal memory configuration for Scala IDE" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201105211712" modified="201105211726" tags="tools scala-ide" changecount="7">
+<pre>&quot;&quot;&quot;--launcher.XXMaxPermSize&quot;&quot;&quot;
+256m
+&quot;&quot;&quot;--launcher.defaultAction&quot;&quot;&quot;
+openFile
+-vmargs
+-XX:PermSize=128m
+-Xss1m
+-Xmx2600m
+-server
+-XX:+DoEscapeAnalysis
+-XX:+UseConcMarkSweepGC
+-XX:+UseCompressedOops
+-XX:+UnlockExperimentalVMOptions&quot;&quot;&quot;</pre>
+</div>
 <div title="Parser combinators vs others" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201105082059" modified="201105162056" tags="duel parsing tools" changecount="12">
 <pre>*Parser combinators pros
 **in the language itself
@@ -1105,6 +1140,18 @@ The winner is : Parser combinators (but GLL and derivative combinators should be
 
 See also [[Parser combinators vs others]]</pre>
 </div>
+<div title="Plugins for Eclipse" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201105221308" modified="201105221323" tags="tools scala-ide" changecount="8">
+<pre>*org.scala-ide.sdt.update-site - http://download.scala-ide.org/nightly-update-wip-exp-backport-2.8.1.final*
+*&quot;m2e M repository&quot; - http://download.eclipse.org/technology/m2e/updates/M
+*Maven Integration for Scala IDE build manually from https://github.com/sonatype/m2eclipse-scala branch m2e-0.13
+*Subversive Update Site - http://community.polarion.com/projects/subversive/download/eclipse/2.0/helios-site/
+*Maven SCM Handler for Subversive from m2e market place
+*Eclipse Git Plugin Update Site (Incubation) - http://download.eclipse.org/egit/updates-nightly
+*m2e-egit (not yet installable from m2e market place)
+
+(*)http://download.scala-ide.org/releases/2.0.0-beta does not yet contain implicit conversion feature
+</pre>
+</div>
 <div title="Programming in Scala 2nd : resume" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104232118" modified="201105070810" tags="scala book resume scala-atp" changecount="8">
 <pre>* Chapter 1 · A Scalable Language
 ** Functional programming is guided by two main ideas
@@ -1131,7 +1178,7 @@ See also [[Parser combinators vs others]]</pre>
 **** floatingPointNumber ˆˆ (_.toDouble)
 **** &quot;true&quot; ˆˆ (x =&gt; true)</pre>
 </div>
-<div title="Resources" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201103191829" modified="201105081302" tags="intro" changecount="9">
+<div title="Resources" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201103191829" modified="201105222126" tags="intro" changecount="10">
 <pre>* SCALA
 ** Learn Scala for free thanks to O'REILLY : [[Programming Scala|http://programming-scala.labs.oreilly.com/index.html]]
 *** example at the end of Chapter 9 has been updated by edla.org to scala 2.8.1 here : https://github.com/newca12/mailslot
@@ -1140,7 +1187,7 @@ See also [[Parser combinators vs others]]</pre>
  
 * AUTOMATED THEOREM PROVING
 ** Recommended book about ATP : [[Handbook of Practical Logic and Automated Reasoning|http://www.cambridge.org/catalogue/catalogue.asp?isbn=9780521899574]] (the code used in this book is written in Objective CAML but edla.org will convert it to Scala and make it publicly available, see below)  
-*** Scala port of the Ocaml code : http://code.google.com/p/scala-atp  &lt;== Work in progress !
+*** Scala port of the Ocaml code : http://github.com/newca12/scala-atp  &lt;== Work in progress !
 *** Haskell port of the OCaml code : http://github.com/seanmcl/haskell-atp  
 ** General framework in Scala for applied proof theory : http://code.google.com/p/gapt/
 
@@ -1940,7 +1987,7 @@ config.parsers.twikiFormatter.formatTag = 'TWikiFormat';
 } // end of 'install only once'
 //}}}</pre>
 </div>
-<div title="Tags" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104250931" modified="201105162122" tags="meta editing" changecount="22">
+<div title="Tags" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104250931" modified="201105211711" tags="meta editing" changecount="25">
 <pre>*&lt;&lt;tag atp&gt;&gt;- Automated Theorem Proving, what this site is all about
 **&lt;&lt;tag intro&gt;&gt;- Getting started
 **&lt;&lt;tag scala-atp&gt;&gt;- Scala port of [[Handbook of Practical Logic and Automated Reasoning|http://www.cambridge.org/catalogue/catalogue.asp?isbn=9780521899574]]
@@ -1950,6 +1997,7 @@ config.parsers.twikiFormatter.formatTag = 'TWikiFormat';
 *&lt;&lt;tag parsing&gt;&gt;- Related to parsing
 *&lt;&lt;tag howto&gt;&gt;- various how-to
 *&lt;&lt;tag tools&gt;&gt;- tools drastically selected
+**&lt;&lt;tag scala-ide&gt;&gt; all about Scala IDE for Eclipse
 **&lt;&lt;tag duel&gt;&gt;- duels
 *&lt;&lt;tag meta&gt;&gt;- describes the operation of this site
 **&lt;&lt;tag editing&gt;&gt;- tips on editing and authoring notes, including all sorts of tools
@@ -2313,17 +2361,22 @@ Nota : anything in quotations with | gets passed to secondary_parser, while anth
 - : term = &lt;&lt;|2 * x|&gt;&gt;
 }}}</pre>
 </div>
-<div title="m2eclipse-subversive vs m2eclipse-subclipse" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201105182123" modified="201105182126" tags="duel tools" changecount="5">
-<pre>*m2eclipse-subversive pros
+<div title="m2eclipse-subversive vs m2eclipse-subclipse" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201105182123" modified="201105211738" tags="duel tools" changecount="13">
+<pre>From gapt point of view
+
+*m2eclipse-subversive pros
 **subversive is eclipse native project
 *m2eclipse-subversive cons
-**import and checkout maven project from SCM is detached from SCM
+**import and checkout maven project from SCM is not OK* for mutli-project like gapt
 *m2eclipse-subclipse pros
-**import and checkout maven project from SCM is OK even with multi-project like gapt
+**none from gapt point of view
 *m2eclipse-subclipse cons
+**import and checkout maven project from SCM is not OK* for multi-project like gapt
 **subclipse is not a native eclipse project
 
-The winner is : [[m2eclipse-subclipse|https://github.com/sonatype/m2eclipse-subclipse]] ([[m2eclipse-subversive|https://github.com/sonatype/m2eclipse-subversive]] should be re-evaluated when version &gt; 0.12 will be released)</pre>
+The winner is : [[m2eclipse-subversive|https://github.com/sonatype/m2eclipse-subversive]]
+
+(*) Support of maven multi-project in eclipse is actually far for Netbeans or  IntelliJ IDEA but eclipse Scala plugin is the more promising.</pre>
 </div>
 <div title="ocaml-atp vs haskell-atp files" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104240954" modified="201104250959" tags="ocaml-atp haskell-atp scala-atp" changecount="32">
 <pre>| Description | OCaml | Haskell |h
