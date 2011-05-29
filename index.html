@@ -514,13 +514,15 @@ Also see [[AdvancedOptions]]</pre>
 </div>
 <!--POST-SHADOWAREA-->
 <div id="storeArea">
-<div title="About" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201103191830" modified="201104251248" tags="intro" changecount="4">
+<div title="About" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201103191830" modified="201105292110" tags="intro" changecount="6">
 <pre>This site is highly inspired by [[Garrett Lisi's site|http://deferentialgeometry.org]]
 The idea germinated in 2009 after fortuity visiting [[vdash web site|http://www.vdash.org/]]. That site was the starting point.
 The short term objective is to centralize valuable resources about Automated Theorem Proving.
 The long term objective is to build a new generation theorem prover with Scala language and to participate to the CADE ATP System Competition.
 This new theorem prover is called : [[HED|http://code.google.com/p/edla-hed/]] (hoper edei deixai).
-The [[HED|http://code.google.com/p/edla-hed/]] theorem prover is free software, released under the GNU General Public License version 3 (GPLv3)</pre>
+The [[HED|http://code.google.com/p/edla-hed/]] theorem prover is* free software, released under the GNU General Public License version 3 (GPLv3)
+
+(*) HED is actually vaporware but is definitely THE target. </pre>
 </div>
 <div title="Bison grammar of First Order Logic" creator="YourName" modifier="Olivier ROLAND" created="201105082052" modified="201105082056" tags="parsing" changecount="5">
 <pre>Translation of the description http://www.sju.edu/~jhodgson/ugai/1order.html to Bison
@@ -829,9 +831,9 @@ handler: function(place, macroName, params, wikifier, paramString, tiddler) {
 })(jQuery);}
 //}}}</pre>
 </div>
-<div title="Getting started" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104242212" modified="201104250955" tags="intro" changecount="5">
+<div title="Getting started" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104242212" modified="201105292104" tags="intro" changecount="6">
 <pre>*[[What is it ?|http://www.cs.miami.edu/~tptp/OverviewOfATP.html]]
-*[[An overview|http://www.search.com/reference/Automated_theorem_proving]]
+*[[An overview|http://en.wikipedia.org/wiki/Automated_theorem_proving]]
 *[[Great introduction in French|http://images.math.cnrs.fr/La-verite-et-la-machine.html]]</pre>
 </div>
 <div title="Handbook of practical logic and automated reasoning : resume" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104232119" modified="201105291317" tags="book resume scala-atp" changecount="9">
@@ -1206,17 +1208,17 @@ See also [[Parser combinators vs others]]</pre>
 ** The whole story : http://matt.might.net/articles/parsing-with-derivatives/
 ** Nicely written introduction to parsing : http://szeiger.de/blog/2008/07/27/formal-language-processing-in-scala-part-1</pre>
 </div>
-<div title="Roadmap" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104241247" modified="201105081136" tags="intro" changecount="23">
+<div title="Roadmap" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104241247" modified="201105292148" tags="intro" changecount="31">
 <pre>*Phase 1 : initialization
 ** Identify resources (books, article, thesis, blog, etc ...) that are available (started, WIP)
 ** Identify people/organisation also working on ATP ([[done|Who's who]])
 ** Select the appropriate Content Management System ([[done|Content Management System]])
 ** Select the appropriate programming language ([[done|Scala]])
 ** Select additional &lt;&lt;tag tools&gt;&gt; (started, WIP)
-** Select authoritative &lt;&lt;tag book&gt;&gt; on each subject and make a resume (started WIP)
-** Use the selected [[CMS|Content Management System]] to consolidate knowledge (started, WIP)
+** Select authoritative &lt;&lt;tag book&gt;&gt; on each subject and make a resume (&lt;&lt;tag resume [started]&gt;&gt;, WIP)
+** Use the selected [[CMS|Content Management System]] to consolidate knowledge ([[started|Etat De L'Art]], WIP)
 ** Select parsing technique ([[started|Parsing]],WIP)
-*Phase 2 : Scala port of [[Handbook of Practical Logic and Automated Reasoning|http://www.cambridge.org/catalogue/catalogue.asp?isbn=9780521899574]] (started, WIP)
+*Phase 2 : Scala port of [[Handbook of Practical Logic and Automated Reasoning|http://www.cambridge.org/catalogue/catalogue.asp?isbn=9780521899574]] ([[started|http://github.com/newca12/scala-atp]], WIP)
 *Phase 3 : make [[HED|http://code.google.com/p/edla-hed/]] (hoper edei deixai) a state of the art theorem prover (not yet started)
 </pre>
 </div>
@@ -1272,7 +1274,7 @@ The winner is : [[Scala]]. The only language of the three with strong IDE suppor
 <pre>{{right{&lt;html&gt; &lt;a href=&quot;http://github.com/newca12&quot;&gt;&lt;img  src=&quot;https://d3nwyuy0nl342s.cloudfront.net/img/e6bef7a091f5f3138b8cd40bc3e114258dd68ddf/687474703a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67&quot; alt=&quot;Fork me on GitHub&quot;&gt;&lt;/a&gt;
 &lt;/html&gt;}}}[[Etat De L'Art]] </pre>
 </div>
-<div title="StyleSheet" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201105291620" changecount="1">
+<div title="StyleSheet" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201105291620" modified="201105292135" tags="systemNotes" changecount="2">
 <pre>.headerShadow .left, 
 .headerShadow .right { 
      position: absolute; 
@@ -2264,7 +2266,7 @@ The tags group collections of notes into sets — they're adjectives, directorie
 
 This tiddler was automatically created to record the details of this server</pre>
 </div>
-<div title="Who's who" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104241635" modified="201105162114" tags="person" changecount="21">
+<div title="Who's who" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104241635" modified="201105292150" tags="person" changecount="22">
 <pre>In no particular order.
 
 *Intel Corporation
@@ -2316,7 +2318,9 @@ This tiddler was automatically created to record the details of this server</pre
 * ?
 ** N/A
 ***[[Adam Chlipala|http://adam.chlipala.net/]]
-****Coq</pre>
+****Coq
+
+See also [[Notable people|http://en.wikipedia.org/wiki/Automated_theorem_proving#Notable_people]]</pre>
 </div>
 <div title="howto Princess" creator="YourName" modifier="Olivier ROLAND" created="201105080926" modified="201105162116" tags="scala-atp parsing howto" changecount="19">
 <pre>[[Princess|http://www.philipp.ruemmer.org/princess.shtml]] is a theorem prover for Presburger arithmetic with uninterpreted predicates.
