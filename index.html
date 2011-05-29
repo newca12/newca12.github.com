@@ -44,7 +44,8 @@ DAMAGE.
 <!--}}}-->
 
 <!--PRE-HEAD-END-->
-<title> Etat De L'Art  .  .  .  a site about Automated Theorem Proving </title>
+<title>  
+Etat De L'Art   .  .  .  a site about Automated Theorem Proving </title>
 <style id="styleArea" type="text/css">
 #saveTest {display:none;}
 #messageArea {display:none;}
@@ -594,9 +595,11 @@ Some hints about MathJax [[here|http://wiki.math.toronto.edu/TorontoMathWiki/ind
 
 The winner is : Scala IDE for Eclipse (not yet productive ready but the more promising)</pre>
 </div>
-<div title="Etat De L'Art" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201103191831" modified="201104251011" tags="intro" changecount="3">
+<div title="Etat De L'Art" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201103191831" modified="201105291545" tags="intro" changecount="7">
 <pre>Welcome to [[EDLA|http://www.edla.org]]
-This site focus on automated theorem proving (ATP) or automated deduction which is a subfield of automated reasoning. </pre>
+This site focus essentially on automated theorem proving (ATP) or automated deduction which is a subfield of automated reasoning.
+
+Source code is available on [[GitHub|http://github.com/newca12]] </pre>
 </div>
 <div title="GATracker plugin" modifier="Olivier ROLAND" created="201105191755" modified="201105191759" tags="systemServer plugins" changecount="2">
 <pre>|''Type:''|file|
@@ -831,7 +834,7 @@ handler: function(place, macroName, params, wikifier, paramString, tiddler) {
 *[[An overview|http://www.search.com/reference/Automated_theorem_proving]]
 *[[Great introduction in French|http://images.math.cnrs.fr/La-verite-et-la-machine.html]]</pre>
 </div>
-<div title="Handbook of practical logic and automated reasoning : resume" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104232119" modified="201104272108" tags="book resume scala-atp" changecount="4">
+<div title="Handbook of practical logic and automated reasoning : resume" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104232119" modified="201105291317" tags="book resume scala-atp" changecount="9">
 <pre>* Preface
 ** What's not in the book
 *** model checking
@@ -846,7 +849,16 @@ handler: function(place, macroName, params, wikifier, paramString, tiddler) {
 * Introduction
 ** Boole's algebra
 ** two arguments have the same form if they are both instances of the same formal expression, consistently replacing variables by other propositions
-** we can use the formal language to make a mathematically precise definition of logically valid arguments</pre>
+** we can use the formal language to make a mathematically precise definition of logically valid arguments
+** format used by people = the concrete syntax
+** form used for manipulations = the abstract syntax (AST)
+** translate input from concrete syntax to abstract syntax = parsing
+*** lexical analysis (scanning) decomposes the sequences of input characters into ‘tokens’ 
+*** parsing converts the linear sequences of tokens into an abstract syntax tree
+** translate output back from abstract syntax to concrete syntax = prettyprinting
+* Propositional logic
+** Boole used traditional algebraic signs like ‘+’ for the logical connectives
+** p(q + r) = pq + pr is familiar but p+qr = (p+q)(p+r) is confusing so we will use special symbols for the connectives</pre>
 </div>
 <div title="MainMenu" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201103191830" modified="201104252210" tags="meta editing systemNotes" changecount="7">
 <pre>[[About]]
@@ -1088,7 +1100,7 @@ openFile
 -XX:+UseCompressedOops
 -XX:+UnlockExperimentalVMOptions&quot;&quot;&quot;</pre>
 </div>
-<div title="Parser combinators vs others" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201105082059" modified="201105162056" tags="duel parsing tools" changecount="12">
+<div title="Parser combinators vs others" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201105082059" modified="201105281706" tags="duel parsing tools" changecount="16">
 <pre>*Parser combinators pros
 **in the language itself
 **no external tools
@@ -1109,9 +1121,10 @@ openFile
 *GLL combinators cons
 **too confidential
 
-The winner is : Parser combinators (but GLL and derivative combinators should be re-evaluated in case of limitation with Scala implementation*)
+The winner is : Parser combinators (but GLL and derivative combinators should be re-evaluated in case of limitation* with Scala implementation**)
 
-(*)[[PEGs|http://en.wikipedia.org/wiki/Parsing_expression_grammar]] [[implementation|https://github.com/sirthias/parboiled/wiki]] should then also be evaluated.</pre>
+(*) packrat &amp; left recursion [[limitation|http://www.scala-lang.org/node/7820]]
+(**) [[PEGs|http://en.wikipedia.org/wiki/Parsing_expression_grammar]] [[implementation|https://github.com/sirthias/parboiled/wiki]] should then also be evaluated.</pre>
 </div>
 <div title="Parsing" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104250925" modified="201105162055" tags="parsing scala-atp" changecount="32">
 <pre>*Various techniques and tools are available for parsing
@@ -1140,14 +1153,12 @@ The winner is : Parser combinators (but GLL and derivative combinators should be
 
 See also [[Parser combinators vs others]]</pre>
 </div>
-<div title="Plugins for Eclipse" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201105221308" modified="201105221323" tags="tools scala-ide" changecount="8">
+<div title="Plugins for Eclipse" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201105221308" modified="201105241833" tags="tools scala-ide" changecount="11">
 <pre>*org.scala-ide.sdt.update-site - http://download.scala-ide.org/nightly-update-wip-exp-backport-2.8.1.final*
 *&quot;m2e M repository&quot; - http://download.eclipse.org/technology/m2e/updates/M
 *Maven Integration for Scala IDE build manually from https://github.com/sonatype/m2eclipse-scala branch m2e-0.13
-*Subversive Update Site - http://community.polarion.com/projects/subversive/download/eclipse/2.0/helios-site/
-*Maven SCM Handler for Subversive from m2e market place
-*Eclipse Git Plugin Update Site (Incubation) - http://download.eclipse.org/egit/updates-nightly
-*m2e-egit (not yet installable from m2e market place)
+*m2e-subversive from m2e market place
+*m2e-egit from m2e market place
 
 (*)http://download.scala-ide.org/releases/2.0.0-beta does not yet contain implicit conversion feature
 </pre>
@@ -1254,11 +1265,33 @@ See also : [[Scala vs others]]
 ** syntax is as good as possible but far from the beauty of haskell syntax 
 The winner is : [[Scala]]. The only language of the three with strong IDE support. </pre>
 </div>
-<div title="SiteSubtitle" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201103191828" modified="201104251011" tags="systemNotes" changecount="2">
+<div title="SiteSubtitle" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201103191828" modified="201105291702" tags="systemNotes" changecount="4">
 <pre>.  .  .  a site about Automated Theorem Proving</pre>
 </div>
-<div title="SiteTitle" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201103191829" modified="201104251010" tags="systemNotes" changecount="3">
-<pre>[[Etat De L'Art]]</pre>
+<div title="SiteTitle" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201103191829" modified="201105291702" tags="systemNotes" changecount="18">
+<pre>{{right{&lt;html&gt; &lt;a href=&quot;http://github.com/newca12&quot;&gt;&lt;img  src=&quot;https://d3nwyuy0nl342s.cloudfront.net/img/e6bef7a091f5f3138b8cd40bc3e114258dd68ddf/687474703a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67&quot; alt=&quot;Fork me on GitHub&quot;&gt;&lt;/a&gt;
+&lt;/html&gt;}}}[[Etat De L'Art]] </pre>
+</div>
+<div title="StyleSheet" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201105291620" changecount="1">
+<pre>.headerShadow .left, 
+.headerShadow .right { 
+     position: absolute; 
+     top: 0; 
+} 
+
+.headerShadow .left { 
+     left: 0; 
+} 
+
+.headerShadow .right { 
+     right: 0; 
+} 
+
+.headerForeground .left, 
+.headerForeground .right { 
+     display: none; 
+} 
+</pre>
 </div>
 <div title="SystemSettings" modifier="Olivier ROLAND" created="201105142207" modified="201105191800" tags="excludeLists" server.type="file" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.page.revision="201105142207" changecount="3">
 <pre>txt_GATracker_id: UA-4646079-1
@@ -2378,55 +2411,6 @@ The winner is : [[m2eclipse-subversive|https://github.com/sonatype/m2eclipse-sub
 
 (*) Support of maven multi-project in eclipse is actually far for Netbeans or  IntelliJ IDEA but eclipse Scala plugin is the more promising.</pre>
 </div>
-<div title="ocaml-atp vs haskell-atp files" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104240954" modified="201104250959" tags="ocaml-atp haskell-atp scala-atp" changecount="32">
-<pre>| Description | OCaml | Haskell |h
-|Example formulas for testing the algorithms|atp_interactive.ml|TestFormulas.lhs|
-|Binary Decision Diagram|bdd.ml|Bdd.lhs|
-|Nelson-Oppen combined decision procedure|combining.ml|Combining.lhs|
-|Knuth-Bendix completion|completion.ml|Completion.lhs|
-|Complex quantifier elimination|complex.ml|Complex.lhs,Poly.lhs|
-|Simple congruence closure|cong.ml|Cong.lhs|
-|Cooper's algorithm|cooper.ml|Cooper.lhs|
-|Procedures for decidable subsets of FOL|decidable.ml|Decidable.lhs|
-|Definitional CNF|defcnf.ml|DefCnf.lhs|
-|Dense linear order||Dlo.lhs|
-|Davis-Putnam-Loveland-Logemann procedures|dp.ml|Dp.lhs|
-|Equality elimination|eqelim.ml|EqElim.lhs|
-|FOL with equality|equal.ml|Equal.lhs|
-|Some ATP examples|example.ml||
-|First-order derived rules in LCF|folderived.ml||
-|Basic stuff for FOL|fol.ml|Fol.lhs|
-|Polymorphic type of formula|formulas.ml|Formula.lhs,FormulaSyn.lhs|
-|Geometry theorem proving|geom.ml|Geom.lhs|
-|Grobner basis algorithm|grobner.ml|Grobner.lhs,MPoly.lhs|
-|Herbrand theorem|herbrand.ml|Herbrand.lhs|
-|Tweak Ocaml default state for ATP|initialization.ml||
-|Init ATP example code|init.ml||
-|Craig-Robinson interpolation theorem|interpolation.ml|Interpolation.lhs|
-|Simple algebric expression|intro.ml|Intro.lhs,IntroSyn.lhs|
-|First order tableau procedure using LCF setup|lcffol.ml||
-|LCF-style basis for Tarski-style Hilbert system|lcf.ml||
-|First order tableau procedure using LCF setup|lcfprop.ml||
-|Misc library functions to set up a nice environment|lib.ml|Utils/Lib.lhs|
-|Goedel's theorem and relatives|limitations.ml||
-|Model elimination procedure (MESON version)|meson.ml|Meson.lhs|
-|Term orderings|order.ml|Order.lhs|
-|Paramodulation|paramodulation.ml|Paramodulation.lhs|
-|Backchaining procedure for Horn clauses|prolog.ml|Prolog.lhs|
-|Some propositional formulas to test|propexamples.ml|PropExamples.lhs|
-|Basic stuff for propositional logic|prop.ml|Prop.lhs|
-|Introduction to quantifier elimination|qelim.ml|Qelim.lhs|
-|Utility|Quotexpander.ml||
-|Real quantifier elimination (Cohen-Hormander)|real.ml|Real.lhs,Poly.lhs|
-|Resolution|resolution.ml|Resolution.lhs|
-|Rewriting|rewrite.ml|Rewrite.lhs|
-|Prenex and Skolem normal forms|skolem.ml|Skolem.lhs|
-|Illustration of Skolemizing a set of formulas|skolems.ml||
-|Simple implementation of Stalmarck's algorithm|stal.ml|Stal.lhs|
-|Optimized version of a Prawitz-like procedure|tableaux.ml|Tableaux.lhs|
-|Goals, LCF-like tactics and Mizar-like proofs|tactics.ml||
-|Unification for first order terms|unif.ml|Unif.lhs|</pre>
-</div>
 <div title="ocaml-atp vs haskell-atp syntax" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104251612" modified="201104251642" tags="ocaml-atp haskell-atp scala-atp" changecount="16">
 <pre>*gilmore_2
 **OCaml
@@ -2451,6 +2435,55 @@ Welcome to Haskell ATP!
 (¬p ∨ q) ∧ (q ∨ ¬p) ∨ (p ∧ ¬q) ∧ ¬q ∧ p
 }}}
 </pre>
+</div>
+<div title="ocaml-atp vs haskell-atp vs scala-atp files" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104240954" modified="201105291253" tags="ocaml-atp haskell-atp scala-atp" changecount="39">
+<pre>| Description | OCaml | Haskell | Scala |h
+|Example formulas for testing the algorithms|atp_interactive.ml|TestFormulas.lhs|
+|Binary Decision Diagram|bdd.ml|Bdd.lhs|
+|Nelson-Oppen combined decision procedure|combining.ml|Combining.lhs|
+|Knuth-Bendix completion|completion.ml|Completion.lhs|
+|Complex quantifier elimination|complex.ml|Complex.lhs,Poly.lhs|
+|Simple congruence closure|cong.ml|Cong.lhs|
+|Cooper's algorithm|cooper.ml|Cooper.lhs|
+|Procedures for decidable subsets of FOL|decidable.ml|Decidable.lhs|
+|Definitional CNF|defcnf.ml|DefCnf.lhs|
+|Dense linear order||Dlo.lhs|
+|Davis-Putnam-Loveland-Logemann procedures|dp.ml|Dp.lhs|
+|Equality elimination|eqelim.ml|EqElim.lhs|
+|FOL with equality|equal.ml|Equal.lhs|
+|Some ATP examples|example.ml||
+|First-order derived rules in LCF|folderived.ml||
+|Basic stuff for FOL|fol.ml|Fol.lhs|
+|Polymorphic type of formula|formulas.ml|Formula.lhs,FormulaSyn.lhs|Formula.scala|
+|Geometry theorem proving|geom.ml|Geom.lhs|
+|Grobner basis algorithm|grobner.ml|Grobner.lhs,MPoly.lhs|
+|Herbrand theorem|herbrand.ml|Herbrand.lhs|
+|Tweak Ocaml default state for ATP|initialization.ml||
+|Init ATP example code|init.ml||
+|Craig-Robinson interpolation theorem|interpolation.ml|Interpolation.lhs|
+|Simple algebric expression|intro.ml|Intro.lhs,IntroSyn.lhs|Intro.scala,IntroSpec.scala|
+|First order tableau procedure using LCF setup|lcffol.ml||
+|LCF-style basis for Tarski-style Hilbert system|lcf.ml||
+|First order tableau procedure using LCF setup|lcfprop.ml||
+|Misc library functions to set up a nice environment|lib.ml|Utils/Lib.lhs|
+|Goedel's theorem and relatives|limitations.ml||
+|Model elimination procedure (MESON version)|meson.ml|Meson.lhs|
+|Term orderings|order.ml|Order.lhs|
+|Paramodulation|paramodulation.ml|Paramodulation.lhs|
+|Backchaining procedure for Horn clauses|prolog.ml|Prolog.lhs|
+|Some propositional formulas to test|propexamples.ml|PropExamples.lhs|
+|Basic stuff for propositional logic|prop.ml|Prop.lhs|
+|Introduction to quantifier elimination|qelim.ml|Qelim.lhs|
+|Utility|Quotexpander.ml||
+|Real quantifier elimination (Cohen-Hormander)|real.ml|Real.lhs,Poly.lhs|
+|Resolution|resolution.ml|Resolution.lhs|
+|Rewriting|rewrite.ml|Rewrite.lhs|
+|Prenex and Skolem normal forms|skolem.ml|Skolem.lhs|
+|Illustration of Skolemizing a set of formulas|skolems.ml||
+|Simple implementation of Stalmarck's algorithm|stal.ml|Stal.lhs|
+|Optimized version of a Prawitz-like procedure|tableaux.ml|Tableaux.lhs|
+|Goals, LCF-like tactics and Mizar-like proofs|tactics.ml||
+|Unification for first order terms|unif.ml|Unif.lhs|</pre>
 </div>
 <div title="sbt vs maven" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201105011650" modified="201105182126" tags="duel tools" changecount="17">
 <pre>From Eclipse point of view 
