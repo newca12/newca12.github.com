@@ -603,6 +603,26 @@ This site focus essentially on automated theorem proving (ATP) or automated dedu
 
 Source code is available on [[GitHub|http://github.com/newca12]] </pre>
 </div>
+<div title="First-class resources" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201103191829" modified="201105301715" tags="intro" changecount="13">
+<pre>* SCALA
+** Learn Scala for free thanks to O'REILLY : [[Programming Scala|http://programming-scala.labs.oreilly.com/index.html]]
+*** example at the end of Chapter 9 has been updated by edla.org to scala 2.8.1 here : https://github.com/newca12/mailslot
+** Not free* but far better introduction to Scala : [[Programming in Scala, Second Edition|http://www.artima.com/shop/programming_in_scala_2ed]]
+*** * the first edition is now available for free : http://www.artima.com/pins1ed/ 
+ 
+* AUTOMATED THEOREM PROVING
+** Recommended book about ATP : [[Handbook of Practical Logic and Automated Reasoning|http://www.cambridge.org/catalogue/catalogue.asp?isbn=9780521899574]] (the code used in this book is written in Objective CAML but edla.org will convert it to Scala and make it publicly available, see below)  
+*** Scala port of the Ocaml code : http://github.com/newca12/scala-atp  &lt;== Work in progress !
+*** Haskell port of the OCaml code : http://github.com/seanmcl/haskell-atp  
+** General framework in Scala for applied proof theory : http://code.google.com/p/gapt/
+
+* PARSING
+** The whole story : http://matt.might.net/articles/parsing-with-derivatives/
+** Nicely written introduction to parsing : http://szeiger.de/blog/2008/07/27/formal-language-processing-in-scala-part-1
+
+* PROPOSITIONAL LOGIC
+** Haskell implementation with excellent documentation : http://www.bucephalus.org/</pre>
+</div>
 <div title="GATracker plugin" modifier="Olivier ROLAND" created="201105191755" modified="201105191759" tags="systemServer plugins" changecount="2">
 <pre>|''Type:''|file|
 |''URL:''|http://suiryc.github.com/TiddlyWiki-dev/|
@@ -862,11 +882,11 @@ handler: function(place, macroName, params, wikifier, paramString, tiddler) {
 ** Boole used traditional algebraic signs like ‘+’ for the logical connectives
 ** p(q + r) = pq + pr is familiar but p+qr = (p+q)(p+r) is confusing so we will use special symbols for the connectives</pre>
 </div>
-<div title="MainMenu" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201103191830" modified="201104252210" tags="meta editing systemNotes" changecount="7">
+<div title="MainMenu" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201103191830" modified="201105301713" tags="meta editing systemNotes" changecount="8">
 <pre>[[About]]
 [[Getting started]]
 [[The Big Picture]]
-[[Resources]]
+[[First-class resources]]
 [[Roadmap]]
 [[Tags]]</pre>
 </div>
@@ -1190,23 +1210,6 @@ See also [[Parser combinators vs others]]</pre>
 *** examples :
 **** floatingPointNumber ˆˆ (_.toDouble)
 **** &quot;true&quot; ˆˆ (x =&gt; true)</pre>
-</div>
-<div title="Resources" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201103191829" modified="201105222126" tags="intro" changecount="10">
-<pre>* SCALA
-** Learn Scala for free thanks to O'REILLY : [[Programming Scala|http://programming-scala.labs.oreilly.com/index.html]]
-*** example at the end of Chapter 9 has been updated by edla.org to scala 2.8.1 here : https://github.com/newca12/mailslot
-** Not free* but far better introduction to Scala : [[Programming in Scala, Second Edition|http://www.artima.com/shop/programming_in_scala_2ed]]
-*** * the first edition is now available for free : http://www.artima.com/pins1ed/ 
- 
-* AUTOMATED THEOREM PROVING
-** Recommended book about ATP : [[Handbook of Practical Logic and Automated Reasoning|http://www.cambridge.org/catalogue/catalogue.asp?isbn=9780521899574]] (the code used in this book is written in Objective CAML but edla.org will convert it to Scala and make it publicly available, see below)  
-*** Scala port of the Ocaml code : http://github.com/newca12/scala-atp  &lt;== Work in progress !
-*** Haskell port of the OCaml code : http://github.com/seanmcl/haskell-atp  
-** General framework in Scala for applied proof theory : http://code.google.com/p/gapt/
-
-* PARSING
-** The whole story : http://matt.might.net/articles/parsing-with-derivatives/
-** Nicely written introduction to parsing : http://szeiger.de/blog/2008/07/27/formal-language-processing-in-scala-part-1</pre>
 </div>
 <div title="Roadmap" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104241247" modified="201105292148" tags="intro" changecount="31">
 <pre>*Phase 1 : initialization
@@ -2415,7 +2418,7 @@ The winner is : [[m2eclipse-subversive|https://github.com/sonatype/m2eclipse-sub
 
 (*) Support of maven multi-project in eclipse is actually far for Netbeans or  IntelliJ IDEA but eclipse Scala plugin is the more promising.</pre>
 </div>
-<div title="ocaml-atp vs haskell-atp syntax" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104251612" modified="201104251642" tags="ocaml-atp haskell-atp scala-atp" changecount="16">
+<div title="ocaml-atp vs haskell-atp syntax" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104251612" modified="201105301658" tags="ocaml-atp haskell-atp scala-atp" changecount="17">
 <pre>*gilmore_2
 **OCaml
 ***&quot;&quot;&quot;&lt;&lt;exists x y. forall z. (F(x,z) &lt;=&gt; F(z,y)) /\ (F(z,y) &lt;=&gt; F(z,z)) /\ (F(x,y) &lt;=&gt; F(y,x)) ==&gt; (F(x,y) &lt;=&gt; F(x,z))&gt;&gt;&quot;&quot;&quot;
@@ -2438,7 +2441,18 @@ The winner is : [[m2eclipse-subversive|https://github.com/sonatype/m2eclipse-sub
 Welcome to Haskell ATP!
 (¬p ∨ q) ∧ (q ∨ ¬p) ∨ (p ∧ ¬q) ∧ ¬q ∧ p
 }}}
-</pre>
+*dnf
+**OCaml 
+{{{
+# dnf &lt;&lt;(p &lt;=&gt; (~q /\ r))&gt;&gt;;;
+- : fol formula = &lt;&lt;p /\ r /\ ~q \/ q /\ ~p \/ ~p /\ ~r&gt;&gt;
+}}}
+**Haskell
+{{{
+~/.cabal/bin/atp dnf -f &quot;(p ⇔ (¬ q ∧ r))&quot;
+Welcome to Haskell ATP!
+p ∧ r ∧ ¬q ∨ q ∧ ¬p ∨ ¬p ∧ ¬r
+}}}</pre>
 </div>
 <div title="ocaml-atp vs haskell-atp vs scala-atp files" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104240954" modified="201105291253" tags="ocaml-atp haskell-atp scala-atp" changecount="39">
 <pre>| Description | OCaml | Haskell | Scala |h
