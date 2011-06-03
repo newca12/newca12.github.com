@@ -1175,16 +1175,16 @@ The winner is : Parser combinators (but GLL and derivative combinators should be
 
 See also [[Parser combinators vs others]]</pre>
 </div>
-<div title="Plugins for Eclipse" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201105221308" modified="201106021601" tags="tools scala-ide" changecount="12">
-<pre>*org.scala-ide.sdt.update-site - http://download.scala-ide.org/nightly-update-wip-exp-backport-2.8.1.final*
+<div title="Plugins for Eclipse" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201105221308" modified="201106031412" tags="tools scala-ide" changecount="17">
+<pre>*ScalaIDE - http://download.scala-ide.org/nightly-update-wip-experiment-2.9.0.final(*) (does not yet contain implicit conversion feature**)
 *&quot;m2e M repository&quot; - http://download.eclipse.org/technology/m2e/updates/M
 *Maven Integration for Scala IDE build manually from https://github.com/sonatype/m2eclipse-scala branch m2e-0.13
 *m2e-subversive from m2e market place
 *m2e-egit from m2e market place
 *Markdown text editor : http://winterstein.me.uk/projects/tt-update-site/
 
-(*)http://download.scala-ide.org/releases/2.0.0-beta does not yet contain implicit conversion feature
-</pre>
+(*)http://download.scala-ide.org/releases-29/2.0.0-beta if nightly is unstable
+(**)http://download.scala-ide.org/nightly-update-wip-exp-backport-2.8.1.final contain implicit conversion feature</pre>
 </div>
 <div title="Programming in Scala 2nd : resume" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104232118" modified="201105070810" tags="scala book resume scala-atp" changecount="8">
 <pre>* Chapter 1 · A Scalable Language
@@ -1270,6 +1270,11 @@ See also : [[Scala vs others]]
 * Scala cons
 ** syntax is as good as possible but far from the beauty of haskell syntax 
 The winner is : [[Scala]]. The only language of the three with strong IDE support. </pre>
+</div>
+<div title="ScalaIDE problems" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201106031207" modified="201106031727" tags="pb" changecount="7">
+<pre>* no hover for Javadoc/Scaladoc : http://www.assembla.com/spaces/scala-ide/tickets/1000255-javadoc-view-regression
+* no &quot;Add Import'&quot; function like in Java (but quick fix work)
+* &quot;Organize Imports&quot; AST error fixed in 2.0.0 branch only http://scala-ide-portfolio.assembla.com/spaces/scala-ide/tickets/1000417-error-thrown-when-trying-to-use-organize-imports</pre>
 </div>
 <div title="SiteSubtitle" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201103191828" modified="201105291702" tags="systemNotes" changecount="4">
 <pre>.  .  .  a site about Automated Theorem Proving</pre>
@@ -2026,7 +2031,7 @@ config.parsers.twikiFormatter.formatTag = 'TWikiFormat';
 } // end of 'install only once'
 //}}}</pre>
 </div>
-<div title="Tags" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104250931" modified="201105211711" tags="meta editing" changecount="25">
+<div title="Tags" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104250931" modified="201106031201" tags="meta editing" changecount="26">
 <pre>*&lt;&lt;tag atp&gt;&gt;- Automated Theorem Proving, what this site is all about
 **&lt;&lt;tag intro&gt;&gt;- Getting started
 **&lt;&lt;tag scala-atp&gt;&gt;- Scala port of [[Handbook of Practical Logic and Automated Reasoning|http://www.cambridge.org/catalogue/catalogue.asp?isbn=9780521899574]]
@@ -2038,6 +2043,7 @@ config.parsers.twikiFormatter.formatTag = 'TWikiFormat';
 *&lt;&lt;tag tools&gt;&gt;- tools drastically selected
 **&lt;&lt;tag scala-ide&gt;&gt; all about Scala IDE for Eclipse
 **&lt;&lt;tag duel&gt;&gt;- duels
+*&lt;&lt;tag pb&gt;&gt;- some things annoying that needs to be fixed
 *&lt;&lt;tag meta&gt;&gt;- describes the operation of this site
 **&lt;&lt;tag editing&gt;&gt;- tips on editing and authoring notes, including all sorts of tools
 **&lt;&lt;tag system&gt;&gt;- control how the site operates and is layed out
