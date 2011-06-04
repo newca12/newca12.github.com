@@ -514,7 +514,7 @@ Also see [[AdvancedOptions]]</pre>
 </div>
 <!--POST-SHADOWAREA-->
 <div id="storeArea">
-<div title="About" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201103191830" modified="201106040750" tags="intro" changecount="8">
+<div title="About" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201103191830" modified="201106041127" tags="intro" changecount="9">
 <pre>This site is highly inspired by [[Garrett Lisi's site|http://deferentialgeometry.org]]
 The idea germinated in 2009 after fortuity visiting [[vdash web site|http://www.vdash.org/]]. That site was the starting point.
 The short term objective is to centralize valuable resources about Automated Theorem Proving.
@@ -522,12 +522,7 @@ The long term objective is to build a new generation theorem prover with Scala l
 This new theorem prover is called : [[HED|http://code.google.com/p/edla-hed/]] (hoper edei deixai).
 The [[HED|http://code.google.com/p/edla-hed/]] theorem prover is* free software, released under the GNU General Public License version 3 (GPLv3)
 
-(*) HED is actually vaporware but is definitely THE target.
-
-!Navigating this site
-Navigating this site is a bit tricky and un-conventional.  Each page is not static.  It is created dynamically according to what you have clicked on.  Everything you click on opens in front of you while 'older' stuff are below in the page.  If you open something that its not to your interest you can close it.
-
-You can use the left navigation bar to open major areas.  You can also use the search to find things that you like.  Phrases underlined are external links while phrases in bold blue font are internal links.</pre>
+(*) HED is actually vaporware but is definitely THE target.</pre>
 </div>
 <div title="Bison grammar of First Order Logic" creator="YourName" modifier="Olivier ROLAND" created="201105082052" modified="201105082056" tags="parsing" changecount="5">
 <pre>Translation of the description http://www.sju.edu/~jhodgson/ugai/1order.html to Bison
@@ -889,8 +884,9 @@ handler: function(place, macroName, params, wikifier, paramString, tiddler) {
 ** Boole used traditional algebraic signs like ‘+’ for the logical connectives
 ** p(q + r) = pq + pr is familiar but p+qr = (p+q)(p+r) is confusing so we will use special symbols for the connectives</pre>
 </div>
-<div title="MainMenu" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201103191830" modified="201105301713" tags="meta editing systemNotes" changecount="8">
+<div title="MainMenu" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201103191830" modified="201106041126" tags="meta editing systemNotes" changecount="9">
 <pre>[[About]]
+[[Navigating this site]]
 [[Getting started]]
 [[The Big Picture]]
 [[First-class resources]]
@@ -1114,6 +1110,11 @@ in a paragraph is also important. This expression \(\sqrt{3x-1}+(1+x)^2\) is an 
 inline equation.  As you see, ~MathJax equations can be used this way as well, without unduly
 disturbing the spacing between lines.</pre>
 </div>
+<div title="Navigating this site" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201106041127" tags="intro" changecount="1">
+<pre>Navigating this site is a bit tricky and un-conventional.  Each page is not static.  It is created dynamically according to what you have clicked on.  Everything you click on opens in front of you while 'older' stuff are below in the page.  If you open something that its not to your interest you can close it.
+
+You can use the left navigation bar to open major areas.  You can also use the search to find things that you like.  Phrases underlined are external links while phrases in bold blue font are internal links.</pre>
+</div>
 <div title="Optimal memory configuration for Scala IDE" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201105211712" modified="201105211726" tags="tools scala-ide" changecount="7">
 <pre>&quot;&quot;&quot;--launcher.XXMaxPermSize&quot;&quot;&quot;
 256m
@@ -1245,7 +1246,7 @@ The answer is to to turn the problem on its ear (as it were) and eschew mathemat
 See also : [[Scala vs others]] 
 </pre>
 </div>
-<div title="Scala problems" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201106040803" changecount="1">
+<div title="Scala problems" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201106040803" modified="201106040809" tags="pb" changecount="2">
 <pre>* This is OK in JAVA but not valid in Scala
 {{{
 System.err.format(&quot;[UPTIME: %5ds] %s%n&quot;, (System.currentTimeMillis() - startTime) / 1000, msg)
@@ -1284,10 +1285,11 @@ System.err.format(&quot;[UPTIME: %5ds] %s%n&quot;, (System.currentTimeMillis() -
 ** syntax is as good as possible but far from the beauty of haskell syntax 
 The winner is : [[Scala]]. The only language of the three with strong IDE support. </pre>
 </div>
-<div title="ScalaIDE problems" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201106031207" modified="201106031727" tags="pb" changecount="7">
+<div title="ScalaIDE problems" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201106031207" modified="201106041123" tags="pb" changecount="8">
 <pre>* no hover for Javadoc/Scaladoc : http://www.assembla.com/spaces/scala-ide/tickets/1000255-javadoc-view-regression
 * no &quot;Add Import'&quot; function like in Java (but quick fix work)
-* &quot;Organize Imports&quot; AST error fixed in 2.0.0 branch only http://scala-ide-portfolio.assembla.com/spaces/scala-ide/tickets/1000417-error-thrown-when-trying-to-use-organize-imports</pre>
+* &quot;Organize Imports&quot; AST error fixed in 2.0.0 branch only http://scala-ide-portfolio.assembla.com/spaces/scala-ide/tickets/1000417-error-thrown-when-trying-to-use-organize-imports
+* Import not used never signaled</pre>
 </div>
 <div title="SiteSubtitle" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201103191828" modified="201105291702" tags="systemNotes" changecount="4">
 <pre>.  .  .  a site about Automated Theorem Proving</pre>
