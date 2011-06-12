@@ -514,11 +514,11 @@ Also see [[AdvancedOptions]]</pre>
 </div>
 <!--POST-SHADOWAREA-->
 <div id="storeArea">
-<div title="About" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201103191830" modified="201106041127" tags="intro" changecount="9">
+<div title="About" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201103191830" modified="201106121541" tags="intro" changecount="10">
 <pre>This site is highly inspired by [[Garrett Lisi's site|http://deferentialgeometry.org]]
 The idea germinated in 2009 after fortuity visiting [[vdash web site|http://www.vdash.org/]]. That site was the starting point.
 The short term objective is to centralize valuable resources about Automated Theorem Proving.
-The long term objective is to build a new generation theorem prover with Scala language and to participate to the CADE ATP System Competition.
+The long term objective is to build a new generation theorem prover with Scala language and to participate to the [[CADE ATP System Competition|http://www.cs.miami.edu/~tptp/CASC/]].
 This new theorem prover is called : [[HED|http://code.google.com/p/edla-hed/]] (hoper edei deixai).
 The [[HED|http://code.google.com/p/edla-hed/]] theorem prover is* free software, released under the GNU General Public License version 3 (GPLv3)
 
@@ -632,7 +632,7 @@ Source code is available on [[GitHub|http://github.com/newca12]]
 
 This tiddler was automatically created to record the details of this server</pre>
 </div>
-<div title="GATrackerPlugin" modifier="Julien Coloos" created="201105142206" modified="201105182137" tags="systemConfig" server.type="file" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.page.revision="201105182137">
+<div title="GATrackerPlugin" modifier="Julien Coloos" created="201105142206" modified="201105182137" tags="systemConfig" server.page.revision="201105182137" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.type="file">
 <pre>/***
 |Name|GATrackerPlugin|
 |Description|Google Analytics tracker|
@@ -1194,7 +1194,7 @@ See also [[Parser combinators vs others]]</pre>
 (*)http://download.scala-ide.org/releases-29/2.0.0-beta if nightly is unstable
 (**)http://download.scala-ide.org/nightly-update-wip-exp-backport-2.8.1.final contain implicit conversion feature</pre>
 </div>
-<div title="Programming in Scala 2nd : resume" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104232118" modified="201105070810" tags="scala book resume scala-atp" changecount="8">
+<div title="Programming in Scala 2nd : resume" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104232118" modified="201106122210" tags="scala book resume scala-atp" changecount="15">
 <pre>* Chapter 1 · A Scalable Language
 ** Functional programming is guided by two main ideas
 *** functions are first-class values
@@ -1202,8 +1202,13 @@ See also [[Parser combinators vs others]]</pre>
 * Chapter 2 · First Steps in Scala
 ** recursive function =&gt; explicit result type
 ** function literal : args.foreach(arg =&gt; println(arg))
+** If a function literal consists of one statement that takes a single argument, you need not explicitly name and specify the argument
 ** You can say “in” for the &lt;- symbol. You’d read for (arg &lt;- args), therefore, as “for arg in args.”
 * Chapter 3 · Next Steps in Scala
+** if a method takes only one parameter, you can call it without a dot or parentheses
+** you could alternatively have written 1 + 2 using traditional method invocation syntax, (1).+(2).
+** When you apply parentheses surrounding one or more values to a variable, Scala will transform the code into an invocation of a method named apply on that variable
+** Similarly greetStrings(0) = &quot;Hello&quot; will be transformed into greetStrings.update(0, &quot;Hello&quot;)
 ** If a method name ends in a colon, the method is invoked on the right operand
 ** arrays are always mutable; lists are always immutable
 ** Scala provides mutable and immutable alternatives for sets and maps, but uses the same simple names for both versions
@@ -1212,6 +1217,9 @@ See also [[Parser combinators vs others]]</pre>
 * Chapter 4 · Classes and Objects
 ** Public is Scala’s default access level
 ** One important characteristic of method parameters in Scala is that they are vals, not vars
+* Chapter 18 - Stateful Objects
+** every var that is a non-private member of some object implicitly defines a getter and a setter method with it
+** The getter of a var x is just named “x”, while its setter is named “x_=”
 * Chapter 33 · Combinator Parsing
 ** Sequential composition is expressed by an explicit operator: ~
 ** Repetition is expressed rep( . . . )
@@ -1286,11 +1294,12 @@ System.err.format(&quot;[UPTIME: %5ds] %s%n&quot;, (System.currentTimeMillis() -
 ** syntax is as good as possible but far from the beauty of haskell syntax 
 The winner is : [[Scala]]. The only language of the three with strong IDE support. </pre>
 </div>
-<div title="ScalaIDE problems" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201106031207" modified="201106041123" tags="pb" changecount="8">
+<div title="ScalaIDE problems" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201106031207" modified="201106111056" tags="pb" changecount="9">
 <pre>* no hover for Javadoc/Scaladoc : http://www.assembla.com/spaces/scala-ide/tickets/1000255-javadoc-view-regression
 * no &quot;Add Import'&quot; function like in Java (but quick fix work)
 * &quot;Organize Imports&quot; AST error fixed in 2.0.0 branch only http://scala-ide-portfolio.assembla.com/spaces/scala-ide/tickets/1000417-error-thrown-when-trying-to-use-organize-imports
-* Import not used never signaled</pre>
+* Import not used never signaled
+* no maximum line width in Scala formatter configuration</pre>
 </div>
 <div title="SiteSubtitle" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201103191828" modified="201105291702" tags="systemNotes" changecount="4">
 <pre>.  .  .  a site about Automated Theorem Proving</pre>
@@ -1320,11 +1329,12 @@ The winner is : [[Scala]]. The only language of the three with strong IDE suppor
 } 
 </pre>
 </div>
-<div title="SystemSettings" modifier="Olivier ROLAND" created="201105142207" modified="201105191800" tags="excludeLists" server.type="file" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.page.revision="201105142207" changecount="3">
+<div title="SystemSettings" modifier="Olivier ROLAND" created="201105142207" modified="201106101816" tags="excludeLists" changecount="5" server.page.revision="201105142207" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.type="file">
 <pre>txt_GATracker_id: UA-4646079-1
-txt_GATracker_track: 1%2C0%2C1%2C1%2C1%2C1%2C1</pre>
+txt_GATracker_track: 1%2C0%2C1%2C1%2C1%2C1%2C1
+txtUserName: Olivier ROLAND</pre>
 </div>
-<div title="TWikiFormatterPlugin" modifier="MartinBudden" created="200607210000" tags="systemConfig excludeLists excludeSearch" server.type="file" server.host="http://www.martinswiki.com" server.page.revision="200607210000">
+<div title="TWikiFormatterPlugin" modifier="MartinBudden" created="200607210000" tags="systemConfig excludeLists excludeSearch" server.page.revision="200607210000" server.host="http://www.martinswiki.com" server.type="file">
 <pre>/***
 |''Name:''|TWikiFormatterPlugin|
 |''Description:''|Allows Tiddlers to use [[TWiki|http://twiki.org/cgi-bin/view/TWiki/TextFormattingRules]] text formatting|
