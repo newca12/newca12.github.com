@@ -632,7 +632,7 @@ Source code is available on [[GitHub|http://github.com/newca12]]
 
 This tiddler was automatically created to record the details of this server</pre>
 </div>
-<div title="GATrackerPlugin" modifier="Julien Coloos" created="201105142206" modified="201105182137" tags="systemConfig" server.page.revision="201105182137" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.type="file">
+<div title="GATrackerPlugin" modifier="Julien Coloos" created="201105142206" modified="201105182137" tags="systemConfig" server.type="file" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.page.revision="201105182137">
 <pre>/***
 |Name|GATrackerPlugin|
 |Description|Google Analytics tracker|
@@ -884,12 +884,17 @@ handler: function(place, macroName, params, wikifier, paramString, tiddler) {
 ** Boole used traditional algebraic signs like ‘+’ for the logical connectives
 ** p(q + r) = pq + pr is familiar but p+qr = (p+q)(p+r) is confusing so we will use special symbols for the connectives</pre>
 </div>
-<div title="MainMenu" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201103191830" modified="201106041126" tags="meta editing systemNotes" changecount="9">
+<div title="Library" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201106131629" modified="201106131809" changecount="6">
+<pre>[[EDLA book collection|http://books.google.fr/books?uid=116287463809571408586&amp;source=gbs_lp_bookshelf_list]]
+[[EDLA document collection|https://docs.google.com/leaf?id=0B7LbY7bJaltlMTljZWIyZWEtOWFjZi00Njc1LWE4ZjctMDk4YWY2NzliMjVl&amp;hl=en_US]]</pre>
+</div>
+<div title="MainMenu" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201103191830" modified="201106131754" tags="meta editing systemNotes" changecount="12">
 <pre>[[About]]
 [[Navigating this site]]
 [[Getting started]]
 [[The Big Picture]]
 [[First-class resources]]
+[[Library]]
 [[Roadmap]]
 [[Tags]]</pre>
 </div>
@@ -1194,7 +1199,7 @@ See also [[Parser combinators vs others]]</pre>
 (*)http://download.scala-ide.org/releases-29/2.0.0-beta if nightly is unstable
 (**)http://download.scala-ide.org/nightly-update-wip-exp-backport-2.8.1.final contain implicit conversion feature</pre>
 </div>
-<div title="Programming in Scala 2nd : resume" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104232118" modified="201106122210" tags="scala book resume scala-atp" changecount="15">
+<div title="Programming in Scala 2nd : resume" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104232118" modified="201106131257" tags="scala book resume scala-atp" changecount="19">
 <pre>* Chapter 1 · A Scalable Language
 ** Functional programming is guided by two main ideas
 *** functions are first-class values
@@ -1211,12 +1216,27 @@ See also [[Parser combinators vs others]]</pre>
 ** Similarly greetStrings(0) = &quot;Hello&quot; will be transformed into greetStrings.update(0, &quot;Hello&quot;)
 ** If a method name ends in a colon, the method is invoked on the right operand
 ** arrays are always mutable; lists are always immutable
+** Tuples are very useful, for example, if you need to return multiple objects from a method
 ** Scala provides mutable and immutable alternatives for sets and maps, but uses the same simple names for both versions
 ** The telltale sign of a function with side effects is that its result type is Unit
 ** Prefer vals, immutable objects, and methods without side effects
 * Chapter 4 · Classes and Objects
 ** Public is Scala’s default access level
 ** One important characteristic of method parameters in Scala is that they are vals, not vars
+** Scala cannot have static members. Instead, Scala has singleton objects
+** You must define both the class and its companion object in the same source file
+** A class and its companion object can access each other’s private members
+** Scala implicitly imports members of packages java.lang and scala, as well as the members of a singleton object named Predef
+** they end in a definition. A script, by contrast, must end in a re- sult expression
+* Chapter 5 : Basic Types and Operations
+** Scala will transform the expression -2.0 into the method invoca-tion (2.0).unary_-
+** The only identifiers that can be used as prefix operators are +, -, !, and ~
+** eq and its opposite, ne, only apply to objects that directly map to Java object
+** Scala decides precedence based on the first character of the methods used in operator notation
+** The one exception to the precedence rule, alluded to above, concerns assignment operators, which end in an equals character
+** The associativity of an operator in Scala is determined by its last character
+**  that for each basic type described in this chapter, there is also a “rich wrapper” that provides several additional methods
+* Chapter 6 - Functional Objects 
 * Chapter 18 - Stateful Objects
 ** every var that is a non-private member of some object implicitly defines a getter and a setter method with it
 ** The getter of a var x is just named “x”, while its setter is named “x_=”
@@ -1329,12 +1349,12 @@ The winner is : [[Scala]]. The only language of the three with strong IDE suppor
 } 
 </pre>
 </div>
-<div title="SystemSettings" modifier="Olivier ROLAND" created="201105142207" modified="201106101816" tags="excludeLists" changecount="5" server.page.revision="201105142207" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.type="file">
+<div title="SystemSettings" modifier="Olivier ROLAND" created="201105142207" modified="201106101816" tags="excludeLists" server.type="file" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.page.revision="201105142207" changecount="5">
 <pre>txt_GATracker_id: UA-4646079-1
 txt_GATracker_track: 1%2C0%2C1%2C1%2C1%2C1%2C1
 txtUserName: Olivier ROLAND</pre>
 </div>
-<div title="TWikiFormatterPlugin" modifier="MartinBudden" created="200607210000" tags="systemConfig excludeLists excludeSearch" server.page.revision="200607210000" server.host="http://www.martinswiki.com" server.type="file">
+<div title="TWikiFormatterPlugin" modifier="MartinBudden" created="200607210000" tags="systemConfig excludeLists excludeSearch" server.type="file" server.host="http://www.martinswiki.com" server.page.revision="200607210000">
 <pre>/***
 |''Name:''|TWikiFormatterPlugin|
 |''Description:''|Allows Tiddlers to use [[TWiki|http://twiki.org/cgi-bin/view/TWiki/TextFormattingRules]] text formatting|
