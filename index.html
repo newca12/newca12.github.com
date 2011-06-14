@@ -1349,6 +1349,29 @@ The winner is : [[Scala]]. The only language of the three with strong IDE suppor
 } 
 </pre>
 </div>
+<div title="Syntax of First-Order Logic" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201106132149" modified="201106140759" tags="parsing" changecount="7">
+<pre>; FORM ::= true //truth//
+: | false //falsity//
+: | FORM ∧ FORM //conjunction//
+: | FORM ∨ FORM //disjunction//
+: | FORM → FORM //implication//
+: | ¬FORM //negation//
+: | ∀VAR FORM //universal quantiﬁcation//
+: | ∃VAR FORM //existential quantiﬁcation//
+: | p(TERM, . . . , TERM ) where p ∈ Σp //atomic formulas or predicates//
+; TERM ::= f (TERM, . . . , TERM ) where f ∈ Σf
+: | VAR
+; VAR ::= some countable set of names //variables//</pre>
+</div>
+<div title="Syntax of Propositional Logic" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201106132122" modified="201106140758" tags="parsing" changecount="15">
+<pre>; FORM ::= true //truth//
+: | false //falsity//
+: | FORM ∧ FORM //conjunction//
+: | FORM ∨ FORM //disjunction//
+: | FORM → FORM //implication//
+: | ¬FORM //negation//
+: | p where p ∈ Σ //boolean variables//</pre>
+</div>
 <div title="SystemSettings" modifier="Olivier ROLAND" created="201105142207" modified="201106101816" tags="excludeLists" server.type="file" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.page.revision="201105142207" changecount="5">
 <pre>txt_GATracker_id: UA-4646079-1
 txt_GATracker_track: 1%2C0%2C1%2C1%2C1%2C1%2C1
