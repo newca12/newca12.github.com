@@ -632,7 +632,7 @@ Source code is available on [[GitHub|http://github.com/newca12]]
 
 This tiddler was automatically created to record the details of this server</pre>
 </div>
-<div title="GATrackerPlugin" modifier="Julien Coloos" created="201105142206" modified="201105182137" tags="systemConfig" server.type="file" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.page.revision="201105182137">
+<div title="GATrackerPlugin" modifier="Julien Coloos" created="201105142206" modified="201105182137" tags="systemConfig" server.page.revision="201105182137" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.type="file">
 <pre>/***
 |Name|GATrackerPlugin|
 |Description|Google Analytics tracker|
@@ -852,6 +852,15 @@ handler: function(place, macroName, params, wikifier, paramString, tiddler) {
 
 })(jQuery);}
 //}}}</pre>
+</div>
+<div title="Gapt source code analysis" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201106151006" modified="201106151201" tags="gapt scala-atp" changecount="11">
+<pre>! upgrade to scala 2.8
+*code update from scala 2.7 to scala 2.8 in [[r457|http://code.google.com/p/gapt/source/detail?r=457]]
+*scala 2.8 warning cleanup in [[r460|http://code.google.com/p/gapt/source/detail?r=460]]
+*scala 2.8 warning cleanup ended in [[r470|http://code.google.com/p/gapt/source/detail?r=470]]
+
+! dependency graph r2
+[img[dependency graph r2|http://lh6.googleusercontent.com/MGXjIUeaTfolDQ0BpERB8LRfWo35jYf0y5vEOAWQRxQAGgONdcDReiRmjby8kpAY497YmEwacET_4_Fsjl1JoMT-JA=s512]]</pre>
 </div>
 <div title="Getting started" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104242212" modified="201105292104" tags="intro" changecount="6">
 <pre>*[[What is it ?|http://www.cs.miami.edu/~tptp/OverviewOfATP.html]]
@@ -1372,12 +1381,12 @@ The winner is : [[Scala]]. The only language of the three with strong IDE suppor
 : | ¬FORM //negation//
 : | p where p ∈ Σ //boolean variables//</pre>
 </div>
-<div title="SystemSettings" modifier="Olivier ROLAND" created="201105142207" modified="201106101816" tags="excludeLists" server.type="file" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.page.revision="201105142207" changecount="5">
+<div title="SystemSettings" modifier="Olivier ROLAND" created="201105142207" modified="201106101816" tags="excludeLists" changecount="5" server.page.revision="201105142207" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.type="file">
 <pre>txt_GATracker_id: UA-4646079-1
 txt_GATracker_track: 1%2C0%2C1%2C1%2C1%2C1%2C1
 txtUserName: Olivier ROLAND</pre>
 </div>
-<div title="TWikiFormatterPlugin" modifier="MartinBudden" created="200607210000" tags="systemConfig excludeLists excludeSearch" server.type="file" server.host="http://www.martinswiki.com" server.page.revision="200607210000">
+<div title="TWikiFormatterPlugin" modifier="MartinBudden" created="200607210000" tags="systemConfig excludeLists excludeSearch" server.page.revision="200607210000" server.host="http://www.martinswiki.com" server.type="file">
 <pre>/***
 |''Name:''|TWikiFormatterPlugin|
 |''Description:''|Allows Tiddlers to use [[TWiki|http://twiki.org/cgi-bin/view/TWiki/TextFormattingRules]] text formatting|
@@ -2428,8 +2437,8 @@ make
 }}}
 </pre>
 </div>
-<div title="howto gapt" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201105042106" modified="201105162114" tags="gapt scala-atp howto" changecount="7">
-<pre>* root pom.xml doesn't build cli. cli need to be build manually with mvn install in cli directory
+<div title="howto gapt" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201105042106" modified="201106142107" tags="gapt scala-atp howto" changecount="9">
+<pre>* --root pom.xml doesn't build cli. cli need to be build manually with mvn install in cli directory--
 * launch cli with : java -jar cli/target/cli-1.0-SNAPSHOT-jar-with-dependencies.jar
 {{{
 scala&gt; parse fol &quot;P(f(x,c),y)&quot;
