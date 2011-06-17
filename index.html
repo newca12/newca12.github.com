@@ -867,7 +867,7 @@ handler: function(place, macroName, params, wikifier, paramString, tiddler) {
 *[[An overview|http://en.wikipedia.org/wiki/Automated_theorem_proving]]
 *[[Great introduction in French|http://images.math.cnrs.fr/La-verite-et-la-machine.html]]</pre>
 </div>
-<div title="Handbook of practical logic and automated reasoning : resume" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104232119" modified="201105291317" tags="book resume scala-atp" changecount="9">
+<div title="Handbook of practical logic and automated reasoning : resume" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104232119" modified="201106171803" tags="book resume scala-atp" changecount="22">
 <pre>* Preface
 ** What's not in the book
 *** model checking
@@ -891,7 +891,27 @@ handler: function(place, macroName, params, wikifier, paramString, tiddler) {
 ** translate output back from abstract syntax to concrete syntax = prettyprinting
 * Propositional logic
 ** Boole used traditional algebraic signs like ‘+’ for the logical connectives
-** p(q + r) = pq + pr is familiar but p+qr = (p+q)(p+r) is confusing so we will use special symbols for the connectives</pre>
+** p(q + r) = pq + pr is familiar but p+qr = (p+q)(p+r) is confusing so we will use special symbols for the connectives
+** the ultimate meaning of a formula is just one of the two truth-values ‘true’ and ‘false’
+** we can naturally extend the enumeration in truth-table form from the basic operations to arbitrary formulas
+** we also have to accept that ‘p implies q’ is true whenever p is false, regardless of q
+** a formula is said to be 
+*** a tautology if its truth-table value is ‘true’ in all rows
+*** satisfiable if its truth-table value is ‘true’ in at least one row
+*** unsatisfiable if its truth-table value is ‘false’ in all rows
+** a set Γ of formulas is said to be satisfiable if there is a valuation v that simultaneously satisfies them all
+** the notation Γ |= q to mean ‘for all valuations in which all p ∈ Γ are true, q is true’
+** Compactness : For any set Γ of propositional formulas, if each finite subset Δ ⊆ Γ is satisfiable, then Γ itself is satisfiable
+* First-order logic
+** First- order (predicate) logic extends propositional logic in two ways
+*** the atomic propositions can be built up from non-propositional variables and constants using functions and predicates
+*** the non-propositional variables can be bound with quantifiers
+** The name ‘first-order logic’ arises because quantifiers can be applied only to object-denoting variables, not to functions or predicates
+** Logics where quantification over functions and predicates is permitted (e.g. ∃f. ∀x. P [x, f(x)]) are said to be second-order or higher-order
+** By analogy with propositional logic, a first-order formula is said to be logically valid if it holds in all interpretations and all valuations
+** The notation Γ |= p means ‘p holds in all models of Γ’
+** We have no way at all of evaluating whether a formula holds in an interpretation with an infinite domain
+** Note the contrast with propositional logic, where the propositional variables range over a finite (2-element) set which can therefore be enumerated exhaustively</pre>
 </div>
 <div title="Library" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201106131629" modified="201106131809" changecount="6">
 <pre>[[EDLA book collection|http://books.google.fr/books?uid=116287463809571408586&amp;source=gbs_lp_bookshelf_list]]
@@ -1256,6 +1276,12 @@ See also [[Parser combinators vs others]]</pre>
 *** examples :
 **** floatingPointNumber ˆˆ (_.toDouble)
 **** &quot;true&quot; ˆˆ (x =&gt; true)</pre>
+</div>
+<div title="Proof language" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201106152104" modified="201106152106" tags="atp parsing" changecount="3">
+<pre>* a kind of standard for higher-order expressions: http://www.cs.miami.edu/~tptp/TPTP/Proposals/THF.html
+* old prover9 xml format is just lots of boilerplate
+* even HLK doesn't make much sense
+* if you look at the &quot;proof language&quot; of Coq, you will see that there is almost no language. It is almost just functional programming...</pre>
 </div>
 <div title="Roadmap" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104241247" modified="201105292148" tags="intro" changecount="31">
 <pre>*Phase 1 : initialization
@@ -2437,7 +2463,7 @@ make
 }}}
 </pre>
 </div>
-<div title="howto gapt" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201105042106" modified="201106142107" tags="gapt scala-atp howto" changecount="9">
+<div title="howto gapt" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201105042106" modified="201106152052" tags="gapt scala-atp howto" changecount="11">
 <pre>* --root pom.xml doesn't build cli. cli need to be build manually with mvn install in cli directory--
 * launch cli with : java -jar cli/target/cli-1.0-SNAPSHOT-jar-with-dependencies.jar
 {{{
@@ -2445,6 +2471,14 @@ scala&gt; parse fol &quot;P(f(x,c),y)&quot;
 res29: at.logic.language.fol.FOLFormula = P(f(x, c), y)
 scala&gt; parse hol &quot;g(f(F(a:i):i):i,f(F(a:i):i):i):i&quot;
 res5: at.logic.language.hol.HOLExpression = g(f(F(a:i):i):i, f(F(a:i):i):i):i
+}}}
+* launch atp with : java -jar ./provers/atp/target/atp-1.1-Alpha-main.jar INPUTFILE
+{{{
+List of clauses in set:
+0) :-P(a)
+1) P(x), P(x):-P(f(x)), P(f(x))
+2) P(f(f(a))):-
+Enter index of first clause:
 }}}</pre>
 </div>
 <div title="howto haskell-atp" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104232124" modified="201105162115" tags="haskell-atp scala-atp howto" changecount="7">
