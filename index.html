@@ -605,7 +605,7 @@ Source code is available on [[GitHub|http://github.com/newca12]]
 
 @@If you came thru google search due to the uniqueness of ~TiddlyWiki the web result you saw on google may not appear on this website.  To find it just remember the query items and put on the search line to the upper right of this page. You should be able to find the item you were looking for.@@</pre>
 </div>
-<div title="First-class resources" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201103191829" modified="201105301715" tags="intro" changecount="13">
+<div title="First-class resources" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201103191829" modified="201106182219" tags="intro" changecount="19">
 <pre>* SCALA
 ** Learn Scala for free thanks to O'REILLY : [[Programming Scala|http://programming-scala.labs.oreilly.com/index.html]]
 *** example at the end of Chapter 9 has been updated by edla.org to scala 2.8.1 here : https://github.com/newca12/mailslot
@@ -617,13 +617,18 @@ Source code is available on [[GitHub|http://github.com/newca12]]
 *** Scala port of the Ocaml code : http://github.com/newca12/scala-atp  &lt;== Work in progress !
 *** Haskell port of the OCaml code : http://github.com/seanmcl/haskell-atp  
 ** General framework in Scala for applied proof theory : http://code.google.com/p/gapt/
+** Formal Methods : http://www.dwheeler.com/formal_methods/
+** How to Prove Stuff Automatically : http://www.dwheeler.com/formal_methods/how-to-prove-stuff.html
 
 * PARSING
 ** The whole story : http://matt.might.net/articles/parsing-with-derivatives/
 ** Nicely written introduction to parsing : http://szeiger.de/blog/2008/07/27/formal-language-processing-in-scala-part-1
 
 * PROPOSITIONAL LOGIC
-** Haskell implementation with excellent documentation : http://www.bucephalus.org/</pre>
+** Haskell implementation with excellent documentation : http://www.bucephalus.org/
+
+* &quot;&quot;&quot;NON-STANDARD LOGICS&quot;&quot;&quot;
+** A Bibliography of Non-Standard Logics : http://www.earlham.edu/~peters/courses/logsys/nonstbib.htm</pre>
 </div>
 <div title="GATracker plugin" modifier="Olivier ROLAND" created="201105191755" modified="201105191759" tags="systemServer plugins" changecount="2">
 <pre>|''Type:''|file|
@@ -862,10 +867,11 @@ handler: function(place, macroName, params, wikifier, paramString, tiddler) {
 ! dependency graph r2
 [img[dependency graph r2|http://lh6.googleusercontent.com/MGXjIUeaTfolDQ0BpERB8LRfWo35jYf0y5vEOAWQRxQAGgONdcDReiRmjby8kpAY497YmEwacET_4_Fsjl1JoMT-JA=s512]]</pre>
 </div>
-<div title="Getting started" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104242212" modified="201105292104" tags="intro" changecount="6">
+<div title="Getting started" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104242212" modified="201106190937" tags="intro" changecount="7">
 <pre>*[[What is it ?|http://www.cs.miami.edu/~tptp/OverviewOfATP.html]]
 *[[An overview|http://en.wikipedia.org/wiki/Automated_theorem_proving]]
-*[[Great introduction in French|http://images.math.cnrs.fr/La-verite-et-la-machine.html]]</pre>
+*[[Great introduction in French|http://images.math.cnrs.fr/La-verite-et-la-machine.html]]
+*[[A concrete step by step example|http://www.ontologyportal.org/resolution.html]]</pre>
 </div>
 <div title="Handbook of practical logic and automated reasoning : resume" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104232119" modified="201106171803" tags="book resume scala-atp" changecount="22">
 <pre>* Preface
@@ -1406,6 +1412,42 @@ The winner is : [[Scala]]. The only language of the three with strong IDE suppor
 : | FORM → FORM //implication//
 : | ¬FORM //negation//
 : | p where p ∈ Σ //boolean variables//</pre>
+</div>
+<div title="Syntax of Prover9" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201106181233" modified="201106181236" tags="parsing" changecount="7">
+<pre>Prover9/Mace4 BNF
+David A. Wheeler, 2007-09-21
+
+The following attempts to document prover9's syntax for formulas, in BNF format.  Note that symbols can be changed and added, including whether they are prefix, infix, and so on; this BNF only describes the default.
+A formulas(sos), formulas(assumptions), and formulas(goals) contains a list of zero or more &quot;top_level_formula&quot;s.  This is based on the Aug 2007 version of prover9.  There may be errors.
+A &quot;formula&quot; is essentially the 'type' of a built-in boolean, while &quot;term&quot; is essentially the 'type' of everything else.
+
+;top_level_formula ::= formula &quot;.&quot;
+;formula ::= formula binary_operation formula | &quot;-&quot; formula |
+            quantifier variable formula | &quot;(&quot; formula &quot;)&quot; |
+            predicate | term equality_related_ops term |
+            &quot;$T&quot; | &quot;$F&quot; |
+            formula &quot;#&quot; attribute
+;equality_related_ops ::= &quot;=&quot; | &quot;!=&quot;
+;binary_operation ::= &quot;|&quot; | &quot;&amp;&quot; | &quot;-&gt;&quot; | &quot;&lt;-&quot; | &quot;&lt;-&gt;&quot;
+;quantifier ::= &quot;all&quot; | &quot;exists&quot;
+;predicate ::= predicate_name &quot;(&quot; term { &quot;,&quot; term }* &quot;)&quot;
+;term ::= function_name { &quot;(&quot; term { &quot;,&quot; term }* &quot;)&quot; } |
+         term binary_term_operation term |
+         prefix_term_operation term |
+         term postfix_term_operation | list
+;binary_term_operation ::= &quot;==&quot; | &quot;&lt;&quot; | &quot;&lt;=&quot; | &quot;&gt;&quot; | &quot;&gt;=&quot; |
+                          &quot;+&quot; | &quot;*&quot; | &quot;@&quot; | &quot;/&quot; | &quot;\&quot; | &quot;^&quot; | &quot;v&quot;
+% Note: Lacks infix &quot;-&quot;.
+;prefix_term_operation ::= &quot;-&quot;
+% Note that prefix &quot;-&quot; can form either a formula or a term.
+;postfix_term_operation ::= &quot;'&quot;
+;list ::= &quot;[]&quot; |
+         &quot;[&quot; term { &quot;,&quot; term}* [&quot;:&quot; term] &quot;]&quot;
+% list notation is shorthand for $cons(...).
+;attribute ::= &quot;label&quot; &quot;(&quot; string &quot;)&quot; |
+              &quot;answer&quot; &quot;(&quot; term &quot;)&quot; |
+              &quot;action&quot; &quot;(&quot; term &quot;)&quot;
+              &quot;bsub_hint_wt&quot; &quot;(&quot; integer &quot;)&quot;</pre>
 </div>
 <div title="SystemSettings" modifier="Olivier ROLAND" created="201105142207" modified="201106101816" tags="excludeLists" changecount="5" server.page.revision="201105142207" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.type="file">
 <pre>txt_GATracker_id: UA-4646079-1
@@ -2463,7 +2505,7 @@ make
 }}}
 </pre>
 </div>
-<div title="howto gapt" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201105042106" modified="201106152052" tags="gapt scala-atp howto" changecount="11">
+<div title="howto gapt" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201105042106" modified="201106191255" tags="gapt scala-atp howto" changecount="12">
 <pre>* --root pom.xml doesn't build cli. cli need to be build manually with mvn install in cli directory--
 * launch cli with : java -jar cli/target/cli-1.0-SNAPSHOT-jar-with-dependencies.jar
 {{{
@@ -2471,6 +2513,12 @@ scala&gt; parse fol &quot;P(f(x,c),y)&quot;
 res29: at.logic.language.fol.FOLFormula = P(f(x, c), y)
 scala&gt; parse hol &quot;g(f(F(a:i):i):i,f(F(a:i):i):i):i&quot;
 res5: at.logic.language.hol.HOLExpression = g(f(F(a:i):i):i, f(F(a:i):i):i):i
+}}}
+{{{
+scala&gt; val v = huet(&quot;x(f(a:i):i):i&quot;, &quot;f(x(a:i):i):i&quot;)
+v: at.logic.utils.executionModels.ndStream.NDStream[at.logic.language.lambda.substitutions.Substitution[at.logic.language.hol.HOLExpression]] = at.logic.algorithms.unification.hol.huet.Huet$$anon$1@4513098
+scala&gt; normalizeSub(v.next.get)
+&lt;x -&gt; (?#5{1}.#5{1})&gt;
 }}}
 * launch atp with : java -jar ./provers/atp/target/atp-1.1-Alpha-main.jar INPUTFILE
 {{{
