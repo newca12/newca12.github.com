@@ -1223,8 +1223,16 @@ The winner is : Parser combinators (but GLL and derivative combinators should be
 
 See also [[Parser combinators vs others]]</pre>
 </div>
-<div title="Plugins for Eclipse" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201105221308" modified="201106031412" tags="tools scala-ide" changecount="17">
-<pre>*ScalaIDE - http://download.scala-ide.org/nightly-update-wip-experiment-2.9.0.final(*) (does not yet contain implicit conversion feature**)
+<div title="Plugins for Eclipse" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201105221308" modified="201106231245" tags="tools scala-ide" changecount="20">
+<pre>!Indigo
+*ScalaIDE - http://download.scala-ide.org/nightly-update-wip-experiment-2.9.0-1/
+*m2e is now integrated with eclipse
+*Maven Integration for Scala IDE build manually from modified https://github.com/sonatype/m2eclipse-scala branch m2e-0.13
+*m2e-subversive from m2e market place
+*m2e-egit from m2e market place
+
+!Helios
+*ScalaIDE - http://download.scala-ide.org/nightly-update-wip-experiment-2.9.0.final(*) (does not yet contain implicit conversion feature**)
 *&quot;m2e M repository&quot; - http://download.eclipse.org/technology/m2e/updates/M
 *Maven Integration for Scala IDE build manually from https://github.com/sonatype/m2eclipse-scala branch m2e-0.13
 *m2e-subversive from m2e market place
@@ -1330,12 +1338,11 @@ The answer is to to turn the problem on its ear (as it were) and eschew mathemat
 See also : [[Scala vs others]] 
 </pre>
 </div>
-<div title="Scala problems" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201106040803" modified="201106041310" tags="pb" changecount="8">
+<div title="Scala problems" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201106040803" modified="201106242139" tags="pb" changecount="9">
 <pre>* Scala compiler : this is OK in Java but not valid in Scala
 {{{
 System.err.format(&quot;[UPTIME: %5ds] %s%n&quot;, (System.currentTimeMillis() - startTime) / 1000, msg)
-}}}
-* Scaladoc/Scaladoc2 : no Java like {{{&quot;{@link ...}&quot;}}} (VScalaDoc2 doesn't seem an option actually)</pre>
+}}}</pre>
 </div>
 <div title="Scala vs others" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201105081358" modified="201105081424" tags="tools duel" changecount="10">
 <pre>*The following programming languages have algebraic data types as a first class notion. This criteria is mandatory.
@@ -1376,6 +1383,19 @@ The winner is : [[Scala]]. The only language of the three with strong IDE suppor
 * &quot;Organize Imports&quot; AST error fixed in 2.0.0 branch only http://scala-ide-portfolio.assembla.com/spaces/scala-ide/tickets/1000417-error-thrown-when-trying-to-use-organize-imports
 * Import not used never signaled
 * no maximum line width in Scala formatter configuration</pre>
+</div>
+<div title="Scaladoc &amp; Co" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201106221658" modified="201106242140" tags="tools" changecount="20">
+<pre>Netty Javadoc use [[apiviz|http://code.google.com/p/apiviz/]] which is a rewrite of [[umlgraph|http://www.umlgraph.org/]] to embed class diagram in Javadoc
+Similar feature for scala discussed [[here|http://www.scala-lang.org/node/4627]] and [[here|http://www.scala-lang.org/node/5861]] but no implementation yet
+*Other Scaladoc limitations
+**Scaladoc/Scaladoc2 : no Java like {{{&quot;{@link ...}&quot;}}} (VScalaDoc2 doesn't seem an option actually)
+Project to follow : http://code.google.com/p/class-diagram/
+*Resources :
+**[[scaladoc2|http://lampsvn.epfl.ch/trac/scala-old/wiki/Scaladoc]] source code : https://github.com/scala/scala/tree/master/src/compiler/scala/tools/nsc/doc
+**Advanced browsable Scala source code in HTML with : https://github.com/harrah/browse
+**Collaborative doc initiative : http://collaborative-scaladoc.github.com/
+
+</pre>
 </div>
 <div title="SiteSubtitle" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201103191828" modified="201105291702" tags="systemNotes" changecount="4">
 <pre>.  .  .  a site about Automated Theorem Proving</pre>
@@ -2688,7 +2708,7 @@ p ∧ r ∧ ¬q ∨ q ∧ ¬p ∨ ¬p ∧ ¬r
 |Goals, LCF-like tactics and Mizar-like proofs|tactics.ml||
 |Unification for first order terms|unif.ml|Unif.lhs|</pre>
 </div>
-<div title="sbt vs maven" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201105011650" modified="201105182126" tags="duel tools" changecount="17">
+<div title="sbt vs maven" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201105011650" modified="201106230733" tags="duel tools" changecount="19">
 <pre>From Eclipse point of view 
 *sbt pros
 **quicker incremental build (probably useless with eclipse)
@@ -2706,7 +2726,8 @@ p ∧ r ∧ ¬q ∨ q ∧ ¬p ∨ ¬p ∧ ¬r
 *maven cons
 **verbose XML syntax
 
-The winner is : [[maven|http://maven.apache.org/]] ([[sbt|http://code.google.com/p/simple-build-tool/]] should be re-evaluated when version &gt;= 0.9 will be released)</pre>
+The winner is : [[maven|http://maven.apache.org/]] ([[sbt|http://code.google.com/p/simple-build-tool/]] should be re-evaluated when version &gt;= 0.9 will be released)
+Maven and sbt together could also be an option : https://github.com/jiminoc/SBT-Maven-Example-Project</pre>
 </div>
 </div>
 <!--POST-STOREAREA-->
