@@ -869,8 +869,17 @@ handler: function(place, macroName, params, wikifier, paramString, tiddler) {
 })(jQuery);}
 //}}}</pre>
 </div>
-<div title="Gapt source code analysis" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201106151006" modified="201106151201" tags="gapt scala-atp" changecount="11">
-<pre>! upgrade to scala 2.8
+<div title="Gapt source code analysis" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201106151006" modified="201107122135" tags="gapt scala-atp" changecount="16">
+<pre>! parser anomaly
+*at.logic.parsing.language.arithmetic.HOLTermArithmeticalExporter need 
+**import at.logic.transformations.ceres.struct.ClauseSetSymbol
+**import at.logic.transformations.ceres.struct.TypeSynonyms.CutConfiguration
+*at.logic.transformations.ceres.struct need
+**import at.logic.calculi.lk
+**import at.logic.calculi.lksk
+but maven test is ok without ceres
+
+! upgrade to scala 2.8
 *code update from scala 2.7 to scala 2.8 in [[r457|http://code.google.com/p/gapt/source/detail?r=457]]
 *scala 2.8 warning cleanup in [[r460|http://code.google.com/p/gapt/source/detail?r=460]]
 *scala 2.8 warning cleanup ended in [[r470|http://code.google.com/p/gapt/source/detail?r=470]]
@@ -1319,11 +1328,13 @@ See also [[Parser combinators vs others]]</pre>
 **** floatingPointNumber ˆˆ (_.toDouble)
 **** &quot;true&quot; ˆˆ (x =&gt; true)</pre>
 </div>
-<div title="Proof language" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201106152104" modified="201106152106" tags="atp parsing" changecount="3">
-<pre>* a kind of standard for higher-order expressions: http://www.cs.miami.edu/~tptp/TPTP/Proposals/THF.html
+<div title="Proof language" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201106152104" modified="201107142058" tags="atp parsing" changecount="8">
+<pre>* a kind of standard for higher-order expressions: http://www.cs.miami.edu/~tptp/cgi-bin/SeeTPTP?Category=Documents&amp;File=SyntaxBNF
 * old prover9 xml format is just lots of boilerplate
 * even HLK doesn't make much sense
-* if you look at the &quot;proof language&quot; of Coq, you will see that there is almost no language. It is almost just functional programming...</pre>
+* if you look at the &quot;proof language&quot; of Coq, you will see that there is almost no language. It is almost just functional programming...
+
+=&gt;  [[TPTP]] is the cornerstone in ATP world</pre>
 </div>
 <div title="Reading roadmap" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201107022122" modified="201107052140" tags="book" changecount="11">
 <pre>@@wip@@
@@ -1524,6 +1535,13 @@ A &quot;formula&quot; is essentially the 'type' of a built-in boolean, while &qu
 <pre>txt_GATracker_id: UA-4646079-1
 txt_GATracker_track: 1%2C0%2C1%2C1%2C1%2C1%2C1
 txtUserName: Olivier ROLAND</pre>
+</div>
+<div title="TPTP" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201107141639" modified="201107141723" tags="parsing" changecount="6">
+<pre>[[see  the TPTP technical report|http://www.cs.miami.edu/~tptp/TPTP/TR/TPTPTR.shtml]]
+
+*[[TFF|http://www.cs.miami.edu/~tptp/Seminars/TFF/Summary.html]] (Typed First-order Form) : introduced in TPTP release v5.0.0, Thu Sep 16 10:38:26 EDT 2010
+*MELIA accepts formulas in the TPTP FOF, TFF, and TFF-INT formats
+</pre>
 </div>
 <div title="TWikiFormatterPlugin" modifier="MartinBudden" created="200607210000" tags="systemConfig excludeLists excludeSearch" server.type="file" server.host="http://www.martinswiki.com" server.page.revision="200607210000">
 <pre>/***
