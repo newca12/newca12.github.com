@@ -524,7 +524,7 @@ The [[HED|http://code.google.com/p/edla-hed/]] theorem prover is* free software,
 
 (*) HED is actually vaporware but is definitely THE target.</pre>
 </div>
-<div title="Algorithms for Herbrand sequent extraction" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201106260747" modified="201106260800" tags="Algorithms atp" changecount="4">
+<div title="Algorithms for Herbrand sequent extraction" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201106260747" modified="201107301156" tags="algorithms atp" changecount="5">
 <pre>*Algorithms for [[Herbrand|http://en.wikipedia.org/wiki/Herbrand's_theorem]]  sequent extraction
 **classic Gentzen’s mid-sequent reduction
 **Matthias Baaz and Alexander Leitsch. On skolemization and proof complexity. Fundamenta Matematicae, 20:353–379, 1994.
@@ -869,7 +869,7 @@ handler: function(place, macroName, params, wikifier, paramString, tiddler) {
 })(jQuery);}
 //}}}</pre>
 </div>
-<div title="Gapt source code analysis" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201106151006" modified="201107122135" tags="gapt scala-atp" changecount="16">
+<div title="Gapt source code analysis" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201106151006" modified="201107301006" tags="gapt scala-atp code-analysis" changecount="17">
 <pre>! parser anomaly
 *at.logic.parsing.language.arithmetic.HOLTermArithmeticalExporter need 
 **import at.logic.transformations.ceres.struct.ClauseSetSymbol
@@ -942,6 +942,9 @@ but maven test is ok without ceres
 <div title="Library" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201106131629" modified="201106131809" changecount="6">
 <pre>[[EDLA book collection|http://books.google.fr/books?uid=116287463809571408586&amp;source=gbs_lp_bookshelf_list]]
 [[EDLA document collection|https://docs.google.com/leaf?id=0B7LbY7bJaltlMTljZWIyZWEtOWFjZi00Njc1LWE4ZjctMDk4YWY2NzliMjVl&amp;hl=en_US]]</pre>
+</div>
+<div title="MELIA source code analysis" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201107301005" modified="201107301141" tags="code-analysis MELIA" changecount="3">
+<pre>All classes are inter-dependent, TPTPTParser need all other classes.</pre>
 </div>
 <div title="MainMenu" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201103191830" modified="201107022121" tags="meta editing systemNotes" changecount="20">
 <pre>[[About]]
@@ -1328,13 +1331,13 @@ See also [[Parser combinators vs others]]</pre>
 **** floatingPointNumber ˆˆ (_.toDouble)
 **** &quot;true&quot; ˆˆ (x =&gt; true)</pre>
 </div>
-<div title="Proof language" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201106152104" modified="201107142058" tags="atp parsing" changecount="8">
+<div title="Proof language" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201106152104" modified="201107301332" tags="atp parsing TPTP" changecount="11">
 <pre>* a kind of standard for higher-order expressions: http://www.cs.miami.edu/~tptp/cgi-bin/SeeTPTP?Category=Documents&amp;File=SyntaxBNF
 * old prover9 xml format is just lots of boilerplate
 * even HLK doesn't make much sense
 * if you look at the &quot;proof language&quot; of Coq, you will see that there is almost no language. It is almost just functional programming...
 
-=&gt;  [[TPTP]] is the cornerstone in ATP world</pre>
+=&gt; &lt;&lt;tag TPTP&gt;&gt; is the cornerstone in ATP world</pre>
 </div>
 <div title="Reading roadmap" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201107022122" modified="201107052140" tags="book" changecount="11">
 <pre>@@wip@@
@@ -1536,11 +1539,25 @@ A &quot;formula&quot; is essentially the 'type' of a built-in boolean, while &qu
 txt_GATracker_track: 1%2C0%2C1%2C1%2C1%2C1%2C1
 txtUserName: Olivier ROLAND</pre>
 </div>
-<div title="TPTP" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201107141639" modified="201107141723" tags="parsing" changecount="6">
-<pre>[[see  the TPTP technical report|http://www.cs.miami.edu/~tptp/TPTP/TR/TPTPTR.shtml]]
+<div title="TPTP language" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201107141639" modified="201107302110" tags="atp parsing TPTP" changecount="16">
+<pre>!Main site
+[[see  the TPTP technical report|http://www.cs.miami.edu/~tptp/TPTP/TR/TPTPTR.shtml]]
 
+!Notes
+*[[Notes from ayane wiki|http://code.google.com/p/ayane/wiki/TptpLanguage]]
+*Four languages in TPTP SyntaxBNF are defined : THF, TFF, FOF, and CNF
 *[[TFF|http://www.cs.miami.edu/~tptp/Seminars/TFF/Summary.html]] (Typed First-order Form) : introduced in TPTP release v5.0.0, Thu Sep 16 10:38:26 EDT 2010
 *MELIA accepts formulas in the TPTP FOF, TFF, and TFF-INT formats
+
+!Parsers
+*http://code.google.com/p/tptp-parser/
+*http://hackage.haskell.org/package/logic-TPTP
+*http://trac.informatik.uni-bremen.de:8080/hets/browser/trunk/THF
+*http://www.mail-archive.com/agi@v2.listbox.com/msg09376.html
+*http://www.freewebs.com/andrei_ch/
+
+!Converters
+*http://www.mail-archive.com/agi@v2.listbox.com/msg09376.html
 </pre>
 </div>
 <div title="TWikiFormatterPlugin" modifier="MartinBudden" created="200607210000" tags="systemConfig excludeLists excludeSearch" server.type="file" server.host="http://www.martinswiki.com" server.page.revision="200607210000">
@@ -2266,16 +2283,22 @@ config.parsers.twikiFormatter.formatTag = 'TWikiFormat';
 } // end of 'install only once'
 //}}}</pre>
 </div>
-<div title="Tags" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104250931" modified="201106260759" tags="meta editing" changecount="29">
+<div title="Tags" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104250931" modified="201107301207" tags="meta editing" changecount="40">
 <pre>*&lt;&lt;tag atp&gt;&gt;- Automated Theorem Proving, what this site is all about
 **&lt;&lt;tag intro&gt;&gt;- Getting started
 **&lt;&lt;tag scala-atp&gt;&gt;- Scala port of [[Handbook of Practical Logic and Automated Reasoning|http://www.cambridge.org/catalogue/catalogue.asp?isbn=9780521899574]]
+**&lt;&lt;tag person&gt;&gt;- People working on ATP
 **&lt;&lt;tag book&gt;&gt;- Some books
 ***&lt;&lt;tag resume&gt;&gt;- Reading notes
-**&lt;&lt;tag Algorithms&gt;&gt;- Algorithms related to Automated Theorem Proving
-**&lt;&lt;tag person&gt;&gt;- People working on ATP
-*&lt;&lt;tag parsing&gt;&gt;- Related to parsing
-*&lt;&lt;tag howto&gt;&gt;- various how-to
+**&lt;&lt;tag algorithms&gt;&gt;- Algorithms related to Automated Theorem Proving
+**&lt;&lt;tag proovers&gt;&gt;-
+***&lt;&lt;tag gapt&gt;&gt;- General Architecture for proof
+***&lt;&lt;tag MELIA&gt;&gt;- Model Evolution Calculus with Equality and built-in linear integer arithmetic 
+***&lt;&lt;tag princess&gt;&gt;- Theorem prover for Presburger arithmetic with uninterpreted predicates
+**&lt;&lt;tag parsing&gt;&gt;- Related to parsing
+***&lt;&lt;tag TPTP&gt;&gt;- TPTP language
+**&lt;&lt;tag code-analysis&gt;&gt;- Source code analysis
+**&lt;&lt;tag howto&gt;&gt;- various how-to
 *&lt;&lt;tag tools&gt;&gt;- tools drastically selected
 **&lt;&lt;tag scala-ide&gt;&gt; all about Scala IDE for Eclipse
 **&lt;&lt;tag duel&gt;&gt;- duels
@@ -2584,7 +2607,7 @@ println(getRefutation(&quot;Animal(x) | -Wolf(x). Animal(x) | -Fox(x). Animal(x)
 }}}
 </pre>
 </div>
-<div title="howto MELIA" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201107192119" modified="201107192137" changecount="4">
+<div title="howto MELIA" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201107192119" modified="201107301141" tags="howto MELIA" changecount="6">
 <pre>[[MELIA|http://users.cecs.anu.edu.au/~baumgart/systems/MELIA/index.html]] is a theorem prover for the Model Evolution Calculus with Equality and built-in linear integer arithmetic.
 
 *could be run conveniently from eclipse
@@ -2595,7 +2618,7 @@ println(getRefutation(&quot;Animal(x) | -Wolf(x). Animal(x) | -Fox(x). Animal(x)
 ./tptp2X  -f protein /tmp/PUZ001-1.p
 }}}</pre>
 </div>
-<div title="howto Princess" creator="YourName" modifier="Olivier ROLAND" created="201105080926" modified="201105162116" tags="scala-atp parsing howto" changecount="19">
+<div title="howto Princess" creator="YourName" modifier="Olivier ROLAND" created="201105080926" modified="201107301158" tags="scala-atp parsing howto princess" changecount="20">
 <pre>[[Princess|http://www.philipp.ruemmer.org/princess.shtml]] is a theorem prover for Presburger arithmetic with uninterpreted predicates.
 
 make the parser
