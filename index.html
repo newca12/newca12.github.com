@@ -613,7 +613,7 @@ Source code is available on [[GitHub|http://github.com/newca12]]
 
 @@If you came thru google search due to the uniqueness of ~TiddlyWiki the web result you saw on google may not appear on this website.  To find it just remember the query items and put on the search line to the upper right of this page. You should be able to find the item you were looking for.@@</pre>
 </div>
-<div title="First-class resources" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201103191829" modified="201107160725" tags="intro" changecount="21">
+<div title="First-class resources" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201103191829" modified="201107312102" tags="intro" changecount="23">
 <pre>* SCALA
 ** Learn Scala for free thanks to O'REILLY : [[Programming Scala|http://programming-scala.labs.oreilly.com/index.html]]
 *** example at the end of Chapter 9 has been updated by edla.org to scala 2.8.1 here : https://github.com/newca12/mailslot
@@ -621,8 +621,8 @@ Source code is available on [[GitHub|http://github.com/newca12]]
 *** * the first edition is now available for free : http://www.artima.com/pins1ed/ 
  
 * AUTOMATED THEOREM PROVING
-** Recommended book about ATP : [[Handbook of Practical Logic and Automated Reasoning|http://www.cambridge.org/catalogue/catalogue.asp?isbn=9780521899574]] (the code used in this book is written in Objective CAML but edla.org will convert it to Scala and make it publicly available, see below)  
-*** Scala port of the Ocaml code : http://github.com/newca12/scala-atp  &lt;== Work in progress !
+** Recommended book about ATP : [[Handbook of Practical Logic and Automated Reasoning|http://www.cambridge.org/catalogue/catalogue.asp?isbn=9780521899574]] --(the code used in this book is written in Objective CAML but edla.org will convert it to Scala and make it publicly available, see below)--  
+*** --Scala port of the Ocaml code : http://github.com/newca12/scala-atp  &lt;== Work in progress !--
 *** Haskell port of the OCaml code : http://github.com/seanmcl/haskell-atp  
 ** General framework in Scala for applied proof theory : http://code.google.com/p/gapt/
 ** Formal Methods : http://www.dwheeler.com/formal_methods/
@@ -939,9 +939,9 @@ but maven test is ok without ceres
 ** We have no way at all of evaluating whether a formula holds in an interpretation with an infinite domain
 ** Note the contrast with propositional logic, where the propositional variables range over a finite (2-element) set which can therefore be enumerated exhaustively</pre>
 </div>
-<div title="Library" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201106131629" modified="201106131809" changecount="6">
+<div title="Library" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201106131629" modified="201107312054" changecount="9">
 <pre>[[EDLA book collection|http://books.google.fr/books?uid=116287463809571408586&amp;source=gbs_lp_bookshelf_list]]
-[[EDLA document collection|https://docs.google.com/leaf?id=0B7LbY7bJaltlMTljZWIyZWEtOWFjZi00Njc1LWE4ZjctMDk4YWY2NzliMjVl&amp;hl=en_US]]</pre>
+[[EDLA document collection|https://docs.google.com/leaf?id=0B7LbY7bJaltlMTljZWIyZWEtOWFjZi00Njc1LWE4ZjctMDk4YWY2NzliMjVl&amp;hl=en_US]] @@actually authentication is needed. This is a recent Google Docs known issue. Waiting for a fix soon@@</pre>
 </div>
 <div title="MELIA source code analysis" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201107301005" modified="201107301141" tags="code-analysis MELIA" changecount="3">
 <pre>All classes are inter-dependent, TPTPTParser need all other classes.</pre>
@@ -1195,7 +1195,7 @@ openFile
 -XX:+UseCompressedOops
 -XX:+UnlockExperimentalVMOptions&quot;&quot;&quot;</pre>
 </div>
-<div title="Parser combinators vs others" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201105082059" modified="201105281706" tags="duel parsing tools" changecount="16">
+<div title="Parser combinators vs others" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201105082059" modified="201107302134" tags="duel parsing tools" changecount="18">
 <pre>*Parser combinators pros
 **in the language itself
 **no external tools
@@ -1219,7 +1219,9 @@ openFile
 The winner is : Parser combinators (but GLL and derivative combinators should be re-evaluated in case of limitation* with Scala implementation**)
 
 (*) packrat &amp; left recursion [[limitation|http://www.scala-lang.org/node/7820]]
-(**) [[PEGs|http://en.wikipedia.org/wiki/Parsing_expression_grammar]] [[implementation|https://github.com/sirthias/parboiled/wiki]] should then also be evaluated.</pre>
+(**) [[PEGs|http://en.wikipedia.org/wiki/Parsing_expression_grammar]] [[implementation|https://github.com/sirthias/parboiled/wiki]] should then also be evaluated.
+
+Nota: a Scala port of [[grammar combinator|http://lambda-the-ultimate.org/node/4160]] could be the ultimate solution.</pre>
 </div>
 <div title="Parsing" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104250925" modified="201105162055" tags="parsing scala-atp" changecount="32">
 <pre>*Various techniques and tools are available for parsing
@@ -1361,7 +1363,7 @@ See also [[Parser combinators vs others]]</pre>
 **This volume contains articles covering a broad spectrum of proof theory, with an emphasis on its mathematical aspects.
 **Full review : http://www.math.ucla.edu/~asl/bsl/0604/0604-003.ps</pre>
 </div>
-<div title="Roadmap" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104241247" modified="201105292148" tags="intro" changecount="31">
+<div title="Roadmap" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104241247" modified="201107312104" tags="intro" changecount="36">
 <pre>*Phase 1 : initialization
 ** Identify resources (books, article, thesis, blog, etc ...) that are available (started, WIP)
 ** Identify people/organisation also working on ATP ([[done|Who's who]])
@@ -1371,8 +1373,9 @@ See also [[Parser combinators vs others]]</pre>
 ** Select authoritative &lt;&lt;tag book&gt;&gt; on each subject and make a resume (&lt;&lt;tag resume [started]&gt;&gt;, WIP)
 ** Use the selected [[CMS|Content Management System]] to consolidate knowledge ([[started|Etat De L'Art]], WIP)
 ** Select parsing technique ([[started|Parsing]],WIP)
-*Phase 2 : Scala port of [[Handbook of Practical Logic and Automated Reasoning|http://www.cambridge.org/catalogue/catalogue.asp?isbn=9780521899574]] ([[started|http://github.com/newca12/scala-atp]], WIP)
+*--Phase 2 : Scala port of [[Handbook of Practical Logic and Automated Reasoning|http://www.cambridge.org/catalogue/catalogue.asp?isbn=9780521899574]]([[started|http://github.com/newca12/scala-atp]], WIP)--
 *Phase 3 : make [[HED|http://code.google.com/p/edla-hed/]] (hoper edei deixai) a state of the art theorem prover (not yet started)
+**Phase 3a : write a parser for TPTP using Scala Parser Combinator (started, WIP) 
 </pre>
 </div>
 <div title="Scala" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104241415" modified="201105081356" tags="intro tools scala" changecount="9">
@@ -1426,10 +1429,9 @@ System.err.format(&quot;[UPTIME: %5ds] %s%n&quot;, (System.currentTimeMillis() -
 ** syntax is as good as possible but far from the beauty of haskell syntax 
 The winner is : [[Scala]]. The only language of the three with strong IDE support. </pre>
 </div>
-<div title="ScalaIDE problems" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201106031207" modified="201107170805" tags="pb" changecount="12">
+<div title="ScalaIDE problems" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201106031207" modified="201107310714" tags="pb" changecount="13">
 <pre>* no hover for Javadoc/Scaladoc : http://www.assembla.com/spaces/scala-ide/tickets/1000255-javadoc-view-regression
 * --no &quot;Add Import'&quot; function like in Java (but quick fix work)--
-* &quot;Organize Imports&quot; AST error fixed in 2.0.0 branch only http://scala-ide-portfolio.assembla.com/spaces/scala-ide/tickets/1000417-error-thrown-when-trying-to-use-organize-imports
 * Import not used never signaled
 * no maximum line width in Scala formatter configuration
 * search references of a Scala object in project (like in Java) is not yet implemented</pre>
@@ -1539,9 +1541,10 @@ A &quot;formula&quot; is essentially the 'type' of a built-in boolean, while &qu
 txt_GATracker_track: 1%2C0%2C1%2C1%2C1%2C1%2C1
 txtUserName: Olivier ROLAND</pre>
 </div>
-<div title="TPTP language" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201107141639" modified="201107302110" tags="atp parsing TPTP" changecount="16">
+<div title="TPTP language" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201107141639" modified="201107312053" tags="atp parsing TPTP" changecount="18">
 <pre>!Main site
-[[see  the TPTP technical report|http://www.cs.miami.edu/~tptp/TPTP/TR/TPTPTR.shtml]]
+[[TPTP technical report|http://www.cs.miami.edu/~tptp/TPTP/TR/TPTPTR.shtml]]
+[[Valuable information in this old document|https://docs.google.com/a/edla.org/viewer?a=v&amp;pid=explorer&amp;chrome=true&amp;srcid=1QLOJTS7aEKyz4LnibstrO-03VZNUCXHpeMuWWa0ywxQ0FyENq0nMz3IpEBDU&amp;hl=en_US]]
 
 !Notes
 *[[Notes from ayane wiki|http://code.google.com/p/ayane/wiki/TptpLanguage]]
