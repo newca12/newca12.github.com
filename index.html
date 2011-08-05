@@ -613,7 +613,7 @@ Source code is available on [[GitHub|http://github.com/newca12]]
 
 @@If you came thru google search due to the uniqueness of ~TiddlyWiki the web result you saw on google may not appear on this website.  To find it just remember the query items and put on the search line to the upper right of this page. You should be able to find the item you were looking for.@@</pre>
 </div>
-<div title="First-class resources" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201103191829" modified="201107312102" tags="intro" changecount="23">
+<div title="First-class resources" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201103191829" modified="201108012042" tags="intro" changecount="24">
 <pre>* SCALA
 ** Learn Scala for free thanks to O'REILLY : [[Programming Scala|http://programming-scala.labs.oreilly.com/index.html]]
 *** example at the end of Chapter 9 has been updated by edla.org to scala 2.8.1 here : https://github.com/newca12/mailslot
@@ -629,6 +629,7 @@ Source code is available on [[GitHub|http://github.com/newca12]]
 ** How to Prove Stuff Automatically : http://www.dwheeler.com/formal_methods/how-to-prove-stuff.html
 
 * PARSING
+** Basic but clear introduction to BNF : http://www.garshol.priv.no/download/text/bnf.html
 ** The whole story : http://matt.might.net/articles/parsing-with-derivatives/
 ** Nicely written introduction to parsing : http://szeiger.de/blog/2008/07/27/formal-language-processing-in-scala-part-1
 
@@ -939,9 +940,9 @@ but maven test is ok without ceres
 ** We have no way at all of evaluating whether a formula holds in an interpretation with an infinite domain
 ** Note the contrast with propositional logic, where the propositional variables range over a finite (2-element) set which can therefore be enumerated exhaustively</pre>
 </div>
-<div title="Library" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201106131629" modified="201107312054" changecount="9">
+<div title="Library" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201106131629" modified="201108052100" changecount="10">
 <pre>[[EDLA book collection|http://books.google.fr/books?uid=116287463809571408586&amp;source=gbs_lp_bookshelf_list]]
-[[EDLA document collection|https://docs.google.com/leaf?id=0B7LbY7bJaltlMTljZWIyZWEtOWFjZi00Njc1LWE4ZjctMDk4YWY2NzliMjVl&amp;hl=en_US]] @@actually authentication is needed. This is a recent Google Docs known issue. Waiting for a fix soon@@</pre>
+[[EDLA document collection|https://docs.google.com/leaf?id=0B7LbY7bJaltlMTljZWIyZWEtOWFjZi00Njc1LWE4ZjctMDk4YWY2NzliMjVl&amp;hl=en_US]]</pre>
 </div>
 <div title="MELIA source code analysis" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201107301005" modified="201107301141" tags="code-analysis MELIA" changecount="3">
 <pre>All classes are inter-dependent, TPTPTParser need all other classes.</pre>
@@ -1195,7 +1196,7 @@ openFile
 -XX:+UseCompressedOops
 -XX:+UnlockExperimentalVMOptions&quot;&quot;&quot;</pre>
 </div>
-<div title="Parser combinators vs others" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201105082059" modified="201107302134" tags="duel parsing tools" changecount="18">
+<div title="Parser combinators vs others" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201105082059" modified="201108012137" tags="duel parsing tools" changecount="19">
 <pre>*Parser combinators pros
 **in the language itself
 **no external tools
@@ -1216,10 +1217,11 @@ openFile
 *GLL combinators cons
 **too confidential
 
-The winner is : Parser combinators (but GLL and derivative combinators should be re-evaluated in case of limitation* with Scala implementation**)
+The winner is : Parser combinators with the PackratParsers extension* (but GLL and derivative combinators should be re-evaluated in case of limitation** with Scala implementation***)
 
-(*) packrat &amp; left recursion [[limitation|http://www.scala-lang.org/node/7820]]
-(**) [[PEGs|http://en.wikipedia.org/wiki/Parsing_expression_grammar]] [[implementation|https://github.com/sirthias/parboiled/wiki]] should then also be evaluated.
+(*)  Packrat Parsing allow left recursive grammars.
+(**) packrat &amp; left recursion [[limitation|http://www.scala-lang.org/node/7820]]
+(***) [[PEGs|http://en.wikipedia.org/wiki/Parsing_expression_grammar]] [[implementation|https://github.com/sirthias/parboiled/wiki]] should then also be evaluated.
 
 Nota: a Scala port of [[grammar combinator|http://lambda-the-ultimate.org/node/4160]] could be the ultimate solution.</pre>
 </div>
@@ -1541,13 +1543,12 @@ A &quot;formula&quot; is essentially the 'type' of a built-in boolean, while &qu
 txt_GATracker_track: 1%2C0%2C1%2C1%2C1%2C1%2C1
 txtUserName: Olivier ROLAND</pre>
 </div>
-<div title="TPTP language" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201107141639" modified="201107312053" tags="atp parsing TPTP" changecount="18">
+<div title="TPTP language" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201107141639" modified="201108052052" tags="atp parsing TPTP" changecount="20">
 <pre>!Main site
 [[TPTP technical report|http://www.cs.miami.edu/~tptp/TPTP/TR/TPTPTR.shtml]]
 [[Valuable information in this old document|https://docs.google.com/a/edla.org/viewer?a=v&amp;pid=explorer&amp;chrome=true&amp;srcid=1QLOJTS7aEKyz4LnibstrO-03VZNUCXHpeMuWWa0ywxQ0FyENq0nMz3IpEBDU&amp;hl=en_US]]
 
 !Notes
-*[[Notes from ayane wiki|http://code.google.com/p/ayane/wiki/TptpLanguage]]
 *Four languages in TPTP SyntaxBNF are defined : THF, TFF, FOF, and CNF
 *[[TFF|http://www.cs.miami.edu/~tptp/Seminars/TFF/Summary.html]] (Typed First-order Form) : introduced in TPTP release v5.0.0, Thu Sep 16 10:38:26 EDT 2010
 *MELIA accepts formulas in the TPTP FOF, TFF, and TFF-INT formats
@@ -1561,7 +1562,15 @@ txtUserName: Olivier ROLAND</pre>
 
 !Converters
 *http://www.mail-archive.com/agi@v2.listbox.com/msg09376.html
-</pre>
+
+!Naming convention
+|DDD|NNN|F|V|.SSS|.T|h
+|&gt;|&gt;|&gt;|&gt;|&gt;|DDD - Domain name abbreviation. The domain names and their abbreviations are listed in Section  The Domain Structure of the TPTP.|
+||&gt;|&gt;|&gt;|&gt;|NNN - Abstract problem number. It is unique within the domain.|
+|||&gt;|&gt;|&gt;|F - Form. ^ for THF, _ for TFF without arithmetic, = for TFF with arithmetic, + for FOF, and - for CNF.|
+||||&gt;|&gt;|V - Version number. It differentiates between different versions of the abstract problem, as discussed in Section Problem Versions.|
+|||||&gt;|SSS - Size parameter(s). These only occur for generated problems, and give the size parameter(s).|
+||||||T - File name extension. p for problem files, g for generator files.|</pre>
 </div>
 <div title="TWikiFormatterPlugin" modifier="MartinBudden" created="200607210000" tags="systemConfig excludeLists excludeSearch" server.type="file" server.host="http://www.martinswiki.com" server.page.revision="200607210000">
 <pre>/***
@@ -2610,11 +2619,11 @@ println(getRefutation(&quot;Animal(x) | -Wolf(x). Animal(x) | -Fox(x). Animal(x)
 }}}
 </pre>
 </div>
-<div title="howto MELIA" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201107192119" modified="201107301141" tags="howto MELIA" changecount="6">
+<div title="howto MELIA" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201107192119" modified="201108052052" tags="howto MELIA" changecount="7">
 <pre>[[MELIA|http://users.cecs.anu.edu.au/~baumgart/systems/MELIA/index.html]] is a theorem prover for the Model Evolution Calculus with Equality and built-in linear integer arithmetic.
 
 *could be run conveniently from eclipse
-*accept some tptp input files  like DAT001=1.p
+*accept some tptp input files  like DAT001=1.p,GRP194+1
 *some tptp input files need tptpFO2tme which is not included with MELIA bundle
 *other need previous conversion to protein format to use .tme files as input files
 {{{
