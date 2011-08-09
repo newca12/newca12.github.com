@@ -649,7 +649,7 @@ Source code is available on [[GitHub|http://github.com/newca12]]
 
 This tiddler was automatically created to record the details of this server</pre>
 </div>
-<div title="GATrackerPlugin" modifier="Julien Coloos" created="201105142206" modified="201105182137" tags="systemConfig" server.type="file" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.page.revision="201105182137">
+<div title="GATrackerPlugin" modifier="Julien Coloos" created="201105142206" modified="201105182137" tags="systemConfig" server.page.revision="201105182137" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.type="file">
 <pre>/***
 |Name|GATrackerPlugin|
 |Description|Google Analytics tracker|
@@ -1196,13 +1196,14 @@ openFile
 -XX:+UseCompressedOops
 -XX:+UnlockExperimentalVMOptions&quot;&quot;&quot;</pre>
 </div>
-<div title="Parser combinators vs others" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201105082059" modified="201108012137" tags="duel parsing tools" changecount="19">
+<div title="Parser combinators vs others" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201105082059" modified="201108092051" tags="duel parsing tools" changecount="42">
 <pre>*Parser combinators pros
 **in the language itself
 **no external tools
 **part of native Scala library
 *Parser combinators cons
-**implementation tricky for left recursion
+**do not generate proper error messages
+**implementation tricky for left recursion (*)
 *Parser generators pros
 **code could be auto generated from EBNF
 *Parser generators cons
@@ -1213,15 +1214,24 @@ openFile
 *Derivative combinators cons
 **too confidential
 *GLL combinators pros
-**solve left recursion problem
+**generate proper error messages
+**solve left recursion problem (*)
 *GLL combinators cons
 **too confidential
+*Parboiled pros
+**syntax similar to BNF
+**generate proper error messages
+*Parboiled cons
+**external library
+**cannot handle left recursion (*)
 
-The winner is : Parser combinators with the PackratParsers extension* (but GLL and derivative combinators should be re-evaluated in case of limitation** with Scala implementation***)
+The winner is : Parser combinators with the PackratParsers extension** (but Parboiled, GLL and derivative combinators should be re-evaluated in case of limitation*** with Scala implementation****)
+A comparison study is needed between PackratParsers extension and Parboiled focusing on error message handling.
 
-(*)  Packrat Parsing allow left recursive grammars.
-(**) packrat &amp; left recursion [[limitation|http://www.scala-lang.org/node/7820]]
-(***) [[PEGs|http://en.wikipedia.org/wiki/Parsing_expression_grammar]] [[implementation|https://github.com/sirthias/parboiled/wiki]] should then also be evaluated.
+(*)  Even if the grammar has [[left recursion|http://en.wikipedia.org/wiki/Left_recursion]] it is usually not hard to remove
+(**)  The Scala 2.8 combinator parser library adds PEG parsing and can memoize parse results for potential re-use when backtracking occurs. Packrat Parsing allow left recursive grammars (*). 
+(***) packrat &amp; left recursion [[limitation|http://www.scala-lang.org/node/7820]] (*)
+(****) [[Scala Parser combinator limitation|http://www.decodified.com/parboiled_/2010/08/16/parboiled-for-scala.html]]
 
 Nota: a Scala port of [[grammar combinator|http://lambda-the-ultimate.org/node/4160]] could be the ultimate solution.</pre>
 </div>
@@ -1538,7 +1548,7 @@ A &quot;formula&quot; is essentially the 'type' of a built-in boolean, while &qu
               &quot;action&quot; &quot;(&quot; term &quot;)&quot;
               &quot;bsub_hint_wt&quot; &quot;(&quot; integer &quot;)&quot;</pre>
 </div>
-<div title="SystemSettings" modifier="Olivier ROLAND" created="201105142207" modified="201106101816" tags="excludeLists" server.type="file" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.page.revision="201105142207" changecount="5">
+<div title="SystemSettings" modifier="Olivier ROLAND" created="201105142207" modified="201106101816" tags="excludeLists" changecount="5" server.page.revision="201105142207" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.type="file">
 <pre>txt_GATracker_id: UA-4646079-1
 txt_GATracker_track: 1%2C0%2C1%2C1%2C1%2C1%2C1
 txtUserName: Olivier ROLAND</pre>
@@ -1572,7 +1582,7 @@ txtUserName: Olivier ROLAND</pre>
 |||||&gt;|SSS - Size parameter(s). These only occur for generated problems, and give the size parameter(s).|
 ||||||T - File name extension. p for problem files, g for generator files.|</pre>
 </div>
-<div title="TWikiFormatterPlugin" modifier="MartinBudden" created="200607210000" tags="systemConfig excludeLists excludeSearch" server.type="file" server.host="http://www.martinswiki.com" server.page.revision="200607210000">
+<div title="TWikiFormatterPlugin" modifier="MartinBudden" created="200607210000" tags="systemConfig excludeLists excludeSearch" server.page.revision="200607210000" server.host="http://www.martinswiki.com" server.type="file">
 <pre>/***
 |''Name:''|TWikiFormatterPlugin|
 |''Description:''|Allows Tiddlers to use [[TWiki|http://twiki.org/cgi-bin/view/TWiki/TextFormattingRules]] text formatting|
