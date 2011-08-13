@@ -1197,7 +1197,7 @@ openFile
 -XX:+UseCompressedOops
 -XX:+UnlockExperimentalVMOptions&quot;&quot;&quot;</pre>
 </div>
-<div title="Parser combinators vs others" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201105082059" modified="201108092051" tags="duel parsing tools" changecount="42">
+<div title="Parser combinators vs others" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201105082059" modified="201108132147" tags="duel parsing tools" changecount="44">
 <pre>*Parser combinators pros
 **in the language itself
 **no external tools
@@ -1227,7 +1227,7 @@ openFile
 **cannot handle left recursion (*)
 
 The winner is : Parser combinators with the PackratParsers extension** (but Parboiled, GLL and derivative combinators should be re-evaluated in case of limitation*** with Scala implementation****)
-A comparison study is needed between PackratParsers extension and Parboiled focusing on error message handling.
+A comparison study is needed between PackratParsers extension and Parboiled focusing on [[error message handling|http://stackoverflow.com/questions/2906674/how-to-further-improve-error-messages-in-scala-parser-combinator-based-parsers]].
 
 (*)  Even if the grammar has [[left recursion|http://en.wikipedia.org/wiki/Left_recursion]] it is usually not hard to remove
 (**)  The Scala 2.8 combinator parser library adds PEG parsing and can memoize parse results for potential re-use when backtracking occurs. Packrat Parsing allow left recursive grammars (*). 
@@ -1281,6 +1281,15 @@ See also [[Parser combinators vs others]]</pre>
 
 (*)http://download.scala-ide.org/releases-29/2.0.0-beta if nightly is unstable
 (**)http://download.scala-ide.org/nightly-update-wip-exp-backport-2.8.1.final contain implicit conversion feature</pre>
+</div>
+<div title="Pretty Printing" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201108131210" modified="201108131731" tags="parsing" changecount="22">
+<pre>!What is it ?
+If a parser takes a stream of characters and turns them into an abstract syntax tree, a pretty printer does the opposite: it turns some tree into a string, subject to some constraints (to keep the output &quot;pretty&quot;)
+
+!Some pretty printer implementation
+*The Scala's standard library already has one Wadler's Pretty-Printer, but it's rather limited and has only few basic combinators. [[Scala doc|http://www.scala-lang.org/archives/downloads/distrib/files/nightly/docs/library/index.html#scala.text.Document]] about it is really weak. Some useful hints on [[this blog|http://www.scala-blogs.org/2009/04/combinators-for-pretty-printers-part-1.html]]
+*A Scala port of Lindig’s implementation of Wadler’s pretty printer from Ocaml, adding all combinators and whole API from Haskell PPrint - which is another implementation of Wadler’s prettier-printer by Daan Leijen : [[source code|http://scala-programming-language.1934581.n4.nabble.com/file/n1995937/zPPrint.scala]] and [[demo|http://scala-programming-language.1934581.n4.nabble.com/scala-pretty-printing-tp1995936p1995939.html]]
+*A rudimentary pretty printer combinator : http://www.scala-blogs.org/2009/04/combinators-for-pretty-printers-part-1.html</pre>
 </div>
 <div title="Programming in Scala 2nd : resume" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104232118" modified="201106211713" tags="scala book resume scala-atp" changecount="23">
 <pre>* Chapter 1 · A Scalable Language
