@@ -643,7 +643,7 @@ Source code is available on [[GitHub|http://github.com/newca12]]
 
 This tiddler was automatically created to record the details of this server</pre>
 </div>
-<div title="GATrackerPlugin" modifier="Julien Coloos" created="201105142206" modified="201105182137" tags="systemConfig" server.type="file" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.page.revision="201105182137">
+<div title="GATrackerPlugin" modifier="Julien Coloos" created="201105142206" modified="201105182137" tags="systemConfig" server.page.revision="201105182137" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.type="file">
 <pre>/***
 |Name|GATrackerPlugin|
 |Description|Google Analytics tracker|
@@ -1210,6 +1210,30 @@ Most of this optimizations are not necessary anymore. Details [[here|http://down
 *Compressed oops is supported and enabled by default in Java SE 6u23 and later. In Java SE 7, use of compressed oops is the default for 64-bit JVM processes when -Xmx isn't specified and for values of -Xmx less than 32 gigabytes.
 *Escape analysis is supported and enabled by default in Java SE 6u23 and later.</pre>
 </div>
+<div title="Packrat Efficiency" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201108280902" modified="201108281358" tags="parsing TPTP" changecount="37">
+<pre>| TPTP test | without packrat | with packrat | time gain |h
+| GRP194+1.p | 0.910 sec | 0.289 sec| -68.24% |
+| ARI595=1.p | 0.283 sec | 0.243 sec| -14.13% |
+| GEG021=1.p | 0.516 sec | 0.299 sec| -42.05% |
+| PUZ133=2.p | 0.822 sec | 0.356 sec| -56.69% |
+| GRP633+1.p | 5.413 sec | 1.239 sec| -77.11% |
+| ALG027+1.p | 8.238 sec | 3.112 sec| -62.22% |
+| ALG196+1.p | 12.252 sec | 4.356 sec| -64.45% |
+| COM022+4.p | 2.562 sec | 0.681 sec| -73.42% |
+| GEG001+1.p | 14.563 sec | 2.596 sec| -82.17% |
+| GEO287+1.p | 10.159 sec | 1.948 sec| -80.82% |
+| KRS159+1.p |  4.515 sec | 1.116 sec| -75.28% |
+| LCL672+1.020.p | failed* | 4.530 sec| N/A |
+| NUM377+1.030.p | 9.064 sec | 2.840 sec| -68.67% |
+| PUZ076+1.p | 17.025 sec | 2.985 sec| -82.47%% |
+| SEU404+2.p |  failed** | 4.117 sec| N/A |
+| SYN424+1.p | 18.882 sec | 1.573 sec| -91.67% |
+
+&quot;&quot;&quot;* out of memory&quot;&quot;&quot;
+&quot;&quot;&quot;** &gt; 15 min&quot;&quot;&quot;
+
+</pre>
+</div>
 <div title="Parser combinators vs others" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201105082059" modified="201108132147" tags="duel parsing tools" changecount="44">
 <pre>*Parser combinators pros
 **in the language itself
@@ -1612,7 +1636,7 @@ A &quot;formula&quot; is essentially the 'type' of a built-in boolean, while &qu
               &quot;action&quot; &quot;(&quot; term &quot;)&quot;
               &quot;bsub_hint_wt&quot; &quot;(&quot; integer &quot;)&quot;</pre>
 </div>
-<div title="SystemSettings" modifier="Olivier ROLAND" created="201105142207" modified="201106101816" tags="excludeLists" server.type="file" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.page.revision="201105142207" changecount="5">
+<div title="SystemSettings" modifier="Olivier ROLAND" created="201105142207" modified="201106101816" tags="excludeLists" changecount="5" server.page.revision="201105142207" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.type="file">
 <pre>txt_GATracker_id: UA-4646079-1
 txt_GATracker_track: 1%2C0%2C1%2C1%2C1%2C1%2C1
 txtUserName: Olivier ROLAND</pre>
@@ -1646,7 +1670,7 @@ txtUserName: Olivier ROLAND</pre>
 |||||&gt;|SSS - Size parameter(s). These only occur for generated problems, and give the size parameter(s).|
 ||||||T - File name extension. p for problem files, g for generator files.|</pre>
 </div>
-<div title="TWikiFormatterPlugin" modifier="MartinBudden" created="200607210000" tags="systemConfig excludeLists excludeSearch" server.type="file" server.host="http://www.martinswiki.com" server.page.revision="200607210000">
+<div title="TWikiFormatterPlugin" modifier="MartinBudden" created="200607210000" tags="systemConfig excludeLists excludeSearch" server.page.revision="200607210000" server.host="http://www.martinswiki.com" server.type="file">
 <pre>/***
 |''Name:''|TWikiFormatterPlugin|
 |''Description:''|Allows Tiddlers to use [[TWiki|http://twiki.org/cgi-bin/view/TWiki/TextFormattingRules]] text formatting|
@@ -2696,12 +2720,12 @@ println(getRefutation(&quot;Animal(x) | -Wolf(x). Animal(x) | -Fox(x). Animal(x)
 }}}
 </pre>
 </div>
-<div title="howto MELIA" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201107192119" modified="201108052052" tags="howto MELIA" changecount="7">
+<div title="howto MELIA" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201107192119" modified="201108280926" tags="howto MELIA" changecount="8">
 <pre>[[MELIA|http://users.cecs.anu.edu.au/~baumgart/systems/MELIA/index.html]] is a theorem prover for the Model Evolution Calculus with Equality and built-in linear integer arithmetic.
 
 *could be run conveniently from eclipse
-*accept some tptp input files  like DAT001=1.p,GRP194+1
-*some tptp input files need tptpFO2tme which is not included with MELIA bundle
+*accept fof, tff and tff-int tptp input files  like DAT001=1.p,GRP194+1
+*cnf tptp input files need tptpFO2tme which is not included with MELIA bundle
 *other need previous conversion to protein format to use .tme files as input files
 {{{
 ./tptp2X  -f protein /tmp/PUZ001-1.p
