@@ -898,8 +898,11 @@ handler: function(place, macroName, params, wikifier, paramString, tiddler) {
 })(jQuery);}
 //}}}</pre>
 </div>
-<div title="Gapt source code analysis" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201106151006" modified="201107301006" tags="gapt scala-atp code-analysis" changecount="17">
-<pre>! parser anomaly
+<div title="Gapt source code analysis" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201106151006" modified="201109110957" tags="gapt scala-atp code-analysis" changecount="18">
+<pre>! dependencies
+Dependency graph generated with [[el4j DepGraph maven plugin|http://el4j.sourceforge.net/plugins/maven-depgraph-plugin/index.html]] :
+https://docs.google.com/leaf?id=0B7LbY7bJaltlNWNhNDkxNjYtNzQ5MS00ODliLTk3YmMtM2Y0NWU3YzI1M2Qx&amp;hl=en_US
+! parser anomaly
 *at.logic.parsing.language.arithmetic.HOLTermArithmeticalExporter need 
 **import at.logic.transformations.ceres.struct.ClauseSetSymbol
 **import at.logic.transformations.ceres.struct.TypeSynonyms.CutConfiguration
@@ -1637,41 +1640,58 @@ Project to follow : http://code.google.com/p/class-diagram/
 : | ¬FORM //negation//
 : | p where p ∈ Σ //boolean variables//</pre>
 </div>
-<div title="Syntax of Prover9" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201106181233" modified="201106181236" tags="parsing" changecount="7">
+<div title="Syntax of Prover9" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201106181233" modified="201109111001" tags="parsing prover9" changecount="11">
 <pre>Prover9/Mace4 BNF
 David A. Wheeler, 2007-09-21
+[[source|http://www.dwheeler.com/formal_methods/prover9-bnf.txt]]
 
 The following attempts to document prover9's syntax for formulas, in BNF format.  Note that symbols can be changed and added, including whether they are prefix, infix, and so on; this BNF only describes the default.
 A formulas(sos), formulas(assumptions), and formulas(goals) contains a list of zero or more &quot;top_level_formula&quot;s.  This is based on the Aug 2007 version of prover9.  There may be errors.
 A &quot;formula&quot; is essentially the 'type' of a built-in boolean, while &quot;term&quot; is essentially the 'type' of everything else.
 
-;top_level_formula ::= formula &quot;.&quot;
-;formula ::= formula binary_operation formula | &quot;-&quot; formula |
+{{{
+top_level_formula ::= formula &quot;.&quot;
+
+formula ::= formula binary_operation formula | &quot;-&quot; formula |
             quantifier variable formula | &quot;(&quot; formula &quot;)&quot; |
             predicate | term equality_related_ops term |
             &quot;$T&quot; | &quot;$F&quot; |
             formula &quot;#&quot; attribute
-;equality_related_ops ::= &quot;=&quot; | &quot;!=&quot;
-;binary_operation ::= &quot;|&quot; | &quot;&amp;&quot; | &quot;-&gt;&quot; | &quot;&lt;-&quot; | &quot;&lt;-&gt;&quot;
-;quantifier ::= &quot;all&quot; | &quot;exists&quot;
-;predicate ::= predicate_name &quot;(&quot; term { &quot;,&quot; term }* &quot;)&quot;
-;term ::= function_name { &quot;(&quot; term { &quot;,&quot; term }* &quot;)&quot; } |
+
+equality_related_ops ::= &quot;=&quot; | &quot;!=&quot;
+
+binary_operation ::= &quot;|&quot; | &quot;&amp;&quot; | &quot;-&gt;&quot; | &quot;&lt;-&quot; | &quot;&lt;-&gt;&quot;
+
+quantifier ::= &quot;all&quot; | &quot;exists&quot;
+
+predicate ::= predicate_name &quot;(&quot; term { &quot;,&quot; term }* &quot;)&quot;
+
+
+
+term ::= function_name { &quot;(&quot; term { &quot;,&quot; term }* &quot;)&quot; } |
          term binary_term_operation term |
          prefix_term_operation term |
          term postfix_term_operation | list
-;binary_term_operation ::= &quot;==&quot; | &quot;&lt;&quot; | &quot;&lt;=&quot; | &quot;&gt;&quot; | &quot;&gt;=&quot; |
+
+binary_term_operation ::= &quot;==&quot; | &quot;&lt;&quot; | &quot;&lt;=&quot; | &quot;&gt;&quot; | &quot;&gt;=&quot; |
                           &quot;+&quot; | &quot;*&quot; | &quot;@&quot; | &quot;/&quot; | &quot;\&quot; | &quot;^&quot; | &quot;v&quot;
 % Note: Lacks infix &quot;-&quot;.
-;prefix_term_operation ::= &quot;-&quot;
+
+prefix_term_operation ::= &quot;-&quot;
 % Note that prefix &quot;-&quot; can form either a formula or a term.
-;postfix_term_operation ::= &quot;'&quot;
-;list ::= &quot;[]&quot; |
+
+
+postfix_term_operation ::= &quot;'&quot;
+
+list ::= &quot;[]&quot; |
          &quot;[&quot; term { &quot;,&quot; term}* [&quot;:&quot; term] &quot;]&quot;
 % list notation is shorthand for $cons(...).
-;attribute ::= &quot;label&quot; &quot;(&quot; string &quot;)&quot; |
+
+attribute ::= &quot;label&quot; &quot;(&quot; string &quot;)&quot; |
               &quot;answer&quot; &quot;(&quot; term &quot;)&quot; |
               &quot;action&quot; &quot;(&quot; term &quot;)&quot;
-              &quot;bsub_hint_wt&quot; &quot;(&quot; integer &quot;)&quot;</pre>
+              &quot;bsub_hint_wt&quot; &quot;(&quot; integer &quot;)&quot;
+}}}</pre>
 </div>
 <div title="SystemSettings" modifier="Olivier ROLAND" created="201105142207" modified="201106101816" tags="excludeLists" server.type="file" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.page.revision="201105142207" changecount="5">
 <pre>txt_GATracker_id: UA-4646079-1
@@ -2755,18 +2775,13 @@ This tiddler was automatically created to record the details of this server</pre
 ****Vampire
 See also [[Notable people|http://en.wikipedia.org/wiki/Automated_theorem_proving#Notable_people]]</pre>
 </div>
-<div title="gapt dependencies" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201109042025" modified="201109042111" tags="gapt" changecount="5">
-<pre>Dependency graph generated with [[el4j DepGraph maven plugin|http://el4j.sourceforge.net/plugins/maven-depgraph-plugin/index.html]] :
-https://docs.google.com/leaf?id=0B7LbY7bJaltlNWNhNDkxNjYtNzQ5MS00ODliLTk3YmMtM2Y0NWU3YzI1M2Qx&amp;hl=en_US
-</pre>
-</div>
-<div title="gapt problems" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201107102128" modified="201107102136" tags="pb gapt" changecount="5">
-<pre>!File     : PUZ031-1 : TPTP v3.1.0. Released v1.0.0. 
-refutation of negated conjecture should be false
-{{{    
+<div title="gapt problems" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201107102128" modified="201109112116" tags="pb gapt" changecount="8">
+<pre>!OOM (PUZ031-1 : TPTP v3.1.0. Released v1.0.0)
+This test need at least -Xss4m (-Xss3m failed)
+{{{
 println(getRefutation(&quot;Animal(x) | -Wolf(x). Animal(x) | -Fox(x). Animal(x) | -Bird(x). Animal(x) | -Caterpillar(x). Animal(x) | -Snail(x). Wolf(a_wolf). Fox(a_fox). Bird(a_bird). Caterpillar(a_caterpillar). Snail(a_snail). Grain(a_grain). Plant(x) | -Grain(x). Eats(animal,plant) | Eats(animal,small_animal) | -Animal(animal) | -Plant(plant) | -Animal(small_animal) | -Plant(other_plant) | -Much_smaller(small_animal,animal) | -Eats(small_animal,other_plant). Much_smaller(catapillar,bird) | -Caterpillar(catapillar) | -Bird(bird). Much_smaller(snail,bird) | -Snail(snail) | -Bird(bird). Much_smaller(bird,fox) | -Bird(bird) | -Fox(fox). Much_smaller(fox,wolf) | -Fox(fox) | -Wolf(wolf). -Wolf(wolf) | -Fox(fox) | -Eats(wolf,fox). -Wolf(wolf) | -Grain(grain) | -Eats(wolf,grain). Eats(bird,catapillar) | -Bird(bird) | -Caterpillar(catapillar). -Bird(bird) | -Snail(snail) | -Eats(bird,snail). Plant(caterpillar_food_of(catapillar)) | -Caterpillar(catapillar). Eats(catapillar,caterpillar_food_of(catapillar)) | -Caterpillar(catapillar). Plant(snail_food_of(snail)) | -Snail(snail). Eats(snail,snail_food_of(snail)) | -Snail(snail). -Animal(animal) | -Animal(grain_eater) | -Grain(grain) | -Eats(animal,grain_eater) | -Eats(grain_eater,grain).&quot;))
-=&gt; true
 }}}
+
 </pre>
 </div>
 <div title="howto MELIA" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201107192119" modified="201108280926" tags="howto MELIA" changecount="8">
