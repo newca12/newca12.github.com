@@ -601,7 +601,7 @@ Some hints about MathJax [[here|http://wiki.math.toronto.edu/TorontoMathWiki/ind
 <div title="DefaultTiddlers" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201103191837" modified="201104251010" tags="systemNotes" changecount="2">
 <pre>[[Etat De L'Art]]</pre>
 </div>
-<div title="Definitions" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201109101656" modified="201109102144" tags="intro" changecount="6">
+<div title="Definitions" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201109101656" modified="201109232016" tags="intro" changecount="8">
 <pre>*[[Atomic formula|http://en.wikipedia.org/wiki/Atomic_formula]]
 *[[Disjunction|http://en.wikipedia.org/wiki/Logical_disjunction]]
 *[[Literal|http://en.wikipedia.org/wiki/Literal_(mathematical_logic)]]
@@ -609,9 +609,11 @@ Some hints about MathJax [[here|http://wiki.math.toronto.edu/TorontoMathWiki/ind
 *[[Skolem normal form|http://en.wikipedia.org/wiki/Skolemization]]
 *[[Herbrandization|http://en.wikipedia.org/wiki/Herbrandization]]
 *[[Clause|http://en.wikipedia.org/wiki/Clause_(logic)]]
+*[[De Bruijn index|http://en.wikipedia.org/wiki/De_Bruijn_index]]
 *[[Typed lambda calculus|http://en.wikipedia.org/wiki/Typed_lambda_calculus]]
 *[[First-order logic|http://en.wikipedia.org/wiki/First-order_logic]]
-*[[Higher-order logic|http://en.wikipedia.org/wiki/Higher-order_logic]]</pre>
+*[[Higher-order logic|http://en.wikipedia.org/wiki/Higher-order_logic]]
+*[[Combinatory logic|http://en.wikipedia.org/wiki/Combinatory_logic]]</pre>
 </div>
 <div title="Eclipse vs others" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201105211706" modified="201105211708" tags="duel tools" changecount="3">
 <pre>From Scala point of view
@@ -1368,7 +1370,7 @@ If a parser takes a stream of characters and turns them into an abstract syntax 
 *A Scala port of Lindig’s implementation of Wadler’s pretty printer from Ocaml, adding all combinators and whole API from Haskell PPrint - which is another implementation of Wadler’s prettier-printer by Daan Leijen : [[source code|http://scala-programming-language.1934581.n4.nabble.com/file/n1995937/zPPrint.scala]] and [[demo|http://scala-programming-language.1934581.n4.nabble.com/scala-pretty-printing-tp1995936p1995939.html]]
 *A rudimentary pretty printer combinator : http://www.scala-blogs.org/2009/04/combinators-for-pretty-printers-part-1.html</pre>
 </div>
-<div title="Programming in Scala 2nd : resume" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104232118" modified="201106211713" tags="scala book resume scala-atp" changecount="23">
+<div title="Programming in Scala 2nd : resume" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104232118" modified="201110042103" tags="scala book resume scala-atp" changecount="27">
 <pre>* Chapter 1 · A Scalable Language
 ** Functional programming is guided by two main ideas
 *** functions are first-class values
@@ -1396,9 +1398,9 @@ If a parser takes a stream of characters and turns them into an abstract syntax 
 ** You must define both the class and its companion object in the same source file
 ** A class and its companion object can access each other’s private members
 ** Scala implicitly imports members of packages java.lang and scala, as well as the members of a singleton object named Predef
-** they end in a definition. A script, by contrast, must end in a re- sult expression
+** they end in a definition. A script, by contrast, must end in a result expression
 * Chapter 5 : Basic Types and Operations
-** Scala will transform the expression -2.0 into the method invoca-tion (2.0).unary_-
+** Scala will transform the expression -2.0 into the method invocation (2.0).unary_-
 ** The only identifiers that can be used as prefix operators are +, -, !, and ~
 ** eq and its opposite, ne, only apply to objects that directly map to Java object
 ** Scala decides precedence based on the first character of the methods used in operator notation
@@ -1421,6 +1423,12 @@ If a parser takes a stream of characters and turns them into an abstract syntax 
 ** You cannot write Thread.yield() because yield is a reserved word in Scala. However, you can still name the method in back ticks, e.g., Thread.`yield`()
 ** The implicit modifier in front of the method tells the compiler to apply it automatically in a number of situations
 * Chapter 7 - Built-in Control Structures
+** The only control structures are if, while, for, try, match, and function calls
+** almost all of Scala’s control structures result in some value
+** The while and do-while constructs are called “loops,” not expressions, because they don’t result in an interesting value
+** If there isn’t a good justification for a particular while or do-while loop, try to find a way to do the same thing without it
+** The syntax of a for-yield expression is like this: for clauses yield body
+** Technically, an exception throw has type Nothing
 * Chapter 18 - Stateful Objects
 ** every var that is a non-private member of some object implicitly defines a getter and a setter method with it
 ** The getter of a var x is just named “x”, while its setter is named “x_=”
