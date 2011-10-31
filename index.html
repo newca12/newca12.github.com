@@ -679,7 +679,7 @@ Source code is available on [[GitHub|http://github.com/newca12]]
 
 This tiddler was automatically created to record the details of this server</pre>
 </div>
-<div title="GATrackerPlugin" modifier="Julien Coloos" created="201105142206" modified="201105182137" tags="systemConfig" server.page.revision="201105182137" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.type="file">
+<div title="GATrackerPlugin" modifier="Julien Coloos" created="201105142206" modified="201105182137" tags="systemConfig" server.type="file" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.page.revision="201105182137">
 <pre>/***
 |Name|GATrackerPlugin|
 |Description|Google Analytics tracker|
@@ -921,12 +921,13 @@ but maven test is ok without ceres
 ! dependency graph r2
 [img[dependency graph r2|http://lh6.googleusercontent.com/MGXjIUeaTfolDQ0BpERB8LRfWo35jYf0y5vEOAWQRxQAGgONdcDReiRmjby8kpAY497YmEwacET_4_Fsjl1JoMT-JA=s512]]</pre>
 </div>
-<div title="Getting started" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104242212" modified="201109081720" tags="intro" changecount="8">
+<div title="Getting started" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104242212" modified="201110311531" tags="intro" changecount="9">
 <pre>*[[What is it ?|http://www.cs.miami.edu/~tptp/OverviewOfATP.html]]
 *[[An overview|http://en.wikipedia.org/wiki/Automated_theorem_proving]]
 *[[Great introduction in French|http://images.math.cnrs.fr/La-verite-et-la-machine.html]]
 *[[A concrete step by step example|http://www.ontologyportal.org/resolution.html]]
-*[[Another concrete step by step example with a Video from John Harrison|http://code.google.com/p/flyspeck/wiki/HolLightDemo1]]</pre>
+*[[Another concrete step by step example with a Video from John Harrison|http://code.google.com/p/flyspeck/wiki/HolLightDemo1]]
+*[[Yet another example with TPTP syntax|https://docs.google.com/leaf?id=1bY0NJpVeT98_iNVWvSmjB83iU6b8yguUUSjsiy54kqx1oPgz6T0upSD-S09N&amp;sort=moddate&amp;layout=list&amp;num=50]]</pre>
 </div>
 <div title="Handbook of practical logic and automated reasoning : resume" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104232119" modified="201106171803" tags="book resume scala-atp" changecount="22">
 <pre>* Preface
@@ -974,6 +975,9 @@ but maven test is ok without ceres
 ** We have no way at all of evaluating whether a formula holds in an interpretation with an infinite domain
 ** Note the contrast with propositional logic, where the propositional variables range over a finite (2-element) set which can therefore be enumerated exhaustively</pre>
 </div>
+<div title="Interval Temporal Logic" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201110202141" modified="201110202152" tags="Uses" changecount="3">
+<pre>* http://www.tech.dmu.ac.uk/STRL/ITL/</pre>
+</div>
 <div title="Library" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201106131629" modified="201108052100" changecount="10">
 <pre>[[EDLA book collection|http://books.google.fr/books?uid=116287463809571408586&amp;source=gbs_lp_bookshelf_list]]
 [[EDLA document collection|https://docs.google.com/leaf?id=0B7LbY7bJaltlMTljZWIyZWEtOWFjZi00Njc1LWE4ZjctMDk4YWY2NzliMjVl&amp;hl=en_US]]</pre>
@@ -981,7 +985,7 @@ but maven test is ok without ceres
 <div title="MELIA source code analysis" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201107301005" modified="201107301141" tags="code-analysis MELIA" changecount="3">
 <pre>All classes are inter-dependent, TPTPTParser need all other classes.</pre>
 </div>
-<div title="MainMenu" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201103191830" modified="201109101656" tags="meta editing systemNotes" changecount="24">
+<div title="MainMenu" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201103191830" modified="201110202152" tags="meta editing systemNotes" changecount="28">
 <pre>[[About]]
 [[Navigating this site]]
 [[Getting started]]
@@ -990,11 +994,13 @@ but maven test is ok without ceres
 [[First-class resources]]
 &lt;&lt;tag Algorithms&gt;&gt;
 [[Definitions]]
+&lt;&lt;tag Uses&gt;&gt;
 [[Reading roadmap]]
 [[Library]]
 [[Roadmap]]
 [[Tags]]
-[[Project Status Report]]</pre>
+[[Project Status Report]]
+</pre>
 </div>
 <div title="MathJax plugin" modifier="Olivier ROLAND" created="201104241346" modified="201104251238" tags="systemServer plugins editing tools" changecount="5">
 <pre>|''Type:''|file|
@@ -1363,7 +1369,7 @@ If a parser takes a stream of characters and turns them into an abstract syntax 
 *A Scala port of Lindig’s implementation of Wadler’s pretty printer from Ocaml, adding all combinators and whole API from Haskell PPrint - which is another implementation of Wadler’s prettier-printer by Daan Leijen : [[source code|http://scala-programming-language.1934581.n4.nabble.com/file/n1995937/zPPrint.scala]] and [[demo|http://scala-programming-language.1934581.n4.nabble.com/scala-pretty-printing-tp1995936p1995939.html]]
 *A rudimentary pretty printer combinator : http://www.scala-blogs.org/2009/04/combinators-for-pretty-printers-part-1.html</pre>
 </div>
-<div title="Programming in Scala 2nd : resume" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104232118" modified="201110042103" tags="scala book resume scala-atp" changecount="27">
+<div title="Programming in Scala 2nd : resume" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104232118" modified="201110222138" tags="scala book resume scala-atp" changecount="30">
 <pre>* Chapter 1 · A Scalable Language
 ** Functional programming is guided by two main ideas
 *** functions are first-class values
@@ -1378,6 +1384,7 @@ If a parser takes a stream of characters and turns them into an abstract syntax 
 ** you could alternatively have written 1 + 2 using traditional method invocation syntax, (1).+(2).
 ** When you apply parentheses surrounding one or more values to a variable, Scala will transform the code into an invocation of a method named apply on that variable
 ** Similarly greetStrings(0) = &quot;Hello&quot; will be transformed into greetStrings.update(0, &quot;Hello&quot;)
+** Scala achieves a conceptual simplicity by treating everything, from arrays to expressions, as objects with methods
 ** If a method name ends in a colon, the method is invoked on the right operand
 ** arrays are always mutable; lists are always immutable
 ** Tuples are very useful, for example, if you need to return multiple objects from a method
@@ -1422,6 +1429,8 @@ If a parser takes a stream of characters and turns them into an abstract syntax 
 ** If there isn’t a good justification for a particular while or do-while loop, try to find a way to do the same thing without it
 ** The syntax of a for-yield expression is like this: for clauses yield body
 ** Technically, an exception throw has type Nothing
+** match expressions result in a value
+* Chapter 8 - Functions and Closures 
 * Chapter 18 - Stateful Objects
 ** every var that is a non-private member of some object implicitly defines a getter and a setter method with it
 ** The getter of a var x is just named “x”, while its setter is named “x_=”
@@ -1694,7 +1703,7 @@ attribute ::= &quot;label&quot; &quot;(&quot; string &quot;)&quot; |
               &quot;bsub_hint_wt&quot; &quot;(&quot; integer &quot;)&quot;
 }}}</pre>
 </div>
-<div title="SystemSettings" modifier="Olivier ROLAND" created="201105142207" modified="201106101816" tags="excludeLists" changecount="5" server.page.revision="201105142207" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.type="file">
+<div title="SystemSettings" modifier="Olivier ROLAND" created="201105142207" modified="201106101816" tags="excludeLists" server.type="file" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.page.revision="201105142207" changecount="5">
 <pre>txt_GATracker_id: UA-4646079-1
 txt_GATracker_track: 1%2C0%2C1%2C1%2C1%2C1%2C1
 txtUserName: Olivier ROLAND</pre>
@@ -1728,7 +1737,7 @@ txtUserName: Olivier ROLAND</pre>
 |||||&gt;|SSS - Size parameter(s). These only occur for generated problems, and give the size parameter(s).|
 ||||||T - File name extension. p for problem files, g for generator files.|</pre>
 </div>
-<div title="TWikiFormatterPlugin" modifier="MartinBudden" created="200607210000" tags="systemConfig excludeLists excludeSearch" server.page.revision="200607210000" server.host="http://www.martinswiki.com" server.type="file">
+<div title="TWikiFormatterPlugin" modifier="MartinBudden" created="200607210000" tags="systemConfig excludeLists excludeSearch" server.type="file" server.host="http://www.martinswiki.com" server.page.revision="200607210000">
 <pre>/***
 |''Name:''|TWikiFormatterPlugin|
 |''Description:''|Allows Tiddlers to use [[TWiki|http://twiki.org/cgi-bin/view/TWiki/TextFormattingRules]] text formatting|
@@ -2451,19 +2460,21 @@ config.parsers.twikiFormatter.formatTag = 'TWikiFormat';
 } // end of 'install only once'
 //}}}</pre>
 </div>
-<div title="Tags" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104250931" modified="201109091816" tags="meta editing" changecount="41">
+<div title="Tags" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104250931" modified="201110311536" tags="meta editing" changecount="47">
 <pre>*&lt;&lt;tag atp&gt;&gt;- Automated Theorem Proving, what this site is all about
 **&lt;&lt;tag intro&gt;&gt;- Getting started
 **&lt;&lt;tag scala-atp&gt;&gt;- Scala port of [[Handbook of Practical Logic and Automated Reasoning|http://www.cambridge.org/catalogue/catalogue.asp?isbn=9780521899574]]
 **&lt;&lt;tag person&gt;&gt;- People working on ATP
 **&lt;&lt;tag book&gt;&gt;- Some books
 ***&lt;&lt;tag resume&gt;&gt;- Reading notes
-**&lt;&lt;tag algorithms&gt;&gt;- Algorithms related to Automated Theorem Proving
+**&lt;&lt;tag Algorithms&gt;&gt;- Algorithms related to Automated Theorem Proving
 **&lt;&lt;tag proovers&gt;&gt;-
 ***&lt;&lt;tag gapt&gt;&gt;- General Architecture for proof
 ***&lt;&lt;tag MELIA&gt;&gt;- Model Evolution Calculus with Equality and built-in linear integer arithmetic 
 ***&lt;&lt;tag princess&gt;&gt;- Theorem prover for Presburger arithmetic with uninterpreted predicates
 ***&lt;&lt;tag prover9&gt;&gt;- Automated theorem prover for first-order and equational logic
+***&lt;&lt;tag Vampire&gt;&gt;- Fast first order logic theorem prover
+**&lt;&lt;tag Uses&gt;&gt;- What has Automated Theorem Proving been Really Useful for ? (for example Industrial uses of ATP)
 **&lt;&lt;tag parsing&gt;&gt;- Related to parsing
 ***&lt;&lt;tag TPTP&gt;&gt;- TPTP language
 **&lt;&lt;tag code-analysis&gt;&gt;- Source code analysis
@@ -2776,12 +2787,12 @@ This tiddler was automatically created to record the details of this server</pre
 ****Vampire
 See also [[Notable people|http://en.wikipedia.org/wiki/Automated_theorem_proving#Notable_people]]</pre>
 </div>
-<div title="gapt problems" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201107102128" modified="201109112116" tags="pb gapt" changecount="8">
-<pre>!OOM (PUZ031-1 : TPTP v3.1.0. Released v1.0.0)
+<div title="gapt problems" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201107102128" modified="201110231545" tags="pb gapt" changecount="9">
+<pre>--!OOM (PUZ031-1 : TPTP v3.1.0. Released v1.0.0)
 This test need at least -Xss4m (-Xss3m failed)
 {{{
 println(getRefutation(&quot;Animal(x) | -Wolf(x). Animal(x) | -Fox(x). Animal(x) | -Bird(x). Animal(x) | -Caterpillar(x). Animal(x) | -Snail(x). Wolf(a_wolf). Fox(a_fox). Bird(a_bird). Caterpillar(a_caterpillar). Snail(a_snail). Grain(a_grain). Plant(x) | -Grain(x). Eats(animal,plant) | Eats(animal,small_animal) | -Animal(animal) | -Plant(plant) | -Animal(small_animal) | -Plant(other_plant) | -Much_smaller(small_animal,animal) | -Eats(small_animal,other_plant). Much_smaller(catapillar,bird) | -Caterpillar(catapillar) | -Bird(bird). Much_smaller(snail,bird) | -Snail(snail) | -Bird(bird). Much_smaller(bird,fox) | -Bird(bird) | -Fox(fox). Much_smaller(fox,wolf) | -Fox(fox) | -Wolf(wolf). -Wolf(wolf) | -Fox(fox) | -Eats(wolf,fox). -Wolf(wolf) | -Grain(grain) | -Eats(wolf,grain). Eats(bird,catapillar) | -Bird(bird) | -Caterpillar(catapillar). -Bird(bird) | -Snail(snail) | -Eats(bird,snail). Plant(caterpillar_food_of(catapillar)) | -Caterpillar(catapillar). Eats(catapillar,caterpillar_food_of(catapillar)) | -Caterpillar(catapillar). Plant(snail_food_of(snail)) | -Snail(snail). Eats(snail,snail_food_of(snail)) | -Snail(snail). -Animal(animal) | -Animal(grain_eater) | -Grain(grain) | -Eats(animal,grain_eater) | -Eats(grain_eater,grain).&quot;))
-}}}
+}}}--
 
 </pre>
 </div>
@@ -2819,6 +2830,13 @@ make
 ./princessGui
 }}}
 </pre>
+</div>
+<div title="howto Vampire" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201110311539" modified="201110312128" tags="Vampire pb" changecount="9">
+<pre>[[Vampire|http://www.vprover.org/]] is actually the best automatic theorem prover for first-order classical logic 
+*very easy to use : vampire &lt;TPTP filename&gt;
+*source code is available but licence is very restrictive
+
+@@vampire doesn't accept space in &lt;fof_annotated&gt; name (todo check this with TPTP BNF Syntax)@@</pre>
 </div>
 <div title="howto gapt" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201105042106" modified="201107101404" tags="gapt scala-atp howto" changecount="23">
 <pre>!using gapt framework
