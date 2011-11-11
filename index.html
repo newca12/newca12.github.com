@@ -698,7 +698,7 @@ GAPT simple format : P(a). -P(x) | P(f(x)). -P(f(f(a))).</pre>
 
 This tiddler was automatically created to record the details of this server</pre>
 </div>
-<div title="GATrackerPlugin" modifier="Julien Coloos" created="201105142206" modified="201105182137" tags="systemConfig" server.type="file" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.page.revision="201105182137">
+<div title="GATrackerPlugin" modifier="Julien Coloos" created="201105142206" modified="201105182137" tags="systemConfig" server.page.revision="201105182137" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.type="file">
 <pre>/***
 |Name|GATrackerPlugin|
 |Description|Google Analytics tracker|
@@ -1277,7 +1277,7 @@ Most of this optimizations are not necessary anymore. Details [[here|http://down
 *Compressed oops is supported and enabled by default in Java SE 6u23 and later. In Java SE 7, use of compressed oops is the default for 64-bit JVM processes when -Xmx isn't specified and for values of -Xmx less than 32 gigabytes.
 *Escape analysis is supported and enabled by default in Java SE 6u23 and later.</pre>
 </div>
-<div title="Packrat Efficiency" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201108280902" modified="201109031316" tags="parsing TPTP" changecount="38">
+<div title="Packrat Efficiency" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201108280902" modified="201111111835" tags="parsing TPTP" changecount="40">
 <pre>| TPTP test | without packrat | with packrat | time gain |h
 | GRP194+1.p | 0.910 sec | 0.289 sec| -68.24% |
 | ARI595=1.p | 0.283 sec | 0.243 sec| -14.13% |
@@ -1299,9 +1299,18 @@ Most of this optimizations are not necessary anymore. Details [[here|http://down
 &quot;&quot;&quot;* out of memory&quot;&quot;&quot;
 &quot;&quot;&quot;** &gt; 15 min&quot;&quot;&quot;
 
-</pre>
+Some lessons learned :
+* some TPTP files are really huge (&gt; 40 M/o)
+* no regression at all with the conversion to packrat
+* packrat perform always better
+* sometime parser efficiency does matter (2 test fail without packrat)
+
+There is only one major drawback with packrat : packrat parsers require O(n) space for memoization.
+But this could be solved :
+Theory here : http://www.ialab.cs.tsukuba.ac.jp/~mizusima/publications/paste513-mizushima.pdf
+A Java implementation here : https://github.com/kmizu/yapp</pre>
 </div>
-<div title="Parser combinators vs others" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201105082059" modified="201108132147" tags="duel parsing tools" changecount="44">
+<div title="Parser combinators vs others" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201105082059" modified="201111112213" tags="duel parsing tools" changecount="51">
 <pre>*Parser combinators pros
 **in the language itself
 **no external tools
@@ -1329,9 +1338,19 @@ Most of this optimizations are not necessary anymore. Details [[here|http://down
 *Parboiled cons
 **external library
 **cannot handle left recursion (*)
+*Xtext pros
+**offers a novel approach to external DSL development
+**true decoupling between semantic model and the grammar rules
+**syntax diagrams (ie railroad diagrams) for free
+**full editor for free
+*Xtext cons
+**entire toolset (not just a library)
+**eclipse-dependent (but the runtime components like the parsers, the metamodel, the serializers, and the linkers, as well as the Xpand templating can be embedded in any arbitrary Java process.
 
-The winner is : Parser combinators with the PackratParsers extension** (but Parboiled, GLL and derivative combinators should be re-evaluated in case of limitation*** with Scala implementation****)
-A comparison study is needed between PackratParsers extension and Parboiled focusing on [[error message handling|http://stackoverflow.com/questions/2906674/how-to-further-improve-error-messages-in-scala-parser-combinator-based-parsers]].
+--The winner is : Parser combinators with the PackratParsers extension** (but Parboiled, GLL and derivative combinators should be re-evaluated in case of limitation*** with Scala implementation****)
+A comparison study is needed between PackratParsers extension and Parboiled focusing on [[error message handling|http://stackoverflow.com/questions/2906674/how-to-further-improve-error-messages-in-scala-parser-combinator-based-parsers]] --
+The new winner is Xtext.
+Some work is probably needed to make it more Scala compliant and also a speed comparaison with Packrat Parsers like this one : [[Packrat Efficiency]]
 
 (*)  Even if the grammar has [[left recursion|http://en.wikipedia.org/wiki/Left_recursion]] it is usually not hard to remove
 (**)  The Scala 2.8 combinator parser library adds PEG parsing and can memoize parse results for potential re-use when backtracking occurs. Packrat Parsing allow left recursive grammars (*). 
@@ -1461,13 +1480,14 @@ If a parser takes a stream of characters and turns them into an abstract syntax 
 **** floatingPointNumber ˆˆ (_.toDouble)
 **** &quot;true&quot; ˆˆ (x =&gt; true)</pre>
 </div>
-<div title="Project Status Report" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201108101807" modified="201108102122" changecount="11">
+<div title="Project Status Report" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201108101807" modified="201111111806" changecount="16">
 <pre>!What we've learned so far
 All issues related to parsing have been undervalued. ATP and parsing are tightly coupled.
 A theorem prover need a solid parsing foundation.
 
 !What we are doing right now
-Focus is currently on building &quot;a state of the art&quot; TPTP parser based on parser combinators with the PackratParsers extension.
+Focus is currently on building &quot;a state of the art&quot; TPTP parser --based on parser combinators with the PackratParsers extension--.
+[[Xtext|http://www.eclipse.org/Xtext/]] could be the better framework/tool. Study now ongoing will tell whether the potential advantages of such framework/tool are confirmed.
 In this context, Debasish Ghosh's book [[DSLs in Action |http://books.google.fr/books?id=SzD6RAAACAAJ&amp;num=16&amp;source=gbs_slider_cls_metadata_1003_mylibrary]] has proved invaluable</pre>
 </div>
 <div title="Proof language" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201106152104" modified="201107301332" tags="atp parsing TPTP" changecount="11">
@@ -1500,7 +1520,7 @@ In this context, Debasish Ghosh's book [[DSLs in Action |http://books.google.fr/
 **This volume contains articles covering a broad spectrum of proof theory, with an emphasis on its mathematical aspects.
 **Full review : http://www.math.ucla.edu/~asl/bsl/0604/0604-003.ps</pre>
 </div>
-<div title="Roadmap" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104241247" modified="201107312104" tags="intro" changecount="36">
+<div title="Roadmap" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104241247" modified="201111111823" tags="intro" changecount="38">
 <pre>*Phase 1 : initialization
 ** Identify resources (books, article, thesis, blog, etc ...) that are available (started, WIP)
 ** Identify people/organisation also working on ATP ([[done|Who's who]])
@@ -1512,7 +1532,7 @@ In this context, Debasish Ghosh's book [[DSLs in Action |http://books.google.fr/
 ** Select parsing technique ([[started|Parsing]],WIP)
 *--Phase 2 : Scala port of [[Handbook of Practical Logic and Automated Reasoning|http://www.cambridge.org/catalogue/catalogue.asp?isbn=9780521899574]]([[started|http://github.com/newca12/scala-atp]], WIP)--
 *Phase 3 : make [[HED|http://code.google.com/p/edla-hed/]] (hoper edei deixai) a state of the art theorem prover (not yet started)
-**Phase 3a : write a parser for TPTP using Scala Parser Combinator (started, WIP) 
+**Phase 3a : write a parser for TPTP using --Scala Parser Combinator-- Xtext  (started, WIP) 
 </pre>
 </div>
 <div title="Scala" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104241415" modified="201105081356" tags="intro tools scala" changecount="9">
@@ -1527,7 +1547,7 @@ The answer is to to turn the problem on its ear (as it were) and eschew mathemat
 See also : [[Scala vs others]] 
 </pre>
 </div>
-<div title="Scala Parser Combinator" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201108141627" modified="201108150843" tags="parsing" changecount="5">
+<div title="Scala Parser Combinator" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201108141627" modified="201111111837" tags="parsing" changecount="10">
 <pre>!How to debug
 *http://jim-mcbeath.blogspot.com/2011/07/debugging-scala-parser-combinators.html
 *the log parser is very useful (see above)
@@ -1554,7 +1574,9 @@ Example with https://github.com/newca12/scala-atp/blob/master/src/main/scala/org
 !Migrate code from Scala standard parser combinator to packrat
 *replace &quot;def&quot; with &quot;lazy val&quot;
 *extends xxxParsers with PackratParsers (ie) make the parsers-class/object mix-in from PackratParsers
-*replace &quot;Parser[T]&quot; with &quot;PackratParser[T]&quot;</pre>
+*replace &quot;Parser[T]&quot; with &quot;PackratParser[T]&quot;
+A complete example of conversion can be found here : https://github.com/newca12/MELIA/compare/master...packrat
+A benchmark before and after the migration : see [[Packrat Efficiency]]</pre>
 </div>
 <div title="Scala notes" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201108151651" tags="scala" changecount="1">
 <pre>*map and filter are not defined on Array. Implicit conversions in Predef are used to provide such methods for arrays.</pre>
@@ -1722,7 +1744,7 @@ attribute ::= &quot;label&quot; &quot;(&quot; string &quot;)&quot; |
               &quot;bsub_hint_wt&quot; &quot;(&quot; integer &quot;)&quot;
 }}}</pre>
 </div>
-<div title="SystemSettings" modifier="Olivier ROLAND" created="201105142207" modified="201106101816" tags="excludeLists" server.type="file" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.page.revision="201105142207" changecount="5">
+<div title="SystemSettings" modifier="Olivier ROLAND" created="201105142207" modified="201106101816" tags="excludeLists" changecount="5" server.page.revision="201105142207" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.type="file">
 <pre>txt_GATracker_id: UA-4646079-1
 txt_GATracker_track: 1%2C0%2C1%2C1%2C1%2C1%2C1
 txtUserName: Olivier ROLAND</pre>
@@ -1756,7 +1778,34 @@ txtUserName: Olivier ROLAND</pre>
 |||||&gt;|SSS - Size parameter(s). These only occur for generated problems, and give the size parameter(s).|
 ||||||T - File name extension. p for problem files, g for generator files.|</pre>
 </div>
-<div title="TWikiFormatterPlugin" modifier="MartinBudden" created="200607210000" tags="systemConfig excludeLists excludeSearch" server.type="file" server.host="http://www.martinswiki.com" server.page.revision="200607210000">
+<div title="TPTP parser" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201111111747" modified="201111112209" tags="TPTP parsing" changecount="23">
+<pre>!with parser combinator
+The most advanced work regarding TPTP parsing in Scala are currently done by Peter Baumgartner (NICTA) in MELIA (GPLv3) prover. 
+Source code is here : http://users.cecs.anu.edu.au/~baumgart/systems/MELIA/MELIA-0.1.2.tar.gz 
+The parser is in : TPTPTParser.scala
+
+There is three problem with Peter's parser. 
+* it is tightly coupled with underlying technical structure (the parser depend on ALL other classes of the prover). 
+* MELIA accepts formulas in the TPTP FOF, TFF, and TFF-INT formats but 
+** some tptp input files need tptpFO2tme which is not included with MELIA bundle 
+** some need previous conversion to protein format to use .tme files as input files 
+* it is awfully slow (fix with packrat parser see [[Packrat Efficiency]]
+@@the first problem has been undervalued and is not really cleanly fixable with Parser Combinator@@   
+
+!with ANTLR
+[[This|http://www.freewebs.com/andrei_ch/TPTP_2007.01.30.tgz]] TPTP parser in Java use ANTLR.
+Surprisingly the Javadoc is not in the previous package but could be found in [[Alexandre Riazanov converter|http://riazanov.webs.com/RIF_BLD_to_TPTP.tgz]] in the jar TptpParser.jar in the lib directory.
+
+Very interresting and fix in a way the traditional ANTLR problem (see below) but Xtext is probably a better alternative.
+
+!with Xtext
+Xtext allow true decoupling between semantic model and the grammar rules.
+Extract from  Debasish Ghosh's book [[DSLs in Action |http://books.google.fr/books?id=SzD6RAAACAAJ&amp;num=16&amp;source=gbs_slider_cls_metadata_1003_mylibrary]] :
+//Parser generators like ANTLR are a big step forward toward developing external DSLs at a higher level of abstraction. But you still need to embed your target actions directly within the grammar rules. The EBNF rules and the logic for generating your semantic model are still not sufficiently decoupled. If you need to implement multiple semantic models for a single set of grammar rules, you might even end up duplicating the code for the parser itself; either that, or you’ll have to derive your semantic models from a common base abstraction that the grammar rules offer.//
+
+@@WIP@@</pre>
+</div>
+<div title="TWikiFormatterPlugin" modifier="MartinBudden" created="200607210000" tags="systemConfig excludeLists excludeSearch" server.page.revision="200607210000" server.host="http://www.martinswiki.com" server.type="file">
 <pre>/***
 |''Name:''|TWikiFormatterPlugin|
 |''Description:''|Allows Tiddlers to use [[TWiki|http://twiki.org/cgi-bin/view/TWiki/TextFormattingRules]] text formatting|
@@ -2479,7 +2528,7 @@ config.parsers.twikiFormatter.formatTag = 'TWikiFormat';
 } // end of 'install only once'
 //}}}</pre>
 </div>
-<div title="Tags" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104250931" modified="201110311536" tags="meta editing" changecount="47">
+<div title="Tags" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104250931" modified="201111112217" tags="meta editing" changecount="50">
 <pre>*&lt;&lt;tag atp&gt;&gt;- Automated Theorem Proving, what this site is all about
 **&lt;&lt;tag intro&gt;&gt;- Getting started
 **&lt;&lt;tag scala-atp&gt;&gt;- Scala port of [[Handbook of Practical Logic and Automated Reasoning|http://www.cambridge.org/catalogue/catalogue.asp?isbn=9780521899574]]
@@ -2493,6 +2542,7 @@ config.parsers.twikiFormatter.formatTag = 'TWikiFormat';
 ***&lt;&lt;tag princess&gt;&gt;- Theorem prover for Presburger arithmetic with uninterpreted predicates
 ***&lt;&lt;tag prover9&gt;&gt;- Automated theorem prover for first-order and equational logic
 ***&lt;&lt;tag Vampire&gt;&gt;- Fast first order logic theorem prover
+***&lt;&lt;tag Maude&gt;&gt;- Ttheorem prover for order-sorted first order logic without equality
 **&lt;&lt;tag Uses&gt;&gt;- What has Automated Theorem Proving been Really Useful for ? (for example Industrial uses of ATP)
 **&lt;&lt;tag parsing&gt;&gt;- Related to parsing
 ***&lt;&lt;tag TPTP&gt;&gt;- TPTP language
@@ -2737,7 +2787,7 @@ The tags group collections of notes into sets — they're adjectives, directorie
 
 This tiddler was automatically created to record the details of this server</pre>
 </div>
-<div title="Who's who" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104241635" modified="201109081805" tags="person" changecount="35">
+<div title="Who's who" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104241635" modified="201111111859" tags="person" changecount="41">
 <pre>In no particular order.
 
 *Australian National University (Australia)
@@ -2788,7 +2838,7 @@ This tiddler was automatically created to record the details of this server</pre
 ****Isabelle/Isar
 ***[[Tobias Nipkow|http://www4.informatik.tu-muenchen.de/~nipkow/]]
 ****Isabelle,AFP
-* Carnegie Mellon University (Pittsburgh)
+*Carnegie Mellon University (Pittsburgh)
 **Department of Computer Science
 ***[[Sean McLaughlin|http://www.seanmcl.com/]]
 ****haskell-atp,imogen
@@ -2804,7 +2854,17 @@ This tiddler was automatically created to record the details of this server</pre
 **Department of Computer Science
 ***[[Andrei Voronkov|http://www.voronkov.com/]]
 ****Vampire
-See also [[Notable people|http://en.wikipedia.org/wiki/Automated_theorem_proving#Notable_people]]</pre>
+*Center for Scientific and Technological Research (ITC-IRST) (Trento, Italy)
+**Automated Reasoning System Devision (SRA)
+***[[Andrei Tchaltsev (Andrey Chaltsev)|http://www.freewebs.com/andrei_ch/]]
+****[[TPTP parser in Java with ANTLR|http://www.freewebs.com/andrei_ch/TPTP_2007.01.30.tgz]]
+*University of New Brunswick
+**Dr. Chris Baker’s group
+***[[Alexandre Riazanov (Alexander Ryazanov)|http://www.freewebs.com/riazanov/]]
+****Vampire, [[TPTP parser in Java with ANTLR|http://www.freewebs.com/andrei_ch/TPTP_2007.01.30.tgz]]
+
+See also [[Notable people|http://en.wikipedia.org/wiki/Automated_theorem_proving#Notable_people]]
+</pre>
 </div>
 <div title="gapt problems" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201107102128" modified="201111051643" tags="pb gapt" changecount="14">
 <pre>!gapt should return true (PUZ031-1 : TPTP v3.1.0. Released v1.0.0)
@@ -2824,6 +2884,56 @@ TPTP format : http://www.cs.miami.edu/~tptp/cgi-bin/SeeTPTP?Category=Problems&am
 *other need previous conversion to protein format to use .tme files as input files
 {{{
 ./tptp2X  -f protein /tmp/PUZ001-1.p
+}}}</pre>
+</div>
+<div title="howto Maude" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201111112217" modified="201111112233" tags="howto Maude" changecount="5">
+<pre>[[The Maude Resolution Theorem Prover|http://maude.cs.uiuc.edu/tools/rtp/]] (RTP) is a refutationally complete resolution theorem prover for order-sorted first order logic without equality, and with support for associative and commutative function symbols.
+
+*part of the [[Maude system|http://maude.cs.uiuc.edu/]]
+*GPL2 License
+*binary available for MacOS and Linux
+*provide benchmarks for the Harrison's problems
+*provide translation scripts for Harrison's and TPTP's benchmarks into RTP's format
+
+{{{
+MacBook-Pro-de-hack:maude hack$ ./maude.intelDarwin 
+		     \||||||||||||||||||/
+		   --- Welcome to Maude ---
+		     /||||||||||||||||||\
+	    Maude 2.6 built: Dec 10 2010 11:12:39
+	    Copyright 1997-2010 SRI International
+		   Fri Nov 11 23:32:37 2011
+Maude&gt; load ../rtp/rtp
+Maude&gt; fmod PLCL-TWO-THREE-ZERO-PLUS-ONE-DOTP is
+&gt; pr PRED-BASE .
+&gt; 
+&gt; sort S .
+&gt;   op p :  -&gt; Atom [metadata &quot;1&quot;] .
+&gt;   op r :  -&gt; Atom [metadata &quot;2&quot;] .
+&gt;   op q :  -&gt; Atom [metadata &quot;3&quot;] .
+&gt; 
+&gt; endfm
+Maude&gt; 
+&gt; fmod TEST is
+&gt;   inc RTP .
+&gt;   inc PLCL-TWO-THREE-ZERO-PLUS-ONE-DOTP .
+&gt; 
+&gt;   eq USER-MODULE-NAME = 'PLCL-TWO-THREE-ZERO-PLUS-ONE-DOTP .
+&gt; endfm
+Maude&gt; 
+&gt; red !((
+&gt;   (q -&gt; p,r),
+&gt;   ((empty).AtomMagma -&gt; q),
+&gt;   (p -&gt; (empty).AtomMagma),
+&gt;   (r -&gt; (empty).AtomMagma)
+&gt; )) .
+reduce in TEST : !(((q -&gt; p, r), (empty -&gt; q), (p -&gt; empty), (r -&gt; empty))) .
+rewrites: 1520 in 39ms cpu (42ms real) (38226 rewrites/second)
+result State: [empty -&gt; empty,5]
+Maude&gt; 
+&gt; q .
+Bye.
+MacBook-Pro-de-hack:maude hack$ 
 }}}</pre>
 </div>
 <div title="howto Princess" creator="YourName" modifier="Olivier ROLAND" created="201105080926" modified="201107301158" tags="scala-atp parsing howto princess" changecount="20">
@@ -2850,9 +2960,10 @@ make
 }}}
 </pre>
 </div>
-<div title="howto Prover9" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201109091811" modified="201111050934" tags="prover9 howto pb" changecount="13">
+<div title="howto Prover9" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201109091811" modified="201111052230" tags="prover9 howto pb" changecount="14">
 <pre>[[Prover9|http://www.cs.unm.edu/~mccune/mace4/]] is an automated theorem prover for first-order and equational logic. Prover9 is the successor of the [[Otter prover|http://www.cs.unm.edu/~mccune/otter/]].
 
+*A brief introduction : http://www.cs.utsa.edu/~bylander/cs5233/prover9-intro.pdf
 *Prover9 and miscellaneous LADR applications are available in Debian distribution
 {{{
 aptitude install prover9 prover9-doc prover9-mace4 libladr-dev
@@ -2866,12 +2977,18 @@ Nota : [[Prover9 &amp; co|http://www.cs.unm.edu/~mccune/mace4/download/LADR-2009
 
 @@*ladr_to_tptp segfault@@</pre>
 </div>
-<div title="howto Vampire" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201110311539" modified="201110312128" tags="Vampire pb" changecount="9">
+<div title="howto Vampire" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201110311539" modified="201111112223" tags="Vampire pb" changecount="12">
 <pre>[[Vampire|http://www.vprover.org/]] is actually the best automatic theorem prover for first-order classical logic 
 *very easy to use : vampire &lt;TPTP filename&gt;
 *source code is available but licence is very restrictive
+*self contained binary available for MacOS, Linux and Windows
+{{{
+vampire_macosx ~/TPTP-v5.2.0/Problems/PUZ/PUZ031-1.p
+}}}
 
-@@vampire doesn't accept space in &lt;fof_annotated&gt; name (todo check this with TPTP BNF Syntax)@@</pre>
+@@vampire doesn't accept space in &lt;fof_annotated&gt; name (todo check this with TPTP BNF Syntax)@@
+
+</pre>
 </div>
 <div title="howto gapt" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201105042106" modified="201107101404" tags="gapt scala-atp howto" changecount="23">
 <pre>!using gapt framework
