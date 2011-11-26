@@ -1778,7 +1778,7 @@ txtUserName: Olivier ROLAND</pre>
 |||||&gt;|SSS - Size parameter(s). These only occur for generated problems, and give the size parameter(s).|
 ||||||T - File name extension. p for problem files, g for generator files.|</pre>
 </div>
-<div title="TPTP parser" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201111111747" modified="201111112209" tags="TPTP parsing" changecount="23">
+<div title="TPTP parser" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201111111747" modified="201111262236" tags="TPTP parsing" changecount="34">
 <pre>!with parser combinator
 The most advanced work regarding TPTP parsing in Scala are currently done by Peter Baumgartner (NICTA) in MELIA (GPLv3) prover. 
 Source code is here : http://users.cecs.anu.edu.au/~baumgart/systems/MELIA/MELIA-0.1.2.tar.gz 
@@ -1793,8 +1793,13 @@ There is three problem with Peter's parser.
 @@the first problem has been undervalued and is not really cleanly fixable with Parser Combinator@@   
 
 !with ANTLR
-[[This|http://www.freewebs.com/andrei_ch/TPTP_2007.01.30.tgz]] TPTP parser in Java use ANTLR.
-Surprisingly the Javadoc is not in the previous package but could be found in [[Alexandre Riazanov converter|http://riazanov.webs.com/RIF_BLD_to_TPTP.tgz]] in the jar TptpParser.jar in the lib directory.
+Andrei Tchaltsev's highly reusable TPTP parser in Java using ANTLR.
+Several version of this parser (total mess due to no release note) 
+*the [[official version|http://www.freewebs.com/andrei_ch/TPTP_2007.01.30.tgz]] is not up to date. 
+*in [[Alexandre Riazanov converter|http://riazanov.webs.com/RIF_BLD_to_TPTP.tgz]] in the jar TptpParser.jar in the lib directory. (the same jar is also available in the [[psoa-to-tptp project|http://code.google.com/p/psoa-to-tptp/]]. See [[here|http://code.google.com/p/psoa-to-tptp/source/browse/trunk/RIF_BLD_to_TPTP/lib/TptpParser.jar]])
+*An earlier version of the binary seem to be available in the OMDoc (Open Mathematical Documents) project. See [[here|https://www.omdoc.org/browser/src/jomdoc/trunk/lib/tptp/tptp-parser.jar?rev=2459]]
+
+The most up to date is the one in [[Geoff's Service Tools|http://www.cs.miami.edu/~tptp/ServiceTools.tgz]]
 
 Very interresting and fix in a way the traditional ANTLR problem (see below) but Xtext is probably a better alternative.
 
