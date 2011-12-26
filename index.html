@@ -1386,17 +1386,15 @@ Nota: a Scala port of [[grammar combinator|http://lambda-the-ultimate.org/node/4
 
 See also [[Parser combinators vs others]]</pre>
 </div>
-<div title="Plugins for Eclipse" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201105221308" modified="201110160913" tags="tools scala-ide" changecount="24">
+<div title="Plugins for Eclipse" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201105221308" modified="201112261858" tags="tools scala-ide" changecount="27">
 <pre>!Indigo
-*ScalaIDE - http://download.scala-ide.org/nightly-update-2-0-x-2.9.2-SNAPSHOT*
+*ScalaIDE - http://download.scala-ide.org/nightly-update-master-2.9.1
 *m2e is now integrated with eclipse
 *Maven Integration for Scala IDE build manually from https://github.com/sonatype/m2eclipse-scala
 *m2e-subversive from m2e market place
 *m2e-egit from m2e market place
-
-Nota : http://download.scala-ide.org/nightly-update-wip-exp-backport-2.8.1.final contain implicit conversion feature
-
-(*) Projet scala-ide-nightly-2-0-x-2.9.1.final is not updated anymore (see https://jenkins.scala-ide.org:8443/jenkins/)</pre>
+@@Scala IDE Version 2.1, Nightly is used because of the new Highlight Implicits feature.@@
+</pre>
 </div>
 <div title="Pretty Printing" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201108131210" modified="201108131731" tags="parsing" changecount="22">
 <pre>!What is it ?
@@ -1778,7 +1776,7 @@ txtUserName: Olivier ROLAND</pre>
 |||||&gt;|SSS - Size parameter(s). These only occur for generated problems, and give the size parameter(s).|
 ||||||T - File name extension. p for problem files, g for generator files.|</pre>
 </div>
-<div title="TPTP parser" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201111111747" modified="201111262236" tags="TPTP parsing" changecount="34">
+<div title="TPTP parser" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201111111747" modified="201112031324" tags="TPTP parsing" changecount="36">
 <pre>!with parser combinator
 The most advanced work regarding TPTP parsing in Scala are currently done by Peter Baumgartner (NICTA) in MELIA (GPLv3) prover. 
 Source code is here : http://users.cecs.anu.edu.au/~baumgart/systems/MELIA/MELIA-0.1.2.tar.gz 
@@ -1789,7 +1787,7 @@ There is three problem with Peter's parser.
 * MELIA accepts formulas in the TPTP FOF, TFF, and TFF-INT formats but 
 ** some tptp input files need tptpFO2tme which is not included with MELIA bundle 
 ** some need previous conversion to protein format to use .tme files as input files 
-* it is awfully slow (fix with packrat parser see [[Packrat Efficiency]]
+* it is awfully slow (despite notable improvements achieved with packrat parser see [[Packrat Efficiency]])
 @@the first problem has been undervalued and is not really cleanly fixable with Parser Combinator@@   
 
 !with ANTLR
