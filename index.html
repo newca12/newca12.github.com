@@ -673,7 +673,7 @@ Source code is available on [[GitHub|http://github.com/newca12]]
 * BULLETIN
 ** The Bulletin of Symbolic Logic : http://www.math.ucla.edu/~asl/bsltoc.htm</pre>
 </div>
-<div title="GAPT notation" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201111030855" modified="201111051714" tags="parsing" changecount="19">
+<div title="GAPT notation" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201111030855" modified="201201011721" tags="parsing gapt" changecount="20">
 <pre>! notes (from Tomer mails)
 * GAPT traditionally had a somewhat different notation than Prover9 for variables and constants
 * Both ATP and Prover9 in GAPT get as input a clause set which was parsed right now by the &quot;simple&quot; parser
@@ -691,6 +691,27 @@ There is a rule for distinguishing variables from constants, because clauses and
 ! Example
 GAPT simple format : P(a). -P(x) | P(f(x)). -P(f(f(a))).</pre>
 </div>
+<div title="GAPT source code analysis" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201106151006" modified="201201011730" tags="gapt scala-atp code-analysis" changecount="25">
+<pre>! parser structure
+
+
+! dependencies
+Dependency graph generated with [[el4j DepGraph maven plugin|http://el4j.sourceforge.net/plugins/maven-depgraph-plugin/index.html]] :
+https://docs.google.com/open?id=0B7LbY7bJaltlNThjMDQ3M2EtYWY1My00ZmM3LWFjZGQtYWZiZDMxYmRiMWUy
+! parser anomaly
+*at.logic.parsing.language.arithmetic.HOLTermArithmeticalExporter need 
+**import at.logic.transformations.ceres.struct.ClauseSetSymbol
+**import at.logic.transformations.ceres.struct.TypeSynonyms.CutConfiguration
+*at.logic.transformations.ceres.struct need
+**import at.logic.calculi.lk
+**import at.logic.calculi.lksk
+but maven test is ok without ceres
+
+! upgrade to scala 2.8
+*code update from scala 2.7 to scala 2.8 in [[r457|http://code.google.com/p/gapt/source/detail?r=457]]
+*scala 2.8 warning cleanup in [[r460|http://code.google.com/p/gapt/source/detail?r=460]]
+*scala 2.8 warning cleanup ended in [[r470|http://code.google.com/p/gapt/source/detail?r=470]]</pre>
+</div>
 <div title="GATracker plugin" modifier="Olivier ROLAND" created="201105191755" modified="201105191759" tags="systemServer plugins" changecount="2">
 <pre>|''Type:''|file|
 |''URL:''|http://suiryc.github.com/TiddlyWiki-dev/|
@@ -698,7 +719,7 @@ GAPT simple format : P(a). -P(x) | P(f(x)). -P(f(f(a))).</pre>
 
 This tiddler was automatically created to record the details of this server</pre>
 </div>
-<div title="GATrackerPlugin" modifier="Julien Coloos" created="201105142206" modified="201105182137" tags="systemConfig" server.page.revision="201105182137" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.type="file">
+<div title="GATrackerPlugin" modifier="Julien Coloos" created="201105142206" modified="201105182137" tags="systemConfig" server.type="file" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.page.revision="201105182137">
 <pre>/***
 |Name|GATrackerPlugin|
 |Description|Google Analytics tracker|
@@ -918,27 +939,6 @@ handler: function(place, macroName, params, wikifier, paramString, tiddler) {
 
 })(jQuery);}
 //}}}</pre>
-</div>
-<div title="Gapt source code analysis" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201106151006" modified="201109110957" tags="gapt scala-atp code-analysis" changecount="18">
-<pre>! dependencies
-Dependency graph generated with [[el4j DepGraph maven plugin|http://el4j.sourceforge.net/plugins/maven-depgraph-plugin/index.html]] :
-https://docs.google.com/leaf?id=0B7LbY7bJaltlNWNhNDkxNjYtNzQ5MS00ODliLTk3YmMtM2Y0NWU3YzI1M2Qx&amp;hl=en_US
-! parser anomaly
-*at.logic.parsing.language.arithmetic.HOLTermArithmeticalExporter need 
-**import at.logic.transformations.ceres.struct.ClauseSetSymbol
-**import at.logic.transformations.ceres.struct.TypeSynonyms.CutConfiguration
-*at.logic.transformations.ceres.struct need
-**import at.logic.calculi.lk
-**import at.logic.calculi.lksk
-but maven test is ok without ceres
-
-! upgrade to scala 2.8
-*code update from scala 2.7 to scala 2.8 in [[r457|http://code.google.com/p/gapt/source/detail?r=457]]
-*scala 2.8 warning cleanup in [[r460|http://code.google.com/p/gapt/source/detail?r=460]]
-*scala 2.8 warning cleanup ended in [[r470|http://code.google.com/p/gapt/source/detail?r=470]]
-
-! dependency graph r2
-[img[dependency graph r2|http://lh6.googleusercontent.com/MGXjIUeaTfolDQ0BpERB8LRfWo35jYf0y5vEOAWQRxQAGgONdcDReiRmjby8kpAY497YmEwacET_4_Fsjl1JoMT-JA=s512]]</pre>
 </div>
 <div title="Getting started" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104242212" modified="201111051700" tags="intro" changecount="11">
 <pre>*[[What is it ?|http://www.cs.miami.edu/~tptp/OverviewOfATP.html]]
@@ -1405,7 +1405,7 @@ If a parser takes a stream of characters and turns them into an abstract syntax 
 *A Scala port of Lindig’s implementation of Wadler’s pretty printer from Ocaml, adding all combinators and whole API from Haskell PPrint - which is another implementation of Wadler’s prettier-printer by Daan Leijen : [[source code|http://scala-programming-language.1934581.n4.nabble.com/file/n1995937/zPPrint.scala]] and [[demo|http://scala-programming-language.1934581.n4.nabble.com/scala-pretty-printing-tp1995936p1995939.html]]
 *A rudimentary pretty printer combinator : http://www.scala-blogs.org/2009/04/combinators-for-pretty-printers-part-1.html</pre>
 </div>
-<div title="Programming in Scala 2nd : resume" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104232118" modified="201110222138" tags="scala book resume scala-atp" changecount="30">
+<div title="Programming in Scala 2nd : resume" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104232118" modified="201112312245" tags="scala book resume scala-atp" changecount="41">
 <pre>* Chapter 1 · A Scalable Language
 ** Functional programming is guided by two main ideas
 *** functions are first-class values
@@ -1466,7 +1466,28 @@ If a parser takes a stream of characters and turns them into an abstract syntax 
 ** The syntax of a for-yield expression is like this: for clauses yield body
 ** Technically, an exception throw has type Nothing
 ** match expressions result in a value
+** there has been no mention of break or continue
+** Class Breaks in package scala.util.control offers a break method
 * Chapter 8 - Functions and Closures 
+**  local functions are visible only in their enclosing block
+** local functions can access the parameters of their enclosing function
+** Scala has first-class functions
+** One way to make a function literal more brief is to leave off the parameter types
+** A second way to remove useless characters is to leave out parentheses around a parameter whose type is inferred
+** you can use underscores as placeholders for one or more parameters, so long as each parameter appears only one time within the function literal
+** A partially applied function is an expression in which you don’t supply all of the arguments needed by the function
+** is called a closure. The name arises from the act of “closing” the function literal by “capturing” the bindings of its free variables
+** Changes made by a closure to a captured variable are visible outside the closure
+** the instance used is the one that was active at the time the closure was created
+** Scala supports repeated parameters, named arguments, and default arguments
+** Scala only optimizes directly recursive calls back to the same function making the call
+* Chapter 9 - Control Abstraction
+** first-class functions can help you eliminate code duplication
+** A curried function is applied to multiple argument lists, instead of just one
+** The purpose of this ability to substitute curly braces for parentheses for passing in one argument is to enable client programmers to write function literals between curly braces
+** Scala provides by-name parameters
+* Chapter 10 - Composition and Inheritance
+** 
 * Chapter 18 - Stateful Objects
 ** every var that is a non-private member of some object implicitly defines a getter and a setter method with it
 ** The getter of a var x is just named “x”, while its setter is named “x_=”
@@ -1496,10 +1517,15 @@ In this context, Debasish Ghosh's book [[DSLs in Action |http://books.google.fr/
 
 =&gt; &lt;&lt;tag TPTP&gt;&gt; is the cornerstone in ATP world</pre>
 </div>
-<div title="Reading roadmap" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201107022122" modified="201107052140" tags="book" changecount="11">
+<div title="Reading roadmap" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201107022122" modified="201201071506" tags="book" changecount="15">
 <pre>@@wip@@
 
 !These book are recommended for first reading
+*[[Language, proof, and logic|http://books.google.fr/books?id=we4YAQAAIAAJ&amp;hl=fr&amp;source=gbs_slider_cls_metadata_1003_mylibrary]]
+** Starts with a great review of logic and goes on to discuss proofs of soundness and Godel's incompleteness theorems.
+** Textbook and software package, intended for use in undergraduate level logic courses.
+** Appropriate for students without much exposure to math or computer science
+** Full review [[here|http://www.math.ucla.edu/~asl/bsl/0703/0703-006.ps]] page 377 
 *[[First-Order Logic and Automated Theorem Proving|http://books.google.fr/books?id=nYN0dBrCpmMC&amp;source=gbs_slider_cls_metadata_1003_mylibrary]]
 ** All the proofs are here
 ** Examples in Prolog
@@ -1742,7 +1768,7 @@ attribute ::= &quot;label&quot; &quot;(&quot; string &quot;)&quot; |
               &quot;bsub_hint_wt&quot; &quot;(&quot; integer &quot;)&quot;
 }}}</pre>
 </div>
-<div title="SystemSettings" modifier="Olivier ROLAND" created="201105142207" modified="201106101816" tags="excludeLists" changecount="5" server.page.revision="201105142207" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.type="file">
+<div title="SystemSettings" modifier="Olivier ROLAND" created="201105142207" modified="201106101816" tags="excludeLists" server.type="file" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.page.revision="201105142207" changecount="5">
 <pre>txt_GATracker_id: UA-4646079-1
 txt_GATracker_track: 1%2C0%2C1%2C1%2C1%2C1%2C1
 txtUserName: Olivier ROLAND</pre>
@@ -1808,7 +1834,7 @@ Extract from  Debasish Ghosh's book [[DSLs in Action |http://books.google.fr/boo
 
 @@WIP@@</pre>
 </div>
-<div title="TWikiFormatterPlugin" modifier="MartinBudden" created="200607210000" tags="systemConfig excludeLists excludeSearch" server.page.revision="200607210000" server.host="http://www.martinswiki.com" server.type="file">
+<div title="TWikiFormatterPlugin" modifier="MartinBudden" created="200607210000" tags="systemConfig excludeLists excludeSearch" server.type="file" server.host="http://www.martinswiki.com" server.page.revision="200607210000">
 <pre>/***
 |''Name:''|TWikiFormatterPlugin|
 |''Description:''|Allows Tiddlers to use [[TWiki|http://twiki.org/cgi-bin/view/TWiki/TextFormattingRules]] text formatting|
