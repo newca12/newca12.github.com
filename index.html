@@ -601,21 +601,6 @@ Some hints about MathJax [[here|http://wiki.math.toronto.edu/TorontoMathWiki/ind
 <div title="DefaultTiddlers" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201103191837" modified="201104251010" tags="systemNotes" changecount="2">
 <pre>[[Etat De L'Art]]</pre>
 </div>
-<div title="Definitions" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201109101656" modified="201111051712" tags="intro" changecount="9">
-<pre>*[[Predicate|http://en.wikipedia.org/wiki/Predicate_(mathematical_logic)]]
-*[[Atomic formula|http://en.wikipedia.org/wiki/Atomic_formula]]
-*[[Disjunction|http://en.wikipedia.org/wiki/Logical_disjunction]]
-*[[Literal|http://en.wikipedia.org/wiki/Literal_(mathematical_logic)]]
-*[[Conjunctive normal form|http://en.wikipedia.org/wiki/Conjunctive_normal_form]]
-*[[Skolem normal form|http://en.wikipedia.org/wiki/Skolemization]]
-*[[Herbrandization|http://en.wikipedia.org/wiki/Herbrandization]]
-*[[Clause|http://en.wikipedia.org/wiki/Clause_(logic)]]
-*[[De Bruijn index|http://en.wikipedia.org/wiki/De_Bruijn_index]]
-*[[Typed lambda calculus|http://en.wikipedia.org/wiki/Typed_lambda_calculus]]
-*[[First-order logic|http://en.wikipedia.org/wiki/First-order_logic]]
-*[[Higher-order logic|http://en.wikipedia.org/wiki/Higher-order_logic]]
-*[[Combinatory logic|http://en.wikipedia.org/wiki/Combinatory_logic]]</pre>
-</div>
 <div title="Eclipse vs others" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201105211706" modified="201105211708" tags="duel tools" changecount="3">
 <pre>From Scala point of view
 
@@ -948,7 +933,22 @@ handler: function(place, macroName, params, wikifier, paramString, tiddler) {
 *[[Another concrete step by step example with a Video from John Harrison|http://code.google.com/p/flyspeck/wiki/HolLightDemo1]]
 *[[Yet another example with TPTP syntax|https://docs.google.com/leaf?id=1bY0NJpVeT98_iNVWvSmjB83iU6b8yguUUSjsiy54kqx1oPgz6T0upSD-S09N&amp;sort=moddate&amp;layout=list&amp;num=50]] (start slide 17)</pre>
 </div>
-<div title="Handbook of practical logic and automated reasoning : resume" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104232119" modified="201106171803" tags="book resume scala-atp" changecount="22">
+<div title="Glossary" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201109101656" modified="201201150934" tags="intro" changecount="10">
+<pre>*[[Predicate|http://en.wikipedia.org/wiki/Predicate_(mathematical_logic)]]
+*[[Atomic formula|http://en.wikipedia.org/wiki/Atomic_formula]]
+*[[Disjunction|http://en.wikipedia.org/wiki/Logical_disjunction]]
+*[[Literal|http://en.wikipedia.org/wiki/Literal_(mathematical_logic)]]
+*[[Conjunctive normal form|http://en.wikipedia.org/wiki/Conjunctive_normal_form]]
+*[[Skolem normal form|http://en.wikipedia.org/wiki/Skolemization]]
+*[[Herbrandization|http://en.wikipedia.org/wiki/Herbrandization]]
+*[[Clause|http://en.wikipedia.org/wiki/Clause_(logic)]]
+*[[De Bruijn index|http://en.wikipedia.org/wiki/De_Bruijn_index]]
+*[[Typed lambda calculus|http://en.wikipedia.org/wiki/Typed_lambda_calculus]]
+*[[First-order logic|http://en.wikipedia.org/wiki/First-order_logic]]
+*[[Higher-order logic|http://en.wikipedia.org/wiki/Higher-order_logic]]
+*[[Combinatory logic|http://en.wikipedia.org/wiki/Combinatory_logic]]</pre>
+</div>
+<div title="Handbook of practical logic and automated reasoning : summary" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104232119" modified="201201150925" tags="book summary scala-atp wip" changecount="26">
 <pre>* Preface
 ** What's not in the book
 *** model checking
@@ -960,7 +960,7 @@ handler: function(place, macroName, params, wikifier, paramString, tiddler) {
 *** lambda calculus
 *** higher-order logic
 *** type theory
-* Introduction
+* Chapter 1 · Introduction
 ** Boole's algebra
 ** two arguments have the same form if they are both instances of the same formal expression, consistently replacing variables by other propositions
 ** we can use the formal language to make a mathematically precise definition of logically valid arguments
@@ -970,7 +970,7 @@ handler: function(place, macroName, params, wikifier, paramString, tiddler) {
 *** lexical analysis (scanning) decomposes the sequences of input characters into ‘tokens’ 
 *** parsing converts the linear sequences of tokens into an abstract syntax tree
 ** translate output back from abstract syntax to concrete syntax = prettyprinting
-* Propositional logic
+* Chapter 2 · Propositional logic
 ** Boole used traditional algebraic signs like ‘+’ for the logical connectives
 ** p(q + r) = pq + pr is familiar but p+qr = (p+q)(p+r) is confusing so we will use special symbols for the connectives
 ** the ultimate meaning of a formula is just one of the two truth-values ‘true’ and ‘false’
@@ -983,7 +983,7 @@ handler: function(place, macroName, params, wikifier, paramString, tiddler) {
 ** a set Γ of formulas is said to be satisfiable if there is a valuation v that simultaneously satisfies them all
 ** the notation Γ |= q to mean ‘for all valuations in which all p ∈ Γ are true, q is true’
 ** Compactness : For any set Γ of propositional formulas, if each finite subset Δ ⊆ Γ is satisfiable, then Γ itself is satisfiable
-* First-order logic
+* Chapter 3 · First-order logic
 ** First- order (predicate) logic extends propositional logic in two ways
 *** the atomic propositions can be built up from non-propositional variables and constants using functions and predicates
 *** the non-propositional variables can be bound with quantifiers
@@ -997,6 +997,245 @@ handler: function(place, macroName, params, wikifier, paramString, tiddler) {
 <div title="Interval Temporal Logic" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201110202141" modified="201110202152" tags="Uses" changecount="3">
 <pre>* http://www.tech.dmu.ac.uk/STRL/ITL/</pre>
 </div>
+<div title="Language, proof, and logic : summary" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201201130949" modified="201201151501" tags="book summary done" changecount="41">
+<pre>@@this book provides useful remember section which lazily constitute this summary@@
+
+* Chapter 1 · Atomic Sentences
+**In fol,
+***Every individual constant must name an (actually existing) object.
+***No individual constant can name more than one object.
+***An object can have more than one name, or no name at all.
+***Every predicate symbol comes with a single, fixed “arity,” a number that tells you how many names it needs to form an atomic sentence.
+***Every predicate is interpreted by a determinate property or relation of the same arity as the predicate.
+***Atomic sentences are formed by putting a predicate of arity n in front of n names (enclosed in parentheses and separated by commas).
+***Atomic sentences are built from the identity predicate, =, using infix notation: the arguments are placed on either side of the predicate.
+***The order of the names is crucial in forming atomic sentences.
+**In a language with function symbols,
+***Complex terms are typically formed by putting a function symbol of arity n in front of n terms (simple or complex).
+***Complex terms are used just like names (simple terms) in forming atomic sentences.
+***In fol, complex terms are assumed to refer to one and only one object.
+* Chapter 2 · The Logic of Atomic Sentences
+**An argument is a series of statements in which one, called the conclusion, is meant to be a consequence of the others, called the premises.
+**An argument is valid if the conclusion must be true in any circumstance in which the premises are true. We say that the conclusion of a logically valid argument is a logical consequence of its premises.
+**An argument is sound if it is valid and the premises are all true.
+**A proof of a statement S from premises P1,...,Pn is a step-by-step demonstration which shows that S must be true in any circumstances in which the premises P1,..., Pn are all true.
+**Informal and formal proofs differ in style, not in rigor.
+**There are four important principles that hold of the identity relation: (The latter two principles follow from the first two.) 
+***= Elim: If b = c, then whatever holds of b holds of c. This is also known as the indiscernibility of identicals.
+***= Intro: Sentences of the form b = b are always true (in fol). This is also known as the reflexivity of identity.
+***Symmetry of Identity: If b = c, then c = b.
+***Transitivity of Identity: If a = b and b = c, then a = c. 
+**To demonstrate the invalidity of an argument with premises P1,...,Pn and conclusion Q, find a counterexample: a possible circumstance that makes P1,..., Pn all true but Q false. Such a counterexample shows that Q is not a consequence of P1,...,Pn.
+* Chapter 3 · The Boolean Connectives
+**If P is a sentence of fol, then so is ¬P.
+**The sentence ¬P is true if and only if P is not true.
+**A sentence that is either atomic or the negation of an atomic sentence is called a literal.
+**If P and Q are sentences of fol, then so is P∧Q.
+**The sentence P∧Q is true if and only if both P and Q are true.
+**If P and Q are sentences of fol, then so is P∨Q.
+**The sentence P∨Q is true if and only ifP is true or Q is true (or both are true).
+**Parentheses must be used whenever ambiguity would result from their omission. In practice, this means that conjunctions and disjunctions must be “wrapped” in parentheses whenever combined by means of some other connective.
+**(Double negation and DeMorgan’s Laws) For any sentences P and Q:
+***Double negation: ¬¬P ⇔ P
+***DeMorgan: ¬(P ∧ Q) ⇔ (¬P ∨ ¬Q)
+***DeMorgan: ¬(P ∨ Q) ⇔ (¬P ∧ ¬Q)
+**In order for an fol sentence to be a good translation of an English sentence, it is sufficient that the two sentences have the same truth values in all possible circumstances, that is, that they have the same truth conditions.
+**The English expression and sometimes suggests a temporal ordering; the fol expression ∧ never does.
+**The English expressions but, however, yet, nonetheless, and moreover are all stylistic variants of and.
+**The English expressions either and both are often used like parentheses to clarify an otherwise ambiguous sentence.
+* Chapter 4 · The Logic of Boolean Connectives
+**Let S be a sentence of fol built up from atomic sentences by means of truth-functional connectives alone. A truth table for S shows how the truth of S depends on the truth of its atomic parts.
+***S is a tautology if and only if every row of the truth table assigns true to S.
+***If S is a tautology, then S is a logical truth (that is, is logically neces- sary).
+***Some logical truths are not tautologies.
+***S is tt-possible if and only if at least one row of the truth table assigns true to S.
+**Let S and S′ be a sentences of fol built up from atomic sentences by means of truth-functional connectives alone. To test for tautological equivalence, we construct a joint truth table for the two sentences.
+***S and S′ are tautologically equivalent if and only if every row of the joint truth table assigns the same values to S and S′.
+***If S and S′ are tautologically equivalent, then they are logically equivalent.
+***Some logically equivalent sentences are not tautologically equivalent.
+**Let P1,...,Pn and Q be sentences of fol built up from atomic sentences by means of truth functional connectives alone. Construct a joint truth table for all of these sentences.
+***Q is a tautological consequence of P1,...,Pn if and only if every row that assigns T to each of P1,...,Pn also assigns T to Q.
+***If Q is a tautological consequence of P1,...,Pn, then Q is also a logical consequence of P1,...,Pn.
+***Some logical consequences are not tautological consequences.
+**Substitution of equivalents: If P and Q are logically equivalent: P⇔Q then the results of substituting one for the other in the context of a larger sentence are also logically equivalent: S(P) ⇔ S(Q)
+**A sentence is in negation normal form (NNF) if all occurrences of ¬ apply directly to atomic sentences.
+**Any sentence built from atomic sentences using just ∧, ∨, and ¬ can be put into negation normal form by repeated application of the DeMorgan laws and double negation.
+**Sentences can often be further simplified using the principles of associativity, commutativity, and idempotence.
+**(The distributive laws) For any sentences P, Q, and R:
+***Distribution of ∧ over ∨: P∧(Q∨R) ⇔ (P∧Q)∨(P∧R)
+***Distribution of ∨ over ∧: P∨(Q∧R) ⇔ (P∨Q)∧(P∨R)
+**A sentence is in disjunctive normal form (DNF) if it is a disjunction of one or more conjunctions of one or more literals.
+**A sentence is in conjunctive normal form (CNF) if it is a conjunction of one or more disjunctions of one or more literals.
+**Distribution of ∧ over ∨ allows you to transform any sentence in negation normal form into disjunctive normal form.
+**Distribution of ∨ over ∧ allows you to transform any sentence in negation normal form into conjunctive normal form.
+**Some sentences are in both CNF and DNF.
+* Chapter 5 · Methods of Proof for Boolean Logic
+**In giving an informal proof from some premises, if Q is already known to be a logical consequence of sentences P1,...,Pn and each of P1,...,Pn has been proven from the premises, then you may assert Q in your proof.
+**Each step in an informal proof should be significant but easily understood.
+**Whether a step is significant or easily understood depends on the audience to whom it is addressed.
+**The following are valid patterns of inference that generally go unmentioned in informal proofs:
+***From P ∧ Q, infer P.
+***From P and Q, infer P∧Q.
+***From P, infer P∨Q.
+**Proof by cases: To prove S from P1 ∨ ... ∨ Pn using this method, prove S from each of P1,...,Pn.
+**Proof by contradiction: To prove ¬S using this method, assume S and prove a contradiction ⊥.
+**A proof of a contradiction	⊥ from premises P1,...,Pn	(without additional assumptions) shows that the premises are inconsistent. An argument with inconsistent premises is always valid, but more importantly, always unsound.
+* Chapter 6 · Formal Proofs and Boolean Logic
+**In justifying a step of a subproof, you may cite any earlier step contained in the main proof, or in any subproof whose assumption is still in force. You may never cite individual steps inside a subproof that has already ended.
+**In assessing the validity of an argument, use the following method:
+***Understand what the sentences are saying.
+***Decide whether you think the conclusion follows from the premises.
+***If you think it does not follow, or are not sure, try to find a counterexample.
+***If you think it does follow, try to give an informal proof.
+***If a formal proof is called for, use the informal proof to guide you in finding one.
+***In giving consequence proofs, both formal and informal, don’t forget the tactic of working backwards.
+***In working backwards, though, always check that your intermediate goals are consequences of the available information.
+**A proof without any premises shows that its conclusion is a logical truth.
+* Chapter 7 · Conditionals
+**If P and Q are sentences of fol, then so is P→Q.
+**The sentence P → Q is false in only one case: if the antecedent P is true and the consequent Q is false. Otherwise, it is true.
+**The following English constructions are all translated P → Q: If P then Q; Q if P; P only if Q; and Provided P, Q.
+**Unless P, Q and Q unless P are translated ¬P → Q.
+**Q is a logical consequence of P1,...,Pn if and only if the sentence (P1 ∧ ... ∧ Pn) → Q is a logical truth.
+**If P and Q are sentences of fol, then sois P ↔ Q.
+**The sentence P ↔ Q is true if and only if P and Q have the same truth value.
+**If the assertion of a sentence carries with it a suggestion that could be cancelled (without contradiction) by further elaboration by the speaker, then the suggestion is a conversational implicature, not part of the content of the original claim.
+**A set of connectives is truth-functionally complete if the connectives allow us to express every truth function.
+**Various sets of connectives, including the Boolean connectives, are truth-functionally complete.
+* Chapter 8 · The Logic of Conditionals
+**Let P and Q be any sentences of fol.
+***Modus ponens: From P → Q and P, infer Q.
+***Biconditional elimination: From P and either P ↔ Q or Q ↔ P, infer Q.
+***Contraposition: P → Q ⇔ ¬Q → ¬P 
+**The method of conditional proof: To prove P → Q, assume P and prove Q.
+**To prove a number of biconditionals, try to arrange them into a cycle of conditionals.
+* Chapter 9 · Introduction to Quantification
+**The language fol has an infinite number of variables, any of t, u, v, w, x, y, and z, with or without numerical subscripts.
+**Variables can occur in atomic wffs in any position normally occupied by a name.
+**Complex wffs are built from atomic wffs by means of truth-functional connectives and quantifiers in accord with the following rules :
+***If P is a wff, so is ¬P.
+***If P1,...,Pn are wffs, so is (P1 ∧ ... ∧ Pn).
+***If P1,...,Pn are wffs, so is (P1 ∨ ... ∨ Pn).
+***If P and Q are wffs, so is (P → Q).
+**When you append either quantifier ∀x or ∃x to a wff P, we say that the quantifier binds all the free occurrences of x in P.
+**A sentence is a wff in which no variables occur free (unbound).
+**Quantified sentences make claims about some intended domain of discourse.
+**A sentence of the form ∀xS(x) is true if and only if the wff S(x) is satisfied by every object in the domain of discourse.
+**A sentence of the form ∃xS(x) is true if and only if the wff S(x) is satisfied by some object in the domain of discourse.
+**The four Aristotelian forms are translated as follows:
+***All P’s are Q’s. &amp;nbsp;&amp;nbsp; ∀x (P(x) → Q(x))
+***Some P’s are Q’s. &amp;nbsp;&amp;nbsp; ∃x (P(x) ∧ Q(x))
+***No P’s are Q’s. &amp;nbsp;&amp;nbsp; ∀x (P(x) → ¬Q(x))
+***Some P’s are not Q’s. &amp;nbsp;&amp;nbsp; ∃x (P(x) ∧ ¬Q(x))
+**Translations of complex quantified noun phrases frequently employ conjunctions of atomic predicates.
+**The order of an English sentence may not correspond to the order of its fol translation.
+**All P’s are Q’s does not imply, though it may conversationally suggest, that there are some P’s.
+**Some P’s are Q’s does not imply, though it may conversationally suggest, that not all P’s are Q’s.
+* Chapter 10 · The Logic of Quantifiers
+**Use the truth-functional form algorithm to determine the truth-functional form of a sentence or argument containing quantifiers.
+**The truth-functional form of a sentence shows how the sentence is built up from atomic and quantified sentences using truth-functional connectives.
+**A quantified sentence is a tautology if and only if its truth-functional form is a tautology.
+**Every tautology is a logical truth, but among quantified sentences there are many logical truths that are not tautologies.
+**Similarly, there are many logically valid arguments of fol that are not tautologically valid.
+**A sentence of fol is a first-order validity if it is a logical truth when you ignore the meanings of the names, function symbols, and predicates other than the identity symbol.
+**A sentence S is a first-order consequence of premises P1,...,Pn if it a logical consequence of these premises when you ignore the meanings of the names, function symbols, and predicates other than identity.
+**The Replacement Method is useful for determining whether a sentence is a first-order validity and whether the conclusion of an argument is a first-order consequence of the premises.
+**All tautologies are first-order validities; all first-order validities are logical truths. Similarly for consequence.
+**(DeMorgan laws for quantifiers) For any wff P(x):
+***¬∀x P(x) ⇔ ∃x ¬P(x)
+***¬∃x P(x) ⇔ ∀x ¬P(x)
+**(Pushing quantifiers past ∧ and ∨) For any wffs P(x) and Q(x):
+***∀x (P(x)∧Q(x)) ⇔ ∀x P(x) ∧ ∀x Q(x)
+***∃x (P(x)∨Q(x)) ⇔ ∃x P(x) ∨ ∃x Q(x)
+**(Null quantification) For any wff P in which x is not free:
+***∀x P ⇔ P
+***∃x P ⇔ P
+***∀x (P ∨ Q(x)) ⇔ P ∨ ∀x Q(x)
+***∃x (P ∧ Q(x)) ⇔ P ∧ ∃x Q(x)
+**(Replacing bound variables) For any wff P(x) and variable y that does not occur in P(x):
+***∀x P(x) ⇔ ∀y P(y)
+***∃x P(x) ⇔ ∃y P(y)
+* Chapter 11 · Multiple Quantifiers
+**When evaluating a sentence with multiple quantifiers, don’t fall into the trap of thinking that distinct variables range over distinct objects. In fact, the sentence ∀x∀yP(x,y) logically implies ∀xP(x,x), and the sentence ∃x P(x, x) logically implies ∃x ∃y P(x, y)!
+**When you are dealing with mixed quantifiers, the order is very important. ∀x ∃y R(x, y) is not logically equivalent to ∃y ∀x R(x, y).
+**In translating from English to fol, the goal is to get a sentence that has the same meaning as the original. This sometimes requires changes in the surface form of the sentence.
+**A important source of ambiguity in English stems from the order in which quantifiers are interpreted. To translate such a sentence into fol, you must know which order the speaker of the sentence had in mind. This can often be determined by looking at the context in which the sentence was used.
+**Anything you can express using an n-ary function symbol can also be expressed using an n + 1-ary relation symbol, plus the identity predicate, but at a cost in terms of the complexity of the sentences used.
+**A sentence is in prenex form if any quantifiers contained in it are out in front. Any sentence is logically equivalent to one in prenex form.
+* Chapter 12 · Methods of Proof for Quantifiers
+**Universal instantiation: From ∀x S(x), infer S(c), so long as c denotes an object in the domain of discourse.
+**Existential generalization: From S(c), infer ∃x S(x), so long as c denotes an object in the domain of discourse.
+**Let S(x), P(x), and Q(x) be wffs.
+***Existential Instantiation: If you have proven ∃xS(x) then you may choose a new constant symbol c to stand for any object satisfying S(x) and so you may assume S(c).
+***General Conditional Proof: If you want to prove ∀x [P(x) → Q(x)] then you may choose a new constant symbol c, assume P(c), and prove Q(c), making sure that Q does not contain any names introduced by existential instantiation after the assumption of P(c).
+***Universal Generalization: If you want to prove ∀x S(x) then you may choose a new constant symbol c and prove S(c), making sure that S(c) does not contain any names introduced by existential instantiation after the introduction of c.
+* Chapter 13 · Formal Proofs and Quantifiers
+**The formal rule of ∀ Intro corresponds to the informal method of general conditional proof, including the special case of universal generalization.
+**The formal rule of ∃ Elim corresponds to the informal method of existential instantiation.
+**Always be clear about the meaning of the sentences you are using.
+**A good strategy is to find an informal proof and then try to formalize it.
+**Working backwards can be very useful in proving universal claims, especially those of the form ∀x (P(x) → Q(x)).
+**Working backwards is not useful in proving an existential claim ∃x S(x) unless you can think of a particular instance S(c) of the claim that follows from the premises.
+**If you get stuck, consider using proof by contradiction.
+* Chapter 14 · More about Quantification
+**The notations ∃≥n, ∃≤n, and ∃!n are abbreviations for complex fol expressions meaning “there are at least/at most/exactly n things such that ....”
+**To prove ∃!nx P(x), prove two things:
+***that there are at least n objects satisfying P(x), and
+***that there are at most n objects satisfying P(x).
+**The Russellian analysis of The A is a B is the fol translation of There is exactly one A and it is a B.
+**The Russellian analysis of Both A’s are B’s is the fol translation of There are exactly two A’s and each of them is a B.
+**The Russellian analysis of Neither A is a B is the fol translation of There are exactly two A’s and each of them is not a B.
+**The competing Strawsonian analysis of these determiners treats them as having presuppositions, and so as only making claims when these presuppositions are met. On Strawson’s analysis, these determiners cannot be adequately translated in fol.
+**Given any English determiner Q, we can add a corresponding quantifier Q to fol. In this extended language, the sentence Q x (A, B) is true in a world just in case Q of the objects that satisfy A(x) also satisfy B(x).
+**There are three properties of determiners that are critical to their logical behavior: conservativity, monotonicity, and persistence.
+**All English determiners are conservative (with the exception of only, which is not usually considered a determiner).
+**Monotonicity has to do with the behavior of the second argument of the determiner. All basic determiners in English are monotone increasing or decreasing, with most being monotone increasing.
+**Persistence has to do with the behavior of the first argument of the determiner. It is less common than monotonicity.
+* Chapter 15 · First-order Set Theory
+**Naive set theory has the Axiom of Extensionality and the Axiom Scheme of Comprehension. Extensionality says that sets with the same members are identical. Comprehension asserts that every first-order formula determines a set.
+**Let a and b be sets.
+***a ⊆ b iff every element of a is an element of b.
+***a = b iff a ⊆ band b ⊆ a.
+**Let b and c be sets.
+***x ∈ b ∩ c if and only if x ∈ b ∧ x ∈ c
+***x ∈ b ∪ c if and only if x ∈ b ∨ x ∈ c
+**The powerset of a set b is the set of all its subsets: ℘b = {a | a ⊆ b}
+**Russell found a paradox in naive set theory by considering Z = {x | x̸ ∈ x} and showing that the assumption Z ∈ Z and its negation each entails the other.
+**Modern set theory replaces the naive concept of set, which is inconsistent, with a concept of set as a collection that is not too large.
+**These collections are seen as arising in stages, where a set arises only after all its members are present.
+**The axiom of comprehension of set theory is replaced by the Axiom of Separation and some of the intuitively correct consequences of the axiom of comprehension.
+**Modern set theory also contains the Axiom of Regularity, which is justified on the basis of (2).
+**All the propositions stated in this chapter—with the exception of Propositions 1 and 14—are theorems of zfc.
+* Chapter 16 · Mathematical Induction
+**An inductive definition consists of
+***a base clause, which specifies the basic elements of the defined set,
+***one or more inductive clauses, which tell us how to generate additional elements, and
+***a final clause, which tells us that all the elements are either basic or generated by the inductive clauses.
+**Given an inductive definition of a set, an inductive proof requires
+***a basis step, which shows that the property holds of the basic elements, and
+***an inductive step, which shows that if the property holds of some elements, then it holds of any elements generated from them by the inductive clauses.
+**The assumption that begins the inductive step is called the inductive hypothesis.
+* Chapter 17 · Advanced Topics in Propositional Logic 
+**A truth assignment is simply a function from the atomic sentences into the set {true,false}. It models a single row of a complete truth table for the language.
+**The Completeness Theorem is proven by showing that every formally consistent set T of sentences is tt-satisfiable. This is done in two steps.
+**The first step is to show the result for sets T which are also formally complete.
+**The second step is to show how to extend any formally consistent set to one that is both formally consistent and formally complete.
+**A Horn sentence is a propositional sentence in CNF such that every disjunction of literals in contains at most one positive literal.
+**The satisfaction algorithm for Horn sentences gives an efficient algorithm to tell whether a Horn sentence is tt-satisfiable.
+**Every set of propositional sentences can be expressed as a set of clauses.
+**The resolution method is an important method for determining whether a set of clauses is tt-satisfiable. The key notion is that of a resolvent for a set of clauses.
+**A resolvent of clauses C1 and C2 is a clause R provided there is an atomic sentence in one of the clauses whose negation is in the other clause, and if R is the set of all the remaining literals in either clause.
+* Chapter 18 · Advanced Topics in FOL
+**First-order structures are mathematical models of the domains about which we make claims using fol.
+**Variable assignments are functions mapping variables into the domain of some first-order structure.
+**A variable assignment satisfies a wff in a structure if, intuitively, the objects assigned to the variables make the wff true in the structure.
+**Using the notion of satisfaction, we can define what it means for a sentence to be true in a structure.
+**Finally, once we have the notion of truth in a structure, we can model the notions of logical truth, and logical consequence. 
+**(Simplest case of Skolemization) Given a sentence of the form ∀x ∃y P(x, y) in some first-order language, we Skolemize it by choosing a function symbol f not in the language and writing ∀x P(x, f(x)). Every world that makes the Skolemization true also makes the original sentence true. Every world that makes the original sentence true can be turned into one that makes the Skolemization true by interpreting the function symbol f by a function f which picks out, for any object b in the domain, some object c such that they satisfy the wff P(x, y).
+* Chapter 19 · Completeness and Incompleteness
+**immediate consequences of the Completeness Theorem is the first-order Compactness Theorem
+**G&amp;ouml;del’s Incompleteness Theorem showed the positive progress was misleading, and that in fact the goal of Hilbert’s Program could never be accomplished.</pre>
+</div>
 <div title="Library" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201106131629" modified="201108052100" changecount="10">
 <pre>[[EDLA book collection|http://books.google.fr/books?uid=116287463809571408586&amp;source=gbs_lp_bookshelf_list]]
 [[EDLA document collection|https://docs.google.com/leaf?id=0B7LbY7bJaltlMTljZWIyZWEtOWFjZi00Njc1LWE4ZjctMDk4YWY2NzliMjVl&amp;hl=en_US]]</pre>
@@ -1004,7 +1243,7 @@ handler: function(place, macroName, params, wikifier, paramString, tiddler) {
 <div title="MELIA source code analysis" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201107301005" modified="201107301141" tags="code-analysis MELIA" changecount="3">
 <pre>All classes are inter-dependent, TPTPTParser need all other classes.</pre>
 </div>
-<div title="MainMenu" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201103191830" modified="201110202152" tags="meta editing systemNotes" changecount="28">
+<div title="MainMenu" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201103191830" modified="201201150934" tags="meta editing systemNotes" changecount="29">
 <pre>[[About]]
 [[Navigating this site]]
 [[Getting started]]
@@ -1012,7 +1251,7 @@ handler: function(place, macroName, params, wikifier, paramString, tiddler) {
 [[A bit of history]]
 [[First-class resources]]
 &lt;&lt;tag Algorithms&gt;&gt;
-[[Definitions]]
+[[Glossary]]
 &lt;&lt;tag Uses&gt;&gt;
 [[Reading roadmap]]
 [[Library]]
@@ -1386,9 +1625,9 @@ Nota: a Scala port of [[grammar combinator|http://lambda-the-ultimate.org/node/4
 
 See also [[Parser combinators vs others]]</pre>
 </div>
-<div title="Plugins for Eclipse" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201105221308" modified="201112261858" tags="tools scala-ide" changecount="27">
+<div title="Plugins for Eclipse" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201105221308" modified="201201081006" tags="tools scala-ide" changecount="28">
 <pre>!Indigo
-*ScalaIDE - http://download.scala-ide.org/nightly-update-master-2.9.1
+*ScalaIDE - http://download.scala-ide.org/nightly-update-master-2.9.2-SNAPSHOT
 *m2e is now integrated with eclipse
 *Maven Integration for Scala IDE build manually from https://github.com/sonatype/m2eclipse-scala
 *m2e-subversive from m2e market place
@@ -1405,7 +1644,7 @@ If a parser takes a stream of characters and turns them into an abstract syntax 
 *A Scala port of Lindig’s implementation of Wadler’s pretty printer from Ocaml, adding all combinators and whole API from Haskell PPrint - which is another implementation of Wadler’s prettier-printer by Daan Leijen : [[source code|http://scala-programming-language.1934581.n4.nabble.com/file/n1995937/zPPrint.scala]] and [[demo|http://scala-programming-language.1934581.n4.nabble.com/scala-pretty-printing-tp1995936p1995939.html]]
 *A rudimentary pretty printer combinator : http://www.scala-blogs.org/2009/04/combinators-for-pretty-printers-part-1.html</pre>
 </div>
-<div title="Programming in Scala 2nd : resume" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104232118" modified="201112312245" tags="scala book resume scala-atp" changecount="41">
+<div title="Programming in Scala 2nd : summary" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104232118" modified="201201150925" tags="scala book summary scala-atp wip" changecount="44">
 <pre>* Chapter 1 · A Scalable Language
 ** Functional programming is guided by two main ideas
 *** functions are first-class values
@@ -1499,15 +1738,21 @@ If a parser takes a stream of characters and turns them into an abstract syntax 
 **** floatingPointNumber ˆˆ (_.toDouble)
 **** &quot;true&quot; ˆˆ (x =&gt; true)</pre>
 </div>
-<div title="Project Status Report" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201108101807" modified="201111111806" changecount="16">
+<div title="Project Status Report" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201108101807" modified="201201150917" tags="done wip" changecount="42">
 <pre>!What we've learned so far
-All issues related to parsing have been undervalued. ATP and parsing are tightly coupled.
-A theorem prover need a solid parsing foundation.
+All issues related to &lt;&lt;tag parsing&gt;&gt; have been undervalued. ATP and &lt;&lt;tag parsing&gt;&gt; are tightly coupled.
+A theorem prover need a solid &lt;&lt;tag parsing&gt;&gt; foundation.
+
+!What we've done so far
+*contribute to &lt;&lt;tag MELIA&gt;&gt; [[0.1.3|http://users.cecs.anu.edu.au/~baumgart/systems/MELIA/ReadMe.txt]] by changing the &lt;&lt;tag TPTP&gt;&gt; parser to packrat &lt;&lt;tag parsing&gt;&gt;, which speeds up &lt;&lt;tag parsing&gt;&gt; significantly. 
+*see also : &lt;&lt;tag done&gt;&gt;
 
 !What we are doing right now
-Focus is currently on building &quot;a state of the art&quot; TPTP parser --based on parser combinators with the PackratParsers extension--.
+Focus is currently on building &quot;a state of the art&quot; &lt;&lt;tag TPTP&gt;&gt; parser --based on parser combinators with the PackratParsers extension--.
 [[Xtext|http://www.eclipse.org/Xtext/]] could be the better framework/tool. Study now ongoing will tell whether the potential advantages of such framework/tool are confirmed.
-In this context, Debasish Ghosh's book [[DSLs in Action |http://books.google.fr/books?id=SzD6RAAACAAJ&amp;num=16&amp;source=gbs_slider_cls_metadata_1003_mylibrary]] has proved invaluable</pre>
+In this context, Debasish Ghosh's book [[DSLs in Action |http://books.google.fr/books?id=SzD6RAAACAAJ&amp;num=16&amp;source=gbs_slider_cls_metadata_1003_mylibrary]] has proved invaluable
+
+See also : &lt;&lt;tag wip&gt;&gt;</pre>
 </div>
 <div title="Proof language" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201106152104" modified="201107301332" tags="atp parsing TPTP" changecount="11">
 <pre>* a kind of standard for higher-order expressions: http://www.cs.miami.edu/~tptp/cgi-bin/SeeTPTP?Category=Documents&amp;File=SyntaxBNF
@@ -2557,13 +2802,13 @@ config.parsers.twikiFormatter.formatTag = 'TWikiFormat';
 } // end of 'install only once'
 //}}}</pre>
 </div>
-<div title="Tags" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104250931" modified="201111112217" tags="meta editing" changecount="50">
+<div title="Tags" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104250931" modified="201201150925" tags="meta editing" changecount="54">
 <pre>*&lt;&lt;tag atp&gt;&gt;- Automated Theorem Proving, what this site is all about
 **&lt;&lt;tag intro&gt;&gt;- Getting started
 **&lt;&lt;tag scala-atp&gt;&gt;- Scala port of [[Handbook of Practical Logic and Automated Reasoning|http://www.cambridge.org/catalogue/catalogue.asp?isbn=9780521899574]]
 **&lt;&lt;tag person&gt;&gt;- People working on ATP
 **&lt;&lt;tag book&gt;&gt;- Some books
-***&lt;&lt;tag resume&gt;&gt;- Reading notes
+***&lt;&lt;tag summary&gt;&gt;- Reading notes
 **&lt;&lt;tag Algorithms&gt;&gt;- Algorithms related to Automated Theorem Proving
 **&lt;&lt;tag proovers&gt;&gt;-
 ***&lt;&lt;tag gapt&gt;&gt;- General Architecture for proof
@@ -2581,6 +2826,8 @@ config.parsers.twikiFormatter.formatTag = 'TWikiFormat';
 **&lt;&lt;tag scala-ide&gt;&gt; all about Scala IDE for Eclipse
 **&lt;&lt;tag duel&gt;&gt;- duels
 *&lt;&lt;tag pb&gt;&gt;- some things annoying that needs to be fixed
+*&lt;&lt;tag done&gt;&gt;- what we've done so far
+*&lt;&lt;tag wip&gt;&gt;- work in progress
 *&lt;&lt;tag meta&gt;&gt;- describes the operation of this site
 **&lt;&lt;tag editing&gt;&gt;- tips on editing and authoring notes, including all sorts of tools
 **&lt;&lt;tag system&gt;&gt;- control how the site operates and is layed out
