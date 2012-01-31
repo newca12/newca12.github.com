@@ -658,7 +658,7 @@ Source code is available on [[GitHub|http://github.com/newca12]]
 * BULLETIN
 ** The Bulletin of Symbolic Logic : http://www.math.ucla.edu/~asl/bsltoc.htm</pre>
 </div>
-<div title="GAPT notation" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201111030855" modified="201201011721" tags="parsing gapt" changecount="20">
+<div title="GAPT and TPTP notation" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201111030855" modified="201201221754" tags="parsing gapt" changecount="21">
 <pre>! notes (from Tomer mails)
 * GAPT traditionally had a somewhat different notation than Prover9 for variables and constants
 * Both ATP and Prover9 in GAPT get as input a clause set which was parsed right now by the &quot;simple&quot; parser
@@ -666,7 +666,11 @@ Source code is available on [[GitHub|http://github.com/newca12]]
 * tptp_to_ladr parse a tptp into a prolog style prover9 format which is quiet different from the simple one 
 * The simple format was just intended as a utility but I should indeed made it identical to Prover9 and not only similar.
 
-! analyse from GAPT code
+! TPTP notation
+* a constant can be either an identifier starting with a lower-case letter, a single quoted string or an numeric constant.
+* the TPTP-FOF variables always start with an upper case letter.
+
+! GAPT notation analysed from GAPT code
 * constante : Regex(&quot;[a-t]&quot; + word)
 * variable : Regex(&quot;[u-z]&quot; + word)
 
@@ -2047,10 +2051,10 @@ txtUserName: Olivier ROLAND</pre>
 |||||&gt;|SSS - Size parameter(s). These only occur for generated problems, and give the size parameter(s).|
 ||||||T - File name extension. p for problem files, g for generator files.|</pre>
 </div>
-<div title="TPTP parser" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201111111747" modified="201112031324" tags="TPTP parsing" changecount="36">
+<div title="TPTP parser" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201111111747" modified="201201222156" tags="TPTP parsing" changecount="41">
 <pre>!with parser combinator
 The most advanced work regarding TPTP parsing in Scala are currently done by Peter Baumgartner (NICTA) in MELIA (GPLv3) prover. 
-Source code is here : http://users.cecs.anu.edu.au/~baumgart/systems/MELIA/MELIA-0.1.2.tar.gz 
+Source code is here : http://users.cecs.anu.edu.au/~baumgart/systems/MELIA/MELIA-0.1.3.tar.gz
 The parser is in : TPTPTParser.scala
 
 There is three problem with Peter's parser. 
@@ -2062,10 +2066,10 @@ There is three problem with Peter's parser.
 @@the first problem has been undervalued and is not really cleanly fixable with Parser Combinator@@   
 
 !with ANTLR
-Andrei Tchaltsev's highly reusable TPTP parser in Java using ANTLR.
+Andrei Tchaltsev's highly reusable TPTP parser in Java using ANTLR
 Several version of this parser (total mess due to no release note) 
 *the [[official version|http://www.freewebs.com/andrei_ch/TPTP_2007.01.30.tgz]] is not up to date. 
-*in [[Alexandre Riazanov converter|http://riazanov.webs.com/RIF_BLD_to_TPTP.tgz]] in the jar TptpParser.jar in the lib directory. (the same jar is also available in the [[psoa-to-tptp project|http://code.google.com/p/psoa-to-tptp/]]. See [[here|http://code.google.com/p/psoa-to-tptp/source/browse/trunk/RIF_BLD_to_TPTP/lib/TptpParser.jar]])
+*in [[Alexandre Riazanov converter|http://riazanov.webs.com/RIF_BLD_to_TPTP.tgz]] in the jar TptpParser.jar in the lib directory. (the same jar is also available in the [[psoa-to-tptp|http://code.google.com/p/psoa-to-tptp/]] [[project|http://reubenpeterpaul.github.com/PSOA-to-TPTP/build/html/index.html]]. See [[here|http://code.google.com/p/psoa-to-tptp/source/browse/trunk/RIF_BLD_to_TPTP/lib/TptpParser.jar]])
 *An earlier version of the binary seem to be available in the OMDoc (Open Mathematical Documents) project. See [[here|https://www.omdoc.org/browser/src/jomdoc/trunk/lib/tptp/tptp-parser.jar?rev=2459]]
 
 The most up to date is the one in [[Geoff's Service Tools|http://www.cs.miami.edu/~tptp/ServiceTools.tgz]]
@@ -2838,7 +2842,13 @@ config.parsers.twikiFormatter.formatTag = 'TWikiFormat';
 
 The tags group collections of notes into sets — they're adjectives, directories, or folders. By selecting a tag, visible in the upper right of each note, you can jump to any note labeled with that tag — a navigational convenience. It's efficacious to build a flexible hierarchy of tagged content. Each note should be labeled by its most appropriate, &quot;lowest&quot; leaf tags — more than one as appropriate. Click on the tag to see a popup menu of notes with that tag. Alternatively, these folders and their contents may be selectively displayed in the &quot;Contents&quot; tab to the left.</pre>
 </div>
-<div title="The Big Picture" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104252117" modified="201104252207" tags="TWikiFormat intro" changecount="6">
+<div title="The Big Picture" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201201312155" modified="201201312204" tags="intro" changecount="6">
+<pre>@@This site is about atp. What did you expect ?@@
+
+If you are really interested by atp see [[The Big Picture (Wikipedia links)]]
+</pre>
+</div>
+<div title="The Big Picture (Wikipedia links)" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104252117" modified="201201312152" tags="TWikiFormat intro" changecount="7">
 <pre>---+ [[http://en.wikipedia.org/wiki/Automated_theorem_proving Automated theorem proving]]
 
    * [[http://en.wikipedia.org/wiki/automated_reasoning automated reasoning]]
@@ -3142,12 +3152,12 @@ This tiddler was automatically created to record the details of this server</pre
 See also [[Notable people|http://en.wikipedia.org/wiki/Automated_theorem_proving#Notable_people]]
 </pre>
 </div>
-<div title="gapt problems" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201107102128" modified="201111051643" tags="pb gapt" changecount="14">
+<div title="gapt problems" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201107102128" modified="201201301341" tags="pb gapt" changecount="15">
 <pre>!gapt should return true (PUZ031-1 : TPTP v3.1.0. Released v1.0.0)
 {{{
 println(getRefutation(&quot;Animal(x) | -Wolf(x). Animal(x) | -Fox(x). Animal(x) | -Bird(x). Animal(x) | -Caterpillar(x). Animal(x) | -Snail(x). Wolf(a_wolf). Fox(a_fox). Bird(a_bird). Caterpillar(a_caterpillar). Snail(a_snail). Grain(a_grain). Plant(x) | -Grain(x). Eats(animal,plant) | Eats(animal,small_animal) | -Animal(animal) | -Plant(plant) | -Animal(small_animal) | -Plant(other_plant) | -Much_smaller(small_animal,animal) | -Eats(small_animal,other_plant). Much_smaller(catapillar,bird) | -Caterpillar(catapillar) | -Bird(bird). Much_smaller(snail,bird) | -Snail(snail) | -Bird(bird). Much_smaller(bird,fox) | -Bird(bird) | -Fox(fox). Much_smaller(fox,wolf) | -Fox(fox) | -Wolf(wolf). -Wolf(wolf) | -Fox(fox) | -Eats(wolf,fox). -Wolf(wolf) | -Grain(grain) | -Eats(wolf,grain). Eats(bird,catapillar) | -Bird(bird) | -Caterpillar(catapillar). -Bird(bird) | -Snail(snail) | -Eats(bird,snail). Plant(caterpillar_food_of(catapillar)) | -Caterpillar(catapillar). Eats(catapillar,caterpillar_food_of(catapillar)) | -Caterpillar(catapillar). Plant(snail_food_of(snail)) | -Snail(snail). Eats(snail,snail_food_of(snail)) | -Snail(snail). -Animal(animal) | -Animal(grain_eater) | -Grain(grain) | -Eats(animal,grain_eater) | -Eats(grain_eater,grain).&quot;))
 }}}
-@@Input is wrong : see [[GAPT notation]] (in the adaptation of the problem into gapt &quot;simple&quot; format, variables were translated into constants)@@
+@@Input is wrong : see [[GAPT and TPTP notation]] (in the adaptation of the problem into gapt &quot;simple&quot; format, variables were translated into constants)@@
 Prover9 format : http://www.cs.unm.edu/~mccune/mace4/examples/2009-11A/misc/steam.in
 TPTP format : http://www.cs.miami.edu/~tptp/cgi-bin/SeeTPTP?Category=Problems&amp;Domain=PUZ&amp;File=PUZ031-1.p</pre>
 </div>
