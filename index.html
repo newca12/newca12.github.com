@@ -621,11 +621,13 @@ Some hints about MathJax [[here|http://wiki.math.toronto.edu/TorontoMathWiki/ind
 
 The winner is : Scala IDE for Eclipse (not yet productive ready but the more promising)</pre>
 </div>
-<div title="Etat De L'Art" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201103191831" modified="201107031622" tags="intro" changecount="12">
+<div title="Etat De L'Art" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201103191831" modified="201202171439" tags="intro" changecount="14">
 <pre>Welcome to [[EDLA|http://www.edla.org]]
 This site focus essentially on automated theorem proving (ATP) or automated deduction which is a subfield of [[automated reasoning|http://plato.stanford.edu/entries/reasoning-automated/]].
 
 Source code is available on [[GitHub|http://github.com/newca12]]
+
+If you wan't an overview of what is available on this site you can use [[Tags]] as a sitemap.
 
 @@If you came thru google search due to the uniqueness of ~TiddlyWiki the web result you saw on google may not appear on this website.  To find it just remember the query items and put on the search line to the upper right of this page. You should be able to find the item you were looking for.@@</pre>
 </div>
@@ -1553,6 +1555,14 @@ But this could be solved :
 Theory here : http://www.ialab.cs.tsukuba.ac.jp/~mizusima/publications/paste513-mizushima.pdf
 A Java implementation here : https://github.com/kmizu/yapp</pre>
 </div>
+<div title="Packrat Parsers" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201202171851" modified="201202171855" tags="parsing" changecount="3">
+<pre>Scala’s parsing combinators provide several utility classes for lexical and syntactic analysis. 
+These are contained in two sub-packages, one for each kind of analysis:
+*scala.util.parsing.combinator.lexical 
+*scala.util.parsing.combinator.syntactical
+
+@@Packrat parsers don’t need a separate scanner@@  so we need to augment the grammar with extra disambiguation information for distinguishing between reserved words and identifiers.</pre>
+</div>
 <div title="Parser combinators vs others" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201105082059" modified="201111112213" tags="duel parsing tools" changecount="51">
 <pre>*Parser combinators pros
 **in the language itself
@@ -1766,7 +1776,7 @@ See also : &lt;&lt;tag wip&gt;&gt;</pre>
 
 =&gt; &lt;&lt;tag TPTP&gt;&gt; is the cornerstone in ATP world</pre>
 </div>
-<div title="Reading roadmap" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201107022122" modified="201201071506" tags="book" changecount="15">
+<div title="Reading roadmap" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201107022122" modified="201202171455" tags="book" changecount="17">
 <pre>@@wip@@
 
 !These book are recommended for first reading
@@ -1783,6 +1793,10 @@ See also : &lt;&lt;tag wip&gt;&gt;</pre>
 ** No higher-order logic at all
 ** Not an easy read for those not already familiar with classical logic and functional programming
 ** Full review [[here|http://www.math.ucla.edu/~asl/bsl/1602/1602-005.ps]] page 279
+*[[DSLs in Action|http://books.google.fr/books?id=SzD6RAAACAAJ&amp;num=16&amp;source=gbs_slider_cls_metadata_1003_mylibrary]]
+** Great book on how to design, implement and use domain specific languages. 
+** Very useful  if you have to write or parser with Scala parser combinator.
+** Very good book. Thank's to the author Debasish Ghosh.
 !These books are not for first reading
 *[[Basic proof theory|http://books.google.fr/books?id=LA_mg2nSbBoC&amp;source=gbs_slider_cls_metadata_1003_mylibrary]]
 **Require a moderately advanced knowledge of proof theory
@@ -1793,14 +1807,14 @@ See also : &lt;&lt;tag wip&gt;&gt;</pre>
 **This volume contains articles covering a broad spectrum of proof theory, with an emphasis on its mathematical aspects.
 **Full review : http://www.math.ucla.edu/~asl/bsl/0604/0604-003.ps</pre>
 </div>
-<div title="Roadmap" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104241247" modified="201111111823" tags="intro" changecount="38">
+<div title="Roadmap" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104241247" modified="201202171429" tags="intro" changecount="39">
 <pre>*Phase 1 : initialization
 ** Identify resources (books, article, thesis, blog, etc ...) that are available (started, WIP)
 ** Identify people/organisation also working on ATP ([[done|Who's who]])
 ** Select the appropriate Content Management System ([[done|Content Management System]])
 ** Select the appropriate programming language ([[done|Scala]])
 ** Select additional &lt;&lt;tag tools&gt;&gt; (started, WIP)
-** Select authoritative &lt;&lt;tag book&gt;&gt; on each subject and make a resume (&lt;&lt;tag resume [started]&gt;&gt;, WIP)
+** Select authoritative &lt;&lt;tag book&gt;&gt; on each subject and make a summary (&lt;&lt;tag summary [started]&gt;&gt;, WIP)
 ** Use the selected [[CMS|Content Management System]] to consolidate knowledge ([[started|Etat De L'Art]], WIP)
 ** Select parsing technique ([[started|Parsing]],WIP)
 *--Phase 2 : Scala port of [[Handbook of Practical Logic and Automated Reasoning|http://www.cambridge.org/catalogue/catalogue.asp?isbn=9780521899574]]([[started|http://github.com/newca12/scala-atp]], WIP)--
