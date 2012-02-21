@@ -682,6 +682,36 @@ There is a rule for distinguishing variables from constants, because clauses and
 ! Example
 GAPT simple format : P(a). -P(x) | P(f(x)). -P(f(f(a))).</pre>
 </div>
+<div title="GAPT simple format source code analysis" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201202190914" modified="201202211847" tags="parsing gapt code-analysis" changecount="5">
+<pre>{{{
+private class MyParser(str: String) extends StringReader(str) with SimpleResolutionParserFOL
+trait SimpleResolutionParserFOL extends SimpleResolutionParser with SimpleFOLParser
+
+trait SimpleResolutionParser extends ResolutionParser
+trait ResolutionParser extends InputParser
+
+trait SimpleFOLParser extends SimpleHOLParser
+trait SimpleHOLParser extends HOLParser with JavaTokenParsers with at.logic.language.lambda.types.Parsers
+trait HOLParser extends InputParser
+
+trait InputParser extends RegexParsers
+}}}
+
+Each parsed clause is converted to a FSequent (ie) Pair[Seq[HOLFormula],Seq[HOLFormula]] like this :
+(f1,...,fn) =&gt; (negated functions neg-stripped, not negated functions)
+Example : 
+clause in GAPT simple format : Much_smaller(catapillar,bird) | -Caterpillar(catapillar) | -Bird(bird).
+Much_smaller(snail, bird), ¬Snail(snail), ¬Bird(bird) =&gt; List(Snail(snail), Bird(bird)),List(Much_smaller(snail, bird))
+{{{
+def clause: Parser[FSequent] = repsep(log(formula)(&quot;formula&quot;),&quot;|&quot;) ~ &quot;.&quot; ^^ {
+    case ls ~ &quot;.&quot; =&gt; new Pair(
+          (ls.filter(filterPosFormulas).map(stripNeg)),
+          (ls.filter(x =&gt; !filterPosFormulas(x)))
+     ) }
+}}}
+
+</pre>
+</div>
 <div title="GAPT source code analysis" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201106151006" modified="201201011730" tags="gapt scala-atp code-analysis" changecount="25">
 <pre>! parser structure
 
@@ -1555,13 +1585,12 @@ But this could be solved :
 Theory here : http://www.ialab.cs.tsukuba.ac.jp/~mizusima/publications/paste513-mizushima.pdf
 A Java implementation here : https://github.com/kmizu/yapp</pre>
 </div>
-<div title="Packrat Parsers" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201202171851" modified="201202171855" tags="parsing" changecount="3">
+<div title="Packrat Parsers" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201202171851" modified="201202171858" tags="parsing" changecount="5">
 <pre>Scala’s parsing combinators provide several utility classes for lexical and syntactic analysis. 
 These are contained in two sub-packages, one for each kind of analysis:
 *scala.util.parsing.combinator.lexical 
 *scala.util.parsing.combinator.syntactical
-
-@@Packrat parsers don’t need a separate scanner@@  so we need to augment the grammar with extra disambiguation information for distinguishing between reserved words and identifiers.</pre>
+@@Packrat parsers don’t need a separate scanner@@  so we need to augment the grammar with extra disambiguation information for distinguishing between reserved words, identifiers and delimiter set.</pre>
 </div>
 <div title="Parser combinators vs others" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201105082059" modified="201111112213" tags="duel parsing tools" changecount="51">
 <pre>*Parser combinators pros
@@ -1658,7 +1687,7 @@ If a parser takes a stream of characters and turns them into an abstract syntax 
 *A Scala port of Lindig’s implementation of Wadler’s pretty printer from Ocaml, adding all combinators and whole API from Haskell PPrint - which is another implementation of Wadler’s prettier-printer by Daan Leijen : [[source code|http://scala-programming-language.1934581.n4.nabble.com/file/n1995937/zPPrint.scala]] and [[demo|http://scala-programming-language.1934581.n4.nabble.com/scala-pretty-printing-tp1995936p1995939.html]]
 *A rudimentary pretty printer combinator : http://www.scala-blogs.org/2009/04/combinators-for-pretty-printers-part-1.html</pre>
 </div>
-<div title="Programming in Scala 2nd : summary" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104232118" modified="201201150925" tags="scala book summary scala-atp wip" changecount="44">
+<div title="Programming in Scala 2nd : summary" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104232118" modified="201202182242" tags="scala book summary scala-atp wip" changecount="53">
 <pre>* Chapter 1 · A Scalable Language
 ** Functional programming is guided by two main ideas
 *** functions are first-class values
@@ -1738,9 +1767,63 @@ If a parser takes a stream of characters and turns them into an abstract syntax 
 ** first-class functions can help you eliminate code duplication
 ** A curried function is applied to multiple argument lists, instead of just one
 ** The purpose of this ability to substitute curly braces for parentheses for passing in one argument is to enable client programmers to write function literals between curly braces
-** Scala provides by-name parameters
+** To make a by-name parameter, you give the parameter a type starting with =&gt; instead of () =&gt;
 * Chapter 10 - Composition and Inheritance
-** 
+** two fundamental relationships between classes
+*** Composition means one class holds a reference to another, using the referenced class to help it fulfill its mission
+*** Inheritance is the superclass/subclass relationship
+** A method is abstract if it does not have an implementation (i.e., no equals sign or body).
+** The recommended convention is to use a parameterless method whenever there are no parameters and the method accesses mutable state only by reading fields of the containing object (in particular, it does not change mutable state)
+** This convention supports the uniform access principle,1 which says that client code should not be affected by a decision to implement an attribute as a field or method
+** it is recommended to still write the empty parentheses when the invoked method represents more than a property of its receiver object
+** To instantiate an element, therefore, we will need to create a subclass that extends Element and implements the abstract contents method
+** Inheritance means that all members of the superclass are also members of the subclass, with two exceptions
+*** private members of the superclass are not inherited in a subclass
+*** a member of a superclass is not inherited if a member with the same name and parameters is already implemented in the subclass
+** fields and methods belong to the same namespace. This makes it possible for a field to override a parameterless method
+** Java’s four namespaces are fields, methods, types, and packages
+** Scala’s two namespaces are :
+*** values (fields, methods, packages, and singleton objects)
+*** types (class and trait names)
+** so you can override a parameterless method with a val
+** You can avoid the code smell by combining the parameter and the field in a single parametric field definition
+** To invoke a superclass constructor, you simply place the argument or arguments you want to pass in parentheses following the name of the superclass
+** In Java 1.5, an @Override annotation was introduced that works similarly to Scala’s override modifier, but unlike Scala’s override, is not required
+** the actual method implementation invoked is determined at run time based on the class of the object, not the type of the variable or expression
+** In Scala, you can define classes and singleton objects inside other classes and singleton objects
+* Chapter 11 - Scala’s Hierarchy
+** In Scala, every class inherits from a common superclass named Any
+** Scala also defines some interesting classes at the bottom of the hierarchy, Null and Nothing
+** just as Any is a superclass of every other class, Nothing is a subclass of every other class
+** The root class Any has two subclasses: AnyVal and AnyRef
+** AnyVal is the parent class of every built-in value class in Scala
+*** Byte, Short, Char, Int, Long, Float, Double, Boolean, and Unit
+** AnyRef is in fact just an alias for class java.lang.Object
+** the equality operation == in Scala is designed to be transparent with respect to the type’s representation
+** class AnyRef defines an additional eq method, which cannot be overridden and is implemented as reference equality (i.e., it behaves like == in Java for reference types)
+** Because Nothing is a subtype of every other type, you can use methods like error in very flexible ways
+* Chapter 12 - Traits
+** A trait encapsulates method and field definitions, which can then be reused by mixing them into classes
+** A trait definition looks just like a class definition except that it uses the keyword trait
+** Once a trait is defined, it can be mixed in to a class using either the extends or with keywords
+** A trait also defines a type
+** you can do anything in a trait definition that you can do in a class definition, and the syntax looks exactly the same, with only two exceptions
+*** a trait cannot have any “class” parameters, i.e., parameters passed to the primary constructor of a class
+*** whereas in classes, super calls are statically bound, in traits, they are dynamically bound
+** Adding a concrete method to a trait tilts the thin-rich trade-off heavily towards rich interfaces
+** The Ordered trait then defines &lt;, &gt;, &lt;=, and &gt;=
+** Unlike the traits you have seen so far, Ordered requires you to specify a type parameter when you mix it in
+** Traits let you modify the methods of a class, and they do so in a way that allows you to stack those modifications with each other
+** super calls in a trait are dynamically bound
+** mark such methods as abstract override. This combination of modifiers is only allowed for members of traits, not classes
+** With traits, the method called is determined by a linearization of the classes and traits that are mixed into a class
+** a class is always linearized before all of its su- perclasses and mixed in traits
+** Whenever you implement a reusable collection of behavior, you will have to decide whether you want to use a trait or an abstract class
+*** If the behavior will not be reused, then make it a concrete class
+*** If you want to inherit from it in Java code, use an abstract class
+*** If you plan to distribute it in compiled form, and you expect outside groups to write classes inheriting from it, you might lean towards using an abstract class
+*** If efficiency is very important, lean towards using a class
+*** If you still do not know, after considering the above, then start by making it as a trait
 * Chapter 18 - Stateful Objects
 ** every var that is a non-private member of some object implicitly defines a getter and a setter method with it
 ** The getter of a var x is just named “x”, while its setter is named “x_=”
