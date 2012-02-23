@@ -682,7 +682,7 @@ There is a rule for distinguishing variables from constants, because clauses and
 ! Example
 GAPT simple format : P(a). -P(x) | P(f(x)). -P(f(f(a))).</pre>
 </div>
-<div title="GAPT simple format source code analysis" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201202190914" modified="201202231036" tags="parsing gapt code-analysis" changecount="6">
+<div title="GAPT simple format source code analysis" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201202190914" modified="201202231053" tags="parsing gapt code-analysis" changecount="7">
 <pre>{{{
 private class MyParser(str: String) extends StringReader(str) with SimpleResolutionParserFOL
 trait SimpleResolutionParserFOL extends SimpleResolutionParser with SimpleFOLParser
@@ -703,7 +703,7 @@ Example :
 clause in GAPT simple format : Much_smaller(snail,bird) | -Snail(snail) | -Bird(bird).
 Much_smaller(snail, bird), ¬Snail(snail), ¬Bird(bird) =&gt; List(Snail(snail), Bird(bird)),List(Much_smaller(snail, bird))
 {{{
-def clause: Parser[FSequent] = repsep(log(formula)(&quot;formula&quot;),&quot;|&quot;) ~ &quot;.&quot; ^^ {
+def clause: Parser[FSequent] = repsep(formula,&quot;|&quot;) ~ &quot;.&quot; ^^ {
     case ls ~ &quot;.&quot; =&gt; new Pair(
           (ls.filter(filterPosFormulas).map(stripNeg)),
           (ls.filter(x =&gt; !filterPosFormulas(x)))
@@ -740,7 +740,7 @@ but maven test is ok without ceres
 
 This tiddler was automatically created to record the details of this server</pre>
 </div>
-<div title="GATrackerPlugin" modifier="Julien Coloos" created="201105142206" modified="201105182137" tags="systemConfig" server.page.revision="201105182137" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.type="file">
+<div title="GATrackerPlugin" modifier="Julien Coloos" created="201105142206" modified="201105182137" tags="systemConfig" server.type="file" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.page.revision="201105182137">
 <pre>/***
 |Name|GATrackerPlugin|
 |Description|Google Analytics tracker|
@@ -961,13 +961,41 @@ handler: function(place, macroName, params, wikifier, paramString, tiddler) {
 })(jQuery);}
 //}}}</pre>
 </div>
-<div title="Getting started" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104242212" modified="201111051700" tags="intro" changecount="11">
+<div title="Gentzen systems explained" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201202231658" modified="201202231845" tags="explained" changecount="71">
+<pre>Let's prove C, C ⇒ A, ¬A ∨ B → B by refutation.
+We get :
+∃ A,B,C so that :
+1) C, C ⇒ A, ¬A ∨ B is true
+2) B is false
+
+So if we take C ⇒ A
+we get : C is false or A is true
+but we know C is true so C cannot be false and so A is true
+
+So if we take  ¬A ∨ B
+we get  ¬A is true or B is true but ¬A cannot be true because A is true.
+Conclusion : we get B is true but we suppose B is false in (2) so we got a logical contradiction and we prove C, C ⇒ A, ¬A ∨ B → B
+
+We can represent this proof as an array. Read it from the bottom to the up.
+|| @@''A'', C, C ⇒ A, ¬A ∨ B → A, B@@ |||
+|| ''¬A'', A, C, C ⇒ A, ¬A ∨ B → B | //^^&lt;= hypothesis 3,hypothesis 4 =&gt;^^// | @@''B'', A, C, C ⇒ A, ¬A ∨ B → B@@ |
+| @@C, C ⇒ A, ¬A ∨ B → B,''C''@@ | //^^&lt;= hypothesis 1,hypothesis 2 =&gt;^^// | ''A'', C, C ⇒ A, ''¬A ∨ B'' → B ||
+|| C, ''C ⇒ A'', ¬A ∨ B → B |||
+*in bold we see each hypothesis we made
+*each contradiction* is highlighted (*) when the same formula is present on left and on right of the sequent 
+*→ is a separation between true formulas and false formulas
+*, mean a conjunction on the left and a disjunction on the right
+''This is the very essence of sequent calculus.''</pre>
+</div>
+<div title="Getting started" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104242212" modified="201202231815" tags="intro" changecount="14">
 <pre>*[[What is it ?|http://www.cs.miami.edu/~tptp/OverviewOfATP.html]]
 *[[An overview|http://en.wikipedia.org/wiki/Automated_theorem_proving]]
 *[[Great introduction in French|http://images.math.cnrs.fr/La-verite-et-la-machine.html]]
 *[[A concrete step by step example|http://www.ontologyportal.org/resolution.html]]
 *[[Another concrete step by step example with a Video from John Harrison|http://code.google.com/p/flyspeck/wiki/HolLightDemo1]]
-*[[Yet another example with TPTP syntax|https://docs.google.com/leaf?id=1bY0NJpVeT98_iNVWvSmjB83iU6b8yguUUSjsiy54kqx1oPgz6T0upSD-S09N&amp;sort=moddate&amp;layout=list&amp;num=50]] (start slide 17)</pre>
+*[[Yet another example with TPTP syntax|https://docs.google.com/leaf?id=1bY0NJpVeT98_iNVWvSmjB83iU6b8yguUUSjsiy54kqx1oPgz6T0upSD-S09N&amp;sort=moddate&amp;layout=list&amp;num=50]] (start slide 17)
+
+You can also see algorithms &lt;&lt;tag explained&gt;&gt;</pre>
 </div>
 <div title="Glossary" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201109101656" modified="201202231013" tags="intro" changecount="13">
 <pre>!related to formal logic 
@@ -2119,7 +2147,7 @@ attribute ::= &quot;label&quot; &quot;(&quot; string &quot;)&quot; |
               &quot;bsub_hint_wt&quot; &quot;(&quot; integer &quot;)&quot;
 }}}</pre>
 </div>
-<div title="SystemSettings" modifier="Olivier ROLAND" created="201105142207" modified="201106101816" tags="excludeLists" changecount="5" server.page.revision="201105142207" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.type="file">
+<div title="SystemSettings" modifier="Olivier ROLAND" created="201105142207" modified="201106101816" tags="excludeLists" server.type="file" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.page.revision="201105142207" changecount="5">
 <pre>txt_GATracker_id: UA-4646079-1
 txt_GATracker_track: 1%2C0%2C1%2C1%2C1%2C1%2C1
 txtUserName: Olivier ROLAND</pre>
@@ -2185,7 +2213,7 @@ Extract from  Debasish Ghosh's book [[DSLs in Action |http://books.google.fr/boo
 
 @@WIP@@</pre>
 </div>
-<div title="TWikiFormatterPlugin" modifier="MartinBudden" created="200607210000" tags="systemConfig excludeLists excludeSearch" server.page.revision="200607210000" server.host="http://www.martinswiki.com" server.type="file">
+<div title="TWikiFormatterPlugin" modifier="MartinBudden" created="200607210000" tags="systemConfig excludeLists excludeSearch" server.type="file" server.host="http://www.martinswiki.com" server.page.revision="200607210000">
 <pre>/***
 |''Name:''|TWikiFormatterPlugin|
 |''Description:''|Allows Tiddlers to use [[TWiki|http://twiki.org/cgi-bin/view/TWiki/TextFormattingRules]] text formatting|
@@ -2908,7 +2936,7 @@ config.parsers.twikiFormatter.formatTag = 'TWikiFormat';
 } // end of 'install only once'
 //}}}</pre>
 </div>
-<div title="Tags" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104250931" modified="201201150925" tags="meta editing" changecount="54">
+<div title="Tags" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104250931" modified="201202231647" tags="meta editing" changecount="56">
 <pre>*&lt;&lt;tag atp&gt;&gt;- Automated Theorem Proving, what this site is all about
 **&lt;&lt;tag intro&gt;&gt;- Getting started
 **&lt;&lt;tag scala-atp&gt;&gt;- Scala port of [[Handbook of Practical Logic and Automated Reasoning|http://www.cambridge.org/catalogue/catalogue.asp?isbn=9780521899574]]
@@ -2916,6 +2944,7 @@ config.parsers.twikiFormatter.formatTag = 'TWikiFormat';
 **&lt;&lt;tag book&gt;&gt;- Some books
 ***&lt;&lt;tag summary&gt;&gt;- Reading notes
 **&lt;&lt;tag Algorithms&gt;&gt;- Algorithms related to Automated Theorem Proving
+***&lt;&lt;tag explained&gt;&gt;- Algorithms explained
 **&lt;&lt;tag proovers&gt;&gt;-
 ***&lt;&lt;tag gapt&gt;&gt;- General Architecture for proof
 ***&lt;&lt;tag MELIA&gt;&gt;- Model Evolution Calculus with Equality and built-in linear integer arithmetic 
