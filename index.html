@@ -1551,37 +1551,18 @@ disturbing the spacing between lines.</pre>
 
 You can use the left navigation bar to open major areas.  You can also use the search to find things that you like.  Phrases underlined are external links while phrases in bold blue font are internal links.</pre>
 </div>
-<div title="Optimal memory configuration for Scala IDE" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201105211712" modified="201108272200" tags="tools scala-ide" changecount="13">
-<pre>!for a machine with 8 Gigas, ideal settings, no swap.
+<div title="Optimal memory configuration for Scala IDE" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201105211712" modified="201203241818" tags="tools scala-ide" changecount="36">
+<pre>@@The time Scala IDE need huge heap space to compile the gapt project is over@@
+
+These settings are now sufficient.
 {{{
---launcher.XXMaxPermSize
-256m
---launcher.defaultAction
-openFile
--vmargs
--XX:PermSize=128m
--Xmx3800m
--server
+ -vmargs
+ -Xss8m
+ -Xms700m
+ -Xmx2048m
 }}}
 
-!for a machine with 4 Gigas, poor performance, more than 4 Gigas of swap.
-{{{
---launcher.XXMaxPermSize
-256m
---launcher.defaultAction
-openFile
--vmargs
--XX:PermSize=128m
--Xss1m
--Xmx2700m
--server
--XX:+DoEscapeAnalysis
--XX:+UseConcMarkSweepGC
--XX:+UseCompressedOops
--XX:+UnlockExperimentalVMOptions
-}}}
-
-Most of this optimizations are not necessary anymore. Details [[here|http://download.oracle.com/javase/7/docs/technotes/guides/vm/performance-enhancements-7.html]].
+Also most of the JVM optimizations are not necessary anymore. Details [[here|http://download.oracle.com/javase/7/docs/technotes/guides/vm/performance-enhancements-7.html]].
 *Compressed oops is supported and enabled by default in Java SE 6u23 and later. In Java SE 7, use of compressed oops is the default for 64-bit JVM processes when -Xmx isn't specified and for values of -Xmx less than 32 gigabytes.
 *Escape analysis is supported and enabled by default in Java SE 6u23 and later.</pre>
 </div>
@@ -1720,7 +1701,7 @@ If a parser takes a stream of characters and turns them into an abstract syntax 
 *A Scala port of Lindig’s implementation of Wadler’s pretty printer from Ocaml, adding all combinators and whole API from Haskell PPrint - which is another implementation of Wadler’s prettier-printer by Daan Leijen : [[source code|http://scala-programming-language.1934581.n4.nabble.com/file/n1995937/zPPrint.scala]] and [[demo|http://scala-programming-language.1934581.n4.nabble.com/scala-pretty-printing-tp1995936p1995939.html]]
 *A rudimentary pretty printer combinator : http://www.scala-blogs.org/2009/04/combinators-for-pretty-printers-part-1.html</pre>
 </div>
-<div title="Programming in Scala 2nd : summary" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104232118" modified="201202182242" tags="scala book summary scala-atp wip" changecount="53">
+<div title="Programming in Scala 2nd : summary" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104232118" modified="201203082213" tags="scala book summary scala-atp wip" changecount="54">
 <pre>* Chapter 1 · A Scalable Language
 ** Functional programming is guided by two main ideas
 *** functions are first-class values
@@ -1857,10 +1838,12 @@ If a parser takes a stream of characters and turns them into an abstract syntax 
 *** If you plan to distribute it in compiled form, and you expect outside groups to write classes inheriting from it, you might lean towards using an abstract class
 *** If efficiency is very important, lean towards using a class
 *** If you still do not know, after considering the above, then start by making it as a trait
+* Chapter 13 - Packages and Imports
+** 
 * Chapter 18 - Stateful Objects
 ** every var that is a non-private member of some object implicitly defines a getter and a setter method with it
 ** The getter of a var x is just named “x”, while its setter is named “x_=”
-* Chapter 33 · Combinator Parsing
+* Chapter 33 - Combinator Parsing
 ** Sequential composition is expressed by an explicit operator: ~
 ** Repetition is expressed rep( . . . )
 ** The ˆˆ operator transforms the result of a parser
