@@ -740,7 +740,7 @@ but maven test is ok without ceres
 
 This tiddler was automatically created to record the details of this server</pre>
 </div>
-<div title="GATrackerPlugin" modifier="Julien Coloos" created="201105142206" modified="201105182137" tags="systemConfig" server.type="file" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.page.revision="201105182137">
+<div title="GATrackerPlugin" modifier="Julien Coloos" created="201105142206" modified="201105182137" tags="systemConfig" server.page.revision="201105182137" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.type="file">
 <pre>/***
 |Name|GATrackerPlugin|
 |Description|Google Analytics tracker|
@@ -1551,21 +1551,6 @@ disturbing the spacing between lines.</pre>
 
 You can use the left navigation bar to open major areas.  You can also use the search to find things that you like.  Phrases underlined are external links while phrases in bold blue font are internal links.</pre>
 </div>
-<div title="Optimal memory configuration for Scala IDE" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201105211712" modified="201203241818" tags="tools scala-ide" changecount="36">
-<pre>@@The time Scala IDE need huge heap space to compile the gapt project is over@@
-
-These settings are now sufficient.
-{{{
- -vmargs
- -Xss8m
- -Xms700m
- -Xmx2048m
-}}}
-
-Also most of the JVM optimizations are not necessary anymore. Details [[here|http://download.oracle.com/javase/7/docs/technotes/guides/vm/performance-enhancements-7.html]].
-*Compressed oops is supported and enabled by default in Java SE 6u23 and later. In Java SE 7, use of compressed oops is the default for 64-bit JVM processes when -Xmx isn't specified and for values of -Xmx less than 32 gigabytes.
-*Escape analysis is supported and enabled by default in Java SE 6u23 and later.</pre>
-</div>
 <div title="Packrat Efficiency" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201108280902" modified="201111111835" tags="parsing TPTP" changecount="40">
 <pre>| TPTP test | without packrat | with packrat | time gain |h
 | GRP194+1.p | 0.910 sec | 0.289 sec| -68.24% |
@@ -1681,16 +1666,6 @@ Nota: a Scala port of [[grammar combinator|http://lambda-the-ultimate.org/node/4
 **http://scala-programming-language.1934581.n4.nabble.com/scala-pretty-printing-td1995936.html
 
 See also [[Parser combinators vs others]]</pre>
-</div>
-<div title="Plugins for Eclipse" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201105221308" modified="201201081006" tags="tools scala-ide" changecount="28">
-<pre>!Indigo
-*ScalaIDE - http://download.scala-ide.org/nightly-update-master-2.9.2-SNAPSHOT
-*m2e is now integrated with eclipse
-*Maven Integration for Scala IDE build manually from https://github.com/sonatype/m2eclipse-scala
-*m2e-subversive from m2e market place
-*m2e-egit from m2e market place
-@@Scala IDE Version 2.1, Nightly is used because of the new Highlight Implicits feature.@@
-</pre>
 </div>
 <div title="Pretty Printing" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201108131210" modified="201108131731" tags="parsing" changecount="22">
 <pre>!What is it ?
@@ -2130,7 +2105,7 @@ attribute ::= &quot;label&quot; &quot;(&quot; string &quot;)&quot; |
               &quot;bsub_hint_wt&quot; &quot;(&quot; integer &quot;)&quot;
 }}}</pre>
 </div>
-<div title="SystemSettings" modifier="Olivier ROLAND" created="201105142207" modified="201106101816" tags="excludeLists" server.type="file" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.page.revision="201105142207" changecount="5">
+<div title="SystemSettings" modifier="Olivier ROLAND" created="201105142207" modified="201106101816" tags="excludeLists" changecount="5" server.page.revision="201105142207" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.type="file">
 <pre>txt_GATracker_id: UA-4646079-1
 txt_GATracker_track: 1%2C0%2C1%2C1%2C1%2C1%2C1
 txtUserName: Olivier ROLAND</pre>
@@ -2196,7 +2171,7 @@ Extract from  Debasish Ghosh's book [[DSLs in Action |http://books.google.fr/boo
 
 @@WIP@@</pre>
 </div>
-<div title="TWikiFormatterPlugin" modifier="MartinBudden" created="200607210000" tags="systemConfig excludeLists excludeSearch" server.type="file" server.host="http://www.martinswiki.com" server.page.revision="200607210000">
+<div title="TWikiFormatterPlugin" modifier="MartinBudden" created="200607210000" tags="systemConfig excludeLists excludeSearch" server.page.revision="200607210000" server.host="http://www.martinswiki.com" server.type="file">
 <pre>/***
 |''Name:''|TWikiFormatterPlugin|
 |''Description:''|Allows Tiddlers to use [[TWiki|http://twiki.org/cgi-bin/view/TWiki/TextFormattingRules]] text formatting|
@@ -3376,6 +3351,31 @@ tptp_to_ladr &lt; PUZ031-1.tptp | prover9
 Nota : [[Prover9 &amp; co|http://www.cs.unm.edu/~mccune/mace4/download/LADR-2009-11A.tar.gz]] also compile with just a glitch* on Mac OS X version 10.6.8 with gcc 4.2.1 
 
 @@*ladr_to_tptp segfault@@</pre>
+</div>
+<div title="howto Scala IDE for Eclipse" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201105221308" modified="201204132158" tags="tools scala-ide howto" changecount="33">
+<pre>!Installation
+*Eclipse IDE for Java Developers
+*ScalaIDE - http://download.scala-ide.org/nightly-update-master-2.9.2-SNAPSHOT
+*m2e is now integrated with eclipse
+*m2eclipse-scala - http://alchim31.free.fr/m2e-scala/update-site
+*m2e-subversive from m2e market place
+*m2e-egit from m2e market place
+@@Scala IDE Version 2.1, Nightly is used because of the new Highlight Implicits feature.@@
+
+!Optimal memory configuration for Scala IDE
+@@The time Scala IDE need huge heap space to compile the gapt project is over@@
+
+These settings are now sufficient.
+{{{
+ -vmargs
+ -Xss8m
+ -Xms700m
+ -Xmx2048m
+}}}
+
+Also most of the JVM optimizations are not necessary anymore. Details [[here|http://download.oracle.com/javase/7/docs/technotes/guides/vm/performance-enhancements-7.html]].
+*Compressed oops is supported and enabled by default in Java SE 6u23 and later. In Java SE 7, use of compressed oops is the default for 64-bit JVM processes when -Xmx isn't specified and for values of -Xmx less than 32 gigabytes.
+*Escape analysis is supported and enabled by default in Java SE 6u23 and later.</pre>
 </div>
 <div title="howto Vampire" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201110311539" modified="201111112223" tags="Vampire pb" changecount="12">
 <pre>[[Vampire|http://www.vprover.org/]] is actually the best automatic theorem prover for first-order classical logic 
