@@ -740,7 +740,7 @@ but maven test is ok without ceres
 
 This tiddler was automatically created to record the details of this server</pre>
 </div>
-<div title="GATrackerPlugin" modifier="Julien Coloos" created="201105142206" modified="201105182137" tags="systemConfig" server.page.revision="201105182137" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.type="file">
+<div title="GATrackerPlugin" modifier="Julien Coloos" created="201105142206" modified="201105182137" tags="systemConfig" server.type="file" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.page.revision="201105182137">
 <pre>/***
 |Name|GATrackerPlugin|
 |Description|Google Analytics tracker|
@@ -1826,19 +1826,20 @@ If a parser takes a stream of characters and turns them into an abstract syntax 
 **** floatingPointNumber ˆˆ (_.toDouble)
 **** &quot;true&quot; ˆˆ (x =&gt; true)</pre>
 </div>
-<div title="Project Status Report" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201108101807" modified="201201150917" tags="done wip" changecount="42">
+<div title="Project Status Report" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201108101807" modified="201205090738" tags="done wip" changecount="46">
 <pre>!What we've learned so far
-All issues related to &lt;&lt;tag parsing&gt;&gt; have been undervalued. ATP and &lt;&lt;tag parsing&gt;&gt; are tightly coupled.
-A theorem prover need a solid &lt;&lt;tag parsing&gt;&gt; foundation.
+All issues related to &lt;&lt;tag parsing&gt;&gt; have been undervalued. ATP and parsing are tightly coupled.
+A theorem prover need a solid parsing foundation.
 
 !What we've done so far
-*contribute to &lt;&lt;tag MELIA&gt;&gt; [[0.1.3|http://users.cecs.anu.edu.au/~baumgart/systems/MELIA/ReadMe.txt]] by changing the &lt;&lt;tag TPTP&gt;&gt; parser to packrat &lt;&lt;tag parsing&gt;&gt;, which speeds up &lt;&lt;tag parsing&gt;&gt; significantly. 
+*contribute to &lt;&lt;tag MELIA&gt;&gt; [[0.1.3|http://users.cecs.anu.edu.au/~baumgart/systems/MELIA/ReadMe.txt]] by changing the &lt;&lt;tag TPTP&gt;&gt; parser to packrat &lt;&lt;tag parsing&gt;&gt;, which speeds up parsing significantly. 
 *see also : &lt;&lt;tag done&gt;&gt;
 
 !What we are doing right now
 Focus is currently on building &quot;a state of the art&quot; &lt;&lt;tag TPTP&gt;&gt; parser --based on parser combinators with the PackratParsers extension--.
-[[Xtext|http://www.eclipse.org/Xtext/]] could be the better framework/tool. Study now ongoing will tell whether the potential advantages of such framework/tool are confirmed.
+[[Xtext|http://www.eclipse.org/Xtext/]] could be the better framework/tool. --Study now ongoing will tell whether the potential advantages of such framework/tool are confirmed.--
 In this context, Debasish Ghosh's book [[DSLs in Action |http://books.google.fr/books?id=SzD6RAAACAAJ&amp;num=16&amp;source=gbs_slider_cls_metadata_1003_mylibrary]] has proved invaluable
+@@Current work consist in implementing a full featured TPTP parser/editor with Xtext.@@ 
 
 See also : &lt;&lt;tag wip&gt;&gt;</pre>
 </div>
@@ -1881,20 +1882,26 @@ See also : &lt;&lt;tag wip&gt;&gt;</pre>
 **This volume contains articles covering a broad spectrum of proof theory, with an emphasis on its mathematical aspects.
 **Full review : http://www.math.ucla.edu/~asl/bsl/0604/0604-003.ps</pre>
 </div>
-<div title="Roadmap" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104241247" modified="201202171429" tags="intro" changecount="39">
+<div title="Roadmap" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104241247" modified="201205090814" tags="intro" changecount="52">
 <pre>*Phase 1 : initialization
-** Identify resources (books, article, thesis, blog, etc ...) that are available (started, WIP)
-** Identify people/organisation also working on ATP ([[done|Who's who]])
+** Identify resources (books, article, thesis, blog, etc ...) that are available ([[started|Library]] and never end)
+** Identify people/organisation also working on ATP ([[started|Who's who]] and never end)
 ** Select the appropriate Content Management System ([[done|Content Management System]])
 ** Select the appropriate programming language ([[done|Scala]])
 ** Select additional &lt;&lt;tag tools&gt;&gt; (started, WIP)
-** Select authoritative &lt;&lt;tag book&gt;&gt; on each subject and make a summary (&lt;&lt;tag summary [started]&gt;&gt;, WIP)
-** Use the selected [[CMS|Content Management System]] to consolidate knowledge ([[started|Etat De L'Art]], WIP)
-** Select parsing technique ([[started|Parsing]],WIP)
+** Select authoritative &lt;&lt;tag book&gt;&gt; on each subject and make a summary (&lt;&lt;tag summary [started]&gt;&gt;and never end)
+** Use the selected [[CMS|Content Management System]] to consolidate knowledge ([[started|Etat De L'Art]] and never end)
+** Select parsing technique ([[done|Parser combinators vs others]])
 *--Phase 2 : Scala port of [[Handbook of Practical Logic and Automated Reasoning|http://www.cambridge.org/catalogue/catalogue.asp?isbn=9780521899574]]([[started|http://github.com/newca12/scala-atp]], WIP)--
+* Phase 2 : contribute to &lt;&lt;tag gapt&gt;&gt; (started and nerver end) 
 *Phase 3 : make [[HED|http://code.google.com/p/edla-hed/]] (hoper edei deixai) a state of the art theorem prover (not yet started)
-**Phase 3a : write a parser for TPTP using --Scala Parser Combinator-- Xtext  (started, WIP) 
-</pre>
+**Phase 3a : write a parser/editor for TPTP using --Scala Parser Combinator-- Xtext  (started, WIP) 
+***Phase 3a1 : construct Xtext grammar for TPTP (started, WIP)
+***Phase 3a2 : create scopes for type resolution and challenges faced due to the TPTP’s language semantics
+***Phase 3a4 : customize the appearance and contents of the Outline View
+***Phase 3a5 : customize the editor: syntax highlighting, Javadoc-like documentation and hyperlinking
+***Phase 3a6 : customize content-assist beyond the language syntax
+***Phase 3a7 : validate and test the language’s semantics</pre>
 </div>
 <div title="Scala" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104241415" modified="201105081356" tags="intro tools scala" changecount="9">
 <pre>Why Scala ?
@@ -1907,6 +1914,19 @@ The answer is to to turn the problem on its ear (as it were) and eschew mathemat
 
 See also : [[Scala vs others]] 
 </pre>
+</div>
+<div title="Scala IDE for Eclipse problems" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201106031207" modified="201205090726" tags="pb scala-ide" changecount="21">
+<pre>! Problems in Scala plugin
+* no hover for Javadoc/Scaladoc : [[ticket 1000255|http://www.assembla.com/spaces/scala-ide/tickets/1000255]]
+* --no &quot;Add Import'&quot; function like in Java (but quick fix work)--
+* Import not used never signaled
+* no maximum line width in Scala formatter configuration
+* search references of a Scala object in project (like in Java) is not yet implemented
+* open call hierarchy doesn't work : [[ticket 1000360|http://www.assembla.com/spaces/scala-ide/tickets/1000360]]
+! Problems in m2eclipse
+* add a module in a maven multiple project never add the corresponding scala project even with update project configuration
+! Problems with specs2
+* First method to execute specs2 specification [[documented here|http://etorreborre.github.com/specs2/guide/org.specs2.guide.Runners.html#Via+JUnit]] doesn't always work even with the [[trick|http://code.google.com/p/specs/wiki/RunningSpecs#Run_your_specification_with_JUnit4_in_Eclipse]]. The author note :  for undetermined reasons the trick above might not even work! In that case your best chance is to put explicitly the following annotation on your specification class ... @@&lt;= not really a problem since the second method work.@@</pre>
 </div>
 <div title="Scala Parser Combinator" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201108141627" modified="201111111837" tags="parsing" changecount="10">
 <pre>!How to debug
@@ -1980,13 +2000,6 @@ System.err.format(&quot;[UPTIME: %5ds] %s%n&quot;, (System.currentTimeMillis() -
 * Scala cons
 ** syntax is as good as possible but far from the beauty of haskell syntax 
 The winner is : [[Scala]]. The only language of the three with strong IDE support. </pre>
-</div>
-<div title="ScalaIDE problems" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201106031207" modified="201107310714" tags="pb" changecount="13">
-<pre>* no hover for Javadoc/Scaladoc : http://www.assembla.com/spaces/scala-ide/tickets/1000255-javadoc-view-regression
-* --no &quot;Add Import'&quot; function like in Java (but quick fix work)--
-* Import not used never signaled
-* no maximum line width in Scala formatter configuration
-* search references of a Scala object in project (like in Java) is not yet implemented</pre>
 </div>
 <div title="Scaladoc &amp; Co" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201106221658" modified="201106242140" tags="tools" changecount="20">
 <pre>Netty Javadoc use [[apiviz|http://code.google.com/p/apiviz/]] which is a rewrite of [[umlgraph|http://www.umlgraph.org/]] to embed class diagram in Javadoc
@@ -2105,7 +2118,7 @@ attribute ::= &quot;label&quot; &quot;(&quot; string &quot;)&quot; |
               &quot;bsub_hint_wt&quot; &quot;(&quot; integer &quot;)&quot;
 }}}</pre>
 </div>
-<div title="SystemSettings" modifier="Olivier ROLAND" created="201105142207" modified="201106101816" tags="excludeLists" changecount="5" server.page.revision="201105142207" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.type="file">
+<div title="SystemSettings" modifier="Olivier ROLAND" created="201105142207" modified="201106101816" tags="excludeLists" server.type="file" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.page.revision="201105142207" changecount="5">
 <pre>txt_GATracker_id: UA-4646079-1
 txt_GATracker_track: 1%2C0%2C1%2C1%2C1%2C1%2C1
 txtUserName: Olivier ROLAND</pre>
@@ -2171,7 +2184,7 @@ Extract from  Debasish Ghosh's book [[DSLs in Action |http://books.google.fr/boo
 
 @@WIP@@</pre>
 </div>
-<div title="TWikiFormatterPlugin" modifier="MartinBudden" created="200607210000" tags="systemConfig excludeLists excludeSearch" server.page.revision="200607210000" server.host="http://www.martinswiki.com" server.type="file">
+<div title="TWikiFormatterPlugin" modifier="MartinBudden" created="200607210000" tags="systemConfig excludeLists excludeSearch" server.type="file" server.host="http://www.martinswiki.com" server.page.revision="200607210000">
 <pre>/***
 |''Name:''|TWikiFormatterPlugin|
 |''Description:''|Allows Tiddlers to use [[TWiki|http://twiki.org/cgi-bin/view/TWiki/TextFormattingRules]] text formatting|
