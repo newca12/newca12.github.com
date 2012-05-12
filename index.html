@@ -1826,7 +1826,7 @@ If a parser takes a stream of characters and turns them into an abstract syntax 
 **** floatingPointNumber ˆˆ (_.toDouble)
 **** &quot;true&quot; ˆˆ (x =&gt; true)</pre>
 </div>
-<div title="Project Status Report" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201108101807" modified="201205090738" tags="done wip" changecount="46">
+<div title="Project Status Report" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201108101807" modified="201205121257" tags="done wip" changecount="48">
 <pre>!What we've learned so far
 All issues related to &lt;&lt;tag parsing&gt;&gt; have been undervalued. ATP and parsing are tightly coupled.
 A theorem prover need a solid parsing foundation.
@@ -1840,8 +1840,7 @@ Focus is currently on building &quot;a state of the art&quot; &lt;&lt;tag TPTP&g
 [[Xtext|http://www.eclipse.org/Xtext/]] could be the better framework/tool. --Study now ongoing will tell whether the potential advantages of such framework/tool are confirmed.--
 In this context, Debasish Ghosh's book [[DSLs in Action |http://books.google.fr/books?id=SzD6RAAACAAJ&amp;num=16&amp;source=gbs_slider_cls_metadata_1003_mylibrary]] has proved invaluable
 @@Current work consist in implementing a full featured TPTP parser/editor with Xtext.@@ 
-
-See also : &lt;&lt;tag wip&gt;&gt;</pre>
+See also : [[Roadmap]]</pre>
 </div>
 <div title="Proof language" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201106152104" modified="201107301332" tags="atp parsing TPTP" changecount="11">
 <pre>* a kind of standard for higher-order expressions: http://www.cs.miami.edu/~tptp/cgi-bin/SeeTPTP?Category=Documents&amp;File=SyntaxBNF
@@ -1882,26 +1881,34 @@ See also : &lt;&lt;tag wip&gt;&gt;</pre>
 **This volume contains articles covering a broad spectrum of proof theory, with an emphasis on its mathematical aspects.
 **Full review : http://www.math.ucla.edu/~asl/bsl/0604/0604-003.ps</pre>
 </div>
-<div title="Roadmap" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104241247" modified="201205090814" tags="intro" changecount="52">
-<pre>*Phase 1 : initialization
-** Identify resources (books, article, thesis, blog, etc ...) that are available ([[started|Library]] and never end)
-** Identify people/organisation also working on ATP ([[started|Who's who]] and never end)
-** Select the appropriate Content Management System ([[done|Content Management System]])
-** Select the appropriate programming language ([[done|Scala]])
-** Select additional &lt;&lt;tag tools&gt;&gt; (started, WIP)
-** Select authoritative &lt;&lt;tag book&gt;&gt; on each subject and make a summary (&lt;&lt;tag summary [started]&gt;&gt;and never end)
-** Use the selected [[CMS|Content Management System]] to consolidate knowledge ([[started|Etat De L'Art]] and never end)
-** Select parsing technique ([[done|Parser combinators vs others]])
-*--Phase 2 : Scala port of [[Handbook of Practical Logic and Automated Reasoning|http://www.cambridge.org/catalogue/catalogue.asp?isbn=9780521899574]]([[started|http://github.com/newca12/scala-atp]], WIP)--
-* Phase 2 : contribute to &lt;&lt;tag gapt&gt;&gt; (started and nerver end) 
-*Phase 3 : make [[HED|http://code.google.com/p/edla-hed/]] (hoper edei deixai) a state of the art theorem prover (not yet started)
-**Phase 3a : write a parser/editor for TPTP using --Scala Parser Combinator-- Xtext  (started, WIP) 
-***Phase 3a1 : construct Xtext grammar for TPTP (started, WIP)
-***Phase 3a2 : create scopes for type resolution and challenges faced due to the TPTP’s language semantics
-***Phase 3a4 : customize the appearance and contents of the Outline View
-***Phase 3a5 : customize the editor: syntax highlighting, Javadoc-like documentation and hyperlinking
-***Phase 3a6 : customize content-assist beyond the language syntax
-***Phase 3a7 : validate and test the language’s semantics</pre>
+<div title="Roadmap" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104241247" modified="201205121324" tags="intro done" changecount="66">
+<pre>!Tasks to complete
+*Phase 1 : Initialization
+** --Select the appropriate Content Management System-- ([[done|Content Management System]])
+** --Select the appropriate programming language-- ([[done|Scala]])
+** --Select additional &lt;&lt;tag tools&gt;&gt;-- (done)
+** --Select parsing technique-- ([[done|Parser combinators vs others]])
+*Phase 2 : Write a parser/editor for &lt;&lt;tag TPTP&gt;&gt; using --Scala Parser Combinator-- Xtext  ([[started|TPTP Editor]], WIP) 
+**Construct Xtext grammar for TPTP (started, WIP)
+***Convert tptp.g from antlrV2 to antlrV3 (started, WIP)
+***Convert Antlr grammar to Xtext
+***Create scopes for type resolution and challenges faced due to the TPTP’s language semantics
+***Customize the appearance and contents of the Outline View
+***Customize the editor: syntax highlighting, Javadoc-like documentation and hyperlinking
+***Customize content-assist beyond the language syntax
+***Validate and test the language’s semantics
+*Phase 3 : Make [[HED|http://code.google.com/p/edla-hed/]] (hoper edei deixai) a state of the art theorem prover (not yet started)
+
+!Never ending tasks
+* Identify resources (books, article, thesis, blog, etc ...) that are available ([[started|Library]])
+* Identify people/organisation also working on ATP ([[started|Who's who]])
+* Select authoritative &lt;&lt;tag book&gt;&gt; on each subject and make a summary (&lt;&lt;tag summary [started]&gt;&gt;)
+* Use the selected [[CMS|Content Management System]] to consolidate knowledge ([[started|Etat De L'Art]])
+* Contribute to &lt;&lt;tag gapt&gt;&gt; (started) 
+
+!Aborted tasks
+--Phase 2 : Scala port of [[Handbook of Practical Logic and Automated Reasoning|http://www.cambridge.org/catalogue/catalogue.asp?isbn=9780521899574]]([[started|http://github.com/newca12/scala-atp]], WIP)--
+</pre>
 </div>
 <div title="Scala" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104241415" modified="201105081356" tags="intro tools scala" changecount="9">
 <pre>Why Scala ?
@@ -2122,6 +2129,19 @@ attribute ::= &quot;label&quot; &quot;(&quot; string &quot;)&quot; |
 <pre>txt_GATracker_id: UA-4646079-1
 txt_GATracker_track: 1%2C0%2C1%2C1%2C1%2C1%2C1
 txtUserName: Olivier ROLAND</pre>
+</div>
+<div title="TPTP Editor" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201205121304" modified="201205121349" tags="parsing TPTP" changecount="20">
+<pre>!Xtext grammar for TPTP
+Andrei Tchaltsev has created an ANTLR grammar file for TPTP language version 3.1.1.13 (see section ''//with ANTLR//'' in [[TPTP parser]])
+This grammar is for ANTLR v2 but is a good starting point.
+[[ANTLR v2 to v3 converter|http://antlr.org/download/v2v3-0.2.tar.gz]] was used to help v2 =&gt; v3 conversion but 12 residual errors need to be fixed
+{{{
+java -cp ./antlr-runtime-3.0.1.jar:. v3me tptp.g
+}}}
+See [[here|https://github.com/adamschmideg/coffeescript-eclipse/blob/master/devjournal.md]] some tips to convert Antlr grammar to Xtext 
+
+@@WIP@@
+</pre>
 </div>
 <div title="TPTP language" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201107141639" modified="201108052052" tags="atp parsing TPTP" changecount="20">
 <pre>!Main site
