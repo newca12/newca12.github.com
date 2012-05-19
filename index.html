@@ -740,7 +740,7 @@ but maven test is ok without ceres
 
 This tiddler was automatically created to record the details of this server</pre>
 </div>
-<div title="GATrackerPlugin" modifier="Julien Coloos" created="201105142206" modified="201105182137" tags="systemConfig" server.type="file" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.page.revision="201105182137">
+<div title="GATrackerPlugin" modifier="Julien Coloos" created="201105142206" modified="201105182137" tags="systemConfig" server.page.revision="201105182137" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.type="file">
 <pre>/***
 |Name|GATrackerPlugin|
 |Description|Google Analytics tracker|
@@ -2125,22 +2125,27 @@ attribute ::= &quot;label&quot; &quot;(&quot; string &quot;)&quot; |
               &quot;bsub_hint_wt&quot; &quot;(&quot; integer &quot;)&quot;
 }}}</pre>
 </div>
-<div title="SystemSettings" modifier="Olivier ROLAND" created="201105142207" modified="201106101816" tags="excludeLists" server.type="file" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.page.revision="201105142207" changecount="5">
+<div title="SystemSettings" modifier="Olivier ROLAND" created="201105142207" modified="201106101816" tags="excludeLists" changecount="5" server.page.revision="201105142207" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.type="file">
 <pre>txt_GATracker_id: UA-4646079-1
 txt_GATracker_track: 1%2C0%2C1%2C1%2C1%2C1%2C1
 txtUserName: Olivier ROLAND</pre>
 </div>
-<div title="TPTP Editor" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201205121304" modified="201205121349" tags="parsing TPTP" changecount="20">
-<pre>!Xtext grammar for TPTP
+<div title="TPTP Editor" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201205121304" modified="201205141728" tags="parsing TPTP" changecount="29">
+<pre>@@WIP@@
+!Xtext grammar for TPTP
 Andrei Tchaltsev has created an ANTLR grammar file for TPTP language version 3.1.1.13 (see section ''//with ANTLR//'' in [[TPTP parser]])
 This grammar is for ANTLR v2 but is a good starting point.
-[[ANTLR v2 to v3 converter|http://antlr.org/download/v2v3-0.2.tar.gz]] was used to help v2 =&gt; v3 conversion but 12 residual errors need to be fixed
+[[ANTLR v2 to v3 converter|http://antlr.org/download/v2v3-0.2.tar.gz]] was used to help v2 =&gt; v3 conversion but 12 residual errors need to be [[manually|http://www.antlr.org/wiki/display/ANTLR3/Migrating+from+ANTLR+2+to+ANTLR+3]] fixed
 {{{
 java -cp ./antlr-runtime-3.0.1.jar:. v3me tptp.g
 }}}
 See [[here|https://github.com/adamschmideg/coffeescript-eclipse/blob/master/devjournal.md]] some tips to convert Antlr grammar to Xtext 
 
-@@WIP@@
+The creation of the Xtext grammar from Antlr grammar did not prove to be a good idea. However Xtext generate an Antlr grammar InternalX.g and for debugging purpose the translation may prove to be useful. (see below)
+!Debugging Xtext grammar
+[[ANTLRWorks|http://antlr.org/works/index.html]] or [[ANTLR IDE|http://antlrv3ide.sourceforge.net/]] can sometime help to debug corner case problems.
+
+
 </pre>
 </div>
 <div title="TPTP language" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201107141639" modified="201108052052" tags="atp parsing TPTP" changecount="20">
@@ -2204,7 +2209,7 @@ Extract from  Debasish Ghosh's book [[DSLs in Action |http://books.google.fr/boo
 
 @@WIP@@</pre>
 </div>
-<div title="TWikiFormatterPlugin" modifier="MartinBudden" created="200607210000" tags="systemConfig excludeLists excludeSearch" server.type="file" server.host="http://www.martinswiki.com" server.page.revision="200607210000">
+<div title="TWikiFormatterPlugin" modifier="MartinBudden" created="200607210000" tags="systemConfig excludeLists excludeSearch" server.page.revision="200607210000" server.host="http://www.martinswiki.com" server.type="file">
 <pre>/***
 |''Name:''|TWikiFormatterPlugin|
 |''Description:''|Allows Tiddlers to use [[TWiki|http://twiki.org/cgi-bin/view/TWiki/TextFormattingRules]] text formatting|
@@ -3385,7 +3390,7 @@ Nota : [[Prover9 &amp; co|http://www.cs.unm.edu/~mccune/mace4/download/LADR-2009
 
 @@*ladr_to_tptp segfault@@</pre>
 </div>
-<div title="howto Scala IDE for Eclipse" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201105221308" modified="201204132158" tags="tools scala-ide howto" changecount="33">
+<div title="howto Scala IDE for Eclipse" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201105221308" modified="201205191721" tags="tools scala-ide howto" changecount="44">
 <pre>!Installation
 *Eclipse IDE for Java Developers
 *ScalaIDE - http://download.scala-ide.org/nightly-update-master-2.9.2-SNAPSHOT
@@ -3394,21 +3399,30 @@ Nota : [[Prover9 &amp; co|http://www.cs.unm.edu/~mccune/mace4/download/LADR-2009
 *m2e-subversive from m2e market place
 *m2e-egit from m2e market place
 @@Scala IDE Version 2.1, Nightly is used because of the new Highlight Implicits feature.@@
-
+!Post installation
+*Eclipse/Preference/General/Workspace/ =&gt; set text file encoding to UTF-8
+*@@Eclipse/Preference/Maven/ =&gt; set hide folders of physically nested modules@@
+*@@Eclipse/Preference/Team/Git/Projects =&gt; set auto share projects located in a git repository@@
+*Eclipse/Preference/Team/Git/Ignored Resources/ =&gt; add .cache,.classpath,.prefs,.project,*/target/*
 !Optimal memory configuration for Scala IDE
 @@The time Scala IDE need huge heap space to compile the gapt project is over@@
 
-These settings are now sufficient.
+Default eclipse settings are now sufficient but these could be used if necessary :
 {{{
  -vmargs
  -Xss8m
  -Xms700m
  -Xmx2048m
 }}}
-
 Also most of the JVM optimizations are not necessary anymore. Details [[here|http://download.oracle.com/javase/7/docs/technotes/guides/vm/performance-enhancements-7.html]].
 *Compressed oops is supported and enabled by default in Java SE 6u23 and later. In Java SE 7, use of compressed oops is the default for 64-bit JVM processes when -Xmx isn't specified and for values of -Xmx less than 32 gigabytes.
-*Escape analysis is supported and enabled by default in Java SE 6u23 and later.</pre>
+*Escape analysis is supported and enabled by default in Java SE 6u23 and later.
+!Example with Gapt
+#/File/Import/Maven/Check out Maven Projects from SCM
+#Choose git and enter https://github.com/newca12/gapt.git in SCM URL
+#Click on finish and that is : @@you've got automatically a fully configured Scala Maven multi-modules project git managed !@@
+
+  </pre>
 </div>
 <div title="howto Vampire" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201110311539" modified="201204211603" tags="Vampire howto pb" changecount="13">
 <pre>[[Vampire|http://www.vprover.org/]] is actually the best automatic theorem prover for first-order classical logic 
