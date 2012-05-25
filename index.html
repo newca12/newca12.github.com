@@ -1922,14 +1922,15 @@ The answer is to to turn the problem on its ear (as it were) and eschew mathemat
 See also : [[Scala vs others]] 
 </pre>
 </div>
-<div title="Scala IDE for Eclipse problems" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201106031207" modified="201205090726" tags="pb scala-ide" changecount="21">
+<div title="Scala IDE for Eclipse problems" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201106031207" modified="201205201100" tags="pb scala-ide" changecount="26">
 <pre>! Problems in Scala plugin
 * no hover for Javadoc/Scaladoc : [[ticket 1000255|http://www.assembla.com/spaces/scala-ide/tickets/1000255]]
 * --no &quot;Add Import'&quot; function like in Java (but quick fix work)--
-* Import not used never signaled
+* Import not used never signaled [feature available in IntelliJ IDEA]
 * no maximum line width in Scala formatter configuration
-* search references of a Scala object in project (like in Java) is not yet implemented
+* search references of a Scala object in project (like in Java) is not yet implemented [feature available in IntelliJ IDEA Find usages]
 * open call hierarchy doesn't work : [[ticket 1000360|http://www.assembla.com/spaces/scala-ide/tickets/1000360]]
+* no code analysis : [[ticket 1000629|http://www.assembla.com/spaces/scala-ide/tickets/1000629]] [feature available in IntelliJ IDEA Inspect code]
 ! Problems in m2eclipse
 * add a module in a maven multiple project never add the corresponding scala project even with update project configuration
 ! Problems with specs2
@@ -3390,7 +3391,7 @@ Nota : [[Prover9 &amp; co|http://www.cs.unm.edu/~mccune/mace4/download/LADR-2009
 
 @@*ladr_to_tptp segfault@@</pre>
 </div>
-<div title="howto Scala IDE for Eclipse" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201105221308" modified="201205191721" tags="tools scala-ide howto" changecount="44">
+<div title="howto Scala IDE for Eclipse" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201105221308" modified="201205192153" tags="tools scala-ide howto" changecount="45">
 <pre>!Installation
 *Eclipse IDE for Java Developers
 *ScalaIDE - http://download.scala-ide.org/nightly-update-master-2.9.2-SNAPSHOT
@@ -3403,7 +3404,7 @@ Nota : [[Prover9 &amp; co|http://www.cs.unm.edu/~mccune/mace4/download/LADR-2009
 *Eclipse/Preference/General/Workspace/ =&gt; set text file encoding to UTF-8
 *@@Eclipse/Preference/Maven/ =&gt; set hide folders of physically nested modules@@
 *@@Eclipse/Preference/Team/Git/Projects =&gt; set auto share projects located in a git repository@@
-*Eclipse/Preference/Team/Git/Ignored Resources/ =&gt; add .cache,.classpath,.prefs,.project,*/target/*
+*Eclipse/Preference/Team/Git/Ignored Resources/ =&gt; add .cache,.classpath,.project,*.prefs,*/target/*
 !Optimal memory configuration for Scala IDE
 @@The time Scala IDE need huge heap space to compile the gapt project is over@@
 
@@ -3437,7 +3438,7 @@ vampire_macosx ~/TPTP-v5.2.0/Problems/PUZ/PUZ031-1.p
 
 </pre>
 </div>
-<div title="howto gapt" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201105042106" modified="201107101404" tags="gapt scala-atp howto" changecount="23">
+<div title="howto gapt" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201105042106" modified="201205251512" tags="gapt scala-atp howto" changecount="25">
 <pre>!using gapt framework
 We want to prove : All men are mortal Socrates is a man Therefore Socrates is mortal
 This is equivalent to : All X are Y a is X Therefore a is Y
@@ -3480,7 +3481,7 @@ res5: at.logic.language.hol.HOLExpression = g(f(F(a:i):i):i, f(F(a:i):i):i):i
 scala&gt; val v = huet(&quot;x(f(a:i):i):i&quot;, &quot;f(x(a:i):i):i&quot;)
 v: at.logic.utils.executionModels.ndStream.NDStream[at.logic.language.lambda.substitutions.Substitution[at.logic.language.hol.HOLExpression]] = at.logic.algorithms.unification.hol.huet.Huet$$anon$1@4513098
 scala&gt; normalizeSub(v.next.get)
-&lt;x -&gt; (?#5{1}.#5{1})&gt;
+&lt;x -&gt; (λ#5{1}.#5{1})&gt;
 }}}
 * launch atp with : java -jar ./provers/atp/target/atp-1.1-Alpha-main.jar INPUTFILE
 {{{
