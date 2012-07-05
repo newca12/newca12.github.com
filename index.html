@@ -3396,15 +3396,15 @@ Nota : [[Prover9 &amp; co|http://www.cs.unm.edu/~mccune/mace4/download/LADR-2009
 
 @@*ladr_to_tptp segfault@@</pre>
 </div>
-<div title="howto Scala IDE for Eclipse" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201105221308" modified="201205192153" tags="tools scala-ide howto" changecount="45">
+<div title="howto Scala IDE for Eclipse 3.7 (Indigo)" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201105221308" modified="201207052131" tags="tools scala-ide howto" changecount="49">
 <pre>!Installation
 *Eclipse IDE for Java Developers
-*ScalaIDE - http://download.scala-ide.org/nightly-update-master-2.9.2-SNAPSHOT
-*m2e is now integrated with eclipse
+*m2e from eclipse market place
+*ScalaIDE - http://download.scala-ide.org/nightly-update-master-29x
 *m2eclipse-scala - http://alchim31.free.fr/m2e-scala/update-site
 *m2e-subversive from m2e market place
 *m2e-egit from m2e market place
-@@Scala IDE Version 2.1, Nightly is used because of the new Highlight Implicits feature.@@
+@@Scala IDE Version 2.1, Nightly is used because of the new Implicit Hyperlinking and Scala Debugger feature.@@
 !Post installation
 *Eclipse/Preference/General/Workspace/ =&gt; set text file encoding to UTF-8
 *@@Eclipse/Preference/Maven/ =&gt; set hide folders of physically nested modules@@
@@ -3429,6 +3429,17 @@ Also most of the JVM optimizations are not necessary anymore. Details [[here|htt
 #Click on finish and that is : @@you've got automatically a fully configured Scala Maven multi-modules project git managed !@@
 
   </pre>
+</div>
+<div title="howto Scala IDE for Eclipse 4.2 (Juno)" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201207052131" modified="201207052144" tags="tools scala-ide howto" changecount="5">
+<pre>@@There are actually some annoying problems with Juno, prefer [[howto Scala IDE for Eclipse 3.7 (Indigo)]]@@
+
+The [[howto Scala IDE for Eclipse 3.7 (Indigo)]] is also OK with Juno but :
+* use this URL to install Scala http://download.scala-ide.org/nightly-update-juno-master-29x
+* m2e-subversive is not available in Juno and maybe won't be, see : http://dev.eclipse.org/mhonarc/lists/m2e-users/msg02095.html
+* a bunch of popup with error asking you to add Scala library during compilation.
+* some java heap with indexation and some with the scala compiler
+
+@@Juno is actually not recommended@@</pre>
 </div>
 <div title="howto Vampire" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201110311539" modified="201204211603" tags="Vampire howto pb" changecount="13">
 <pre>[[Vampire|http://www.vprover.org/]] is actually the best automatic theorem prover for first-order classical logic 
