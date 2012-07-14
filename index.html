@@ -2014,9 +2014,11 @@ System.err.format(&quot;[UPTIME: %5ds] %s%n&quot;, (System.currentTimeMillis() -
 ** syntax is as good as possible but far from the beauty of haskell syntax 
 The winner is : [[Scala]]. The only language of the three with strong IDE support. </pre>
 </div>
-<div title="Scaladoc &amp; Co" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201106221658" modified="201106242140" tags="tools" changecount="20">
+<div title="Scaladoc &amp; Co" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201106221658" modified="201207142156" tags="tools" changecount="24">
 <pre>Netty Javadoc use [[apiviz|http://code.google.com/p/apiviz/]] which is a rewrite of [[umlgraph|http://www.umlgraph.org/]] to embed class diagram in Javadoc
-Similar feature for scala discussed [[here|http://www.scala-lang.org/node/4627]] and [[here|http://www.scala-lang.org/node/5861]] but no implementation yet
+Similar feature for scala discussed [[here|http://www.scala-lang.org/node/4627]] and [[here|http://www.scala-lang.org/node/5861]] but no implementation yet.
+Extract from : http://www.sts.tu-harburg.de/people/mi.garcia/ScalaCompilerCorner/
+{{{Type lattice visualization: Rather than trying to understand head-on how the typechecker works ;-) it might be useful to visualize first what the typechecker does for a given run (which type lattice it computes). At least one other component of the Scala compiler generates a DOT file to illustrate its operation (-Xgenerate-phase-graph). In IDE-speak, a type lattice is called a &quot;UML Class Hierarchy&quot;. Actually, it need not be IDE-based: Scaladoc2 could be retrofitted to perform code-summarization as in Spinelli's UMLGraph.}}}
 *Other Scaladoc limitations
 **Scaladoc/Scaladoc2 : no Java like {{{&quot;{@link ...}&quot;}}} (VScalaDoc2 doesn't seem an option actually)
 Project to follow : http://code.google.com/p/class-diagram/
