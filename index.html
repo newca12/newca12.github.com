@@ -2014,18 +2014,19 @@ System.err.format(&quot;[UPTIME: %5ds] %s%n&quot;, (System.currentTimeMillis() -
 ** syntax is as good as possible but far from the beauty of haskell syntax 
 The winner is : [[Scala]]. The only language of the three with strong IDE support. </pre>
 </div>
-<div title="Scaladoc &amp; Co" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201106221658" modified="201207142156" tags="tools" changecount="24">
+<div title="Scaladoc &amp; Co" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201106221658" modified="201207150825" tags="tools" changecount="33">
 <pre>Netty Javadoc use [[apiviz|http://code.google.com/p/apiviz/]] which is a rewrite of [[umlgraph|http://www.umlgraph.org/]] to embed class diagram in Javadoc
-Similar feature for scala discussed [[here|http://www.scala-lang.org/node/4627]] and [[here|http://www.scala-lang.org/node/5861]] but no implementation yet.
+Similar feature for scala discussed [[here|http://www.scala-lang.org/node/4627]] and [[here|http://www.scala-lang.org/node/5861]] --but no implementation yet.--
 Extract from : http://www.sts.tu-harburg.de/people/mi.garcia/ScalaCompilerCorner/
 {{{Type lattice visualization: Rather than trying to understand head-on how the typechecker works ;-) it might be useful to visualize first what the typechecker does for a given run (which type lattice it computes). At least one other component of the Scala compiler generates a DOT file to illustrate its operation (-Xgenerate-phase-graph). In IDE-speak, a type lattice is called a &quot;UML Class Hierarchy&quot;. Actually, it need not be IDE-based: Scaladoc2 could be retrofitted to perform code-summarization as in Spinelli's UMLGraph.}}}
-*Other Scaladoc limitations
+@@Implementation is ongoing : see [[Scaladoc class diagrams part 1|https://github.com/scala/scala/commit/fba65513d1195b162f958a5c25124958d6e7ea52]] and [[Scaladoc class diagrams part 2|https://github.com/scala/scala/commit/c85b4a4956]]@@
+*Scaladoc limitations (@@TODO@@ check if fixed in last version)
 **Scaladoc/Scaladoc2 : no Java like {{{&quot;{@link ...}&quot;}}} (VScalaDoc2 doesn't seem an option actually)
-Project to follow : http://code.google.com/p/class-diagram/
+--Project to follow : http://code.google.com/p/class-diagram/--
 *Resources :
 **[[scaladoc2|http://lampsvn.epfl.ch/trac/scala-old/wiki/Scaladoc]] source code : https://github.com/scala/scala/tree/master/src/compiler/scala/tools/nsc/doc
 **Advanced browsable Scala source code in HTML with : https://github.com/harrah/browse
-**Collaborative doc initiative : http://collaborative-scaladoc.github.com/
+**--Collaborative doc initiative : http://collaborative-scaladoc.github.com/--
 
 </pre>
 </div>
