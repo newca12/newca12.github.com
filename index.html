@@ -3433,16 +3433,18 @@ Also most of the JVM optimizations are not necessary anymore. Details [[here|htt
 
   </pre>
 </div>
-<div title="howto Scala IDE for Eclipse 4.2 (Juno)" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201207052131" modified="201207052144" tags="tools scala-ide howto" changecount="5">
-<pre>@@There are actually some annoying problems with Juno, prefer [[howto Scala IDE for Eclipse 3.7 (Indigo)]]@@
+<div title="howto Scala IDE for Eclipse 4.2 (Juno)" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201207052131" modified="201207221522" tags="tools scala-ide howto" changecount="12">
+<pre>@@--There are actually some annoying problems with Juno, prefer [[howto Scala IDE for Eclipse 3.7 (Indigo)]]--@@
 
-The [[howto Scala IDE for Eclipse 3.7 (Indigo)]] is also OK with Juno but :
+The [[howto Scala IDE for Eclipse 3.7 (Indigo)]] could also be used with Juno but :
 * use this URL to install Scala http://download.scala-ide.org/nightly-update-juno-master-29x
-* m2e-subversive is not available in Juno and maybe won't be, see : http://dev.eclipse.org/mhonarc/lists/m2e-users/msg02095.html
-* a bunch of popup with error asking you to add Scala library during compilation.
-* some java heap with indexation and some with the scala compiler
+* --m2e-subversive is not available in Juno and maybe won't be, see : http://dev.eclipse.org/mhonarc/lists/m2e-users/msg02095.html--
+** available from http://repository.tesla.io:8081/nexus/content/sites/m2e.extras/m2eclipse-subversive/0.13.0/N/0.13.0.201207010112/
+* --a bunch of popup with error asking you to add Scala library during compilation-- fixed
+* --some java heap with indexation and some with the scala compiler-- fixed (remove .m2/repository/.cache/m2e/)
 
-@@Juno is actually not recommended@@</pre>
+@@--Juno is actually not recommended--@@
+Juno with Scala IDE is usable. Still problems with m2e import (partial autoshare with git and none with subversive)</pre>
 </div>
 <div title="howto Vampire" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201110311539" modified="201204211603" tags="Vampire howto pb" changecount="13">
 <pre>[[Vampire|http://www.vprover.org/]] is actually the best automatic theorem prover for first-order classical logic 
