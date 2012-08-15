@@ -1831,15 +1831,14 @@ If a parser takes a stream of characters and turns them into an abstract syntax 
 **** floatingPointNumber ˆˆ (_.toDouble)
 **** &quot;true&quot; ˆˆ (x =&gt; true)</pre>
 </div>
-<div title="Project Status Report" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201108101807" modified="201205121257" tags="done wip" changecount="48">
+<div title="Project Status Report" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201108101807" modified="201208151232" tags="done wip" changecount="53">
 <pre>!What we've learned so far
 All issues related to &lt;&lt;tag parsing&gt;&gt; have been undervalued. ATP and parsing are tightly coupled.
 A theorem prover need a solid parsing foundation.
-
 !What we've done so far
 *contribute to &lt;&lt;tag MELIA&gt;&gt; [[0.1.3|http://users.cecs.anu.edu.au/~baumgart/systems/MELIA/ReadMe.txt]] by changing the &lt;&lt;tag TPTP&gt;&gt; parser to packrat &lt;&lt;tag parsing&gt;&gt;, which speeds up parsing significantly. 
+*contribute to &lt;&lt;tag gapt&gt;&gt; migration to specs2, maven best practices, XML validation and code organization.
 *see also : &lt;&lt;tag done&gt;&gt;
-
 !What we are doing right now
 Focus is currently on building &quot;a state of the art&quot; &lt;&lt;tag TPTP&gt;&gt; parser --based on parser combinators with the PackratParsers extension--.
 [[Xtext|http://www.eclipse.org/Xtext/]] could be the better framework/tool. --Study now ongoing will tell whether the potential advantages of such framework/tool are confirmed.--
@@ -1927,7 +1926,7 @@ The answer is to to turn the problem on its ear (as it were) and eschew mathemat
 See also : [[Scala vs others]] 
 </pre>
 </div>
-<div title="Scala IDE for Eclipse problems" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201106031207" modified="201205201100" tags="pb scala-ide" changecount="26">
+<div title="Scala IDE for Eclipse problems" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201106031207" modified="201208151222" tags="pb scala-ide" changecount="31">
 <pre>! Problems in Scala plugin
 * no hover for Javadoc/Scaladoc : [[ticket 1000255|http://www.assembla.com/spaces/scala-ide/tickets/1000255]]
 * --no &quot;Add Import'&quot; function like in Java (but quick fix work)--
@@ -1935,11 +1934,12 @@ See also : [[Scala vs others]]
 * no maximum line width in Scala formatter configuration
 * search references of a Scala object in project (like in Java) is not yet implemented [feature available in IntelliJ IDEA Find usages]
 * open call hierarchy doesn't work : [[ticket 1000360|http://www.assembla.com/spaces/scala-ide/tickets/1000360]]
-* no code analysis : [[ticket 1000629|http://www.assembla.com/spaces/scala-ide/tickets/1000629]] [feature available in IntelliJ IDEA Inspect code]
+* --no code analysis : [[ticket 1000629|http://www.assembla.com/spaces/scala-ide/tickets/1000629]] [feature available in IntelliJ IDEA Inspect code]-- [[Scalastyle|http://www.scalastyle.org/]] Eclipse plugin work well.
 ! Problems in m2eclipse
 * add a module in a maven multiple project never add the corresponding scala project even with update project configuration
 ! Problems with specs2
-* First method to execute specs2 specification [[documented here|http://etorreborre.github.com/specs2/guide/org.specs2.guide.Runners.html#Via+JUnit]] doesn't always work even with the [[trick|http://code.google.com/p/specs/wiki/RunningSpecs#Run_your_specification_with_JUnit4_in_Eclipse]]. The author note :  for undetermined reasons the trick above might not even work! In that case your best chance is to put explicitly the following annotation on your specification class ... @@&lt;= not really a problem since the second method work.@@</pre>
+* First method to execute specs2 specification [[documented here|http://etorreborre.github.com/specs2/guide/org.specs2.guide.Runners.html#Via+JUnit]] doesn't always work even with the [[trick|http://code.google.com/p/specs/wiki/RunningSpecs#Run_your_specification_with_JUnit4_in_Eclipse]]. The author note :  for undetermined reasons the trick above might not even work! In that case your best chance is to put explicitly the following annotation on your specification class ... @@&lt;= not really a problem since the second method work.@@
+* @RunWith(classOf[JUnitRunner]) need to be on top so no case class before for example. (Not a big problem)</pre>
 </div>
 <div title="Scala Parser Combinator" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201108141627" modified="201111111837" tags="parsing" changecount="10">
 <pre>!How to debug
@@ -3433,18 +3433,35 @@ Also most of the JVM optimizations are not necessary anymore. Details [[here|htt
 
   </pre>
 </div>
-<div title="howto Scala IDE for Eclipse 4.2 (Juno)" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201207052131" modified="201207221522" tags="tools scala-ide howto" changecount="12">
-<pre>@@--There are actually some annoying problems with Juno, prefer [[howto Scala IDE for Eclipse 3.7 (Indigo)]]--@@
-
-The [[howto Scala IDE for Eclipse 3.7 (Indigo)]] could also be used with Juno but :
-* use this URL to install Scala http://download.scala-ide.org/nightly-update-juno-master-29x
-* --m2e-subversive is not available in Juno and maybe won't be, see : http://dev.eclipse.org/mhonarc/lists/m2e-users/msg02095.html--
-** available from http://repository.tesla.io:8081/nexus/content/sites/m2e.extras/m2eclipse-subversive/0.13.0/N/0.13.0.201207010112/
-* --a bunch of popup with error asking you to add Scala library during compilation-- fixed
-* --some java heap with indexation and some with the scala compiler-- fixed (remove .m2/repository/.cache/m2e/)
-
-@@--Juno is actually not recommended--@@
-Juno with Scala IDE is usable. Still problems with m2e import (partial autoshare with git and none with subversive)</pre>
+<div title="howto Scala IDE for Eclipse 4.2 (Juno)" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201207052131" modified="201208151224" tags="tools scala-ide howto" changecount="30">
+<pre>@@This howto is slightly different from [[howto Scala IDE for Eclipse 3.7 (Indigo)]] (see why in &quot;Why this is so complicated&quot; section bellow)@@
+@@Scala nightly is used, proved to be stable and more usable and new features are not a luxury@@
+!Installation
+*Eclipse IDE for Java Developers
+*@@update m2e to 1.2@@ using this update site : https://repository.sonatype.org/content/repositories/forge-sites/m2e/1.2.0/N/LATEST/
+*ScalaIDE - http://download.scala-ide.org/nightly-update-juno-master-29x
+*m2eclipse-scala - http://alchim31.free.fr/m2e-scala/update-site
+*m2e-egit - http://repository.tesla.io:8081/nexus/content/sites/m2e.extras/m2eclipse-egit/0.14.0/N/0.14.0.201207041402/ @@You need to uncheck &quot;Group item by category to install m2e-egit&quot;@@
+*m2e-subversive - http://repository.tesla.io:8081/nexus/content/sites/m2e.extras/m2eclipse-subversive/0.13.0/N/0.13.0.201207041401/
+!Post installation
+*Eclipse/Preference/General/Workspace/ =&gt; set text file encoding to UTF-8
+*@@Eclipse/Preference/Maven/ =&gt; set hide folders of physically nested modules@@
+*@@Eclipse/Preference/Team/Git/Projects =&gt; set auto share projects located in a git repository@@
+*Eclipse/Preference/Team/Git/Ignored Resources/ =&gt; add .cache,.classpath,.project,*.prefs,*/target/*
+!Optimal memory configuration for Scala IDE
+Modify this in eclipse.ini and use -Xmx1024m if you got less that 4 Go of memory
+{{{
+-Dosgi.requiredJavaVersion=1.6
+-Xss8m
+-Xms700m
+-Xmx2048m
+}}}
+!Why this is so complicated ?
+*Experimental Maven feature &quot;Hide folders of physically nested module&quot; is broken in the m2e version provided with Juno that's why upgrade to 1.2 is required to prevent partial autoshare with egit and subversive during m2e import.
+*m2e-egit from market place is not compatible with m2e 1.2 so other update site is needed
+*m2e-subversive is not available from m2e market place so other update site is needed
+!Tips
+*remove .m2/repository/.cache/m2e/ to fix java heap with indexation and some with the scala compiler</pre>
 </div>
 <div title="howto Vampire" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201110311539" modified="201204211603" tags="Vampire howto pb" changecount="13">
 <pre>[[Vampire|http://www.vprover.org/]] is actually the best automatic theorem prover for first-order classical logic 
