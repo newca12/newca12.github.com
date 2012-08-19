@@ -1926,6 +1926,22 @@ The answer is to to turn the problem on its ear (as it were) and eschew mathemat
 See also : [[Scala vs others]] 
 </pre>
 </div>
+<div title="Scala &amp; XML" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201208172117" modified="201208191238" tags="scala" changecount="13">
+<pre>!Alternative libraries
+The standard XML package (aka Scala-XML) is outdated and beyond fixing (see section below).
+And this will be the same for Scala 2.10 : https://groups.google.com/forum/#!topic/scala-user/Dz95uJLqzhA%5B1-25%5D
+There are alternative XML libraries :
+*[[Anti-XML|http://anti-xml.org/]] (no build available for Scala 2.9.2)
+*[[ScalesXML|https://github.com/chris-twiner/scalesXml]]
+Unfortunately none of these libraries could be used as drop in replacement.
+!Standard Scala-XML is in very bad shape.
+Working with XML offline is not straightforward with Scala-XML  
+*http://weblogs.java.net/blog/cayhorstmann/archive/2011/12/12/sordid-tale-xml-catalogs
+*http://www.java.net/external?url=http://blog.flotsam.nl/2011/12/dtd-resolution-be-gone.html
+*https://issues.scala-lang.org/browse/SI-2725 (the tweak from Daniel Sobral doesnt work any more for recent JDK and OpenJDK)
+*Some also concluded &quot;XML catalogs are not yet ready for prime time&quot; and implement their own XML catalogs : https://opensource.ncsa.illinois.edu/fisheye/git/dfdl.git. See comment in (TestXMLCatalogAndValidate.scala)
+I manage to make the whole thing working for gapt : http://code.google.com/p/gapt/source/detail?r=1142 </pre>
+</div>
 <div title="Scala IDE for Eclipse problems" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201106031207" modified="201208151222" tags="pb scala-ide" changecount="31">
 <pre>! Problems in Scala plugin
 * no hover for Javadoc/Scaladoc : [[ticket 1000255|http://www.assembla.com/spaces/scala-ide/tickets/1000255]]
@@ -2941,7 +2957,7 @@ config.parsers.twikiFormatter.formatTag = 'TWikiFormat';
 } // end of 'install only once'
 //}}}</pre>
 </div>
-<div title="Tags" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104250931" modified="201202231647" tags="meta editing" changecount="56">
+<div title="Tags" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104250931" modified="201208191226" tags="meta editing" changecount="57">
 <pre>*&lt;&lt;tag atp&gt;&gt;- Automated Theorem Proving, what this site is all about
 **&lt;&lt;tag intro&gt;&gt;- Getting started
 **&lt;&lt;tag scala-atp&gt;&gt;- Scala port of [[Handbook of Practical Logic and Automated Reasoning|http://www.cambridge.org/catalogue/catalogue.asp?isbn=9780521899574]]
@@ -2963,6 +2979,7 @@ config.parsers.twikiFormatter.formatTag = 'TWikiFormat';
 **&lt;&lt;tag code-analysis&gt;&gt;- Source code analysis
 **&lt;&lt;tag howto&gt;&gt;- various how-to
 *&lt;&lt;tag tools&gt;&gt;- tools drastically selected
+**&lt;&lt;tag scala&gt;&gt; related to Scala
 **&lt;&lt;tag scala-ide&gt;&gt; all about Scala IDE for Eclipse
 **&lt;&lt;tag duel&gt;&gt;- duels
 *&lt;&lt;tag pb&gt;&gt;- some things annoying that needs to be fixed
