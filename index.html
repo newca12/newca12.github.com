@@ -3423,7 +3423,7 @@ Nota : [[Prover9 &amp; co|http://www.cs.unm.edu/~mccune/mace4/download/LADR-2009
 
 @@*ladr_to_tptp segfault@@</pre>
 </div>
-<div title="howto Scala IDE for Eclipse 3.7 (Indigo)" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201105221308" modified="201207052131" tags="tools scala-ide howto" changecount="49">
+<div title="howto Scala IDE for Eclipse 3.7 (Indigo)" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201105221308" modified="201209161153" tags="tools scala-ide howto" changecount="50">
 <pre>!Installation
 *Eclipse IDE for Java Developers
 *m2e from eclipse market place
@@ -3443,7 +3443,7 @@ Nota : [[Prover9 &amp; co|http://www.cs.unm.edu/~mccune/mace4/download/LADR-2009
 Default eclipse settings are now sufficient but these could be used if necessary :
 {{{
  -vmargs
- -Xss8m
+ -Xss2m
  -Xms700m
  -Xmx2048m
 }}}
@@ -3457,7 +3457,7 @@ Also most of the JVM optimizations are not necessary anymore. Details [[here|htt
 
   </pre>
 </div>
-<div title="howto Scala IDE for Eclipse 4.2 (Juno)" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201207052131" modified="201208151224" tags="tools scala-ide howto" changecount="30">
+<div title="howto Scala IDE for Eclipse 4.2 (Juno)" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201207052131" modified="201210131226" tags="tools scala-ide howto" changecount="33">
 <pre>@@This howto is slightly different from [[howto Scala IDE for Eclipse 3.7 (Indigo)]] (see why in &quot;Why this is so complicated&quot; section bellow)@@
 @@Scala nightly is used, proved to be stable and more usable and new features are not a luxury@@
 !Installation
@@ -3466,7 +3466,8 @@ Also most of the JVM optimizations are not necessary anymore. Details [[here|htt
 *ScalaIDE - http://download.scala-ide.org/nightly-update-juno-master-29x
 *m2eclipse-scala - http://alchim31.free.fr/m2e-scala/update-site
 *m2e-egit - http://repository.tesla.io:8081/nexus/content/sites/m2e.extras/m2eclipse-egit/0.14.0/N/0.14.0.201207041402/ @@You need to uncheck &quot;Group item by category to install m2e-egit&quot;@@
-*m2e-subversive - http://repository.tesla.io:8081/nexus/content/sites/m2e.extras/m2eclipse-subversive/0.13.0/N/0.13.0.201207041401/
+*m2e-subversive - http://repository.tesla.io:8081/nexus/content/sites/m2e.extras/m2eclipse-subversive/0.13.0/N/0.13.0.201208191312/
+*Scala Worksheet - http://download.scala-ide.org/nightly-build-worksheet-scalaide21-29/site/
 !Post installation
 *Eclipse/Preference/General/Workspace/ =&gt; set text file encoding to UTF-8
 *@@Eclipse/Preference/Maven/ =&gt; set hide folders of physically nested modules@@
