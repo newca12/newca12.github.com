@@ -3433,8 +3433,9 @@ Nota : [[Prover9 &amp; co|http://www.cs.unm.edu/~mccune/mace4/download/LADR-2009
 
 @@*ladr_to_tptp segfault@@</pre>
 </div>
-<div title="howto Scala IDE for Eclipse 3.7 (Indigo)" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201105221308" modified="201209161153" tags="tools scala-ide howto" changecount="50">
-<pre>!Installation
+<div title="howto Scala IDE for Eclipse 3.7 (Indigo)" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201105221308" modified="201211140912" tags="tools scala-ide howto" changecount="59">
+<pre>@@Eclipse 3.7 is old and Eclipse 4.2 is now stable and usable with Scala IDE. It is recommended to use [[howto Scala IDE for Eclipse 4.2 (Juno)]]@@
+!Installation
 *Eclipse IDE for Java Developers
 *m2e from eclipse market place
 *ScalaIDE - http://download.scala-ide.org/nightly-update-master-29x
@@ -3460,24 +3461,25 @@ Default eclipse settings are now sufficient but these could be used if necessary
 Also most of the JVM optimizations are not necessary anymore. Details [[here|http://download.oracle.com/javase/7/docs/technotes/guides/vm/performance-enhancements-7.html]].
 *Compressed oops is supported and enabled by default in Java SE 6u23 and later. In Java SE 7, use of compressed oops is the default for 64-bit JVM processes when -Xmx isn't specified and for values of -Xmx less than 32 gigabytes.
 *Escape analysis is supported and enabled by default in Java SE 6u23 and later.
-!Example with Gapt
+!Checkout a maven project to check everything is OK
+@@Gapt actually doesn't work with Eclipse due to change in m2eclipse-scala. Fix is ongoing.@@
 #/File/Import/Maven/Check out Maven Projects from SCM
 #Choose git and enter https://github.com/newca12/gapt.git in SCM URL
 #Click on finish and that is : @@you've got automatically a fully configured Scala Maven multi-modules project git managed !@@
 
+
   </pre>
 </div>
-<div title="howto Scala IDE for Eclipse 4.2 (Juno)" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201207052131" modified="201210131226" tags="tools scala-ide howto" changecount="33">
-<pre>@@This howto is slightly different from [[howto Scala IDE for Eclipse 3.7 (Indigo)]] (see why in &quot;Why this is so complicated&quot; section bellow)@@
-@@Scala nightly is used, proved to be stable and more usable and new features are not a luxury@@
+<div title="howto Scala IDE for Eclipse 4.2 (Juno)" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201207052131" modified="201211140917" tags="tools scala-ide howto" changecount="41">
+<pre>@@Scala nightly is used, proved to be stable and more usable and new features are not a luxury@@
 !Installation
-*Eclipse IDE for Java Developers
-*@@update m2e to 1.2@@ using this update site : https://repository.sonatype.org/content/repositories/forge-sites/m2e/1.2.0/N/LATEST/
-*ScalaIDE - http://download.scala-ide.org/nightly-update-juno-master-29x
+*Eclipse IDE for Java Developers @@Juno SR1@@
+*m2e from eclipse market place @@If not already installed@@
+*ScalaIDE - http://download.scala-ide.org/nightly-update-juno-master-29x or http://download.scala-ide.org/nightly-update-juno-master-2.10.x @@Scala 2.10 is now usable and recommended@@
 *m2eclipse-scala - http://alchim31.free.fr/m2e-scala/update-site
-*m2e-egit - http://repository.tesla.io:8081/nexus/content/sites/m2e.extras/m2eclipse-egit/0.14.0/N/0.14.0.201207041402/ @@You need to uncheck &quot;Group item by category to install m2e-egit&quot;@@
-*m2e-subversive - http://repository.tesla.io:8081/nexus/content/sites/m2e.extras/m2eclipse-subversive/0.13.0/N/0.13.0.201208191312/
-*Scala Worksheet - http://download.scala-ide.org/nightly-build-worksheet-scalaide21-29/site/
+*m2e-egit from m2e market place
+*m2e-subversive from m2e market place
+*Scala Worksheet - http://download.scala-ide.org/nightly-build-worksheet-scalaide21-29/site/ or http://download.scala-ide.org/nightly-update-worksheet-scalaide21-210/site/
 !Post installation
 *Eclipse/Preference/General/Workspace/ =&gt; set text file encoding to UTF-8
 *@@Eclipse/Preference/Maven/ =&gt; set hide folders of physically nested modules@@
@@ -3487,16 +3489,27 @@ Also most of the JVM optimizations are not necessary anymore. Details [[here|htt
 Modify this in eclipse.ini and use -Xmx1024m if you got less that 4 Go of memory
 {{{
 -Dosgi.requiredJavaVersion=1.6
--Xss8m
+-Xss2m
 -Xms700m
 -Xmx2048m
 }}}
-!Why this is so complicated ?
-*Experimental Maven feature &quot;Hide folders of physically nested module&quot; is broken in the m2e version provided with Juno that's why upgrade to 1.2 is required to prevent partial autoshare with egit and subversive during m2e import.
-*m2e-egit from market place is not compatible with m2e 1.2 so other update site is needed
-*m2e-subversive is not available from m2e market place so other update site is needed
+Also most of the JVM optimizations are not necessary anymore. Details [[here|http://download.oracle.com/javase/7/docs/technotes/guides/vm/performance-enhancements-7.html]].
+*Compressed oops is supported and enabled by default in Java SE 6u23 and later. In Java SE 7, use of compressed oops is the default for 64-bit JVM processes when -Xmx isn't specified and for values of -Xmx less than 32 gigabytes.
+*Escape analysis is supported and enabled by default in Java SE 6u23 and later.
+!Checkout a single-maven project to check everything is OK
+#/File/Import/Maven/Check out Maven Projects from SCM
+#Choose git and enter https://github.com/newca12/scala-atp.git in SCM URL
+#Click on finish and that is : @@you've got automatically a fully configured Scala Maven single-module project git managed !@@
+!Checkout a multi-modules maven project to check everything is OK
+@@Gapt actually doesn't work with Eclipse due to change in m2eclipse-scala. Fix is ongoing.@@
+@@Gapt is not yet compatible with Scala 2.10. Fix is ongoing.@@
+#/File/Import/Maven/Check out Maven Projects from SCM
+#Choose git and enter https://github.com/newca12/gapt.git in SCM URL
+#Click on finish and that is : @@you've got automatically a fully configured Scala Maven multi-modules project git managed !@@
 !Tips
-*remove .m2/repository/.cache/m2e/ to fix java heap with indexation and some with the scala compiler</pre>
+*remove .m2/repository/.cache/m2e/ to fix java heap with indexation and some with the scala compiler
+*Eclipse/project/clean could be needed after checkout (with Scala IDE nightly build)
+</pre>
 </div>
 <div title="howto Vampire" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201110311539" modified="201204211603" tags="Vampire howto pb" changecount="13">
 <pre>[[Vampire|http://www.vprover.org/]] is actually the best automatic theorem prover for first-order classical logic 
