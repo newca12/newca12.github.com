@@ -2098,6 +2098,20 @@ Extract from : http://www.sts.tu-harburg.de/people/mi.garcia/ScalaCompilerCorner
 : | VAR
 ; VAR ::= some countable set of names //variables//</pre>
 </div>
+<div title="Syntax of Ivy" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201211201623" modified="201211202220" tags="parsing prover9 gapt" changecount="8">
+<pre>[[Ivy|http://www.cs.unm.edu/~mccune/papers/ivy/]] is a preprocessor and proof checker for resolution/paramodulation theorem provers.
+
+Information about Ivy seem available in this non free book : [[Computer-Aided Reasoning: ACL2 Case Studies|http://www.cs.utexas.edu/users/moore/publications/acl2-papers.html#Books]]
+Some informations about the syntax of Ivy are available in this [[document|https://docs.google.com/file/d/0B7LbY7bJaltlRW4xYWsyVlRxcDA/edit?pli=1]] (see page 18 &amp; 19)
+*each line is justified as an application of rule to preceding lines
+*the justification for initial steps is named ''input''
+*''instantiate'' apply to and explicit substitution to a clause
+*''resolve'' apply binary resolution on identical atoms to a pair of clause
+*''paramod'' apply equality substitution on identical terms to a pair of clauses
+*''flip'' swap the arguments of an equality atom of a clause
+*''propositional'' apply to a propositional simplification to a clause
+</pre>
+</div>
 <div title="Syntax of Propositional Logic" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201106132122" modified="201106140758" tags="parsing" changecount="15">
 <pre>; FORM ::= true //truth//
 : | false //falsity//
@@ -3243,7 +3257,7 @@ If you are really interested by atp see [[The Big Picture (Wikipedia links)]]
 
 This tiddler was automatically created to record the details of this server</pre>
 </div>
-<div title="Who's who" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104241635" modified="201211181401" tags="person" changecount="43">
+<div title="Who's who" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104241635" modified="201211201043" tags="person" changecount="44">
 <pre>In no particular order.
 
 *Australian National University (Australia)
@@ -3320,6 +3334,10 @@ This tiddler was automatically created to record the details of this server</pre
 **Dr. Chris Baker’s group
 ***[[Alexandre Riazanov (Alexander Ryazanov)|http://www.freewebs.com/riazanov/]]
 ****Vampire, [[TPTP parser in Java with ANTLR|http://www.freewebs.com/andrei_ch/TPTP_2007.01.30.tgz]]
+*University of New Mexico
+**Computer Science Department
+***[[William McCune|http://www.cs.unm.edu/~mccune/]]
+****Otter,Mace4,Prover9,Ivy proof checker
 
 See also [[Notable people|http://en.wikipedia.org/wiki/Automated_theorem_proving#Notable_people]]
 </pre>
@@ -3418,7 +3436,7 @@ make
 }}}
 </pre>
 </div>
-<div title="howto Prover9" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201109091811" modified="201111052230" tags="prover9 howto pb" changecount="14">
+<div title="howto Prover9" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201109091811" modified="201211201620" tags="prover9 howto pb" changecount="18">
 <pre>[[Prover9|http://www.cs.unm.edu/~mccune/mace4/]] is an automated theorem prover for first-order and equational logic. Prover9 is the successor of the [[Otter prover|http://www.cs.unm.edu/~mccune/otter/]].
 
 *A brief introduction : http://www.cs.utsa.edu/~bylander/cs5233/prover9-intro.pdf
@@ -3431,9 +3449,9 @@ aptitude install prover9 prover9-doc prover9-mace4 libladr-dev
 tptp_to_ladr &lt; PUZ031-1.tptp | prover9
 }}}
 
-Nota : [[Prover9 &amp; co|http://www.cs.unm.edu/~mccune/mace4/download/LADR-2009-11A.tar.gz]] also compile with just a glitch* on Mac OS X version 10.6.8 with gcc 4.2.1 
+Nota : [[Prover9 &amp; co|http://www.cs.unm.edu/~mccune/mace4/download/LADR-2009-11A.tar.gz]] also compile --with just a glitch*-- on Mac OS X version 10.6.8 with gcc 4.2.1 
 
-@@*ladr_to_tptp segfault@@</pre>
+--@@*ladr_to_tptp segfault@@-- &lt;= The last version here : https://github.com/jessealama/ladr.git fix this.</pre>
 </div>
 <div title="howto Scala IDE for Eclipse 3.7 (Indigo)" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201105221308" modified="201211140912" tags="tools scala-ide howto" changecount="59">
 <pre>@@Eclipse 3.7 is old and Eclipse 4.2 is now stable and usable with Scala IDE. It is recommended to use [[howto Scala IDE for Eclipse 4.2 (Juno)]]@@
