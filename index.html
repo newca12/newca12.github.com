@@ -727,9 +727,26 @@ def clause: Parser[FSequent] = repsep(formula,&quot;|&quot;) ~ &quot;.&quot; ^^ 
 
 </pre>
 </div>
-<div title="GAPT source code analysis" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201106151006" modified="201201011730" tags="gapt scala-atp code-analysis" changecount="25">
-<pre>! parser structure
+<div title="GAPT source code analysis" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201106151006" modified="201211222207" tags="gapt scala-atp code-analysis" changecount="30">
+<pre>! upgrade to Scala 2.10
+@@export MAVEN_OPTS=&quot;-Xmx512m -XX:MaxPermSize=256m&quot; needed for mvn install or mvn test@@
+See https://github.com/newca12/gapt/commit/6e6e291a40581e098ed6161d6d121ddffa9994ed
+!!cutIntroduction
+DecompositionTest : set sequential testing and disable some test with pendingUntilFixed
+!!shlk
+sFOparserTest : set sequential testing
+!!ceres
+ProjectionTermTest : set sequential testing 
+ClauseSetsTest : set sequential testing
+!!ceres_xml_parsing
+SimpleParser : syntax modification for Scala 2.10
+SimpleXMLParserTest : syntax modification for Scala 2.10
+!!provers
+Prover9 : comment call to p9_to_ivy (to prevent prooftrans segfault)
+IvyTest : all commented. This code is definitely problematic 
 
+PrimeProofTest : sequential ? 
+Prover9Test : sequential ?
 
 ! dependencies
 Dependency graph generated with [[el4j DepGraph maven plugin|http://el4j.sourceforge.net/plugins/maven-depgraph-plugin/index.html]] :
@@ -743,7 +760,7 @@ https://docs.google.com/open?id=0B7LbY7bJaltlNThjMDQ3M2EtYWY1My00ZmM3LWFjZGQtYWZ
 **import at.logic.calculi.lksk
 but maven test is ok without ceres
 
-! upgrade to scala 2.8
+! upgrade to Scala 2.8
 *code update from scala 2.7 to scala 2.8 in [[r457|http://code.google.com/p/gapt/source/detail?r=457]]
 *scala 2.8 warning cleanup in [[r460|http://code.google.com/p/gapt/source/detail?r=460]]
 *scala 2.8 warning cleanup ended in [[r470|http://code.google.com/p/gapt/source/detail?r=470]]</pre>
