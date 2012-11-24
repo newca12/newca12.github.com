@@ -639,7 +639,12 @@ If you wan't an overview of what is available on this site you can use [[Tags]] 
 
 @@If you came thru google search due to the uniqueness of ~TiddlyWiki the web result you saw on google may not appear on this website.  To find it just remember the query items and put on the search line to the upper right of this page. You should be able to find the item you were looking for.@@</pre>
 </div>
-<div title="First-class resources" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201103191829" modified="201211101300" tags="intro" changecount="35">
+<div title="First-class articles" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201211241732" modified="201211241832" tags="intro" changecount="5">
+<pre>*DEPENDENT TYPE
+**[[Unifying Programming and Math – The Dependent Type Revolution|http://spin.atomicobject.com/2012/11/11/unifying-programming-and-math-the-dependent-type-revolution/]]
+**[[Scala has surprisingly good support for dependent typing|http://stackoverflow.com/questions/12935731/any-reason-why-scala-does-not-explicitly-support-dependent-types/12937819#12937819]]</pre>
+</div>
+<div title="First-class resources" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201103191829" modified="201211241822" tags="intro" changecount="38">
 <pre>* SCALA
 ** Free online (Coursera) Scala course with Martin Odersky [[Functional Programming Principles in Scala|https://www.coursera.org/course/progfun]]
 *** This course introduces the cornerstones of functional programming using the Scala programming language.
@@ -650,12 +655,13 @@ If you wan't an overview of what is available on this site you can use [[Tags]] 
 ** Practical techniques for coding in Scala : [[Scala in Depth|http://www.manning.com/suereth/]]
 
 * AUTOMATED THEOREM PROVING
-** Recommended book about ATP : [[Handbook of Practical Logic and Automated Reasoning|http://www.cambridge.org/catalogue/catalogue.asp?isbn=9780521899574]] --(the code used in this book is written in Objective CAML but edla.org will convert it to Scala and make it publicly available, see below)--  
-*** --Scala port of the Ocaml code : http://github.com/newca12/scala-atp  &lt;== Work in progress !--
+** Recommended book about ATP (OCaml oriented) : [[Handbook of Practical Logic and Automated Reasoning|http://www.cambridge.org/catalogue/catalogue.asp?isbn=9780521899574]]  
+*** Scala port of the OCaml code : http://github.com/newca12/scala-atp  @@wip@@ 
 *** Haskell port of the OCaml code : http://github.com/seanmcl/haskell-atp  
 ** General framework in Scala for applied proof theory : http://code.google.com/p/gapt/
 ** Formal Methods : http://www.dwheeler.com/formal_methods/
 ** How to Prove Stuff Automatically : http://www.dwheeler.com/formal_methods/how-to-prove-stuff.html
+** One-semester course on Software Foundations (Coq oriented) : http://www.cis.upenn.edu/~bcpierce/sf/
 
 * PARSING
 ** Basic but clear introduction to BNF : http://www.garshol.priv.no/download/text/bnf.html
@@ -1344,7 +1350,7 @@ You can also see algorithms &lt;&lt;tag explained&gt;&gt;</pre>
 <div title="MELIA source code analysis" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201107301005" modified="201107301141" tags="code-analysis MELIA" changecount="3">
 <pre>All classes are inter-dependent, TPTPTParser need all other classes.</pre>
 </div>
-<div title="MainMenu" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201103191830" modified="201201150934" tags="meta editing systemNotes" changecount="29">
+<div title="MainMenu" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201103191830" modified="201211241731" tags="meta editing systemNotes" changecount="30">
 <pre>[[About]]
 [[Navigating this site]]
 [[Getting started]]
@@ -1354,6 +1360,7 @@ You can also see algorithms &lt;&lt;tag explained&gt;&gt;</pre>
 &lt;&lt;tag Algorithms&gt;&gt;
 [[Glossary]]
 &lt;&lt;tag Uses&gt;&gt;
+[[First-class articles]]
 [[Reading roadmap]]
 [[Library]]
 [[Roadmap]]
@@ -1708,7 +1715,7 @@ If a parser takes a stream of characters and turns them into an abstract syntax 
 *A Scala port of Lindig’s implementation of Wadler’s pretty printer from Ocaml, adding all combinators and whole API from Haskell PPrint - which is another implementation of Wadler’s prettier-printer by Daan Leijen : [[source code|http://scala-programming-language.1934581.n4.nabble.com/file/n1995937/zPPrint.scala]] and [[demo|http://scala-programming-language.1934581.n4.nabble.com/scala-pretty-printing-tp1995936p1995939.html]]
 *A rudimentary pretty printer combinator : http://www.scala-blogs.org/2009/04/combinators-for-pretty-printers-part-1.html</pre>
 </div>
-<div title="Programming in Scala 2nd : summary" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104232118" modified="201203082213" tags="scala book summary scala-atp wip" changecount="54">
+<div title="Programming in Scala 2nd : summary" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104232118" modified="201211242227" tags="scala book summary scala-atp wip" changecount="56">
 <pre>* Chapter 1 · A Scalable Language
 ** Functional programming is guided by two main ideas
 *** functions are first-class values
@@ -1734,6 +1741,7 @@ If a parser takes a stream of characters and turns them into an abstract syntax 
 ** Public is Scala’s default access level
 ** One important characteristic of method parameters in Scala is that they are vals, not vars
 ** Scala cannot have static members. Instead, Scala has singleton objects
+** When a singleton object shares the same name with a class, it is called that class’s companion object
 ** You must define both the class and its companion object in the same source file
 ** A class and its companion object can access each other’s private members
 ** Scala implicitly imports members of packages java.lang and scala, as well as the members of a singleton object named Predef
@@ -1795,7 +1803,7 @@ If a parser takes a stream of characters and turns them into an abstract syntax 
 *** Inheritance is the superclass/subclass relationship
 ** A method is abstract if it does not have an implementation (i.e., no equals sign or body).
 ** The recommended convention is to use a parameterless method whenever there are no parameters and the method accesses mutable state only by reading fields of the containing object (in particular, it does not change mutable state)
-** This convention supports the uniform access principle,1 which says that client code should not be affected by a decision to implement an attribute as a field or method
+** This convention supports the uniform access principle, which says that client code should not be affected by a decision to implement an attribute as a field or method
 ** it is recommended to still write the empty parentheses when the invoked method represents more than a property of its receiver object
 ** To instantiate an element, therefore, we will need to create a subclass that extends Element and implements the abstract contents method
 ** Inheritance means that all members of the superclass are also members of the subclass, with two exceptions
@@ -2057,14 +2065,36 @@ System.err.format(&quot;[UPTIME: %5ds] %s%n&quot;, (System.currentTimeMillis() -
 ** syntax is as good as possible but far from the beauty of haskell syntax 
 The winner is : [[Scala]]. The only language of the three with strong IDE support. </pre>
 </div>
-<div title="Scaladoc &amp; Co" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201106221658" modified="201207150825" tags="tools" changecount="33">
+<div title="Scaladoc &amp; Co" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201106221658" modified="201211241641" tags="tools" changecount="54">
 <pre>Netty Javadoc use [[apiviz|http://code.google.com/p/apiviz/]] which is a rewrite of [[umlgraph|http://www.umlgraph.org/]] to embed class diagram in Javadoc
 Similar feature for scala discussed [[here|http://www.scala-lang.org/node/4627]] and [[here|http://www.scala-lang.org/node/5861]] --but no implementation yet.--
 Extract from : http://www.sts.tu-harburg.de/people/mi.garcia/ScalaCompilerCorner/
 {{{Type lattice visualization: Rather than trying to understand head-on how the typechecker works ;-) it might be useful to visualize first what the typechecker does for a given run (which type lattice it computes). At least one other component of the Scala compiler generates a DOT file to illustrate its operation (-Xgenerate-phase-graph). In IDE-speak, a type lattice is called a &quot;UML Class Hierarchy&quot;. Actually, it need not be IDE-based: Scaladoc2 could be retrofitted to perform code-summarization as in Spinelli's UMLGraph.}}}
-@@Implementation is ongoing : see [[Scaladoc class diagrams part 1|https://github.com/scala/scala/commit/fba65513d1195b162f958a5c25124958d6e7ea52]] and [[Scaladoc class diagrams part 2|https://github.com/scala/scala/commit/c85b4a4956]]@@
-*Scaladoc limitations (@@TODO@@ check if fixed in last version)
-**Scaladoc/Scaladoc2 : no Java like {{{&quot;{@link ...}&quot;}}} (VScalaDoc2 doesn't seem an option actually)
+--Implementation is ongoing : see [[Scaladoc class diagrams part 1|https://github.com/scala/scala/commit/fba65513d1195b162f958a5c25124958d6e7ea52]] and [[Scaladoc class diagrams part 2|https://github.com/scala/scala/commit/c85b4a4956]]--
+@@''Implementation is done and the graph and implicit feature are available in Scala 2.10''@@
+*scala-maven-plugin limitation
+** no way to pass -diagrams and -implicits argument other than this way and that is not compatible with install goal
+{{{
+    &lt;build&gt;
+        &lt;plugins&gt;
+            &lt;plugin&gt;
+                &lt;groupId&gt;net.alchim31.maven&lt;/groupId&gt;
+                &lt;artifactId&gt;scala-maven-plugin&lt;/artifactId&gt;
+                &lt;version&gt;3.0.2&lt;/version&gt;
+                &lt;configuration&gt;
+                    &lt;args&gt;
+                        &lt;arg&gt;-diagrams&lt;/arg&gt;
+                        &lt;arg&gt;-implicits&lt;/arg&gt;
+                    &lt;/args&gt;
+                &lt;/configuration&gt;
+}}}
+@@sbt use a much better way@@ : 
+{{{
+scalacOptions in (Compile, doc) ++= Seq(&quot;-diagrams&quot;,&quot;-implicits&quot;)
+}}}
+
+*Scaladoc limitations --(@@TODO@@ check if fixed in last version)--
+**--Scaladoc/Scaladoc2 : no Java like {{{&quot;{@link ...}&quot;}}} (VScalaDoc2 doesn't seem an option actually)-- @@&quot;&quot;&quot;Scaladoc uses [[fullyQualifiedName]] instead of {@link} &quot;&quot;&quot;@@
 --Project to follow : http://code.google.com/p/class-diagram/--
 *Resources :
 **[[scaladoc2|http://lampsvn.epfl.ch/trac/scala-old/wiki/Scaladoc]] source code : https://github.com/scala/scala/tree/master/src/compiler/scala/tools/nsc/doc
@@ -3470,7 +3500,7 @@ Nota : [[Prover9 &amp; co|http://www.cs.unm.edu/~mccune/mace4/download/LADR-2009
 
 --@@*ladr_to_tptp segfault@@-- &lt;= The last version here : https://github.com/jessealama/ladr.git fix this.</pre>
 </div>
-<div title="howto Scala IDE for Eclipse 3.7 (Indigo)" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201105221308" modified="201211140912" tags="tools scala-ide howto" changecount="59">
+<div title="howto Scala IDE for Eclipse 3.7 (Indigo)" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201105221308" modified="201211241334" tags="tools scala-ide howto" changecount="60">
 <pre>@@Eclipse 3.7 is old and Eclipse 4.2 is now stable and usable with Scala IDE. It is recommended to use [[howto Scala IDE for Eclipse 4.2 (Juno)]]@@
 !Installation
 *Eclipse IDE for Java Developers
@@ -3499,7 +3529,7 @@ Also most of the JVM optimizations are not necessary anymore. Details [[here|htt
 *Compressed oops is supported and enabled by default in Java SE 6u23 and later. In Java SE 7, use of compressed oops is the default for 64-bit JVM processes when -Xmx isn't specified and for values of -Xmx less than 32 gigabytes.
 *Escape analysis is supported and enabled by default in Java SE 6u23 and later.
 !Checkout a maven project to check everything is OK
-@@Gapt actually doesn't work with Eclipse due to change in m2eclipse-scala. Fix is ongoing.@@
+@@Gapt actually doesn't work with Eclipse due to change in m2eclipse-scala. This is fixed in the m2e branch@@
 #/File/Import/Maven/Check out Maven Projects from SCM
 #Choose git and enter https://github.com/newca12/gapt.git in SCM URL
 #Click on finish and that is : @@you've got automatically a fully configured Scala Maven multi-modules project git managed !@@
@@ -3507,7 +3537,7 @@ Also most of the JVM optimizations are not necessary anymore. Details [[here|htt
 
   </pre>
 </div>
-<div title="howto Scala IDE for Eclipse 4.2 (Juno)" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201207052131" modified="201211232230" tags="tools scala-ide howto" changecount="43">
+<div title="howto Scala IDE for Eclipse 4.2 (Juno)" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201207052131" modified="201211241335" tags="tools scala-ide howto" changecount="44">
 <pre>@@Scala nightly is used, proved to be stable and more usable and new features are not a luxury@@
 !Installation
 *Eclipse IDE for Java Developers @@Juno SR1@@
@@ -3536,6 +3566,7 @@ Also most of the JVM optimizations are not necessary anymore. Details [[here|htt
 *Compressed oops is supported and enabled by default in Java SE 6u23 and later. In Java SE 7, use of compressed oops is the default for 64-bit JVM processes when -Xmx isn't specified and for values of -Xmx less than 32 gigabytes.
 *Escape analysis is supported and enabled by default in Java SE 6u23 and later.
 !Checkout a single-maven project to check everything is OK
+@@Gapt actually doesn't work with Eclipse due to change in m2eclipse-scala. This is fixed in the m2e branch@@
 #/File/Import/Maven/Check out Maven Projects from SCM
 #Choose git and enter https://github.com/newca12/scala-atp.git in SCM URL
 #Click on finish and that is : @@you've got automatically a fully configured Scala Maven single-module project git managed !@@
@@ -3763,7 +3794,7 @@ p ∧ r ∧ ¬q ∨ q ∧ ¬p ∨ ¬p ∧ ¬r
 |Goals, LCF-like tactics and Mizar-like proofs|tactics.ml||
 |Unification for first order terms|unif.ml|Unif.lhs|</pre>
 </div>
-<div title="sbt vs maven" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201105011650" modified="201106230733" tags="duel tools" changecount="19">
+<div title="sbt vs maven" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201105011650" modified="201211241342" tags="duel tools" changecount="21">
 <pre>From Eclipse point of view 
 *sbt pros
 **quicker incremental build (probably useless with eclipse)
@@ -3781,8 +3812,9 @@ p ∧ r ∧ ¬q ∨ q ∧ ¬p ∨ ¬p ∧ ¬r
 *maven cons
 **verbose XML syntax
 
-The winner is : [[maven|http://maven.apache.org/]] ([[sbt|http://code.google.com/p/simple-build-tool/]] should be re-evaluated when version &gt;= 0.9 will be released)
-Maven and sbt together could also be an option : https://github.com/jiminoc/SBT-Maven-Example-Project</pre>
+@@No winner@@
+Maven and sbt together is the better option.
+The idea is to drive the project with sbt and auto generate a pom.xml with sbt make-pom to have the best of both worlds.</pre>
 </div>
 </div>
 <!--POST-STOREAREA-->
