@@ -1715,7 +1715,7 @@ If a parser takes a stream of characters and turns them into an abstract syntax 
 *A Scala port of Lindig’s implementation of Wadler’s pretty printer from Ocaml, adding all combinators and whole API from Haskell PPrint - which is another implementation of Wadler’s prettier-printer by Daan Leijen : [[source code|http://scala-programming-language.1934581.n4.nabble.com/file/n1995937/zPPrint.scala]] and [[demo|http://scala-programming-language.1934581.n4.nabble.com/scala-pretty-printing-tp1995936p1995939.html]]
 *A rudimentary pretty printer combinator : http://www.scala-blogs.org/2009/04/combinators-for-pretty-printers-part-1.html</pre>
 </div>
-<div title="Programming in Scala 2nd : summary" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104232118" modified="201211242227" tags="scala book summary scala-atp wip" changecount="56">
+<div title="Programming in Scala 2nd : summary" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104232118" modified="201211262238" tags="scala book summary scala-atp wip" changecount="63">
 <pre>* Chapter 1 · A Scalable Language
 ** Functional programming is guided by two main ideas
 *** functions are first-class values
@@ -1840,13 +1840,14 @@ If a parser takes a stream of characters and turns them into an abstract syntax 
 *** a trait cannot have any “class” parameters, i.e., parameters passed to the primary constructor of a class
 *** whereas in classes, super calls are statically bound, in traits, they are dynamically bound
 ** Adding a concrete method to a trait tilts the thin-rich trade-off heavily towards rich interfaces
+** Unlike in Java, adding a concrete method to a Scala trait is a one-time effort
 ** The Ordered trait then defines &lt;, &gt;, &lt;=, and &gt;=
 ** Unlike the traits you have seen so far, Ordered requires you to specify a type parameter when you mix it in
 ** Traits let you modify the methods of a class, and they do so in a way that allows you to stack those modifications with each other
 ** super calls in a trait are dynamically bound
 ** mark such methods as abstract override. This combination of modifiers is only allowed for members of traits, not classes
 ** With traits, the method called is determined by a linearization of the classes and traits that are mixed into a class
-** a class is always linearized before all of its su- perclasses and mixed in traits
+** a class is always linearized before all of its superclasses and mixed in traits
 ** Whenever you implement a reusable collection of behavior, you will have to decide whether you want to use a trait or an abstract class
 *** If the behavior will not be reused, then make it a concrete class
 *** If you want to inherit from it in Java code, use an abstract class
@@ -1854,7 +1855,33 @@ If a parser takes a stream of characters and turns them into an abstract syntax 
 *** If efficiency is very important, lean towards using a class
 *** If you still do not know, after considering the above, then start by making it as a trait
 * Chapter 13 - Packages and Imports
-** 
+** One way to minimize coupling is to write in a modular style
+** it is recommended to follow Java’s reverse-domain-name convention for Scala packages
+** Scala provides a package named _root_ that is outside any package a user can write
+** Scala’s import clauses are quite a bit more flexible than Java’s
+*** may appear anywhere
+**** This syntax is particularly useful when you use objects as modules, which will be described in Chapter 29
+*** may refer to objects (singleton or regular) in addition to packages
+*** let you rename and hide some of the imported members
+** Scala adds some imports implicitly to every program
+*** import java.lang._
+*** import scala._
+**** the scala import overshadows the java.lang import
+*** import Predef._
+** Access modifiers in Scala can be augmented with qualifiers
+*** A modifier of the form private[X] or protected[X] means that access is private or protected “up to” X, where X designates some enclosing package, class or singleton object.
+** Any definitions placed in a package object are considered members of the package itself.
+** Package objects are frequently used to hold package-wide type aliases (Chapter 20) and implicit conversions (Chapter 21)
+** Looking ahead, Chapter 29 describes a more flexible module system than division into packages
+* Chapter 14 - Assertions and Unit Testing
+** The expression assert(condition) throws an AssertionError if condition does not hold
+** There’s also a two-argument version of assert.
+** The ensuring method can be used with any result type because of an implicit conversion
+** Assertions (and ensuring checks) can be enabled and disabled using the JVM’s -ea and -da command-line flags
+* Chapter 15 - Case Classes and Pattern Matching
+** In the common case, all you need to do is add a single case keyword to each class that you want to be pattern matchable
+** elements of case classes are always compared structurally
+**  
 * Chapter 18 - Stateful Objects
 ** every var that is a non-private member of some object implicitly defines a getter and a setter method with it
 ** The getter of a var x is just named “x”, while its setter is named “x_=”
@@ -3537,7 +3564,7 @@ Also most of the JVM optimizations are not necessary anymore. Details [[here|htt
 
   </pre>
 </div>
-<div title="howto Scala IDE for Eclipse 4.2 (Juno)" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201207052131" modified="201211241335" tags="tools scala-ide howto" changecount="44">
+<div title="howto Scala IDE for Eclipse 4.2 (Juno)" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201207052131" modified="201211261853" tags="tools scala-ide howto" changecount="45">
 <pre>@@Scala nightly is used, proved to be stable and more usable and new features are not a luxury@@
 !Installation
 *Eclipse IDE for Java Developers @@Juno SR1@@
@@ -3566,13 +3593,12 @@ Also most of the JVM optimizations are not necessary anymore. Details [[here|htt
 *Compressed oops is supported and enabled by default in Java SE 6u23 and later. In Java SE 7, use of compressed oops is the default for 64-bit JVM processes when -Xmx isn't specified and for values of -Xmx less than 32 gigabytes.
 *Escape analysis is supported and enabled by default in Java SE 6u23 and later.
 !Checkout a single-maven project to check everything is OK
-@@Gapt actually doesn't work with Eclipse due to change in m2eclipse-scala. This is fixed in the m2e branch@@
 #/File/Import/Maven/Check out Maven Projects from SCM
 #Choose git and enter https://github.com/newca12/scala-atp.git in SCM URL
 #Click on finish and that is : @@you've got automatically a fully configured Scala Maven single-module project git managed !@@
 !Checkout a multi-modules maven project to check everything is OK
-@@Gapt actually doesn't work with Eclipse due to change in m2eclipse-scala. Fix is ongoing.@@
-@@Gapt is not yet compatible with Scala 2.10. Fix is ongoing.@@
+@@Gapt actually doesn't work with Eclipse due to a change in m2eclipse-scala. This is fixed in the m2e branch@@
+@@Gapt is not yet compatible with Scala 2.10. Fix is ongoing in the m2e-210 branch@@
 #/File/Import/Maven/Check out Maven Projects from SCM
 #Choose git and enter https://github.com/newca12/gapt.git in SCM URL
 #Click on finish and that is : @@you've got automatically a fully configured Scala Maven multi-modules project git managed !@@
