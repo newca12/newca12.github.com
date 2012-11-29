@@ -1715,7 +1715,7 @@ If a parser takes a stream of characters and turns them into an abstract syntax 
 *A Scala port of Lindig’s implementation of Wadler’s pretty printer from Ocaml, adding all combinators and whole API from Haskell PPrint - which is another implementation of Wadler’s prettier-printer by Daan Leijen : [[source code|http://scala-programming-language.1934581.n4.nabble.com/file/n1995937/zPPrint.scala]] and [[demo|http://scala-programming-language.1934581.n4.nabble.com/scala-pretty-printing-tp1995936p1995939.html]]
 *A rudimentary pretty printer combinator : http://www.scala-blogs.org/2009/04/combinators-for-pretty-printers-part-1.html</pre>
 </div>
-<div title="Programming in Scala 2nd : summary" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104232118" modified="201211262238" tags="scala book summary scala-atp wip" changecount="63">
+<div title="Programming in Scala 2nd : summary" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104232118" modified="201211292214" tags="scala book summary scala-atp wip" changecount="67">
 <pre>* Chapter 1 · A Scalable Language
 ** Functional programming is guided by two main ideas
 *** functions are first-class values
@@ -1880,8 +1880,29 @@ If a parser takes a stream of characters and turns them into an abstract syntax 
 ** Assertions (and ensuring checks) can be enabled and disabled using the JVM’s -ea and -da command-line flags
 * Chapter 15 - Case Classes and Pattern Matching
 ** In the common case, all you need to do is add a single case keyword to each class that you want to be pattern matchable
+** Using the case modifier makes the Scala compiler add some syntactic conveniences to your class.
+*** it adds a factory method with the name of the class
+*** all arguments in the parameter list of a case class implicitly get a val prefix, so they are maintained as fields
+*** adds “natural” implementations of methods toString
+*** adds a copy method to your class for making modified copies
 ** elements of case classes are always compared structurally
-**  
+** you always have to make sure that all cases are covered, even if it means adding a default case where there’s nothing to do
+** Constructors are where pattern matching becomes really powerful
+** Scala uses the erasure model of generics, just like Java does. This means that no information about type arguments is maintained at runtime
+** The only exception to the erasure rule is arrays
+** In addition to the standalone variable patterns, you can also add a variable to any other pattern. You simply write the variable name, an at sign (@), and then the pattern.
+** A pattern guard comes after a pattern and starts with an if
+** A sealed class cannot have any new subclasses added except the ones in the same file
+** So you know that in fact no MatchError will be produced. To make the warning go away, you could add a third catch-all case to the method
+** A more lightweight alternative is to add an @unchecked annotation to the selector expression of the match
+** The most common way to take optional values apart is through a pattern match
+** Patterns are allowed in many parts of Scala, not just in standalone match expressions
+*** Any time you define a val or a var, you can use a pattern instead of a simple identifier
+*** A sequence of cases (i.e., alternatives) in curly braces can be used anywhere a function literal can be used
+**** In general, you should try to work with complete functions whenever possible, because using partial functions allows for runtime errors that the compiler cannot help you with
+*** You can also use a pattern in a for expression
+* Chapter 16 - Working with Lists
+**
 * Chapter 18 - Stateful Objects
 ** every var that is a non-private member of some object implicitly defines a getter and a setter method with it
 ** The getter of a var x is just named “x”, while its setter is named “x_=”
