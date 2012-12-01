@@ -1715,7 +1715,7 @@ If a parser takes a stream of characters and turns them into an abstract syntax 
 *A Scala port of Lindig’s implementation of Wadler’s pretty printer from Ocaml, adding all combinators and whole API from Haskell PPrint - which is another implementation of Wadler’s prettier-printer by Daan Leijen : [[source code|http://scala-programming-language.1934581.n4.nabble.com/file/n1995937/zPPrint.scala]] and [[demo|http://scala-programming-language.1934581.n4.nabble.com/scala-pretty-printing-tp1995936p1995939.html]]
 *A rudimentary pretty printer combinator : http://www.scala-blogs.org/2009/04/combinators-for-pretty-printers-part-1.html</pre>
 </div>
-<div title="Programming in Scala 2nd : summary" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104232118" modified="201211292214" tags="scala book summary scala-atp wip" changecount="67">
+<div title="Programming in Scala 2nd : summary" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104232118" modified="201212012256" tags="scala book summary scala-atp wip" changecount="71">
 <pre>* Chapter 1 · A Scalable Language
 ** Functional programming is guided by two main ideas
 *** functions are first-class values
@@ -1902,6 +1902,30 @@ If a parser takes a stream of characters and turns them into an abstract syntax 
 **** In general, you should try to work with complete functions whenever possible, because using partial functions allows for runtime errors that the compiler cannot help you with
 *** You can also use a pattern in a for expression
 * Chapter 16 - Working with Lists
+** lists are immutable
+** lists are homogeneous: the elements of a list all have the same type
+** The list type in Scala is covariant. This means that for each pair of types S and T, if S is a subtype of T, then List[S] is a subtype of List[T]
+** pattern matching over lists is clearer than decomposing them with methods
+** On lists, unlike arrays, length is a relatively expensive operation
+** It’s a good idea to organize your data so that most accesses are at the head of a list, rather than the last element
+** Higher-order methods on class List
+*** Mapping over lists: map, flatMap and foreach
+*** Filtering lists: filter, partition, find, takeWhile, dropWhile, and span
+*** Predicates over lists: forall and exists
+*** Folding lists: /: and :\
+*** Sorting lists: sortWith
+** Methods of the List object
+*** Creating lists from their elements: List.apply
+*** Creating a range of numbers: List.range
+*** Creating uniform lists: List.fill
+*** Tabulating a function: List.tabulate
+*** Concatenating multiple lists: List.concat
+** Type inference in Scala is flow based
+** This example highlights some limitations of the local, flow-based type inference scheme of Scala
+*** It is not present in the more global Hindley-Milner style of type inference used in functional languages such as ML or Haskell
+*** However, Scala’s local type inference deals much more gracefully with object-oriented subtyping than the Hindley-Milner style does
+*** Fortunately, the limitations show up only in some corner cases, and are usually easily fixed by adding an explicit type annotation
+* Chapter 17 - Collections
 **
 * Chapter 18 - Stateful Objects
 ** every var that is a non-private member of some object implicitly defines a getter and a setter method with it
