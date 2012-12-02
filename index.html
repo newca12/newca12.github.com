@@ -1715,7 +1715,7 @@ If a parser takes a stream of characters and turns them into an abstract syntax 
 *A Scala port of Lindig’s implementation of Wadler’s pretty printer from Ocaml, adding all combinators and whole API from Haskell PPrint - which is another implementation of Wadler’s prettier-printer by Daan Leijen : [[source code|http://scala-programming-language.1934581.n4.nabble.com/file/n1995937/zPPrint.scala]] and [[demo|http://scala-programming-language.1934581.n4.nabble.com/scala-pretty-printing-tp1995936p1995939.html]]
 *A rudimentary pretty printer combinator : http://www.scala-blogs.org/2009/04/combinators-for-pretty-printers-part-1.html</pre>
 </div>
-<div title="Programming in Scala 2nd : summary" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104232118" modified="201212012256" tags="scala book summary scala-atp wip" changecount="71">
+<div title="Programming in Scala 2nd : summary" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104232118" modified="201212020952" tags="scala book summary scala-atp wip" changecount="73">
 <pre>* Chapter 1 · A Scalable Language
 ** Functional programming is guided by two main ideas
 *** functions are first-class values
@@ -1926,7 +1926,14 @@ If a parser takes a stream of characters and turns them into an abstract syntax 
 *** However, Scala’s local type inference deals much more gracefully with object-oriented subtyping than the Hindley-Milner style does
 *** Fortunately, the limitations show up only in some corner cases, and are usually easily fixed by adding an explicit type annotation
 * Chapter 17 - Collections
-**
+** A ListBuffer is a mutable object (contained in package scala.collection.mutable), which can help you build lists more efficiently when you need to append
+** Another reason to use ListBuffer instead of List is to prevent the potential for stack overflow
+**  Because Predef has an implicit conversion from String to StringOps, you can treat any string like a sequence
+** The key characteristic of sets is that they will ensure that at most one of each object, as determined by ==, will be contained in the set at any one time
+** To make it easier to switch from immutable to mutable collections, and vice versa, Scala provides some syntactic sugar
+** Because tuples can combine objects of different types, tuples do not inherit from Traversable
+** A common application of tuples is returning multiple values from a method
+** To access elements of a tuple, you can use method _1 to access the first element, _2 to access the second, and so on
 * Chapter 18 - Stateful Objects
 ** every var that is a non-private member of some object implicitly defines a getter and a setter method with it
 ** The getter of a var x is just named “x”, while its setter is named “x_=”
