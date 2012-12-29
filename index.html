@@ -1034,7 +1034,7 @@ We can represent this proof as an array. Read it from the bottom to the up.
 *[[Yet another example with TPTP syntax|https://docs.google.com/leaf?id=1bY0NJpVeT98_iNVWvSmjB83iU6b8yguUUSjsiy54kqx1oPgz6T0upSD-S09N&amp;sort=moddate&amp;layout=list&amp;num=50]] (start slide 17)
 You can also see algorithms &lt;&lt;tag explained&gt;&gt; and introductory documents [[here|https://docs.google.com/folder/d/0B7LbY7bJaltlb0huM3RBZlhrSEk/edit?pli=1&amp;forcehl=1&amp;hl=fr]] </pre>
 </div>
-<div title="Glossary" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201109101656" modified="201202231013" tags="intro" changecount="13">
+<div title="Glossary" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201109101656" modified="201212291712" tags="intro" changecount="14">
 <pre>!related to formal logic 
 *[[Predicate|http://en.wikipedia.org/wiki/Predicate_(mathematical_logic)]]
 *[[Atomic formula|http://en.wikipedia.org/wiki/Atomic_formula]]
@@ -1052,7 +1052,10 @@ You can also see algorithms &lt;&lt;tag explained&gt;&gt; and introductory docum
 !related to sequent calculus
 *[[Turnstile (symbol)|http://en.wikipedia.org/wiki/Turnstile_(symbol)]]
 *[[Sequent|http://en.wikipedia.org/wiki/Sequent]]
-*[[Sequent calculus|http://en.wikipedia.org/wiki/Sequent_calculus]]</pre>
+*[[Sequent calculus|http://en.wikipedia.org/wiki/Sequent_calculus]]
+!unclassified
+*[[Satisfiability Modulo Theories|http://en.wikipedia.org/wiki/Satisfiability_Modulo_Theories]]
+</pre>
 </div>
 <div title="Handbook of practical logic and automated reasoning : summary" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104232119" modified="201201150925" tags="book summary scala-atp wip" changecount="26">
 <pre>* Preface
@@ -2025,6 +2028,34 @@ See also : [[Roadmap]]</pre>
 
 !Aborted tasks
 --Phase 2 : Scala port of [[Handbook of Practical Logic and Automated Reasoning|http://www.cambridge.org/catalogue/catalogue.asp?isbn=9780521899574]]([[started|http://github.com/newca12/scala-atp]], WIP)--
+</pre>
+</div>
+<div title="SMT vs. ATP" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201212291452" modified="201212291728" tags="SMT" changecount="13">
+<pre>Extract from [[Michal Jan Moskal PhD Thesis : Satisfiability Modulo Software|https://docs.google.com/file/d/0B7LbY7bJaltlMEFRczA1QWJOSlE/edit]]
+//There is certain overlap between what is referred to as SMT solvers and first-order Automated Theorem Proving (ATP) systems. Both check satisfiability (or equivalently validity)
+of first-order formulas. However, unlike in SMT, the logic considered in ATP systems is usually just plain first-order logic with or without equality, but always without any
+additional theories. On the other hand, SMT solvers usually accept only ground (quantifier-free) problems, whereas ATP systems use reasoning methods like resolution or
+superposition, which are complete also in presence of non-ground formulas. Still, there are SMT solvers supporting quantifiers, and there are ATP solvers handling some background
+theories. The crucial differences are thus in the application areas and search methods.
+SMT solvers evolved from propositional SAT solvers to support more efficient encoding of specific (hardware or software) verification problems. ATP systems are built to move forward
+automated deduction, in particular of mathematical theorems. In fact the TPTP library contains a number of open mathematical problems. Thus, as a rule of thumb, SMT solvers are
+ good at huge, shallow problems (usually from decidable classes), whereas ATP systems are good at small, deep problems (where the general classes of problems are never
+decidable). As a result, the constraints on search methods are different.
+ATP systems usually do some sort of saturation search, where new formulas are derived from the input. Such process is guaranteed to finish if the formula is unsatisfiable but not in
+the opposite case.
+SMT solvers try to build a model for the input formula, step by step. This is done in hope that the model pointing a verification failure will likely be small, and if there is no model, we will
+be able to quickly move through such small models and discharge them. The user expects an answer either pointing to a candidate model, or the information that there is none. Both
+answers need to be given quickly. As a consequence, when SMT solvers need to deal with quantified formulas some heuristic is employed. This sacrifices completeness for the
+&quot;common&quot;-case performance. From automated deduction point of view, this does not seem very elegant. However, verification tools are very often incomplete for several other
+reasons, having to do with imprecise or restricted encoding of the verified system. Thus, one additional source of incompleteness does not look so bad anymore, especially when one
+can trade it for speeding up the interactive feedback loop.//</pre>
+</div>
+<div title="Satisfiability Modulo Theories (SMT)" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201212291710" tags="SMT" changecount="1">
+<pre>!Competition (SMT-COMP)
+http://smtcomp.sourceforge.net/2012/index.shtml
+!The Satisfiability Modulo Theories Library (SMT-LIB)
+http://www.smt-lib.org/
+
 </pre>
 </div>
 <div title="Scala" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104241415" modified="201105081356" tags="intro tools scala" changecount="9">
@@ -3113,7 +3144,7 @@ config.parsers.twikiFormatter.formatTag = 'TWikiFormat';
 } // end of 'install only once'
 //}}}</pre>
 </div>
-<div title="Tags" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104250931" modified="201208191226" tags="meta editing" changecount="57">
+<div title="Tags" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104250931" modified="201212291650" tags="meta editing" changecount="58">
 <pre>*&lt;&lt;tag atp&gt;&gt;- Automated Theorem Proving, what this site is all about
 **&lt;&lt;tag intro&gt;&gt;- Getting started
 **&lt;&lt;tag scala-atp&gt;&gt;- Scala port of [[Handbook of Practical Logic and Automated Reasoning|http://www.cambridge.org/catalogue/catalogue.asp?isbn=9780521899574]]
@@ -3122,6 +3153,7 @@ config.parsers.twikiFormatter.formatTag = 'TWikiFormat';
 ***&lt;&lt;tag summary&gt;&gt;- Reading notes
 **&lt;&lt;tag Algorithms&gt;&gt;- Algorithms related to Automated Theorem Proving
 ***&lt;&lt;tag explained&gt;&gt;- Algorithms explained
+**&lt;&lt;tag SMT&gt;&gt;- Satisfiability Modulo Theories
 **&lt;&lt;tag proovers&gt;&gt;-
 ***&lt;&lt;tag gapt&gt;&gt;- General Architecture for proof
 ***&lt;&lt;tag MELIA&gt;&gt;- Model Evolution Calculus with Equality and built-in linear integer arithmetic 
@@ -3382,7 +3414,7 @@ If you are really interested by atp see [[The Big Picture (Wikipedia links)]]
 
 This tiddler was automatically created to record the details of this server</pre>
 </div>
-<div title="Who's who" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104241635" modified="201211201043" tags="person" changecount="44">
+<div title="Who's who" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104241635" modified="201212291723" tags="person" changecount="47">
 <pre>In no particular order.
 
 *Australian National University (Australia)
@@ -3463,7 +3495,10 @@ This tiddler was automatically created to record the details of this server</pre
 **Computer Science Department
 ***[[William McCune|http://www.cs.unm.edu/~mccune/]]
 ****Otter,Mace4,Prover9,Ivy proof checker
-
+*École Polytechnique Fédérale de Lausanne (EPFL) (Lausanne, Switzerland)
+**Laboratory for Automated Reasoning and Analysis
+***[[Philippe Suter|http://lara.epfl.ch/~psuter/]]
+****ScalaZ3
 See also [[Notable people|http://en.wikipedia.org/wiki/Automated_theorem_proving#Notable_people]]
 </pre>
 </div>
