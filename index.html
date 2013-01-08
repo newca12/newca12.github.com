@@ -1723,7 +1723,7 @@ If a parser takes a stream of characters and turns them into an abstract syntax 
 *A Scala port of Lindig’s implementation of Wadler’s pretty printer from Ocaml, adding all combinators and whole API from Haskell PPrint - which is another implementation of Wadler’s prettier-printer by Daan Leijen : [[source code|http://scala-programming-language.1934581.n4.nabble.com/file/n1995937/zPPrint.scala]] and [[demo|http://scala-programming-language.1934581.n4.nabble.com/scala-pretty-printing-tp1995936p1995939.html]]
 *A rudimentary pretty printer combinator : http://www.scala-blogs.org/2009/04/combinators-for-pretty-printers-part-1.html</pre>
 </div>
-<div title="Programming in Scala 2nd : summary" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104232118" modified="201301010913" tags="scala book summary scala-atp wip" changecount="81">
+<div title="Programming in Scala 2nd : summary" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104232118" modified="201301081026" tags="scala book summary done" changecount="98">
 <pre>* Chapter 1 · A Scalable Language
 ** Functional programming is guided by two main ideas
 *** functions are first-class values
@@ -1980,15 +1980,163 @@ If a parser takes a stream of characters and turns them into an abstract syntax 
 ** In Scala, the inner class is addressed using the expression Outer#Inner instead of Java’s Outer.Inner. The ‘.’ syntax is reserved for objects
 ** there’s a class in its standard library, scala.Enumeration. To create a new enumeration, you define an object that extends this class
 * Chapter 21 - Implicit Conversions and Parameters
-**
-**
+** The way this code works is that the compiler first tries to compile it as is, but it sees a type error. Before giving up, it looks for an implicit conversion that can repair the problem
+** Implicit conversions are governed by the following general rules:
+*** Marking Rule: Only definitions marked implicit are available
+*** Scope Rule: An inserted implicit conversion must be in scope as a single identifier, or be associated with the source or target type of the conversion
+*** One-at-a-time Rule: Only one implicit is tried
+*** Explicits-First Rule: Whenever code type checks as it is written, no implicits are attempted
+*** Naming an implicit conversion. Implicit conversions can have arbitrary names
+*** Where implicits are tried. There are three places implicits are used in the language: conversions to an expected type, conversions of the receiver of a selection, and implicit parameters
+** Implicit conversions also apply to the receiver of a method call, the object on which the method is invoked This kind of implicit conversion has two main uses
+*** First, receiver conversions allow smoother integration of a new class into an existing class hierarchy
+*** And second, they support writing domain-specific languages (DSLs) within the language
+** The remaining place the compiler inserts implicits is within argument lists
+** Note that the implicit keyword applies to an entire parameter list, not to individual parameters
+** As a style rule, it is best to use a custom named type in the types of implicit parameters
+** You can think of “T &lt;% Ordered[T]” as saying, “I can use any T, so long as T can be treated as an Ordered[T].”
+** before adding a new implicit conversion, first ask whether you can achieve a similar effect through other means, such as inheritance, mixin composition, or method overloading
+* Chapter 22 - Implementing Lists
+** Lists are not “built-in” as a language construct in Scala
+** the list buffer implemen- tation is organized so that both the append operation (+=) and the toList operation take (very short) constant time
+** Instead of recursing through this structure, however, many core list methods are imple- mented using a ListBuffer
+** It is functional on the outside, but uses mutation internally to speed up the common case where a buffer is discarded after toList is been called
+* Chapter 23 - For Expressions Revisited
+** all for expressions that yield a result are translated by the compiler into combinations of invocations of the higher-order methods map, flatMap, and withFilter
+** Generally, a for expression is of the form: for ( seq ) yield expr
+*** seq is a sequence of generators, definitions, and filters, with semicolons between successive elements
+**** A generator is of the form: pat &lt;- expr
+** The for notation is essentially equivalent to common operations of database query languages
+** To support the full range of for expressions and for loops, you need to define map, flatMap, withFilter, and foreach as methods of your data type. But it’s also possible to define a subset of these methods
+*** If it defines flatMap as well as map, it allows for expressions consisting of several generators
+*** If it defines foreach, it allows for loops (both with single and multiple generators)
+*** If it defines withFilter, it allows for filter expressions starting with an if in the for expression
+** the concept of for expression is more general than just iteration over a collection
+** for expressions also play an important role in asynchronous I/O, or as an alternative notation for optional values
+* Chapter 24 - The Scala Collections API
+**  Scala collections systematically distinguish between mutable and immutable collections
+** The three variants are located in packages scala.collection, scala.collection.immutable, and scala.collection.mutable
+*** A collection in package scala.collection can be either mutable or immutable
+** The difference between root collections and immutable collections is
+*** clients of an immutable collection have a guarantee that nobody can mutate the collection
+*** clients of a root collection only know that they can’t change the collection themselves
+** At the top of the collection hierarchy is trait Traversable
+*** Abstract method: xs foreach f
+** The next trait from the top in Figure 24.1 is Iterable
+*** Abstract method: xs.iterator
+** The Seq trait represents sequences. A sequence is a kind of iterable that has a length and whose elements have fixed index positions, starting from 0
+** Seq trait has two subtraits, LinearSeq and IndexedSeq
+*** A linear sequence has efficient head and tail operations
+*** an indexed sequence has efficient apply, length, and (if mutable) update operations
+** Sets are Iterables that contain no duplicate elements
+** Maps are Iterables of pairs of keys and values
+** if you needed a thread-safe map, you could mix the SynchronizedMap trait into whatever particular map imple- mentation you desired.
+** the most common immutable collection types
+*** Lists are finite immutable sequences
+*** A stream is like a list except that its elements are computed lazily
+*** Because vectors strike a good balance between fast random selections and fast random functional updates, they are currently the default implementation of immutable indexed sequences
+*** If you need a last-in-first-out sequence, you can use a Stack
+*** A queue is just like a stack except that it is first-in-first-out rather than last-in- first-out
+*** A range is an ordered sequence of integers that are equally spaced apart
+*** Hash tries are a standard way to implement immutable sets and maps efficiently
+*** Scala provides implementations of sets and maps that use a red-black tree internally. You access them under the names TreeSet and TreeMap
+*** Red-black trees are also the standard implementation of SortedSet
+*** A bit set represents a collection of small integers as the bits of a larger integer
+*** A list map represents a map as a linked list of key-value pairs
+** take a look at the mutable collection classes
+*** An array buffer holds an array and a size
+*** A list buffer is like an array buffer except that it uses a linked list internally instead of an array
+*** Just like an array buffer is useful for building arrays, and a list buffer is useful for building lists, a string builder is useful for building strings
+*** Linked lists are mutable sequences that consist of nodes that are linked with next pointers
+*** DoubleLinkedLists are like the single linked lists. The main benefit of that additional link is that it makes element removal very fast
+*** A MutableList consists of a single linked list together with a pointer that refers to the terminal empty node of that list
+*** Scala provides mutable queues in addition to immutable ones
+*** Array sequences are mutable sequences of fixed size. They are implemented in Scala by class ArraySeq
+*** You saw immutable stacks earlier. There is also a mutable version
+*** ArrayStack is an alternative implementation of a mutable stack. generally slightly more efficient for most operations than a normal mutable stack
+*** the default mutable map and set types in Scala are based on hash tables
+*** A weak hash map is a special kind of hash map in which the garbage collector does not follow links from the map to the keys stored in it
+*** A concurrent map can be accessed by several threads at once
+*** A mutable bit set is just like an immutable one, except that it can be mod- ified in place
+** Arrays are a special kind of collection in Scala
+** Like arrays, strings are not directly sequences, but they can be converted to them
+** You can see the performance char- acteristics of some common operations on collections summarized in two tables, Table 24.10 and Table 24.11
+** The collection libraries have a uniform approach to equality and hashing
+*** The idea is, first, to divide collections into sets, maps, and sequences
+**** Collections in different categories are always unequal
+**** within the same category, collections are equal if and only if they have the same elements
+** A view is a special kind of collection that represents some base collection, but implements all of its transformers lazily
+** An iterator is not a collection, but rather a way to access the elements of a collection one by one
+* Chapter 25 - The Architecture of Scala Collections
+** The principal design objective of the new collections framework was to avoid any duplication, defining every operation in as few places as possi- ble
+** The design approach was to implement most operations in collection “templates” that can be flexibly inherited from individual base classes and implementations
+** Almost all collection operations are implemented in terms of traversals and builders
+** What needs to be done if you want to integrate a new collection class, so that it can profit from all predefined operations at the right types? two examples that do this
+*** Integrating sequences
+*** Integrating new sets and maps
+** Because of Scala’s rich support for abstraction, each new collection type can have a large number of methods without having to reimplement them all over again&amp;nbsp;
+* Chapter 26 - Extractors
+** This chapter explains what extractors are and how you can use them to define patterns that are decoupled from an object’s representation
+** An extractor in Scala is an object that has a method called unapply as one of its members. The purpose of that unapply method is to match a value and take it apart
+** Even though they are very useful, case classes have one shortcoming: they expose the concrete representation of data. Extractors break this link between data representations and patterns.
+** One particularly useful application area of extractors are regular expressions
+** In this chapter you saw how to generalize pattern matching with extractors
+* Chapter 27 - Annotations
+** Annotations are allowed on any kind of declaration or definition, including vals, vars, defs, classes, objects, traits, and types
+** Scala includes several standard annotations
+*** Deprecation
+*** Volatile fields
+*** Binary serialization
+*** Automatic get and set methods
+*** Tailrec
+*** Unchecked
+*** Native methods
+* Chapter 28 - Working with XML [[skipped|https://groups.google.com/forum/#!topic/scala-user/Dz95uJLqzhA]]
+* Chapter 29 - Modular Programming Using Objects
+** if a module is an object, then a template for a module is a class
+** you can use traits to split a module into separate files
+** One final feature of Scala modules is worth emphasizing: they can be linked together at runtime
+* Chapter 30 - Object Equality
+** The == equality is reserved in Scala for the “natural” equality of each type
+** Here’s the recipe for overriding equals
+*** If you’re going to override equals in a non-final class, you should create a canEqual method
+*** The canEqual method should yield true if the argument object is an instance of the current class (i.e., the class in which canEqual is defined), false otherwise
+*** In the equals method, make sure you declare the type of the object passed as an Any
+*** Write the body of the equals method as a single match expression. The selector of the match should be the object passed to equals
+*** The match expression should have two cases
+**** In the body of this case, write an expression that logical-ands together the individual expressions that must be true for the objects to be equal
+**** For the second case, use a wildcard pattern that yields false
+** Given how difficult it is to implement a correct equality method, you might prefer to define your classes of comparable objects as case classes. That way, the Scala compiler will add equals and hashCode methods with the right properties automatically.
+* Chapter 31 - Combining Scala and Java
+** Most of the time, you can ignore how Scala is implemented and simply write and run your code
+* Chapter 32 - Actors and Concurrency [[skipped|http://docs.scala-lang.org/actors-migration/]]
 * Chapter 33 - Combinator Parsing
 ** Sequential composition is expressed by an explicit operator: ~
 ** Repetition is expressed rep( . . . )
 ** The ˆˆ operator transforms the result of a parser
 *** examples :
 **** floatingPointNumber ˆˆ (_.toDouble)
-**** &quot;true&quot; ˆˆ (x =&gt; true)</pre>
+**** &quot;true&quot; ˆˆ (x =&gt; true)
+** Table 33.1 · Summary of parser combinators
+*** &quot;...&quot; literal
+*** &quot;...&quot;.r regular expression
+*** P~Q sequential composition
+*** P&lt;~Q,P~&gt;Q sequential composition; keep left/right only
+*** P|Q alternative
+*** opt(P) option
+*** rep(P) repetition
+*** repsep(P, Q) interleaved repetition
+*** Pˆˆf result conversion
+** The task of syntax analysis is often split into two phases
+*** The lexer phase recognizes individual words in the input and classifies them into some token classes
+*** This is followed by a syntactical analysis phase that analyzes sequences of tokens
+** Scala’s parsing combinators provide several utility classes for lexical and syntactic analysis
+*** scala.util.parsing.combinator.lexical
+*** scala.util.parsing.combinator.syntactical
+** The parser combinators employ backtracking to choose between different parsers in an alternative
+** Backtracking imposes only a few restrictions on how to formulate a grammar so that it can be parsed. Essentially, you just need to avoid left- recursive productions
+* Chapter 34 - GUI Programming [[skipped|http://www.oracle.com/technetwork/java/javafx/overview/faq-1446554.html#6]]
+* Chapter 35 - The SCells Spreadsheet [[skipped|http://www.oracle.com/technetwork/java/javafx/overview/faq-1446554.html#6]]  </pre>
 </div>
 <div title="Project Status Report" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201108101807" modified="201208151232" tags="done wip" changecount="53">
 <pre>!What we've learned so far
