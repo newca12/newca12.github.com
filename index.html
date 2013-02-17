@@ -734,16 +734,16 @@ def clause: Parser[FSequent] = repsep(formula,&quot;|&quot;) ~ &quot;.&quot; ^^ 
 
 </pre>
 </div>
-<div title="GAPT source code analysis" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201106151006" modified="201211222207" tags="gapt scala-atp code-analysis" changecount="30">
-<pre>! upgrade to Scala 2.10
+<div title="GAPT source code analysis" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201106151006" modified="201302171750" tags="gapt scala-atp code-analysis" changecount="32">
+<pre>! Upgrade to Scala 2.10 @@wip@@
 @@export MAVEN_OPTS=&quot;-Xmx512m -XX:MaxPermSize=256m&quot; needed for mvn install or mvn test@@
-See https://github.com/newca12/gapt/commit/6e6e291a40581e098ed6161d6d121ddffa9994ed
+See https://github.com/newca12/gapt/tree/m2e-210
 !!cutIntroduction
-DecompositionTest : set sequential testing and disable some test with pendingUntilFixed
+DecompositionTest : set sequential testing and disable some test with pendingUntilFixed(&quot;Problematic with Scala 2.10&quot;)
 !!shlk
 sFOparserTest : set sequential testing
 !!ceres
-ProjectionTermTest : set sequential testing 
+ProjectionTermTest : set sequential testing and disable some test with pendingUntilFixed(&quot;Problematic with Scala 2.10&quot;)
 ClauseSetsTest : set sequential testing
 !!ceres_xml_parsing
 SimpleParser : syntax modification for Scala 2.10
@@ -755,10 +755,10 @@ IvyTest : all commented. This code is definitely problematic
 PrimeProofTest : sequential ? 
 Prover9Test : sequential ?
 
-! dependencies
+! Dependencies
 Dependency graph generated with [[el4j DepGraph maven plugin|http://el4j.sourceforge.net/plugins/maven-depgraph-plugin/index.html]] :
 https://docs.google.com/open?id=0B7LbY7bJaltlNThjMDQ3M2EtYWY1My00ZmM3LWFjZGQtYWZiZDMxYmRiMWUy
-! parser anomaly
+! Parser anomaly
 *at.logic.parsing.language.arithmetic.HOLTermArithmeticalExporter need 
 **import at.logic.transformations.ceres.struct.ClauseSetSymbol
 **import at.logic.transformations.ceres.struct.TypeSynonyms.CutConfiguration
@@ -767,7 +767,7 @@ https://docs.google.com/open?id=0B7LbY7bJaltlNThjMDQ3M2EtYWY1My00ZmM3LWFjZGQtYWZ
 **import at.logic.calculi.lksk
 but maven test is ok without ceres
 
-! upgrade to Scala 2.8
+! Upgrade to Scala 2.8
 *code update from scala 2.7 to scala 2.8 in [[r457|http://code.google.com/p/gapt/source/detail?r=457]]
 *scala 2.8 warning cleanup in [[r460|http://code.google.com/p/gapt/source/detail?r=460]]
 *scala 2.8 warning cleanup ended in [[r470|http://code.google.com/p/gapt/source/detail?r=470]]</pre>
@@ -3829,18 +3829,18 @@ Also most of the JVM optimizations are not necessary anymore. Details [[here|htt
 
   </pre>
 </div>
-<div title="howto Scala IDE for Eclipse 4.2 (Juno)" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201207052131" modified="201211261853" tags="tools scala-ide howto" changecount="45">
+<div title="howto Scala IDE for Eclipse 4.2 (Juno)" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201207052131" modified="201302171440" tags="tools scala-ide howto" changecount="47">
 <pre>@@Scala nightly is used, proved to be stable and more usable and new features are not a luxury@@
 !Installation
 *Eclipse IDE for Java Developers @@Juno SR1@@
 *m2e from eclipse market place @@If not already installed@@
-*ScalaIDE - http://download.scala-ide.org/nightly-update-juno-master-29x or http://download.scala-ide.org/nightly-update-juno-master-2.10.x @@Scala 2.10 is now usable and recommended@@
+*ScalaIDE - http://download.scala-ide.org/nightly-scala-ide-juno-29x or http://download.scala-ide.org/nightly-scala-ide-juno-210x @@Scala 2.10 is now usable and recommended@@
 *m2eclipse-scala - http://alchim31.free.fr/m2e-scala/update-site
 *m2e-egit from m2e market place
 *m2e-subversive from m2e market place
 *Scala Worksheet - http://download.scala-ide.org/nightly-build-worksheet-scalaide21-29/site/ or http://download.scala-ide.org/nightly-update-worksheet-scalaide21-210/site/
-*ScalaTest plugin for Scala IDE - http://www.artima.com/newplugins3/2.10.0-RC1 @@also work with Scala 2.10.0-RC2 and probably later despite of the URL name@@
-*Scalastyle plugin for Scala IDE - http://www.scalastyle.org/downloads/helios/2.9.2-0.2.0/site @@also work with Scala 2.10 and Eclipse Juno despite of the URL name@@
+*ScalaTest plugin for Scala IDE - --http://www.artima.com/newplugins3/2.10.0-RC1-- @@old update site note compatible anymore since Scala IDE 3.0@@
+*Scalastyle plugin for Scala IDE - http://www.scalastyle.org/downloads/juno/2.9.2-0.2.0/site @@also work with Scala 2.10 but not for new features like string interpolation@@
 !Post installation
 *Eclipse/Preference/General/Workspace/ =&gt; set text file encoding to UTF-8
 *@@Eclipse/Preference/Maven/ =&gt; set hide folders of physically nested modules@@
