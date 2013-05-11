@@ -516,7 +516,7 @@ noscript {display:none;} /* Fixes a feature in Firefox 1.5.0.2 where print previ
 </div></div>
 <!--POST-SHADOWAREA-->
 <div id="storeArea">
-<div title="A bit of history" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201109081600" modified="201109081715" tags="intro" changecount="15">
+<div title="A bit of history" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201109081600" modified="201304261700" tags="intro" changecount="16">
 <pre>!Notable Events
 *1666 : [[Characteristica universalis|http://en.wikipedia.org/wiki/Characteristica_universalis]] concept
 *1879 : Frege invente axiomatic predicate logic
@@ -531,6 +531,7 @@ noscript {display:none;} /* Fixes a feature in Firefox 1.5.0.2 where print previ
 *[[Gottlob Frege|http://en.wikipedia.org/wiki/Frege]] 1848-1925
 *[[Giuseppe Peano]|http://en.wikipedia.org/wiki/Giuseppe_Peano]] 1858–1932
 *[[Bertrand Russell|http://en.wikipedia.org/wiki/Bertrand_Russell]] 1872–1970
+*[[Jacques Herbrand|http://en.wikipedia.org/wiki/Jacques_Herbrand]] 1908-1931
 *[[Gerhard Gentzen|http://en.wikipedia.org/wiki/Gerhard_Gentzen]] 1909-1945
 *[[Nicolaas Govert de Bruijn|http://en.wikipedia.org/wiki/Nicolaas_Govert_de_Bruijn]] 1918-
 *[[Thomas Callister Hales|http://en.wikipedia.org/wiki/Thomas_Callister_Hales]] 1958-
@@ -644,8 +645,11 @@ If you wan't an overview of what is available on this site you can use [[Tags]] 
 **[[Unifying Programming and Math – The Dependent Type Revolution|http://spin.atomicobject.com/2012/11/11/unifying-programming-and-math-the-dependent-type-revolution/]]
 **[[Scala has surprisingly good support for dependent typing|http://stackoverflow.com/questions/12935731/any-reason-why-scala-does-not-explicitly-support-dependent-types/12937819#12937819]]</pre>
 </div>
-<div title="First-class resources" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201103191829" modified="201301091109" tags="intro" changecount="40">
-<pre>* SCALA
+<div title="First-class resources" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201103191829" modified="201304261710" tags="intro" changecount="45">
+<pre>* LOGIC
+** Free online (Coursera) course with Michael Genesereth [[Introduction to Logic|https://www.coursera.org/course/intrologic]]
+
+* SCALA
 ** Free online (Coursera) Scala course with Martin Odersky [[Functional Programming Principles in Scala|https://www.coursera.org/course/progfun]]
 *** This course introduces the cornerstones of functional programming using the Scala programming language.
 ** Learn Scala for free thanks to O'REILLY : [[Programming Scala|http://programming-scala.labs.oreilly.com/index.html]]
@@ -2311,6 +2315,14 @@ Example with https://github.com/newca12/scala-atp/blob/master/src/main/scala/org
 A complete example of conversion can be found here : https://github.com/newca12/MELIA/compare/master...packrat
 A benchmark before and after the migration : see [[Packrat Efficiency]]</pre>
 </div>
+<div title="Scala in Depth : summary" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201302171757" modified="201302172222" tags="scala book summary wip" changecount="2">
+<pre>* Chapter 1 · Scala - a blended language
+**Object orientation can deal with composing the nouns and functional programming can deal with composing verbs
+**The essence of functional programming is delaying side effects as long as possible
+**In addition to separating the concerns of how a variable behaves from the variable type, the placement of types on the right allows type inference to determine the type of the variables
+**Implicits are a powerful feature and are mistrusted by some. The key to implicits in Scala are knowing how and when to use them
+* Chapter 2 · The core rules</pre>
+</div>
 <div title="Scala notes" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201108151651" tags="scala" changecount="1">
 <pre>*map and filter are not defined on Array. Implicit conversions in Predef are used to provide such methods for arrays.</pre>
 </div>
@@ -3323,7 +3335,7 @@ config.parsers.twikiFormatter.formatTag = 'TWikiFormat';
 } // end of 'install only once'
 //}}}</pre>
 </div>
-<div title="Tags" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104250931" modified="201212291650" tags="meta editing" changecount="58">
+<div title="Tags" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104250931" modified="201305110748" tags="meta editing" changecount="59">
 <pre>*&lt;&lt;tag atp&gt;&gt;- Automated Theorem Proving, what this site is all about
 **&lt;&lt;tag intro&gt;&gt;- Getting started
 **&lt;&lt;tag scala-atp&gt;&gt;- Scala port of [[Handbook of Practical Logic and Automated Reasoning|http://www.cambridge.org/catalogue/catalogue.asp?isbn=9780521899574]]
@@ -3352,6 +3364,7 @@ config.parsers.twikiFormatter.formatTag = 'TWikiFormat';
 *&lt;&lt;tag pb&gt;&gt;- some things annoying that needs to be fixed
 *&lt;&lt;tag done&gt;&gt;- what we've done so far
 *&lt;&lt;tag wip&gt;&gt;- work in progress
+*&lt;&lt;tag obsolete&gt;&gt;- out-of-date, could be deleted anytime
 *&lt;&lt;tag meta&gt;&gt;- describes the operation of this site
 **&lt;&lt;tag editing&gt;&gt;- tips on editing and authoring notes, including all sorts of tools
 **&lt;&lt;tag system&gt;&gt;- control how the site operates and is layed out
@@ -3792,8 +3805,38 @@ Nota : [[Prover9 &amp; co|http://www.cs.unm.edu/~mccune/mace4/download/LADR-2009
 
 --@@*ladr_to_tptp segfault@@-- &lt;= The last version here : https://github.com/jessealama/ladr.git fix this.</pre>
 </div>
-<div title="howto Scala IDE for Eclipse 3.7 (Indigo)" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201105221308" modified="201211241334" tags="tools scala-ide howto" changecount="60">
-<pre>@@Eclipse 3.7 is old and Eclipse 4.2 is now stable and usable with Scala IDE. It is recommended to use [[howto Scala IDE for Eclipse 4.2 (Juno)]]@@
+<div title="howto Scala IDE for Eclipse" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201305110738" modified="201305110906" tags="tools scala-ide howto" changecount="4">
+<pre>!Notes
+Eclipse Juno is known for performance regression so Indigo is recommended until Kepler is available
+!Installation
+Simply install the &quot;all in one&quot; [[SDK of the Scala IDE for Eclipse|http://scala-ide.org/download/sdk.html]]
+!Post installation
+*Eclipse/Preference/General/Workspace/ =&gt; set text file encoding to UTF-8
+*ScalaTest plugin for Scala IDE
+*m2e-egit from m2e market place (File/Import.../maven/Check out Maven Projects from SCM)
+*@@Eclipse/Preference/Maven/ =&gt; set hide folders of physically nested modules@@
+*@@Eclipse/Preference/Team/Git/Projects =&gt; set auto share projects located in a git repository@@
+*Eclipse/Preference/Team/Git/Ignored Resources/ =&gt; add .cache,.classpath,.project,*.prefs,*/target/*
+!Optimal memory configuration for Scala IDE
+Modify this in eclipse.ini if you got more than 4 Go of memory
+{{{
+-Xmx2048m
+}}}
+!Checkout a single-maven project to check everything is OK
+#/File/Import/Maven/Check out Maven Projects from SCM
+#Choose git and enter https://github.com/newca12/scala-atp.git in SCM URL
+#Click on finish and that is : @@you've got automatically a fully configured Scala Maven single-module project git managed !@@
+!Checkout a multi-modules maven project to check everything is OK
+@@Gapt actually doesn't work with Eclipse due to a change in m2eclipse-scala. This is fixed in the m2e branch@@
+@@Gapt is not yet compatible with Scala 2.10. Fix is ongoing in the m2e-210 branch@@
+#/File/Import/Maven/Check out Maven Projects from SCM
+#Choose git and enter https://github.com/newca12/gapt.git in SCM URL
+#Click on finish and that is : @@you've got automatically a fully configured Scala Maven multi-modules project git managed !@@</pre>
+</div>
+<div title="howto Scala IDE for Eclipse 3.7 (Indigo)" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201105221308" modified="201305110744" tags="obsolete tools scala-ide howto" changecount="64">
+<pre>@@obsolete@@ See [[howto Scala IDE for Eclipse]]
+
+Eclipse 3.7 is old and Eclipse 4.2 is now stable and usable with Scala IDE. It is recommended to use [[howto Scala IDE for Eclipse 4.2 (Juno)]]
 !Installation
 *Eclipse IDE for Java Developers
 *m2e from eclipse market place
@@ -3829,8 +3872,9 @@ Also most of the JVM optimizations are not necessary anymore. Details [[here|htt
 
   </pre>
 </div>
-<div title="howto Scala IDE for Eclipse 4.2 (Juno)" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201207052131" modified="201302171440" tags="tools scala-ide howto" changecount="47">
-<pre>@@Scala nightly is used, proved to be stable and more usable and new features are not a luxury@@
+<div title="howto Scala IDE for Eclipse 4.2 (Juno)" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201207052131" modified="201305110744" tags="obsolete tools scala-ide howto" changecount="48">
+<pre>@@obsolete@@ See [[howto Scala IDE for Eclipse]]
+
 !Installation
 *Eclipse IDE for Java Developers @@Juno SR1@@
 *m2e from eclipse market place @@If not already installed@@
