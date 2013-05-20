@@ -1113,6 +1113,27 @@ You can also see algorithms &lt;&lt;tag explained&gt;&gt; and introductory docum
 ** We have no way at all of evaluating whether a formula holds in an interpretation with an infinite domain
 ** Note the contrast with propositional logic, where the propositional variables range over a finite (2-element) set which can therefore be enumerated exhaustively</pre>
 </div>
+<div title="Inductive Theorem Proving" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201305201623" modified="201305202118" tags="Techniques" changecount="12">
+<pre>!State of the art
+Extract from [[Inductive Theorem Proving Automated Reasoning Petros Papapanagiotou|http://www.inf.ed.ac.uk/teaching/courses/ar/slides/induction_lecture.pdf]]
+*Inductive Proofs
+**Appear very often in formal veriﬁcation and automated reasoning tasks.
+**Are hard to automate.
+*So far
+**Advanced automated provers (ACL2, IsaPlanner, etc)
+**Advanced techniques (Rippling, Decision Procedures, etc)
+**Still require fair amount of user interaction.
+*Still work on
+***More advanced heuristics
+****Better generalization
+****Counterexample checking
+****Productive use of failure (Isaplanner)
+****More decision procedures
+****...
+**Termination heuristics
+!Inductive Theorem Provers
+[[List of All Inductive Theorem Provers in The World|https://docs.google.com/document/pub?id=1o6EbgtGsFrVLRpgZBYwJ2MEEuR3cqJuM6YKB_ZcUCk4]]</pre>
+</div>
 <div title="Interval Temporal Logic" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201110202141" modified="201110202152" tags="Uses" changecount="3">
 <pre>* http://www.tech.dmu.ac.uk/STRL/ITL/</pre>
 </div>
@@ -1362,7 +1383,7 @@ You can also see algorithms &lt;&lt;tag explained&gt;&gt; and introductory docum
 <div title="MELIA source code analysis" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201107301005" modified="201107301141" tags="code-analysis MELIA" changecount="3">
 <pre>All classes are inter-dependent, TPTPTParser need all other classes.</pre>
 </div>
-<div title="MainMenu" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201103191830" modified="201211241731" tags="meta editing systemNotes" changecount="30">
+<div title="MainMenu" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201103191830" modified="201305201655" tags="meta editing systemNotes" changecount="31">
 <pre>[[About]]
 [[Navigating this site]]
 [[Getting started]]
@@ -1370,6 +1391,7 @@ You can also see algorithms &lt;&lt;tag explained&gt;&gt; and introductory docum
 [[A bit of history]]
 [[First-class resources]]
 &lt;&lt;tag Algorithms&gt;&gt;
+&lt;&lt;tag Techniques&gt;&gt;
 [[Glossary]]
 &lt;&lt;tag Uses&gt;&gt;
 [[First-class articles]]
@@ -1601,6 +1623,11 @@ disturbing the spacing between lines.</pre>
 <pre>Navigating this site is a bit tricky and un-conventional.  Each page is not static.  It is created dynamically according to what you have clicked on.  Everything you click on opens in front of you while 'older' stuff are below in the page.  If you open something that its not to your interest you can close it.
 
 You can use the left navigation bar to open major areas.  You can also use the search to find things that you like.  Phrases underlined are external links while phrases in bold blue font are internal links.</pre>
+</div>
+<div title="Organizations" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201305201705" modified="201305201744" tags="who" changecount="6">
+<pre>In no particular order.
+*University of Edinburgh : [[Mathematical Reasoning Group|http://dream.inf.ed.ac.uk/]]
+*Vienna University of Technology : [[Theory and Logic Group|http://www.logic.at/e1852.html]]</pre>
 </div>
 <div title="Packrat Efficiency" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201108280902" modified="201111111835" tags="parsing TPTP" changecount="40">
 <pre>| TPTP test | without packrat | with packrat | time gain |h
@@ -2233,13 +2260,13 @@ SMT solvers evolved from propositional SAT solvers to support more efficient enc
 ATP systems usually do some sort of saturation search, where new formulas are derived from the input. Such process is guaranteed to finish if the formula is unsatisfiable but not in the opposite case.
 SMT solvers try to build a model for the input formula, step by step. This is done in hope that the model pointing a verification failure will likely be small, and if there is no model, we will be able to quickly move through such small models and discharge them. The user expects an answer either pointing to a candidate model, or the information that there is none. Both answers need to be given quickly. As a consequence, when SMT solvers need to deal with quantified formulas some heuristic is employed. This sacrifices completeness for the &quot;common&quot;-case performance. From automated deduction point of view, this does not seem very elegant. However, verification tools are very often incomplete for several other reasons, having to do with imprecise or restricted encoding of the verified system. Thus, one additional source of incompleteness does not look so bad anymore, especially when one can trade it for speeding up the interactive feedback loop.//</pre>
 </div>
-<div title="Satisfiability Modulo Theories (SMT)" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201212291710" tags="SMT" changecount="1">
-<pre>!Competition (SMT-COMP)
-http://smtcomp.sourceforge.net/2012/index.shtml
-!The Satisfiability Modulo Theories Library (SMT-LIB)
+<div title="Satisfiability Modulo Theories (SMT)" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201212291710" modified="201305181607" tags="SMT" changecount="5">
+<pre>!The Satisfiability Modulo Theories Library (SMT-LIB)
 http://www.smt-lib.org/
-
-</pre>
+!Competition (SMT-COMP)
+http://smtcomp.sourceforge.net/2012/index.shtml
+!Constraint solver in Scala @@(wip)@@
+http://lara.epfl.ch/w/solver (This page contains also first-class resources)</pre>
 </div>
 <div title="Scala" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104241415" modified="201105081356" tags="intro tools scala" changecount="9">
 <pre>Why Scala ?
@@ -3335,15 +3362,16 @@ config.parsers.twikiFormatter.formatTag = 'TWikiFormat';
 } // end of 'install only once'
 //}}}</pre>
 </div>
-<div title="Tags" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104250931" modified="201305110748" tags="meta editing" changecount="59">
+<div title="Tags" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104250931" modified="201305201743" tags="meta editing" changecount="63">
 <pre>*&lt;&lt;tag atp&gt;&gt;- Automated Theorem Proving, what this site is all about
 **&lt;&lt;tag intro&gt;&gt;- Getting started
 **&lt;&lt;tag scala-atp&gt;&gt;- Scala port of [[Handbook of Practical Logic and Automated Reasoning|http://www.cambridge.org/catalogue/catalogue.asp?isbn=9780521899574]]
-**&lt;&lt;tag person&gt;&gt;- People working on ATP
+**&lt;&lt;tag who&gt;&gt;- People and organizations working on ATP
 **&lt;&lt;tag book&gt;&gt;- Some books
 ***&lt;&lt;tag summary&gt;&gt;- Reading notes
 **&lt;&lt;tag Algorithms&gt;&gt;- Algorithms related to Automated Theorem Proving
 ***&lt;&lt;tag explained&gt;&gt;- Algorithms explained
+**&lt;&lt;tag Techniques&gt;&gt;
 **&lt;&lt;tag SMT&gt;&gt;- Satisfiability Modulo Theories
 **&lt;&lt;tag proovers&gt;&gt;-
 ***&lt;&lt;tag gapt&gt;&gt;- General Architecture for proof
@@ -3606,9 +3634,8 @@ If you are really interested by atp see [[The Big Picture (Wikipedia links)]]
 
 This tiddler was automatically created to record the details of this server</pre>
 </div>
-<div title="Who's who" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104241635" modified="201212291723" tags="person" changecount="47">
+<div title="Who's who" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104241635" modified="201305201743" tags="who" changecount="49">
 <pre>In no particular order.
-
 *Australian National University (Australia)
 ** College of Engineering &amp; Computer Science
 ***[[Peter Baumgartner|http://users.cecs.anu.edu.au/~baumgart/]] 
@@ -3617,7 +3644,7 @@ This tiddler was automatically created to record the details of this server</pre
 **Oregon Center of semiconductor research 
 ***[[John Harrison|http://www.cl.cam.ac.uk/~jrh13/]]
 ****ocaml-atp,hol-light,Handbook of Practical Logic and Automated Reasoning
-* Vienna University of Technology (Austria)
+*Vienna University of Technology : [[Theory and Logic Group|http://www.logic.at/e1852.html]] (Austria)
 **Theory and Logic Group
 ***[[Alexander Leitsch|http://www.logic.at/people/leitsch/]]
 ****gapt
