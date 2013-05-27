@@ -645,7 +645,7 @@ If you wan't an overview of what is available on this site you can use [[Tags]] 
 **[[Unifying Programming and Math – The Dependent Type Revolution|http://spin.atomicobject.com/2012/11/11/unifying-programming-and-math-the-dependent-type-revolution/]]
 **[[Scala has surprisingly good support for dependent typing|http://stackoverflow.com/questions/12935731/any-reason-why-scala-does-not-explicitly-support-dependent-types/12937819#12937819]]</pre>
 </div>
-<div title="First-class resources" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201103191829" modified="201304261710" tags="intro" changecount="45">
+<div title="First-class resources" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201103191829" modified="201305272111" tags="intro" changecount="46">
 <pre>* LOGIC
 ** Free online (Coursera) course with Michael Genesereth [[Introduction to Logic|https://www.coursera.org/course/intrologic]]
 
@@ -672,6 +672,7 @@ If you wan't an overview of what is available on this site you can use [[Tags]] 
 ** Basic but clear introduction to BNF : http://www.garshol.priv.no/download/text/bnf.html
 ** The whole story : http://matt.might.net/articles/parsing-with-derivatives/
 ** Nicely written introduction to parsing : http://szeiger.de/blog/2008/07/27/formal-language-processing-in-scala-part-1
+** Very enlightening master's thesis about combinator parsing in Scala : https://docs.google.com/file/d/0B7LbY7bJaltldVRhMHhfT1F4VkE/edit?pli=1
 
 * PROPOSITIONAL LOGIC
 ** Haskell implementation with excellent documentation : http://www.bucephalus.org/
@@ -738,11 +739,15 @@ def clause: Parser[FSequent] = repsep(formula,&quot;|&quot;) ~ &quot;.&quot; ^^ 
 
 </pre>
 </div>
-<div title="GAPT source code analysis" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201106151006" modified="201302171750" tags="gapt scala-atp code-analysis" changecount="32">
-<pre>! Upgrade to Scala 2.10 @@wip@@
+<div title="GAPT source code analysis" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201106151006" modified="201305230854" tags="gapt scala-atp code-analysis" changecount="38">
+<pre>!Gapt development with Eclipse
+Upstream Gapt code is not usable with Eclipse.
+I maintain [[m2e branch|https://github.com/newca12/gapt/tree/m2e]] with a few modifications for Gapt to be Eclipse compliant.
+!Upgrade to Scala 2.10 @@wip@@
 @@export MAVEN_OPTS=&quot;-Xmx512m -XX:MaxPermSize=256m&quot; needed for mvn install or mvn test@@
-See https://github.com/newca12/gapt/tree/m2e-210
+See [[m2e-210 branch|https://github.com/newca12/gapt/tree/m2e-210]]
 !!cutIntroduction
+CutIntroduction : comment in the code about workaround for deprecation of operator - but problem not seen
 DecompositionTest : set sequential testing and disable some test with pendingUntilFixed(&quot;Problematic with Scala 2.10&quot;)
 !!shlk
 sFOparserTest : set sequential testing
@@ -1669,7 +1674,7 @@ These are contained in two sub-packages, one for each kind of analysis:
 *scala.util.parsing.combinator.syntactical
 @@Packrat parsers don’t need a separate scanner@@  so we need to augment the grammar with extra disambiguation information for distinguishing between reserved words, identifiers and delimiter set.</pre>
 </div>
-<div title="Parser combinators vs others" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201105082059" modified="201301011445" tags="duel parsing tools" changecount="54">
+<div title="Parser combinators vs others" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201105082059" modified="201305272122" tags="duel parsing tools" changecount="55">
 <pre>*Parser combinators pros
 **in the language itself
 **no external tools
@@ -1709,8 +1714,9 @@ These are contained in two sub-packages, one for each kind of analysis:
 
 --The winner is : Parser combinators with the PackratParsers extension** (but Parboiled, GLL and derivative combinators should be re-evaluated in case of limitation*** with Scala implementation****)
 A comparison study is needed between PackratParsers extension and Parboiled focusing on [[error message handling|http://stackoverflow.com/questions/2906674/how-to-further-improve-error-messages-in-scala-parser-combinator-based-parsers]] --
-The new winner is Xtext.
-Some work is probably needed to make it more Scala compliant and also a speed comparaison with Packrat Parsers like this one : [[Packrat Efficiency]]
+--The new winner is Xtext.
+Some work is probably needed to make it more Scala compliant and also a speed comparaison with Packrat Parsers like this one : [[Packrat Efficiency]]--
+@@I changed my mind again in favour of combinator parsing@@
 
 (*)  Even if the grammar has [[left recursion|http://en.wikipedia.org/wiki/Left_recursion]] it is usually not hard to remove
 (**)  The Scala 2.8 combinator parser library adds PEG parsing and can memoize parse results for potential re-use when backtracking occurs. Packrat Parsing allow left recursive grammars (*). 
@@ -2170,7 +2176,7 @@ If a parser takes a stream of characters and turns them into an abstract syntax 
 * Chapter 34 - GUI Programming [[skipped|http://www.oracle.com/technetwork/java/javafx/overview/faq-1446554.html#6]]
 * Chapter 35 - The SCells Spreadsheet [[skipped|http://www.oracle.com/technetwork/java/javafx/overview/faq-1446554.html#6]]  </pre>
 </div>
-<div title="Project Status Report" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201108101807" modified="201208151232" tags="done wip" changecount="53">
+<div title="Project Status Report" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201108101807" modified="201305272120" tags="done wip" changecount="56">
 <pre>!What we've learned so far
 All issues related to &lt;&lt;tag parsing&gt;&gt; have been undervalued. ATP and parsing are tightly coupled.
 A theorem prover need a solid parsing foundation.
@@ -2182,7 +2188,8 @@ A theorem prover need a solid parsing foundation.
 Focus is currently on building &quot;a state of the art&quot; &lt;&lt;tag TPTP&gt;&gt; parser --based on parser combinators with the PackratParsers extension--.
 [[Xtext|http://www.eclipse.org/Xtext/]] could be the better framework/tool. --Study now ongoing will tell whether the potential advantages of such framework/tool are confirmed.--
 In this context, Debasish Ghosh's book [[DSLs in Action |http://books.google.fr/books?id=SzD6RAAACAAJ&amp;num=16&amp;source=gbs_slider_cls_metadata_1003_mylibrary]] has proved invaluable
-@@Current work consist in implementing a full featured TPTP parser/editor with Xtext.@@ 
+--Current work consist in implementing a full featured TPTP parser/editor with Xtext.--
+@@Current work : I changed my mind again : the &lt;&lt;tag TPTP&gt;&gt; parser will be based on Combinator parsing@@
 See also : [[Roadmap]]</pre>
 </div>
 <div title="Proof language" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201106152104" modified="201107301332" tags="atp parsing TPTP" changecount="11">
@@ -2224,22 +2231,23 @@ See also : [[Roadmap]]</pre>
 **This volume contains articles covering a broad spectrum of proof theory, with an emphasis on its mathematical aspects.
 **Full review : http://www.math.ucla.edu/~asl/bsl/0604/0604-003.ps</pre>
 </div>
-<div title="Roadmap" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104241247" modified="201205121324" tags="intro done" changecount="66">
+<div title="Roadmap" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104241247" modified="201305272133" tags="intro done" changecount="70">
 <pre>!Tasks to complete
 *Phase 1 : Initialization
 ** --Select the appropriate Content Management System-- ([[done|Content Management System]])
 ** --Select the appropriate programming language-- ([[done|Scala]])
 ** --Select additional &lt;&lt;tag tools&gt;&gt;-- (done)
 ** --Select parsing technique-- ([[done|Parser combinators vs others]])
-*Phase 2 : Write a parser/editor for &lt;&lt;tag TPTP&gt;&gt; using --Scala Parser Combinator-- Xtext  ([[started|TPTP Editor]], WIP) 
-**Construct Xtext grammar for TPTP (started, WIP)
-***Convert tptp.g from antlrV2 to antlrV3 (started, WIP)
-***Convert Antlr grammar to Xtext
-***Create scopes for type resolution and challenges faced due to the TPTP’s language semantics
-***Customize the appearance and contents of the Outline View
-***Customize the editor: syntax highlighting, Javadoc-like documentation and hyperlinking
-***Customize content-assist beyond the language syntax
-***Validate and test the language’s semantics
+*Phase 2 : Write a parser/editor for &lt;&lt;tag TPTP&gt;&gt; using --Scala Parser Combinator-- Xtext  ([[abandoned|TPTP Editor]])
+**Construct Xtext grammar for TPTP (started, abandoned)
+***Convert tptp.g from antlrV2 to antlrV3 (started, abandoned)
+***Convert Antlr grammar to Xtext (abandoned)
+***Create scopes for type resolution and challenges faced due to the TPTP’s language semantics (abandoned)
+***Customize the appearance and contents of the Outline View (abandoned)
+***Customize the editor: syntax highlighting, Javadoc-like documentation and hyperlinking (abandoned)
+***Customize content-assist beyond the language syntax (abandoned)
+***Validate and test the language’s semantics (abandoned)
+*Phase 2 (reloaded) : Write a parser for &lt;&lt;tag TPTP&gt;&gt; using Scala Parser Combinator (@@WIP@@)
 *Phase 3 : Make [[HED|http://code.google.com/p/edla-hed/]] (hoper edei deixai) a state of the art theorem prover (not yet started)
 
 !Never ending tasks
@@ -2553,8 +2561,9 @@ attribute ::= &quot;label&quot; &quot;(&quot; string &quot;)&quot; |
 txt_GATracker_track: 1%2C0%2C1%2C1%2C1%2C1%2C1
 txtUserName: Olivier ROLAND</pre>
 </div>
-<div title="TPTP Editor" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201205121304" modified="201209021224" tags="parsing TPTP" changecount="41">
-<pre>@@WIP@@ see [[tptp-editor|https://github.com/newca12/tptp-editor]] project on github
+<div title="TPTP Editor" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201205121304" modified="201305272127" tags="parsing TPTP abandoned" changecount="44">
+<pre>@@Abandoned project@@
+[[tptp-editor|https://github.com/newca12/tptp-editor]] project on github
 !Standalone editor
 TPTP Editor is an application built on the Eclipse Rich Client Platform (RCP) and as such could be an Eclipse plugin and potentially also a standalone application.
 Some examples of editors based on the same stack (Eclipse + Xtext) :
@@ -3362,7 +3371,7 @@ config.parsers.twikiFormatter.formatTag = 'TWikiFormat';
 } // end of 'install only once'
 //}}}</pre>
 </div>
-<div title="Tags" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104250931" modified="201305201743" tags="meta editing" changecount="63">
+<div title="Tags" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104250931" modified="201305272126" tags="meta editing" changecount="65">
 <pre>*&lt;&lt;tag atp&gt;&gt;- Automated Theorem Proving, what this site is all about
 **&lt;&lt;tag intro&gt;&gt;- Getting started
 **&lt;&lt;tag scala-atp&gt;&gt;- Scala port of [[Handbook of Practical Logic and Automated Reasoning|http://www.cambridge.org/catalogue/catalogue.asp?isbn=9780521899574]]
@@ -3392,6 +3401,7 @@ config.parsers.twikiFormatter.formatTag = 'TWikiFormat';
 *&lt;&lt;tag pb&gt;&gt;- some things annoying that needs to be fixed
 *&lt;&lt;tag done&gt;&gt;- what we've done so far
 *&lt;&lt;tag wip&gt;&gt;- work in progress
+*&lt;&lt;tag abandoned&gt;&gt;- abandoned projects
 *&lt;&lt;tag obsolete&gt;&gt;- out-of-date, could be deleted anytime
 *&lt;&lt;tag meta&gt;&gt;- describes the operation of this site
 **&lt;&lt;tag editing&gt;&gt;- tips on editing and authoring notes, including all sorts of tools
