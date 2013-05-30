@@ -516,12 +516,13 @@ noscript {display:none;} /* Fixes a feature in Firefox 1.5.0.2 where print previ
 </div></div>
 <!--POST-SHADOWAREA-->
 <div id="storeArea">
-<div title="A bit of history" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201109081600" modified="201304261700" tags="intro" changecount="16">
+<div title="A bit of history" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201109081600" modified="201305301631" tags="intro" changecount="21">
 <pre>!Notable Events
 *1666 : [[Characteristica universalis|http://en.wikipedia.org/wiki/Characteristica_universalis]] concept
 *1879 : Frege invente axiomatic predicate logic
 *1934 : Gerhard Gentzen create the first [[sequent calculi|http://en.wikipedia.org/wiki/Sequent_calculus]], systems LK and LJ.
 *1967 : [[Automath|http://en.wikipedia.org/wiki/Automath]] the first automated proof checker
+*1996 : automated proof of the [[Robbins conjecture|http://en.wikipedia.org/wiki/Robbins_conjecture]] using the EQP theorem prover
 *1998 : computer-aided proof of the [[Kepler conjecture|http://en.wikipedia.org/wiki/Kepler_conjecture]]
 *2004 : fully checked formal proof of the famous [[Four Colour Theorem|http://en.wikipedia.org/wiki/Four_color_theorem]].
 *2012? : On going [[flyspeck|http://code.google.com/p/flyspeck/wiki/FlyspeckFactSheet]] project to produce a formal proof of the Kepler Conjecture
@@ -533,7 +534,8 @@ noscript {display:none;} /* Fixes a feature in Firefox 1.5.0.2 where print previ
 *[[Bertrand Russell|http://en.wikipedia.org/wiki/Bertrand_Russell]] 1872–1970
 *[[Jacques Herbrand|http://en.wikipedia.org/wiki/Jacques_Herbrand]] 1908-1931
 *[[Gerhard Gentzen|http://en.wikipedia.org/wiki/Gerhard_Gentzen]] 1909-1945
-*[[Nicolaas Govert de Bruijn|http://en.wikipedia.org/wiki/Nicolaas_Govert_de_Bruijn]] 1918-
+*[[Nicolaas Govert de Bruijn|http://en.wikipedia.org/wiki/Nicolaas_Govert_de_Bruijn]] 1918-2012
+*[[William McCune|http://en.wikipedia.org/wiki/William_McCune]] 1953-2011
 *[[Thomas Callister Hales|http://en.wikipedia.org/wiki/Thomas_Callister_Hales]] 1958-
 *[[Georges Gonthier|http://fr.wikipedia.org/wiki/Georges_Gonthier]] ?
 
@@ -1629,10 +1631,11 @@ disturbing the spacing between lines.</pre>
 
 You can use the left navigation bar to open major areas.  You can also use the search to find things that you like.  Phrases underlined are external links while phrases in bold blue font are internal links.</pre>
 </div>
-<div title="Organizations" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201305201705" modified="201305201744" tags="who" changecount="6">
+<div title="Organizations" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201305201705" modified="201305301606" tags="who" changecount="7">
 <pre>In no particular order.
 *University of Edinburgh : [[Mathematical Reasoning Group|http://dream.inf.ed.ac.uk/]]
-*Vienna University of Technology : [[Theory and Logic Group|http://www.logic.at/e1852.html]]</pre>
+*Vienna University of Technology : [[Theory and Logic Group|http://www.logic.at/e1852.html]]
+*Argonne National Laboratory : [[Automated Deduction at Argonne|http://www.mcs.anl.gov/research/projects/AR/]]</pre>
 </div>
 <div title="Packrat Efficiency" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201108280902" modified="201111111835" tags="parsing TPTP" changecount="40">
 <pre>| TPTP test | without packrat | with packrat | time gain |h
@@ -1674,7 +1677,7 @@ These are contained in two sub-packages, one for each kind of analysis:
 *scala.util.parsing.combinator.syntactical
 @@Packrat parsers don’t need a separate scanner@@  so we need to augment the grammar with extra disambiguation information for distinguishing between reserved words, identifiers and delimiter set.</pre>
 </div>
-<div title="Parser combinators vs others" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201105082059" modified="201305272122" tags="duel parsing tools" changecount="55">
+<div title="Parser combinators vs others" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201105082059" modified="201305302119" tags="duel parsing tools" changecount="58">
 <pre>*Parser combinators pros
 **in the language itself
 **no external tools
@@ -1711,12 +1714,15 @@ These are contained in two sub-packages, one for each kind of analysis:
 *Xtext cons
 **entire toolset (not just a library)
 **eclipse-dependent (but the runtime components like the parsers, the metamodel, the serializers, and the linkers, as well as the Xpand templating can be embedded in any arbitrary Java process.
-
+*Parboiled2 pros
+**elegant combinator-style parser construction and fast runtime speed
+*Parboiled2 cons
+**nothing yet
 --The winner is : Parser combinators with the PackratParsers extension** (but Parboiled, GLL and derivative combinators should be re-evaluated in case of limitation*** with Scala implementation****)
 A comparison study is needed between PackratParsers extension and Parboiled focusing on [[error message handling|http://stackoverflow.com/questions/2906674/how-to-further-improve-error-messages-in-scala-parser-combinator-based-parsers]] --
 --The new winner is Xtext.
 Some work is probably needed to make it more Scala compliant and also a speed comparaison with Packrat Parsers like this one : [[Packrat Efficiency]]--
-@@I changed my mind again in favour of combinator parsing@@
+@@I changed my mind again in favour of Parboiled2@@
 
 (*)  Even if the grammar has [[left recursion|http://en.wikipedia.org/wiki/Left_recursion]] it is usually not hard to remove
 (**)  The Scala 2.8 combinator parser library adds PEG parsing and can memoize parse results for potential re-use when backtracking occurs. Packrat Parsing allow left recursive grammars (*). 
@@ -2176,7 +2182,7 @@ If a parser takes a stream of characters and turns them into an abstract syntax 
 * Chapter 34 - GUI Programming [[skipped|http://www.oracle.com/technetwork/java/javafx/overview/faq-1446554.html#6]]
 * Chapter 35 - The SCells Spreadsheet [[skipped|http://www.oracle.com/technetwork/java/javafx/overview/faq-1446554.html#6]]  </pre>
 </div>
-<div title="Project Status Report" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201108101807" modified="201305272120" tags="done wip" changecount="56">
+<div title="Project Status Report" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201108101807" modified="201305302111" tags="done wip" changecount="57">
 <pre>!What we've learned so far
 All issues related to &lt;&lt;tag parsing&gt;&gt; have been undervalued. ATP and parsing are tightly coupled.
 A theorem prover need a solid parsing foundation.
@@ -2189,7 +2195,7 @@ Focus is currently on building &quot;a state of the art&quot; &lt;&lt;tag TPTP&g
 [[Xtext|http://www.eclipse.org/Xtext/]] could be the better framework/tool. --Study now ongoing will tell whether the potential advantages of such framework/tool are confirmed.--
 In this context, Debasish Ghosh's book [[DSLs in Action |http://books.google.fr/books?id=SzD6RAAACAAJ&amp;num=16&amp;source=gbs_slider_cls_metadata_1003_mylibrary]] has proved invaluable
 --Current work consist in implementing a full featured TPTP parser/editor with Xtext.--
-@@Current work : I changed my mind again : the &lt;&lt;tag TPTP&gt;&gt; parser will be based on Combinator parsing@@
+@@Current work : I changed my mind again : the &lt;&lt;tag TPTP&gt;&gt; parser will be based on parboiled2: a Macro-Based PEG Parser@@
 See also : [[Roadmap]]</pre>
 </div>
 <div title="Proof language" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201106152104" modified="201107301332" tags="atp parsing TPTP" changecount="11">
@@ -2231,7 +2237,7 @@ See also : [[Roadmap]]</pre>
 **This volume contains articles covering a broad spectrum of proof theory, with an emphasis on its mathematical aspects.
 **Full review : http://www.math.ucla.edu/~asl/bsl/0604/0604-003.ps</pre>
 </div>
-<div title="Roadmap" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104241247" modified="201305272133" tags="intro done" changecount="70">
+<div title="Roadmap" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104241247" modified="201305302122" tags="intro done" changecount="71">
 <pre>!Tasks to complete
 *Phase 1 : Initialization
 ** --Select the appropriate Content Management System-- ([[done|Content Management System]])
@@ -2247,7 +2253,7 @@ See also : [[Roadmap]]</pre>
 ***Customize the editor: syntax highlighting, Javadoc-like documentation and hyperlinking (abandoned)
 ***Customize content-assist beyond the language syntax (abandoned)
 ***Validate and test the language’s semantics (abandoned)
-*Phase 2 (reloaded) : Write a parser for &lt;&lt;tag TPTP&gt;&gt; using Scala Parser Combinator (@@WIP@@)
+*Phase 2 (reloaded) : Write a parser for &lt;&lt;tag TPTP&gt;&gt; using parboiled2: a Macro-Based PEG Parser (@@WIP@@)
 *Phase 3 : Make [[HED|http://code.google.com/p/edla-hed/]] (hoper edei deixai) a state of the art theorem prover (not yet started)
 
 !Never ending tasks
