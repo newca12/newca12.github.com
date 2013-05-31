@@ -1677,7 +1677,7 @@ These are contained in two sub-packages, one for each kind of analysis:
 *scala.util.parsing.combinator.syntactical
 @@Packrat parsers don’t need a separate scanner@@  so we need to augment the grammar with extra disambiguation information for distinguishing between reserved words, identifiers and delimiter set.</pre>
 </div>
-<div title="Parser combinators vs others" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201105082059" modified="201305302119" tags="duel parsing tools" changecount="58">
+<div title="Parser combinators vs others" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201105082059" modified="201305310821" tags="duel parsing tools" changecount="66">
 <pre>*Parser combinators pros
 **in the language itself
 **no external tools
@@ -1685,6 +1685,7 @@ These are contained in two sub-packages, one for each kind of analysis:
 *Parser combinators cons
 **do not generate proper error messages
 **implementation tricky for left recursion (*)
+**slow
 *Parser generators pros
 **code could be auto generated from EBNF
 *Parser generators cons
@@ -1699,12 +1700,11 @@ These are contained in two sub-packages, one for each kind of analysis:
 **generate proper error messages
 **solve left recursion problem (*)
 *GLL combinators cons
-**too confidential
-*Parboiled pros
+**slow
+*PEG (Parsing Expression Grammar) pros
 **syntax similar to BNF
 **generate proper error messages
-*Parboiled cons
-**external library
+*PEG cons
 **cannot handle left recursion (*)
 *Xtext pros
 **offers a novel approach to external DSL development
@@ -1714,22 +1714,19 @@ These are contained in two sub-packages, one for each kind of analysis:
 *Xtext cons
 **entire toolset (not just a library)
 **eclipse-dependent (but the runtime components like the parsers, the metamodel, the serializers, and the linkers, as well as the Xpand templating can be embedded in any arbitrary Java process.
-*Parboiled2 pros
-**elegant combinator-style parser construction and fast runtime speed
-*Parboiled2 cons
-**nothing yet
 --The winner is : Parser combinators with the PackratParsers extension** (but Parboiled, GLL and derivative combinators should be re-evaluated in case of limitation*** with Scala implementation****)
 A comparison study is needed between PackratParsers extension and Parboiled focusing on [[error message handling|http://stackoverflow.com/questions/2906674/how-to-further-improve-error-messages-in-scala-parser-combinator-based-parsers]] --
 --The new winner is Xtext.
 Some work is probably needed to make it more Scala compliant and also a speed comparaison with Packrat Parsers like this one : [[Packrat Efficiency]]--
-@@I changed my mind again in favour of Parboiled2@@
+@@I changed my mind again in favour of PEG thanks to Parboiled2 Macro-Based implementation@@
+See [[Parsing Expression Grammar]] for details.
 
 (*)  Even if the grammar has [[left recursion|http://en.wikipedia.org/wiki/Left_recursion]] it is usually not hard to remove
 (**)  The Scala 2.8 combinator parser library adds PEG parsing and can memoize parse results for potential re-use when backtracking occurs. Packrat Parsing allow left recursive grammars (*). 
 (***) packrat &amp; left recursion [[limitation|http://www.scala-lang.org/node/7820]] (*)
 (****) [[Scala Parser combinator limitation|http://www.decodified.com/parboiled_/2010/08/16/parboiled-for-scala.html]]
 
-Nota: a Scala port of [[Grammar combinators]] could be the ultimate solution.</pre>
+Nota: [[Grammar combinators]] is also promising but too slow</pre>
 </div>
 <div title="Parsing" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104250925" modified="201105162055" tags="parsing scala-atp" changecount="32">
 <pre>*Various techniques and tools are available for parsing
@@ -1757,6 +1754,11 @@ Nota: a Scala port of [[Grammar combinators]] could be the ultimate solution.</p
 **http://scala-programming-language.1934581.n4.nabble.com/scala-pretty-printing-td1995936.html
 
 See also [[Parser combinators vs others]]</pre>
+</div>
+<div title="Parsing Expression Grammar" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201305310744" modified="201305310819" tags="parsing" changecount="4">
+<pre>[[The Packrat Parsing and Parsing Expression Grammars Page|http://bford.info/packrat/]]
+[[[GSoC 2013] Parboiled2: PEG parser via Scala Macros|https://groups.google.com/forum/?fromgroups=#!topic/scala-language/sXC-f88Adiw]]
+[[Parboiled2|https://github.com/sirthias/parboiled2]] implementation provide both elegant combinator-style parser construction and fast runtime speed</pre>
 </div>
 <div title="Pretty Printing" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201108131210" modified="201108131731" tags="parsing" changecount="22">
 <pre>!What is it ?
