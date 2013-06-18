@@ -741,7 +741,7 @@ def clause: Parser[FSequent] = repsep(formula,&quot;|&quot;) ~ &quot;.&quot; ^^ 
 
 </pre>
 </div>
-<div title="GAPT source code analysis" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201106151006" modified="201305230854" tags="gapt scala-atp code-analysis" changecount="38">
+<div title="GAPT source code analysis" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201106151006" modified="201306182048" tags="gapt scala-atp code-analysis" changecount="40">
 <pre>!Gapt development with Eclipse
 Upstream Gapt code is not usable with Eclipse.
 I maintain [[m2e branch|https://github.com/newca12/gapt/tree/m2e]] with a few modifications for Gapt to be Eclipse compliant.
@@ -750,18 +750,19 @@ I maintain [[m2e branch|https://github.com/newca12/gapt/tree/m2e]] with a few mo
 See [[m2e-210 branch|https://github.com/newca12/gapt/tree/m2e-210]]
 !!cutIntroduction
 CutIntroduction : comment in the code about workaround for deprecation of operator - but problem not seen
-DecompositionTest : set sequential testing and disable some test with pendingUntilFixed(&quot;Problematic with Scala 2.10&quot;)
+GrammarTest : disable 2 tests with pendingUntilFixed(&quot;Problematic with Scala 2.10&quot;)
 !!shlk
 sFOparserTest : set sequential testing
 !!ceres
 ProjectionTermTest : set sequential testing and disable some test with pendingUntilFixed(&quot;Problematic with Scala 2.10&quot;)
 ClauseSetsTest : set sequential testing
+resolutionSchemaParserTest : set sequential testing
 !!ceres_xml_parsing
 SimpleParser : syntax modification for Scala 2.10
 SimpleXMLParserTest : syntax modification for Scala 2.10
 !!provers
 Prover9 : comment call to p9_to_ivy (to prevent prooftrans segfault)
-IvyTest : all commented. This code is definitely problematic 
+--IvyTest : all commented. This code is definitely problematic-- fixed 
 
 PrimeProofTest : sequential ? 
 Prover9Test : sequential ?
