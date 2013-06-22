@@ -647,7 +647,7 @@ If you wan't an overview of what is available on this site you can use [[Tags]] 
 **[[Unifying Programming and Math – The Dependent Type Revolution|http://spin.atomicobject.com/2012/11/11/unifying-programming-and-math-the-dependent-type-revolution/]]
 **[[Scala has surprisingly good support for dependent typing|http://stackoverflow.com/questions/12935731/any-reason-why-scala-does-not-explicitly-support-dependent-types/12937819#12937819]]</pre>
 </div>
-<div title="First-class resources" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201103191829" modified="201305272111" tags="intro" changecount="46">
+<div title="First-class resources" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201103191829" modified="201306222159" tags="intro" changecount="47">
 <pre>* LOGIC
 ** Free online (Coursera) course with Michael Genesereth [[Introduction to Logic|https://www.coursera.org/course/intrologic]]
 
@@ -663,7 +663,7 @@ If you wan't an overview of what is available on this site you can use [[Tags]] 
 * AUTOMATED THEOREM PROVING
 ** Recommended book about ATP (OCaml oriented) : [[Handbook of Practical Logic and Automated Reasoning|http://www.cambridge.org/catalogue/catalogue.asp?isbn=9780521899574]]
 *** Scala port of the OCaml code : http://github.com/newca12/scala-atp  @@wip@@
-*** Haskell port of the OCaml code : http://github.com/seanmcl/haskell-atp
+*** Haskell port of the OCaml code : https://github.com/newca12/haskell-atp --http://github.com/seanmcl/haskell-atp--
 *** F# port of the OCaml code : https://github.com/jack-pappas/fsharp-logic-examples
 ** General framework in Scala for applied proof theory : http://code.google.com/p/gapt/
 ** Formal Methods : http://www.dwheeler.com/formal_methods/
@@ -2408,6 +2408,22 @@ System.err.format(&quot;[UPTIME: %5ds] %s%n&quot;, (System.currentTimeMillis() -
 * Scala cons
 ** syntax is as good as possible but far from the beauty of haskell syntax 
 The winner is : [[Scala]]. The only language of the three with strong IDE support. </pre>
+</div>
+<div title="ScalaTest vs Specs2" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201306220859" modified="201306220922" tags="duel tools" changecount="8">
+<pre>*ScalaTest pros
+**usable Eclipse plugin
+**Akka’s own test suite is written using ScalaTest
+**used by Martin Odersky in Coursera
+*ScalaTest cons
+**source repository on svn, ant build, ... (but this is going to change =&gt; [[see this thread|https://groups.google.com/forum/#!topic/scalatest-users/cExfcfMgNcQ]])
+*Specs2 pros
+**Eric Torreborre support is amazing
+**parallel tests proved to be usefull for thread safety check  
+**The Scala community seem to prefer Specs2
+*Specs2 cons
+**no Eclipse plugin, Junit is needed
+
+No winner. </pre>
 </div>
 <div title="Scaladoc &amp; Co" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201106221658" modified="201211241641" tags="tools" changecount="54">
 <pre>Netty Javadoc use [[apiviz|http://code.google.com/p/apiviz/]] which is a rewrite of [[umlgraph|http://www.umlgraph.org/]] to embed class diagram in Javadoc
