@@ -565,7 +565,7 @@ The [[HED|http://code.google.com/p/edla-hed/]] theorem prover is* free software,
 **Bruno Woltzenlogel Paleo. Herbrand sequent extraction. Master’s thesis, Technische Universitaet Dresden; Technische Universitaet Wien, Dresden, Germany;Wien, Austria, 2007.
 **Bruno Woltzenlogel Paleo. [[Herbrand Sequent Extraction|http://www.amazon.com/dp/3836461528]]. VDM-Verlag, Saarbruecken, Germany, 2008.</pre>
 </div>
-<div title="Bison grammar of First Order Logic" creator="YourName" modifier="Olivier ROLAND" created="201105082052" modified="201105082056" tags="parsing" changecount="5">
+<div title="Bison grammar of First Order Logic" creator="YourName" modifier="Olivier ROLAND" created="201105082052" modified="201307061718" tags="languages" changecount="6">
 <pre>Translation of the description http://www.sju.edu/~jhodgson/ugai/1order.html to Bison
 {{{
 %token PREDICATE FUNCTION CONSTANT VARIABLE 
@@ -653,7 +653,7 @@ If you wan't an overview of what is available on this site you can use [[Tags]] 
 **[[Unifying Programming and Math – The Dependent Type Revolution|http://spin.atomicobject.com/2012/11/11/unifying-programming-and-math-the-dependent-type-revolution/]]
 **[[Scala has surprisingly good support for dependent typing|http://stackoverflow.com/questions/12935731/any-reason-why-scala-does-not-explicitly-support-dependent-types/12937819#12937819]]</pre>
 </div>
-<div title="First-class resources" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201103191829" modified="201306222159" tags="intro" changecount="47">
+<div title="First-class resources" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201103191829" modified="201307061304" tags="intro" changecount="49">
 <pre>* LOGIC
 ** Free online (Coursera) course with Michael Genesereth [[Introduction to Logic|https://www.coursera.org/course/intrologic]]
 
@@ -693,7 +693,10 @@ If you wan't an overview of what is available on this site you can use [[Tags]] 
 
 * BULLETIN
 ** The Bulletin of Symbolic Logic : http://www.math.ucla.edu/~asl/bsltoc.htm
-** Journal of formalized reasoning : http://jfr.unibo.it/issue/archive</pre>
+** Journal of formalized reasoning : http://jfr.unibo.it/issue/archive
+
+*PORTAL
+** The Philosophy of Roger Bishop Jones : http://www.rbjones.com/rbjpub/index.htm</pre>
 </div>
 <div title="GAPT and TPTP notation" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201111030855" modified="201201221754" tags="parsing gapt" changecount="21">
 <pre>! notes (from Tomer mails)
@@ -2207,13 +2210,26 @@ In this context, Debasish Ghosh's book [[DSLs in Action |http://books.google.fr/
 @@Current work : I changed my mind again : the &lt;&lt;tag TPTP&gt;&gt; parser will be based on parboiled2: a Macro-Based PEG Parser@@
 See also : [[Roadmap]]</pre>
 </div>
-<div title="Proof language" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201106152104" modified="201107301332" tags="atp parsing TPTP" changecount="11">
+<div title="Proof language" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201106152104" modified="201307061719" tags="languages TPTP" changecount="12">
 <pre>* a kind of standard for higher-order expressions: http://www.cs.miami.edu/~tptp/cgi-bin/SeeTPTP?Category=Documents&amp;File=SyntaxBNF
 * old prover9 xml format is just lots of boilerplate
 * even HLK doesn't make much sense
 * if you look at the &quot;proof language&quot; of Coq, you will see that there is almost no language. It is almost just functional programming...
 
 =&gt; &lt;&lt;tag TPTP&gt;&gt; is the cornerstone in ATP world</pre>
+</div>
+<div title="Proof languages" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201307061703" modified="201307061741" tags="languages" changecount="11">
+<pre>*[[Metamath|http://us.metamath.org/]]
+**The precise technical specification of the language is given in Section 4.1 (p. 92) of the [[Metamath book|http://us.metamath.org/#book]] and is about 4 pages long. A simple example is given on p. 35
+**proofs developed using Metamath are fully detailed; this entails that every step can be verified by the readers
+**resulting proofs are much longer than informal proofs or even formal developments in more advanced proof assistants
+*[[Mizar Language|http://www.mizar.org/language/]]
+**The Mizar language is close enough to the mathematical vernacular that mathematicians can read and understand Mizar articles almost immediately
+**it is formal enough that proofs can automatically be checked
+*[[Isar|http://isabelle.in.tum.de/Isar/]]
+**The Isar subsystem is tightly integrated into the Isabelle/Pure meta-logic implementation
+**Compared to existing declarative theorem proving systems (like Mizar), Isar avoids several shortcomings
+*[[TPTP language]]</pre>
 </div>
 <div title="Reading roadmap" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201107022122" modified="201202171455" tags="book" changecount="17">
 <pre>@@wip@@
@@ -2497,7 +2513,7 @@ scalacOptions in (Compile, doc) ++= Seq(&quot;-diagrams&quot;,&quot;-implicits&q
 } 
 </pre>
 </div>
-<div title="Syntax of First-Order Logic" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201106132149" modified="201106140759" tags="parsing" changecount="7">
+<div title="Syntax of First-Order Logic" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201106132149" modified="201307061721" tags="languages" changecount="8">
 <pre>; FORM ::= true //truth//
 : | false //falsity//
 : | FORM ∧ FORM //conjunction//
@@ -2511,7 +2527,7 @@ scalacOptions in (Compile, doc) ++= Seq(&quot;-diagrams&quot;,&quot;-implicits&q
 : | VAR
 ; VAR ::= some countable set of names //variables//</pre>
 </div>
-<div title="Syntax of Ivy" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201211201623" modified="201211202220" tags="parsing prover9 gapt" changecount="8">
+<div title="Syntax of Ivy" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201211201623" modified="201307061722" tags="languages prover9 gapt" changecount="9">
 <pre>[[Ivy|http://www.cs.unm.edu/~mccune/papers/ivy/]] is a preprocessor and proof checker for resolution/paramodulation theorem provers.
 
 Information about Ivy seem available in this non free book : [[Computer-Aided Reasoning: ACL2 Case Studies|http://www.cs.utexas.edu/users/moore/publications/acl2-papers.html#Books]]
@@ -2525,7 +2541,7 @@ Some informations about the syntax of Ivy are available in this [[document|https
 *''propositional'' apply to a propositional simplification to a clause
 </pre>
 </div>
-<div title="Syntax of Propositional Logic" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201106132122" modified="201106140758" tags="parsing" changecount="15">
+<div title="Syntax of Propositional Logic" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201106132122" modified="201307061721" tags="languages" changecount="16">
 <pre>; FORM ::= true //truth//
 : | false //falsity//
 : | FORM ∧ FORM //conjunction//
@@ -2534,7 +2550,7 @@ Some informations about the syntax of Ivy are available in this [[document|https
 : | ¬FORM //negation//
 : | p where p ∈ Σ //boolean variables//</pre>
 </div>
-<div title="Syntax of Prover9" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201106181233" modified="201109111001" tags="parsing prover9" changecount="11">
+<div title="Syntax of Prover9" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201106181233" modified="201307061722" tags="languages prover9" changecount="12">
 <pre>Prover9/Mace4 BNF
 David A. Wheeler, 2007-09-21
 [[source|http://www.dwheeler.com/formal_methods/prover9-bnf.txt]]
@@ -2618,7 +2634,7 @@ The creation of the Xtext grammar from Antlr grammar did not prove to be a good 
 
 </pre>
 </div>
-<div title="TPTP language" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201107141639" modified="201108052052" tags="atp parsing TPTP" changecount="20">
+<div title="TPTP language" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201107141639" modified="201307061725" tags="languages parsing TPTP" changecount="21">
 <pre>!Main site
 [[TPTP technical report|http://www.cs.miami.edu/~tptp/TPTP/TR/TPTPTR.shtml]]
 [[Valuable information in this old document|https://docs.google.com/a/edla.org/viewer?a=v&amp;pid=explorer&amp;chrome=true&amp;srcid=1QLOJTS7aEKyz4LnibstrO-03VZNUCXHpeMuWWa0ywxQ0FyENq0nMz3IpEBDU&amp;hl=en_US]]
@@ -3402,7 +3418,7 @@ config.parsers.twikiFormatter.formatTag = 'TWikiFormat';
 } // end of 'install only once'
 //}}}</pre>
 </div>
-<div title="Tags" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104250931" modified="201305272126" tags="meta editing" changecount="65">
+<div title="Tags" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104250931" modified="201307061714" tags="meta editing" changecount="68">
 <pre>*&lt;&lt;tag atp&gt;&gt;- Automated Theorem Proving, what this site is all about
 **&lt;&lt;tag intro&gt;&gt;- Getting started
 **&lt;&lt;tag scala-atp&gt;&gt;- Scala port of [[Handbook of Practical Logic and Automated Reasoning|http://www.cambridge.org/catalogue/catalogue.asp?isbn=9780521899574]]
@@ -3422,6 +3438,7 @@ config.parsers.twikiFormatter.formatTag = 'TWikiFormat';
 ***&lt;&lt;tag Maude&gt;&gt;- Ttheorem prover for order-sorted first order logic without equality
 **&lt;&lt;tag Uses&gt;&gt;- What has Automated Theorem Proving been Really Useful for ? (for example Industrial uses of ATP)
 **&lt;&lt;tag parsing&gt;&gt;- Related to parsing
+**&lt;&lt;tag languages&gt;&gt; Related to formal languages and focused on proof languages
 ***&lt;&lt;tag TPTP&gt;&gt;- TPTP language
 **&lt;&lt;tag code-analysis&gt;&gt;- Source code analysis
 **&lt;&lt;tag howto&gt;&gt;- various how-to
