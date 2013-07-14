@@ -750,31 +750,70 @@ def clause: Parser[FSequent] = repsep(formula,&quot;|&quot;) ~ &quot;.&quot; ^^ 
 
 </pre>
 </div>
-<div title="GAPT source code analysis" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201106151006" modified="201306182048" tags="gapt scala-atp code-analysis" changecount="40">
+<div title="GAPT source code analysis" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201106151006" modified="201307140737" tags="gapt scala-atp code-analysis" changecount="72">
 <pre>!Gapt development with Eclipse
 Upstream Gapt code is not usable with Eclipse.
 I maintain [[m2e branch|https://github.com/newca12/gapt/tree/m2e]] with a few modifications for Gapt to be Eclipse compliant.
 !Upgrade to Scala 2.10 @@wip@@
-@@export MAVEN_OPTS=&quot;-Xmx512m -XX:MaxPermSize=256m&quot; needed for mvn install or mvn test@@
-See [[m2e-210 branch|https://github.com/newca12/gapt/tree/m2e-210]]
-!!cutIntroduction
-CutIntroduction : comment in the code about workaround for deprecation of operator - but problem not seen
-GrammarTest : disable 2 tests with pendingUntilFixed(&quot;Problematic with Scala 2.10&quot;)
-!!shlk
-sFOparserTest : set sequential testing
-!!ceres
-ProjectionTermTest : set sequential testing and disable some test with pendingUntilFixed(&quot;Problematic with Scala 2.10&quot;)
-ClauseSetsTest : set sequential testing
-resolutionSchemaParserTest : set sequential testing
-!!ceres_xml_parsing
-SimpleParser : syntax modification for Scala 2.10
-SimpleXMLParserTest : syntax modification for Scala 2.10
-!!provers
-Prover9 : comment call to p9_to_ivy (to prevent prooftrans segfault)
---IvyTest : all commented. This code is definitely problematic-- fixed 
+@@without zinc server, export MAVEN_OPTS=&quot;-Xmx512m -XX:MaxPermSize=256m&quot; is needed for mvn install or mvn test@@
+See [[m2e-210-proper|https://github.com/newca12/gapt/tree/m2e-210-proper]] branch
+!!algorithms/cutIntroduction
+*CutIntroduction
+**syntax modification needed for Scala 2.10 (comment in the code about workaround for deprecation of operator - but problem not seen with unit tests provided)
+*GrammarTest
+**disable 2 tests with pendingUntilFixed(&quot;Problematic with Scala 2.10&quot;)
+!!algorithms/shlk
+*sFOparserTest
+**sequential testing needed
+!!cli
+*pom.xml
+**upgrade jline to version &quot;&quot;&quot;$scala-compiler-version&quot;&quot;&quot;
+!!gui
+*pom.xml
+**upgrade scala-swing to version &quot;&quot;&quot;$scala-compiler-version&quot;&quot;&quot;
+!!gui/proftool
+*pom.xml
+**upgrade scala-swing to version &quot;&quot;&quot;$scala-compiler-version&quot;&quot;&quot;
+*MenuScroller
+**fix path layout
+!!integration_tests/lattice_test
+*LatticeTest
+**sequential testing needed
+!!integration_tests/lnp_test
+*LNPProofTest
+**sequential testing needed
+!!integration_tests/prime_proof_test
+*PrimeProofTest
+**sequential testing needed
+!!integration_test/tape_test
+*TapeTest
+**sequential testing needed
+!!parsing/ceres_xml_parsing
+*SimpleParser
+**syntax modification needed for Scala 2.10
+*SimpleXMLParserTest
+**syntax modification needed for Scala 2.10
+!!parsing/ivy
+*SExpression
+**syntax modification needed for Scala 2.10
+!!proover/atp
+*pom.xml
+**upgrade jline to version $scala-compiler-version
+!!transformations/ceres
+*acnfTest
+**sequential testing needed
+*resolutionSchemaParserTest
+**sequential testing needed
+*ClauseSetsTest
+**sequential testing needed
+*ProjectionTermTest
+**sequential testing needed
+!!utils
+*searchAlgorithms
+**syntax modification needed for Scala 2.10
 
-PrimeProofTest : sequential ? 
-Prover9Test : sequential ?
+@@a change (wich one ?) between old m2e-210 and new m2e-210-proper is probably not thread safe)@@
+@@Integration tests were OK with old m2e-210 branch and now need sequential to be set@@
 
 ! Dependencies
 Dependency graph generated with [[el4j DepGraph maven plugin|http://el4j.sourceforge.net/plugins/maven-depgraph-plugin/index.html]] :
