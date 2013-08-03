@@ -750,11 +750,11 @@ def clause: Parser[FSequent] = repsep(formula,&quot;|&quot;) ~ &quot;.&quot; ^^ 
 
 </pre>
 </div>
-<div title="GAPT source code analysis" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201106151006" modified="201307140737" tags="gapt scala-atp code-analysis" changecount="72">
+<div title="GAPT source code analysis" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201106151006" modified="201308030724" tags="gapt scala-atp code-analysis" changecount="76">
 <pre>!Gapt development with Eclipse
 Upstream Gapt code is not usable with Eclipse.
 I maintain [[m2e branch|https://github.com/newca12/gapt/tree/m2e]] with a few modifications for Gapt to be Eclipse compliant.
-!Upgrade to Scala 2.10 @@wip@@
+!Upgrade to Scala 2.10 @@done and committed upstream@@
 @@without zinc server, export MAVEN_OPTS=&quot;-Xmx512m -XX:MaxPermSize=256m&quot; is needed for mvn install or mvn test@@
 See [[m2e-210-proper|https://github.com/newca12/gapt/tree/m2e-210-proper]] branch
 !!algorithms/cutIntroduction
@@ -767,13 +767,13 @@ See [[m2e-210-proper|https://github.com/newca12/gapt/tree/m2e-210-proper]] branc
 **sequential testing needed
 !!cli
 *pom.xml
-**upgrade jline to version &quot;&quot;&quot;$scala-compiler-version&quot;&quot;&quot;
+**upgrade jline to version &quot;&quot;&quot;${scala.version}.${scala-minor.version}&quot;&quot;&quot;
 !!gui
 *pom.xml
-**upgrade scala-swing to version &quot;&quot;&quot;$scala-compiler-version&quot;&quot;&quot;
+**upgrade scala-swing to version &quot;&quot;&quot;${scala.version}.${scala-minor.version}&quot;&quot;&quot;
 !!gui/proftool
 *pom.xml
-**upgrade scala-swing to version &quot;&quot;&quot;$scala-compiler-version&quot;&quot;&quot;
+**upgrade scala-swing to version &quot;&quot;&quot;${scala.version}.${scala-minor.version}&quot;&quot;&quot;
 *MenuScroller
 **fix path layout
 !!integration_tests/lattice_test
@@ -798,7 +798,7 @@ See [[m2e-210-proper|https://github.com/newca12/gapt/tree/m2e-210-proper]] branc
 **syntax modification needed for Scala 2.10
 !!proover/atp
 *pom.xml
-**upgrade jline to version $scala-compiler-version
+**upgrade jline to version &quot;&quot;&quot;${scala.version}.${scala-minor.version}&quot;&quot;&quot;
 !!transformations/ceres
 *acnfTest
 **sequential testing needed
@@ -2233,13 +2233,14 @@ If a parser takes a stream of characters and turns them into an abstract syntax 
 * Chapter 34 - GUI Programming [[skipped|http://www.oracle.com/technetwork/java/javafx/overview/faq-1446554.html#6]]
 * Chapter 35 - The SCells Spreadsheet [[skipped|http://www.oracle.com/technetwork/java/javafx/overview/faq-1446554.html#6]]  </pre>
 </div>
-<div title="Project Status Report" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201108101807" modified="201305302111" tags="done wip" changecount="57">
+<div title="Project Status Report" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201108101807" modified="201308030728" tags="done wip" changecount="60">
 <pre>!What we've learned so far
 All issues related to &lt;&lt;tag parsing&gt;&gt; have been undervalued. ATP and parsing are tightly coupled.
 A theorem prover need a solid parsing foundation.
 !What we've done so far
 *contribute to &lt;&lt;tag MELIA&gt;&gt; [[0.1.3|http://users.cecs.anu.edu.au/~baumgart/systems/MELIA/ReadMe.txt]] by changing the &lt;&lt;tag TPTP&gt;&gt; parser to packrat &lt;&lt;tag parsing&gt;&gt;, which speeds up parsing significantly. 
 *contribute to &lt;&lt;tag gapt&gt;&gt; migration to specs2, maven best practices, XML validation and code organization.
+*contribute to &lt;&lt;tag gapt&gt;&gt; migration to Scala 2.10
 *see also : &lt;&lt;tag done&gt;&gt;
 !What we are doing right now
 Focus is currently on building &quot;a state of the art&quot; &lt;&lt;tag TPTP&gt;&gt; parser --based on parser combinators with the PackratParsers extension--.
@@ -2301,13 +2302,24 @@ See also : [[Roadmap]]</pre>
 **This volume contains articles covering a broad spectrum of proof theory, with an emphasis on its mathematical aspects.
 **Full review : http://www.math.ucla.edu/~asl/bsl/0604/0604-003.ps</pre>
 </div>
-<div title="Roadmap" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104241247" modified="201305302122" tags="intro done" changecount="71">
+<div title="Roadmap" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104241247" modified="201308030727" tags="intro done" changecount="77">
 <pre>!Tasks to complete
 *Phase 1 : Initialization
 ** --Select the appropriate Content Management System-- ([[done|Content Management System]])
 ** --Select the appropriate programming language-- ([[done|Scala]])
 ** --Select additional &lt;&lt;tag tools&gt;&gt;-- (done)
 ** --Select parsing technique-- ([[done|Parser combinators vs others]])
+*Phase 2 (reloaded) :
+**Write a parser for &lt;&lt;tag TPTP&gt;&gt; using parboiled2: a Macro-Based PEG Parser (@@WIP@@)
+**Scala port of [[Handbook of Practical Logic and Automated Reasoning|http://www.cambridge.org/catalogue/catalogue.asp?isbn=9780521899574]]([[started|http://github.com/newca12/scala-atp]], @@WIP@@)
+*Phase 3 : Make [[HED|http://code.google.com/p/edla-hed/]] (hoper edei deixai) a state of the art theorem prover (not yet started)
+!Never ending tasks
+* Identify resources (books, article, thesis, blog, etc ...) that are available ([[started|Library]])
+* Identify people/organisation also working on ATP ([[started|Who's who]])
+* Select authoritative &lt;&lt;tag book&gt;&gt; on each subject and make a summary (&lt;&lt;tag summary [started]&gt;&gt;)
+* Use the selected [[CMS|Content Management System]] to consolidate knowledge ([[started|Etat De L'Art]])
+* Contribute to &lt;&lt;tag gapt&gt;&gt; (started) 
+!Aborted tasks
 *Phase 2 : Write a parser/editor for &lt;&lt;tag TPTP&gt;&gt; using --Scala Parser Combinator-- Xtext  ([[abandoned|TPTP Editor]])
 **Construct Xtext grammar for TPTP (started, abandoned)
 ***Convert tptp.g from antlrV2 to antlrV3 (started, abandoned)
@@ -2316,19 +2328,7 @@ See also : [[Roadmap]]</pre>
 ***Customize the appearance and contents of the Outline View (abandoned)
 ***Customize the editor: syntax highlighting, Javadoc-like documentation and hyperlinking (abandoned)
 ***Customize content-assist beyond the language syntax (abandoned)
-***Validate and test the language’s semantics (abandoned)
-*Phase 2 (reloaded) : Write a parser for &lt;&lt;tag TPTP&gt;&gt; using parboiled2: a Macro-Based PEG Parser (@@WIP@@)
-*Phase 3 : Make [[HED|http://code.google.com/p/edla-hed/]] (hoper edei deixai) a state of the art theorem prover (not yet started)
-
-!Never ending tasks
-* Identify resources (books, article, thesis, blog, etc ...) that are available ([[started|Library]])
-* Identify people/organisation also working on ATP ([[started|Who's who]])
-* Select authoritative &lt;&lt;tag book&gt;&gt; on each subject and make a summary (&lt;&lt;tag summary [started]&gt;&gt;)
-* Use the selected [[CMS|Content Management System]] to consolidate knowledge ([[started|Etat De L'Art]])
-* Contribute to &lt;&lt;tag gapt&gt;&gt; (started) 
-
-!Aborted tasks
---Phase 2 : Scala port of [[Handbook of Practical Logic and Automated Reasoning|http://www.cambridge.org/catalogue/catalogue.asp?isbn=9780521899574]]([[started|http://github.com/newca12/scala-atp]], WIP)--
+***Validate and test the language’s semantics (abandoned)--
 </pre>
 </div>
 <div title="SMT vs. ATP" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201212291452" modified="201301232144" tags="SMT" changecount="15">
@@ -3731,7 +3731,7 @@ If you are really interested by atp see [[The Big Picture (Wikipedia links)]]
 
 This tiddler was automatically created to record the details of this server</pre>
 </div>
-<div title="Who's who" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104241635" modified="201305201743" tags="who" changecount="49">
+<div title="Who's who" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104241635" modified="201307291756" tags="who" changecount="50">
 <pre>In no particular order.
 *Australian National University (Australia)
 ** College of Engineering &amp; Computer Science
@@ -3753,7 +3753,7 @@ This tiddler was automatically created to record the details of this server</pre
 ****gapt
 ***[[Daniel Weller|http://www.logic.at/staff/weller/index.html]]
 ****gapt
-***[[Martin Riener|http://tuwien.academia.edu/MartinRiener/About]]
+***[[Martin Riener|http://www.logic.at/people/riener/]]
 ****gapt
 ***[[Giselle Machado Nogueira Reis|http://www.logic.at/people/giselle/]]
 ****gapt,ASCOP
@@ -3929,9 +3929,9 @@ Nota : [[Prover9 &amp; co|http://www.cs.unm.edu/~mccune/mace4/download/LADR-2009
 
 --@@*ladr_to_tptp segfault@@-- &lt;= The last version here : https://github.com/jessealama/ladr.git fix this.</pre>
 </div>
-<div title="howto Scala IDE for Eclipse" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201305110738" modified="201305110906" tags="tools scala-ide howto" changecount="4">
+<div title="howto Scala IDE for Eclipse" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201305110738" modified="201308011759" tags="tools scala-ide howto" changecount="5">
 <pre>!Notes
-Eclipse Juno is known for performance regression so Indigo is recommended until Kepler is available
+Eclipse Juno is known for performance regression so Indigo is recommended until SDK of Scala IDE for Kepler is available
 !Installation
 Simply install the &quot;all in one&quot; [[SDK of the Scala IDE for Eclipse|http://scala-ide.org/download/sdk.html]]
 !Post installation
@@ -3944,7 +3944,7 @@ Simply install the &quot;all in one&quot; [[SDK of the Scala IDE for Eclipse|htt
 !Optimal memory configuration for Scala IDE
 Modify this in eclipse.ini if you got more than 4 Go of memory
 {{{
--Xmx2048m
+-Xmx2560m
 }}}
 !Checkout a single-maven project to check everything is OK
 #/File/Import/Maven/Check out Maven Projects from SCM
