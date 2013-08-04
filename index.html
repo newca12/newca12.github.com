@@ -522,7 +522,7 @@ noscript {display:none;} /* Fixes a feature in Firefox 1.5.0.2 where print previ
 </div>
 <!--POST-SHADOWAREA-->
 <div id="storeArea">
-<div title="A bit of history" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201109081600" modified="201305301631" tags="intro" changecount="21">
+<div title="A bit of history" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201109081600" modified="201308041300" tags="intro" changecount="26">
 <pre>!Notable Events
 *1666 : [[Characteristica universalis|http://en.wikipedia.org/wiki/Characteristica_universalis]] concept
 *1879 : Frege invente axiomatic predicate logic
@@ -531,8 +531,8 @@ noscript {display:none;} /* Fixes a feature in Firefox 1.5.0.2 where print previ
 *1996 : automated proof of the [[Robbins conjecture|http://en.wikipedia.org/wiki/Robbins_conjecture]] using the EQP theorem prover
 *1998 : computer-aided proof of the [[Kepler conjecture|http://en.wikipedia.org/wiki/Kepler_conjecture]]
 *2004 : fully checked formal proof of the famous [[Four Colour Theorem|http://en.wikipedia.org/wiki/Four_color_theorem]].
-*2012? : On going [[flyspeck|http://code.google.com/p/flyspeck/wiki/FlyspeckFactSheet]] project to produce a formal proof of the Kepler Conjecture
-
+*2012 : [[Feit-Thompson theorem|http://en.wikipedia.org/wiki/Feit%E2%80%93Thompson_theorem]] has been totally checked in Coq
+*2013 : On going [[flyspeck|http://code.google.com/p/flyspeck/wiki/FlyspeckFactSheet]] project to produce a formal proof of the Kepler Conjecture
 !Notable People involved
 *[[Gottfried Leibniz|http://en.wikipedia.org/wiki/Gottfried_Leibniz]] 1646-1716
 *[[Gottlob Frege|http://en.wikipedia.org/wiki/Frege]] 1848-1925
@@ -543,9 +543,7 @@ noscript {display:none;} /* Fixes a feature in Firefox 1.5.0.2 where print previ
 *[[Nicolaas Govert de Bruijn|http://en.wikipedia.org/wiki/Nicolaas_Govert_de_Bruijn]] 1918-2012
 *[[William McCune|http://en.wikipedia.org/wiki/William_McCune]] 1953-2011
 *[[Thomas Callister Hales|http://en.wikipedia.org/wiki/Thomas_Callister_Hales]] 1958-
-*[[Georges Gonthier|http://fr.wikipedia.org/wiki/Georges_Gonthier]] ?
-
-</pre>
+*[[Georges Gonthier|http://fr.wikipedia.org/wiki/Georges_Gonthier]] ?</pre>
 </div>
 <div title="About" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201103191830" modified="201106121541" tags="intro" changecount="10">
 <pre>This site is highly inspired by [[Garrett Lisi's site|http://deferentialgeometry.org]]
@@ -750,10 +748,10 @@ def clause: Parser[FSequent] = repsep(formula,&quot;|&quot;) ~ &quot;.&quot; ^^ 
 
 </pre>
 </div>
-<div title="GAPT source code analysis" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201106151006" modified="201308030724" tags="gapt scala-atp code-analysis" changecount="76">
+<div title="GAPT source code analysis" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201106151006" modified="201308041233" tags="gapt scala-atp code-analysis" changecount="78">
 <pre>!Gapt development with Eclipse
 Upstream Gapt code is not usable with Eclipse.
-I maintain [[m2e branch|https://github.com/newca12/gapt/tree/m2e]] with a few modifications for Gapt to be Eclipse compliant.
+I maintain [[master branch|https://github.com/newca12/gapt/tree/master]] with a few modifications for Gapt to be Eclipse compliant.
 !Upgrade to Scala 2.10 @@done and committed upstream@@
 @@without zinc server, export MAVEN_OPTS=&quot;-Xmx512m -XX:MaxPermSize=256m&quot; is needed for mvn install or mvn test@@
 See [[m2e-210-proper|https://github.com/newca12/gapt/tree/m2e-210-proper]] branch
@@ -811,9 +809,6 @@ See [[m2e-210-proper|https://github.com/newca12/gapt/tree/m2e-210-proper]] branc
 !!utils
 *searchAlgorithms
 **syntax modification needed for Scala 2.10
-
-@@a change (wich one ?) between old m2e-210 and new m2e-210-proper is probably not thread safe)@@
-@@Integration tests were OK with old m2e-210 branch and now need sequential to be set@@
 
 ! Dependencies
 Dependency graph generated with [[el4j DepGraph maven plugin|http://el4j.sourceforge.net/plugins/maven-depgraph-plugin/index.html]] :
@@ -2233,21 +2228,24 @@ If a parser takes a stream of characters and turns them into an abstract syntax 
 * Chapter 34 - GUI Programming [[skipped|http://www.oracle.com/technetwork/java/javafx/overview/faq-1446554.html#6]]
 * Chapter 35 - The SCells Spreadsheet [[skipped|http://www.oracle.com/technetwork/java/javafx/overview/faq-1446554.html#6]]  </pre>
 </div>
-<div title="Project Status Report" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201108101807" modified="201308030728" tags="done wip" changecount="60">
+<div title="Project Status Report" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201108101807" modified="201308041302" tags="done wip" changecount="72">
 <pre>!What we've learned so far
 All issues related to &lt;&lt;tag parsing&gt;&gt; have been undervalued. ATP and parsing are tightly coupled.
 A theorem prover need a solid parsing foundation.
 !What we've done so far
-*contribute to &lt;&lt;tag MELIA&gt;&gt; [[0.1.3|http://users.cecs.anu.edu.au/~baumgart/systems/MELIA/ReadMe.txt]] by changing the &lt;&lt;tag TPTP&gt;&gt; parser to packrat &lt;&lt;tag parsing&gt;&gt;, which speeds up parsing significantly. 
+*contribute to &lt;&lt;tag MELIA&gt;&gt; [[0.1.3|http://users.cecs.anu.edu.au/~baumgart/systems/MELIA/ReadMe.txt]] by changing the &lt;&lt;tag TPTP&gt;&gt; parser to packrat &lt;&lt;tag parsing&gt;&gt;, which speeds up parsing significantly.
 *contribute to &lt;&lt;tag gapt&gt;&gt; migration to specs2, maven best practices, XML validation and code organization.
 *contribute to &lt;&lt;tag gapt&gt;&gt; migration to Scala 2.10
+*maintain a [[Github fork|https://github.com/newca12/gapt/tree/master]] of gapt compatible with Scala IDE
 *see also : &lt;&lt;tag done&gt;&gt;
 !What we are doing right now
-Focus is currently on building &quot;a state of the art&quot; &lt;&lt;tag TPTP&gt;&gt; parser --based on parser combinators with the PackratParsers extension--.
-[[Xtext|http://www.eclipse.org/Xtext/]] could be the better framework/tool. --Study now ongoing will tell whether the potential advantages of such framework/tool are confirmed.--
-In this context, Debasish Ghosh's book [[DSLs in Action |http://books.google.fr/books?id=SzD6RAAACAAJ&amp;num=16&amp;source=gbs_slider_cls_metadata_1003_mylibrary]] has proved invaluable
---Current work consist in implementing a full featured TPTP parser/editor with Xtext.--
-@@Current work : I changed my mind again : the &lt;&lt;tag TPTP&gt;&gt; parser will be based on parboiled2: a Macro-Based PEG Parser@@
+Focus is currently on selecting and using a &quot;state of the art&quot; parser for ATP purpose.
+*parser based on parser combinators with the PackratParsers extension has been studied
+*[[Xtext|http://www.eclipse.org/Xtext/]] framework/tool was also considered
+*Finally current study focus on parboiled2: a Macro-Based PEG Parser
+In this context, Debasish Ghosh's book [[DSLs in Action |http://books.google.fr/books?id=SzD6RAAACAAJ&amp;num=16&amp;source=gbs_slider_cls_metadata_1003_mylibrary]] and [[Eugen Labun thesis|https://docs.google.com/file/d/0B7LbY7bJaltldVRhMHhfT1F4VkE/edit?pli=1]] have proved invaluable
+*Phase 2 (reloaded) :
+**Parsing study and Scala port of [[Handbook of Practical Logic and Automated Reasoning|http://www.cambridge.org/catalogue/catalogue.asp?isbn=9780521899574]]([[started|http://github.com/newca12/scala-atp]], @@WIP@@)
 See also : [[Roadmap]]</pre>
 </div>
 <div title="Proof language" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201106152104" modified="201307061719" tags="languages TPTP" changecount="12">
@@ -2302,7 +2300,7 @@ See also : [[Roadmap]]</pre>
 **This volume contains articles covering a broad spectrum of proof theory, with an emphasis on its mathematical aspects.
 **Full review : http://www.math.ucla.edu/~asl/bsl/0604/0604-003.ps</pre>
 </div>
-<div title="Roadmap" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104241247" modified="201308030727" tags="intro done" changecount="77">
+<div title="Roadmap" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104241247" modified="201308041301" tags="intro done" changecount="82">
 <pre>!Tasks to complete
 *Phase 1 : Initialization
 ** --Select the appropriate Content Management System-- ([[done|Content Management System]])
@@ -2310,15 +2308,16 @@ See also : [[Roadmap]]</pre>
 ** --Select additional &lt;&lt;tag tools&gt;&gt;-- (done)
 ** --Select parsing technique-- ([[done|Parser combinators vs others]])
 *Phase 2 (reloaded) :
-**Write a parser for &lt;&lt;tag TPTP&gt;&gt; using parboiled2: a Macro-Based PEG Parser (@@WIP@@)
-**Scala port of [[Handbook of Practical Logic and Automated Reasoning|http://www.cambridge.org/catalogue/catalogue.asp?isbn=9780521899574]]([[started|http://github.com/newca12/scala-atp]], @@WIP@@)
+**Parsing study and Scala port of [[Handbook of Practical Logic and Automated Reasoning|http://www.cambridge.org/catalogue/catalogue.asp?isbn=9780521899574]]([[started|http://github.com/newca12/scala-atp]], @@WIP@@)
+**Write a parser for &lt;&lt;tag TPTP&gt;&gt; using parboiled2: a Macro-Based PEG Parser
 *Phase 3 : Make [[HED|http://code.google.com/p/edla-hed/]] (hoper edei deixai) a state of the art theorem prover (not yet started)
 !Never ending tasks
 * Identify resources (books, article, thesis, blog, etc ...) that are available ([[started|Library]])
 * Identify people/organisation also working on ATP ([[started|Who's who]])
 * Select authoritative &lt;&lt;tag book&gt;&gt; on each subject and make a summary (&lt;&lt;tag summary [started]&gt;&gt;)
 * Use the selected [[CMS|Content Management System]] to consolidate knowledge ([[started|Etat De L'Art]])
-* Contribute to &lt;&lt;tag gapt&gt;&gt; (started) 
+* Contribute to &lt;&lt;tag gapt&gt;&gt; (started)
+* maintain a [[Github fork|https://github.com/newca12/gapt/tree/master]] of gapt compatible with Scala IDE (started)
 !Aborted tasks
 *Phase 2 : Write a parser/editor for &lt;&lt;tag TPTP&gt;&gt; using --Scala Parser Combinator-- Xtext  ([[abandoned|TPTP Editor]])
 **Construct Xtext grammar for TPTP (started, abandoned)
@@ -3929,9 +3928,10 @@ Nota : [[Prover9 &amp; co|http://www.cs.unm.edu/~mccune/mace4/download/LADR-2009
 
 --@@*ladr_to_tptp segfault@@-- &lt;= The last version here : https://github.com/jessealama/ladr.git fix this.</pre>
 </div>
-<div title="howto Scala IDE for Eclipse" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201305110738" modified="201308011759" tags="tools scala-ide howto" changecount="5">
+<div title="howto Scala IDE for Eclipse" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201305110738" modified="201308041220" tags="tools scala-ide howto" changecount="9">
 <pre>!Notes
 Eclipse Juno is known for performance regression so Indigo is recommended until SDK of Scala IDE for Kepler is available
+For the adventurous manual installation for Kepler is possible see : [[howto Scala IDE for Eclipse 4.3 (Kepler)]]
 !Installation
 Simply install the &quot;all in one&quot; [[SDK of the Scala IDE for Eclipse|http://scala-ide.org/download/sdk.html]]
 !Post installation
@@ -3951,8 +3951,8 @@ Modify this in eclipse.ini if you got more than 4 Go of memory
 #Choose git and enter https://github.com/newca12/scala-atp.git in SCM URL
 #Click on finish and that is : @@you've got automatically a fully configured Scala Maven single-module project git managed !@@
 !Checkout a multi-modules maven project to check everything is OK
-@@Gapt actually doesn't work with Eclipse due to a change in m2eclipse-scala. This is fixed in the m2e branch@@
-@@Gapt is not yet compatible with Scala 2.10. Fix is ongoing in the m2e-210 branch@@
+--@@Gapt actually doesn't work with Eclipse due to a change in m2eclipse-scala. This is fixed in the m2e branch@@--
+--@@Gapt is not yet compatible with Scala 2.10. Fix is ongoing in the m2e-210 branch@@--
 #/File/Import/Maven/Check out Maven Projects from SCM
 #Choose git and enter https://github.com/newca12/gapt.git in SCM URL
 #Click on finish and that is : @@you've got automatically a fully configured Scala Maven multi-modules project git managed !@@</pre>
@@ -4038,6 +4038,42 @@ Also most of the JVM optimizations are not necessary anymore. Details [[here|htt
 !Tips
 *remove .m2/repository/.cache/m2e/ to fix java heap with indexation and some with the scala compiler
 *Eclipse/project/clean could be needed after checkout (with Scala IDE nightly build)
+</pre>
+</div>
+<div title="howto Scala IDE for Eclipse 4.3 (Kepler)" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201308041229" modified="201308041302" tags="tools scala-ide howto" changecount="5">
+<pre>!Installation
+*Eclipse IDE for Java Developers @@Kepler (4.3)@@
+*m2e from eclipse market place @@If not already installed@@
+*ScalaIDE - http://download.scala-ide.org/sdk/e38/scala210/stable/site
+*ScalaIDE plugins
+**Scala Worksheet
+**ScalaTest plugin for Scala IDE
+**Scala Search
+**InSynth Feature
+*m2eclipse-scala - http://alchim31.free.fr/m2e-scala/update-site
+*m2e-egit - http://repository.tesla.io:8081/nexus/content/sites/m2e.extras/m2eclipse-egit/0.14.0/N/0.14.0.201305250025/
+!Post installation
+*Eclipse/Preference/General/Workspace/ =&gt; set text file encoding to UTF-8
+*@@Eclipse/Preference/Maven/ =&gt; set hide folders of physically nested modules@@
+*Eclipse/Preference/Team/Git/Ignored Resources/ =&gt; add .cache,.classpath,.project,*.prefs,*/target/*
+!Optimal memory configuration for Scala IDE
+Modify this in eclipse.ini if you got more than 4 Go of memory
+{{{
+-Xmx2560m
+}}}
+Also most of the JVM optimizations are not necessary anymore. Details [[here|http://download.oracle.com/javase/7/docs/technotes/guides/vm/performance-enhancements-7.html]].
+*Compressed oops is supported and enabled by default in Java SE 6u23 and later. In Java SE 7, use of compressed oops is the default for 64-bit JVM processes when -Xmx isn't specified and for values of -Xmx less than 32 gigabytes.
+*Escape analysis is supported and enabled by default in Java SE 6u23 and later.
+!Checkout a single-maven project to check everything is OK
+#/File/Import/Maven/Check out Maven Projects from SCM
+#Choose git and enter https://github.com/newca12/scala-atp.git in SCM URL
+#Click on finish and that is : @@you've got automatically a fully configured Scala Maven single-module project git managed !@@
+!Checkout a multi-modules maven project to check everything is OK
+--@@Gapt actually doesn't work with Eclipse due to a change in m2eclipse-scala. This is fixed in the m2e branch@@--
+--@@Gapt is not yet compatible with Scala 2.10. Fix is ongoing in the m2e-210 branch@@--
+#/File/Import/Maven/Check out Maven Projects from SCM
+#Choose git and enter https://github.com/newca12/gapt.git in SCM URL
+#Click on finish and that is : @@you've got automatically a fully configured Scala Maven multi-modules project git managed !@@
 </pre>
 </div>
 <div title="howto Vampire" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201110311539" modified="201204211603" tags="Vampire howto pb" changecount="13">
