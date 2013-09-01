@@ -2427,6 +2427,69 @@ A benchmark before and after the migration : see [[Packrat Efficiency]]</pre>
 **Implicits are a powerful feature and are mistrusted by some. The key to implicits in Scala are knowing how and when to use them
 * Chapter 2 · The core rules</pre>
 </div>
+<div title="Scala in action : summary" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201308042050" modified="201309011640" tags="scala book summary" changecount="25">
+<pre>@@wip@@
+*Part 1 - Scala : the basics
+**Why Scala?
+***a pure object-oriented language should have the following characteristics:
+****Encapsulation/information hiding.
+****Inheritance.
+****Polymorphism/dynamic binding.
+****All predefined types are objects.
+****All operations are performed by sending messages to objects.
+****All user-defined types are objects.
+***Scala has made some innovations on OOP space:
+****Modular mixin composition
+****Self-type
+****Type abstraction
+***Functional programming languages that support this style of programming provide at least some of the following features:
+****Higher-order functions
+****Lexical closures
+****Pattern matching
+****Single assignment
+****Lazy evaluation
+****Type inference
+****Tail call optimization
+****List comprehensions
+****Mondadic effects
+***Because all values in Scala are objects, it follows that functions are objects too
+***List(1, 2, 3).map((x: Int) =&gt; x + 1)
+***List(1, 2, 3).map(new Function1[Int, Int]{ def apply(x:Int): Int = x + 1})
+***Scala version 2.10 adds support for a Dynamic
+**Getting started
+***Scala Predef (part of the standard library) maps println to Console.println
+***placeholder character (_) to assign a default value
+***you can’t declare lazy var variables in Scala
+***val first :: rest = List(1, 2, 3)
+***passing a function isn’t always necessarily closure
+***Predef implicitly converts Array to scala.collection.mutable .ArrayOps
+***val afterDelete = newList.filterNot(_ == 3)
+***The special :_* tells the Scala compiler to send the result of toArray as a variable argument to the Arrays.asList method
+**OOP in Scala
+***The class declaration looks different from the way you declare in Java or C#—you’re not only declaring the class, but also its primary constructor
+***You can create classes without any class body
+***val and var prefixes are optional, and when both of them are missing, they’re treated as private instance values
+***To overload a constructor, name it this followed by the parameters. Constructor definition is similar to method definition except that you use the name this
+***To add a setter, you have to suffix your setter method with _=
+***When you don’t explicitly extend any class, by default that class extends the scala.AnyRef class.
+***Scala provides syntactic sugar that allows you to use objects as function calls. Scala achieves this by translating these calls into the apply method
+***The only things you can put in a package are classes, traits, and objects. But with the help of the package object, you can put any kind of definition in a package, such as a class
+***abstract class can have constructor parameters, but traits can’t take any parameters. Both can take type parameters
+***The difference between def and val is that val gets evaluated when an object is created, but def is evaluated every time a method is called
+***One advantage of traits compared to module systems available in other languages is that the trait mixin is checked at compile time
+*Part 2 - Working with Scala
+**Concurrency programming in Scala
+***Locks don’t compose. You can’t implement a higher-level, thread-safe behavior by composing smaller thread-safe operations.
+***Three most popular trends in concurrency
+****Software transactional memory (STM). This is typically implemented in a lock-free way and is composable.
+****Dataflow concurrency
+****Message- passing concurrency
+***you can safely use mutable state inside an actor as long as it’s not shared.
+***the recommended approach is to separate blocking actors from nonblocking actors by assigning different message dispatchers
+***A common use case of Future is to perform some computation concurrently without needing the extra utility of an actor
+***The most compelling feature of the Scala Future library is it allows us to compose concurrent operations, which is hard to achieve with actors
+***Future is an example of a monad. It implements map, flatMap, and filter operations, necessary ingredients of functional composition.</pre>
+</div>
 <div title="Scala notes" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201108151651" tags="scala" changecount="1">
 <pre>*map and filter are not defined on Array. Implicit conversions in Predef are used to provide such methods for arrays.</pre>
 </div>
