@@ -621,17 +621,30 @@ Some hints about MathJax [[here|http://wiki.math.toronto.edu/TorontoMathWiki/ind
 <div title="DefaultTiddlers" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201103191837" modified="201104251010" tags="systemNotes" changecount="2">
 <pre>[[Etat De L'Art]]</pre>
 </div>
-<div title="Dependent type" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201211241732" modified="201310130913" tags="intro" changecount="21">
-<pre>!Read this first
+<div title="Dependent type" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201211241732" modified="201310191127" tags="intro" changecount="25">
+<pre>@@see also [[Homotopy Type Theory]]@@
+!Read this first
 *[[Unifying Programming and Math – The Dependent Type Revolution|http://spin.atomicobject.com/2012/11/11/unifying-programming-and-math-the-dependent-type-revolution/]]
 *[[Dependent-type 'revolution'|http://robsscala.blogspot.fr/2012/11/dependent-type-revolution.html]]
 *[[A gentle introduction to dependent types|http://beust.com/weblog/2011/08/18/a-gentle-introduction-to-dependent-types/]]
 !Scala and dependent type
 *[[Scala has surprisingly good support for dependent typing|http://stackoverflow.com/questions/12935731/any-reason-why-scala-does-not-explicitly-support-dependent-types/12937819#12937819]]
 *[[Miles Sabin on Dependent Types with Scala, Shapeless, Scala Macros|http://www.infoq.com/interviews/sabin-types]]
-
-@@see also [[Homotopy Type Theory]]
+!Languages with dependent type support
+[[Agda|http://en.wikipedia.org/wiki/Agda_(programming_language)]]
+[[Idris|http://en.wikipedia.org/wiki/Idris_(programming_language)]]
+[[Coq|http://en.wikipedia.org/wiki/Coq]]
+[[Dotty]]
+See also [[Comparison of languages with dependent types|http://en.wikipedia.org/wiki/Dependent_types#Comparison_of_languages_with_dependent_types]]
 </pre>
+</div>
+<div title="Dotty" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201310191127" modified="201310191159" changecount="6">
+<pre>Odersky unveils Dotty at [[Strange Loop 2013|https://thestrangeloop.com/sessions/the-trouble-with-types]]
+See [[Slides|https://docs.google.com/file/d/0B7LbY7bJaltlaGg5WXU4ZzRSUEk/edit?usp=drive_web&amp;pli=1]]
+DOT: Calculus for Dependent Object Types
+[[Dotty|https://twitter.com/deanwampler/status/381062586705248257]]: A Scala-Like Language with DOT as its core
+*Dotty has union and intersection types
+*In Odersky’s experimental Dotty language, there is no distinction between existential and higher-kinded types</pre>
 </div>
 <div title="Eclipse vs others" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201105211706" modified="201105211708" tags="duel tools" changecount="3">
 <pre>From Scala point of view
@@ -1191,7 +1204,7 @@ You can also see algorithms &lt;&lt;tag explained&gt;&gt; and introductory docum
 *[[The Types Project|http://www.cse.chalmers.se/research/group/logic/Types/index.html]]
 *[[Homotopy Type Theory|http://homotopytypetheory.org/]]</pre>
 </div>
-<div title="Homotopy Type Theory (The HoTT Book) : summary" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201310131112" modified="201310131410" tags="book summary wip" changecount="15">
+<div title="Homotopy Type Theory (The HoTT Book) : summary" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201310131112" modified="201310132051" tags="book summary wip" changecount="16">
 <pre>!Introduction
 *Homotopy type theory is a new branch of mathematics based on a recently discovered connection between homotopy the- ory and type theory
 *univalent foundations will eventually become a viable alternative to set theory as the “implicit foundation” for the unformalized mathematics done by most mathematicians
@@ -1210,7 +1223,10 @@ You can also see algorithms &lt;&lt;tag explained&gt;&gt; and introductory docum
 **(homotopical) an equivalence p : A ≃ B between A and B
 *One of the classical advantages of type theory is its simple and effective techniques for work- ing with inductively defined structures
 *In homotopy theory, it is natural to consider also “inductively defined spaces” which are generated not merely by a collection of points, but also by collections of paths and higher paths
-
+*Of course, there are many specific examples of the use of type theory without the new homotopy type theory features to formalize mathematics
+*For this reason, most of the applications in this book have been chosen to be areas where univalent foundations has something new to contribute that distinguishes it from existing foundational systems
+*One can imagine a not-too-distant future when it will be possible for mathematicians to verify the correctness of their own papers by working within the system of univalent foundations, formalized in a proof assistant,
+*from every proof we can automatically extract an algorithm; this can be very useful in applications to computer programming
 !PART I - FOUNDATIONS
 *Chapter 1 - Type theory
 **Type theory versus set theory</pre>
