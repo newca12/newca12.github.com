@@ -638,9 +638,9 @@ Some hints about MathJax [[here|http://wiki.math.toronto.edu/TorontoMathWiki/ind
 See also [[Comparison of languages with dependent types|http://en.wikipedia.org/wiki/Dependent_types#Comparison_of_languages_with_dependent_types]]
 </pre>
 </div>
-<div title="Dotty" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201310191127" modified="201310191159" changecount="6">
+<div title="Dotty" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201310191127" modified="201310301758" changecount="7">
 <pre>Odersky unveils Dotty at [[Strange Loop 2013|https://thestrangeloop.com/sessions/the-trouble-with-types]]
-See [[Slides|https://docs.google.com/file/d/0B7LbY7bJaltlaGg5WXU4ZzRSUEk/edit?usp=drive_web&amp;pli=1]]
+See [[Video|http://www.infoq.com/presentations/data-types-issues]] and [[Slides|https://docs.google.com/file/d/0B7LbY7bJaltlaGg5WXU4ZzRSUEk/edit?usp=drive_web&amp;pli=1]]
 DOT: Calculus for Dependent Object Types
 [[Dotty|https://twitter.com/deanwampler/status/381062586705248257]]: A Scala-Like Language with DOT as its core
 *Dotty has union and intersection types
@@ -860,13 +860,13 @@ but maven test is ok without ceres
 
 This tiddler was automatically created to record the details of this server</pre>
 </div>
-<div title="GATrackerPlugin" modifier="Julien Coloos" created="201105142206" modified="201105182137" tags="systemConfig" server.page.revision="201105182137" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.type="file">
+<div title="GATrackerPlugin" modifier="Olivier ROLAND" created="201105142206" modified="201311272207" tags="systemConfig" changecount="1" server.type="file" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.page.revision="201105182137">
 <pre>/***
 |Name|GATrackerPlugin|
 |Description|Google Analytics tracker|
 |Author|Julien Coloos|
-|Version|1.2.0|
-|Date|2011-05-18|
+|Version|1.2.1|
+|Date|2013-11-07|
 |Status|stable|
 |Source|http://julien.coloos.free.fr/TiddlyWiki-dev/#GATrackerPlugin|
 |License|[img[CC BY-SA 3.0|http://i.creativecommons.org/l/by-sa/3.0/80x15.png][http://creativecommons.org/licenses/by-sa/3.0/]]|
@@ -911,6 +911,10 @@ Tracking can be globally disabled, or enabled per action on each tiddler:
 
 
 !Revision History
+!!v1.2.1 (2013-11-07)
+Enhancements:
+* add configurable regular expression to disable tracking according to hosting URL
+
 !!v1.2.0 (2011-05-18)
 Enhancements:
 * do not trigger {{{CloseAll}}} and {{{Open}}} actions when search is performed
@@ -933,7 +937,7 @@ var _gaq = _gaq || [];
 
 if (!config.extensions.GATracker) {(function($) {
 
-version.extensions.GATrackerPlugin = {major: 1, minor: 2, revision: 0, date: new Date(2011, 5, 18)};
+version.extensions.GATrackerPlugin = {major: 1, minor: 2, revision: 1, date: new Date(2013, 11, 07)};
 
 /* Prepare overridden TiddlyWiki displaying */
 var trackOptions = {};
@@ -952,6 +956,7 @@ loadOptions: function() {
 	trackOptions = {
 		id: pl.getOption(&quot;txt_GATracker_id&quot;),
 		enabled: parseInt(gaTrack[0] || &quot;1&quot;),
+		url_exclude: pl.getOption(&quot;txt_GATracker_url_exclude&quot;) || &quot;&quot;,
 		type: parseInt(gaTrack[1] || &quot;0&quot;),
 		events: {
 			open: parseInt(gaTrack[2] || &quot;1&quot;),
@@ -972,6 +977,7 @@ saveOptions: function() {
 		opts += &quot;,&quot; + (trackOptions.events[ev] &amp;&amp; &quot;1&quot; || &quot;0&quot;);
 	}
 	pl.setOption(&quot;txt_GATracker_id&quot;, trackOptions.id || &quot;&quot;);
+	pl.setOption(&quot;txt_GATracker_url_exclude&quot;, trackOptions.url_exclude || &quot;&quot;);
 	pl.setOption(&quot;txt_GATracker_track&quot;, opts);
 },
 track: function() {
@@ -1024,7 +1030,8 @@ pl.loadOptions();
 
 /* Only track in non-local mode */
 var local = &quot;file:&quot; == document.location.protocol;
-if (!local &amp;&amp; trackOptions.id &amp;&amp; trackOptions.enabled) {
+var url_excluded = trackOptions.url_exclude.length ? (new RegExp(trackOptions.url_exclude, &quot;i&quot;)).test(document.location.href) : 0;
+if (!local &amp;&amp; trackOptions.id &amp;&amp; trackOptions.enabled &amp;&amp; !url_excluded) {
 	/* Insert script tag to load GA */
 	$(&quot;head&quot;).eq(0).prepend($(&quot;&lt;script/&gt;&quot;).attr({type: &quot;text/javascript&quot;, async: &quot;true&quot;, src: (&quot;https:&quot; == document.location.protocol ? &quot;https://ssl&quot; : &quot;http://www&quot;) + &quot;.google-analytics.com/ga.js&quot;}));
 
@@ -1048,22 +1055,25 @@ if (!local &amp;&amp; trackOptions.id &amp;&amp; trackOptions.enabled) {
 
 config.macros.GATrackerConfig = {
 handler: function(place, macroName, params, wikifier, paramString, tiddler) {
-	$(createTiddlyElement(place, &quot;div&quot;)).html(&quot;Tracking status: &lt;span style='color:&quot; + (trackOptions.id &amp;&amp; trackOptions.enabled ? &quot;green'&gt;enabled&quot; : &quot;red'&gt;disabled&quot;) + &quot;&lt;/span&gt; and &lt;span style='color:&quot; + (local ? &quot;red'&gt;&quot; : &quot;green'&gt;non-&quot;) + &quot;local&lt;/span&gt;&quot;);
+	$(createTiddlyElement(place, &quot;div&quot;)).html(&quot;Tracking status: &lt;span style='color:&quot; + (trackOptions.id &amp;&amp; trackOptions.enabled ? &quot;green'&gt;enabled&quot; : &quot;red'&gt;disabled&quot;) + &quot;&lt;/span&gt; and &lt;span style='color:&quot; + (local ? &quot;red'&gt;&quot; : &quot;green'&gt;non-&quot;) + &quot;local&lt;/span&gt;&quot; + (!local &amp;&amp; url_excluded ? &quot;, but &lt;span style='color:red'&gt;excluded&lt;/span&gt;&quot; : &quot;&quot;));
 	if (readOnly) {
 		$(createTiddlyElement(place, &quot;div&quot;)).html(&quot;Configuration is not available in read-only mode&quot;);
 		return;
 	}
-	var formNode = $(createTiddlyElement(place, &quot;div&quot;)).html(&quot;&lt;div&gt;Google Analytics plugin configuration:&lt;/div&gt;&lt;table&gt;&lt;tr&gt;&lt;td&gt;Account ID:&lt;/td&gt;&lt;td&gt;&lt;input id='ga_id' type='text'/&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Tracking:&lt;/td&gt;&lt;td&gt;&lt;input id='ga_enabled' type='checkbox'/&gt;Enabled&lt;br/&gt;&lt;br/&gt;How: &lt;select id='ga_track'&gt;&lt;option value='0'&gt;Events&lt;/option&gt;&lt;option value='1'&gt;Pages&lt;/option&gt;&lt;/select&gt;&lt;br/&gt;&lt;br/&gt;What:&lt;br/&gt;&lt;input id='ga_track_open' type='checkbox'/&gt;Open&lt;br/&gt;&lt;input id='ga_track_refresh' type='checkbox'/&gt;Refresh&lt;br/&gt;&lt;input id='ga_track_edit' type='checkbox'/&gt;Edit&lt;br/&gt;&lt;input id='ga_track_close' type='checkbox'/&gt;Close&lt;br/&gt;&lt;input id='ga_track_search' type='checkbox'/&gt;Search&lt;br/&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;input id='ga_action_submit' type='submit' value='Apply'/&gt;&quot;);
+	var formNode = $(createTiddlyElement(place, &quot;div&quot;)).html(&quot;&lt;div&gt;Google Analytics plugin configuration:&lt;/div&gt;&lt;table&gt;&lt;tr&gt;&lt;td&gt;Account ID:&lt;/td&gt;&lt;td&gt;&lt;input id='ga_id' type='text'/&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Tracking:&lt;/td&gt;&lt;td&gt;&lt;input id='ga_enabled' type='checkbox'/&gt;Enabled&lt;br/&gt;&lt;br/&gt;How: &lt;select id='ga_track'&gt;&lt;option value='0'&gt;Events&lt;/option&gt;&lt;option value='1'&gt;Pages&lt;/option&gt;&lt;/select&gt;&lt;br/&gt;&lt;br/&gt;What:&lt;br/&gt;&lt;input id='ga_track_open' type='checkbox'/&gt;Open&lt;br/&gt;&lt;input id='ga_track_refresh' type='checkbox'/&gt;Refresh&lt;br/&gt;&lt;input id='ga_track_edit' type='checkbox'/&gt;Edit&lt;br/&gt;&lt;input id='ga_track_close' type='checkbox'/&gt;Close&lt;br/&gt;&lt;input id='ga_track_search' type='checkbox'/&gt;Search&lt;br/&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;URL exclusion:&lt;/td&gt;&lt;td&gt;&lt;input id='ga_url_exclude' type='text'/&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;input id='ga_action_submit' type='submit' value='Apply'/&gt;&quot;);
 	$(&quot;#ga_id&quot;, formNode).val(trackOptions.id);
 	$(&quot;#ga_enabled&quot;, formNode)[0].checked = trackOptions.enabled;
 	$(&quot;#ga_track option&quot;, formNode).eq(trackOptions.type)[0].selected = true;
 	for (var ev in trackOptions.events) {
 		$(&quot;#ga_track_&quot; + ev, formNode)[0].checked = trackOptions.events[ev];
 	}
+	$(&quot;#ga_url_exclude&quot;, formNode).val(trackOptions.url_exclude);
 	$(&quot;#ga_action_submit&quot;, formNode).click(function() {
 		trackOptions.id = $(&quot;#ga_id&quot;, formNode).val();
 		if (!trackOptions.id.length) trackOptions.id = null;
 		trackOptions.enabled = $(&quot;#ga_enabled&quot;, formNode)[0].checked;
+		trackOptions.url_exclude = $(&quot;#ga_url_exclude&quot;, formNode).val();
+		if (!trackOptions.url_exclude.length) trackOptions.url_exclude = null;
 		trackOptions.type = parseInt($(&quot;#ga_track&quot;, formNode).val());
 		for (var ev in trackOptions.events) {
 			trackOptions.events[ev] = $(&quot;#ga_track_&quot; + ev, formNode)[0].checked;
@@ -1881,6 +1891,26 @@ If a parser takes a stream of characters and turns them into an abstract syntax 
 *The Scala's standard library already has one Wadler's Pretty-Printer, but it's rather limited and has only few basic combinators. [[Scala doc|http://www.scala-lang.org/archives/downloads/distrib/files/nightly/docs/library/index.html#scala.text.Document]] about it is really weak. Some useful hints on [[this blog|http://www.scala-blogs.org/2009/04/combinators-for-pretty-printers-part-1.html]]
 *A Scala port of Lindig’s implementation of Wadler’s pretty printer from Ocaml, adding all combinators and whole API from Haskell PPrint - which is another implementation of Wadler’s prettier-printer by Daan Leijen : [[source code|http://scala-programming-language.1934581.n4.nabble.com/file/n1995937/zPPrint.scala]] and [[demo|http://scala-programming-language.1934581.n4.nabble.com/scala-pretty-printing-tp1995936p1995939.html]]
 *A rudimentary pretty printer combinator : http://www.scala-blogs.org/2009/04/combinators-for-pretty-printers-part-1.html</pre>
+</div>
+<div title="Pro JavaFX 2 : summary" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201311110808" modified="201311111050" tags="GUI book summary wip" changecount="4">
+<pre>*Chapter 1: Getting a Jump Start in JavaFX
+**JavaFX supports data binding, which is characterized by binding the value of a property (such as the height of a rectangle) to an expression
+**A Stage contains the user interface of a JavaFX app, whether it is deployed on the desktop, within a browser, or on other devices
+**a Scene holds the graphical elements that are displayed on the Stage
+**One powerful graphical feature of JavaFX is the ability to create scene graphs, which consist of a tree of graphical nodes
+*Chapter 2: Creating a User Interface in JavaFX
+**One advantage of using layout containers is that when the node sizes change, their visual relationships with each other are predictable
+**Each node in a Scene can be assigned an ID in the id property of the node
+**A very powerful aspect of JavaFX is the ability to use CSS to style the nodes in a Scene dynamically
+*Chapter 3: Properties and Bindings
+**Each Property object may have at most one active unidirectional binding at a time. It may have as many bidirectional bindings as you want
+**To define a JavaFX Beans property in a Java class, you provide three methods: the getter, the setter, and the property getter
+*Building Dynamic UI Layouts in JavaFX
+**
+*Chapter 5: Using the JavaFX UI Controls
+**he StackPane class, which has built-in capabilities for aligning nodes.
+**Just like the StackPane class, TilePane also has variables for setting the default alignment and also the alignment of each individual node added
+**</pre>
 </div>
 <div title="Programming in Scala 2nd : summary" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104232118" modified="201301081026" tags="scala book summary done" changecount="98">
 <pre>* Chapter 1 · A Scalable Language
@@ -2779,10 +2809,11 @@ attribute ::= &quot;label&quot; &quot;(&quot; string &quot;)&quot; |
               &quot;bsub_hint_wt&quot; &quot;(&quot; integer &quot;)&quot;
 }}}</pre>
 </div>
-<div title="SystemSettings" modifier="Olivier ROLAND" created="201105142207" modified="201106101816" tags="excludeLists" changecount="5" server.page.revision="201105142207" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.type="file">
-<pre>txt_GATracker_id: UA-4646079-1
+<div title="SystemSettings" modifier="Olivier ROLAND" created="201105142207" modified="201106101816" tags="excludeLists" server.type="file" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.page.revision="201105142207" changecount="6">
+<pre>txtUserName: Olivier%20ROLAND
+txt_GATracker_id: UA-4646079-1
 txt_GATracker_track: 1%2C0%2C1%2C1%2C1%2C1%2C1
-txtUserName: Olivier ROLAND</pre>
+txt_GATracker_url_exclude: dropboxusercontent</pre>
 </div>
 <div title="TPTP Editor" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201205121304" modified="201305272127" tags="parsing TPTP abandoned" changecount="44">
 <pre>@@Abandoned project@@
@@ -2871,7 +2902,7 @@ Extract from  Debasish Ghosh's book [[DSLs in Action |http://books.google.fr/boo
 
 @@WIP@@</pre>
 </div>
-<div title="TWikiFormatterPlugin" modifier="MartinBudden" created="200607210000" tags="systemConfig excludeLists excludeSearch" server.page.revision="200607210000" server.host="http://www.martinswiki.com" server.type="file">
+<div title="TWikiFormatterPlugin" modifier="MartinBudden" created="200607210000" tags="systemConfig excludeLists excludeSearch" server.type="file" server.host="http://www.martinswiki.com" server.page.revision="200607210000">
 <pre>/***
 |''Name:''|TWikiFormatterPlugin|
 |''Description:''|Allows Tiddlers to use [[TWiki|http://twiki.org/cgi-bin/view/TWiki/TextFormattingRules]] text formatting|
@@ -3594,7 +3625,7 @@ config.parsers.twikiFormatter.formatTag = 'TWikiFormat';
 } // end of 'install only once'
 //}}}</pre>
 </div>
-<div title="Tags" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104250931" modified="201307061714" tags="meta editing" changecount="68">
+<div title="Tags" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104250931" modified="201311110940" tags="meta editing" changecount="71">
 <pre>*&lt;&lt;tag atp&gt;&gt;- Automated Theorem Proving, what this site is all about
 **&lt;&lt;tag intro&gt;&gt;- Getting started
 **&lt;&lt;tag scala-atp&gt;&gt;- Scala port of [[Handbook of Practical Logic and Automated Reasoning|http://www.cambridge.org/catalogue/catalogue.asp?isbn=9780521899574]]
@@ -3618,8 +3649,9 @@ config.parsers.twikiFormatter.formatTag = 'TWikiFormat';
 ***&lt;&lt;tag TPTP&gt;&gt;- TPTP language
 **&lt;&lt;tag code-analysis&gt;&gt;- Source code analysis
 **&lt;&lt;tag howto&gt;&gt;- various how-to
-*&lt;&lt;tag tools&gt;&gt;- tools drastically selected
+*&lt;&lt;tag tools&gt;&gt;- tools or frameworks drastically selected
 **&lt;&lt;tag scala&gt;&gt; related to Scala
+**&lt;&lt;tag GUI&gt;&gt; Graphical User Interface
 **&lt;&lt;tag scala-ide&gt;&gt; all about Scala IDE for Eclipse
 **&lt;&lt;tag duel&gt;&gt;- duels
 *&lt;&lt;tag pb&gt;&gt;- some things annoying that needs to be fixed
@@ -4175,26 +4207,19 @@ Also most of the JVM optimizations are not necessary anymore. Details [[here|htt
 *Eclipse/project/clean could be needed after checkout (with Scala IDE nightly build)
 </pre>
 </div>
-<div title="howto Scala IDE for Eclipse 4.3 (Kepler)" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201308041229" modified="201308041302" tags="tools scala-ide howto" changecount="5">
+<div title="howto Scala IDE for Eclipse 4.3 (Kepler)" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201308041229" modified="201311011640" tags="tools scala-ide howto" changecount="19">
 <pre>!Installation
-*Eclipse IDE for Java Developers @@Kepler (4.3)@@
-*m2e from eclipse market place @@If not already installed@@
-*ScalaIDE - http://download.scala-ide.org/sdk/e38/scala210/stable/site
-*ScalaIDE plugins
-**Scala Worksheet
-**ScalaTest plugin for Scala IDE
-**Scala Search
-**InSynth Feature
-*m2eclipse-scala - http://alchim31.free.fr/m2e-scala/update-site
-*m2e-egit - http://repository.tesla.io:8081/nexus/content/sites/m2e.extras/m2eclipse-egit/0.14.0/N/0.14.0.201305250025/
+*@@[[Download the Bundle of the Scala IDE for Eclipse|http://scala-ide.org/download/sdk.html]]@@
+*--m2eclipse-scala - http://alchim31.free.fr/m2e-scala/update-site--
+*m2e-egit - http://repository.tesla.io:8081/nexus/content/sites/m2e.extras/m2eclipse-egit/0.14.0/N/0.14.0.201305250025/ @@unselect Group items by category@@
 !Post installation
-*Eclipse/Preference/General/Workspace/ =&gt; set text file encoding to UTF-8
+*--Eclipse/Preference/General/Workspace/ =&gt; set text file encoding to UTF-8--
 *@@Eclipse/Preference/Maven/ =&gt; set hide folders of physically nested modules@@
 *Eclipse/Preference/Team/Git/Ignored Resources/ =&gt; add .cache,.classpath,.project,*.prefs,*/target/*
 !Optimal memory configuration for Scala IDE
-Modify this in eclipse.ini if you got more than 4 Go of memory
+Modify this in eclipse.ini if you got more than 4 Go of memory. Expect trouble with big project if you don't.
 {{{
--Xmx2560m
+-Xmx3192m
 }}}
 Also most of the JVM optimizations are not necessary anymore. Details [[here|http://download.oracle.com/javase/7/docs/technotes/guides/vm/performance-enhancements-7.html]].
 *Compressed oops is supported and enabled by default in Java SE 6u23 and later. In Java SE 7, use of compressed oops is the default for 64-bit JVM processes when -Xmx isn't specified and for values of -Xmx less than 32 gigabytes.
