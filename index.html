@@ -621,7 +621,7 @@ Some hints about MathJax [[here|http://wiki.math.toronto.edu/TorontoMathWiki/ind
 <div title="DefaultTiddlers" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201103191837" modified="201104251010" tags="systemNotes" changecount="2">
 <pre>[[Etat De L'Art]]</pre>
 </div>
-<div title="Dependent type" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201211241732" modified="201312071405" tags="intro HoTT" changecount="26">
+<div title="Dependent type" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201211241732" modified="201312151434" tags="intro HoTT" changecount="28">
 <pre>@@see also [[Homotopy Type Theory]]@@
 !Read this first
 *[[Unifying Programming and Math – The Dependent Type Revolution|http://spin.atomicobject.com/2012/11/11/unifying-programming-and-math-the-dependent-type-revolution/]]
@@ -634,11 +634,11 @@ Some hints about MathJax [[here|http://wiki.math.toronto.edu/TorontoMathWiki/ind
 [[Agda|http://en.wikipedia.org/wiki/Agda_(programming_language)]]
 [[Idris|http://en.wikipedia.org/wiki/Idris_(programming_language)]]
 [[Coq|http://en.wikipedia.org/wiki/Coq]]
-[[Dotty]]
+--[[Dotty]]-- @@this is a common mistake, see [[path-dependent type]] for clarification@@
 See also [[Comparison of languages with dependent types|http://en.wikipedia.org/wiki/Dependent_types#Comparison_of_languages_with_dependent_types]]
 </pre>
 </div>
-<div title="Dotty" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201310191127" modified="201312071418" tags="HoTT scala" changecount="10">
+<div title="Dotty" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201310191127" modified="201312151439" tags="scala" changecount="11">
 <pre>Odersky unveils Dotty at [[Strange Loop 2013|https://thestrangeloop.com/sessions/the-trouble-with-types]]
 See [[Video|http://www.infoq.com/presentations/data-types-issues]] and [[Slides|https://docs.google.com/file/d/0B7LbY7bJaltlaGg5WXU4ZzRSUEk/edit?usp=drive_web&amp;pli=1]]
 DOT: Calculus for Dependent Object Types
@@ -677,11 +677,12 @@ If you wan't an overview of what is available on this site you can use [[Tags]] 
 
 @@If you came thru google search due to the uniqueness of ~TiddlyWiki the web result you saw on google may not appear on this website.  To find it just remember the query items and put on the search line to the upper right of this page. You should be able to find the item you were looking for.@@</pre>
 </div>
-<div title="First-class resources" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201103191829" modified="201310130911" tags="intro" changecount="67">
+<div title="First-class resources" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201103191829" modified="201312151407" tags="intro" changecount="69">
 <pre>@@see also [[Dependent type]] and [[Homotopy Type Theory]]
 * LOGIC
 ** Open Course Project from general introduction to Automated Theorem Proving : [[Logic in Action|http://www.logicinaction.org/]]
-** Free online (Coursera) course with Michael Genesereth [[Introduction to Logic|https://www.coursera.org/course/intrologic]]
+** Free online (Coursera) course with Michael Genesereth : [[Introduction to Logic|https://www.coursera.org/course/intrologic]]
+** Online book by Michael Genesereth : [[Introduction to Logic|http://arrogant.stanford.edu/intrologic/chapters/cover.html]]
 
 * SCALA
 ** Free online (Coursera) course with Martin Odersky [[Functional Programming Principles in Scala|https://www.coursera.org/course/progfun]]
@@ -861,7 +862,7 @@ but maven test is ok without ceres
 
 This tiddler was automatically created to record the details of this server</pre>
 </div>
-<div title="GATrackerPlugin" modifier="Olivier ROLAND" created="201105142206" modified="201311272207" tags="systemConfig" changecount="1" server.type="file" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.page.revision="201105182137">
+<div title="GATrackerPlugin" modifier="Olivier ROLAND" created="201105142206" modified="201311272207" tags="systemConfig" server.page.revision="201105182137" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.type="file" changecount="1">
 <pre>/***
 |Name|GATrackerPlugin|
 |Description|Google Analytics tracker|
@@ -2812,7 +2813,7 @@ attribute ::= &quot;label&quot; &quot;(&quot; string &quot;)&quot; |
               &quot;bsub_hint_wt&quot; &quot;(&quot; integer &quot;)&quot;
 }}}</pre>
 </div>
-<div title="SystemSettings" modifier="Olivier ROLAND" created="201105142207" modified="201106101816" tags="excludeLists" server.type="file" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.page.revision="201105142207" changecount="6">
+<div title="SystemSettings" modifier="Olivier ROLAND" created="201105142207" modified="201106101816" tags="excludeLists" changecount="6" server.page.revision="201105142207" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.type="file">
 <pre>txtUserName: Olivier%20ROLAND
 txt_GATracker_id: UA-4646079-1
 txt_GATracker_track: 1%2C0%2C1%2C1%2C1%2C1%2C1
@@ -2905,7 +2906,7 @@ Extract from  Debasish Ghosh's book [[DSLs in Action |http://books.google.fr/boo
 
 @@WIP@@</pre>
 </div>
-<div title="TWikiFormatterPlugin" modifier="MartinBudden" created="200607210000" tags="systemConfig excludeLists excludeSearch" server.type="file" server.host="http://www.martinswiki.com" server.page.revision="200607210000">
+<div title="TWikiFormatterPlugin" modifier="MartinBudden" created="200607210000" tags="systemConfig excludeLists excludeSearch" server.page.revision="200607210000" server.host="http://www.martinswiki.com" server.type="file">
 <pre>/***
 |''Name:''|TWikiFormatterPlugin|
 |''Description:''|Allows Tiddlers to use [[TWiki|http://twiki.org/cgi-bin/view/TWiki/TextFormattingRules]] text formatting|
@@ -4455,6 +4456,9 @@ p ∧ r ∧ ¬q ∨ q ∧ ¬p ∨ ¬p ∧ ¬r
 |Optimized version of a Prawitz-like procedure|tableaux.ml|Tableaux.lhs|
 |Goals, LCF-like tactics and Mizar-like proofs|tactics.ml||
 |Unification for first order terms|unif.ml|Unif.lhs|</pre>
+</div>
+<div title="path-dependent type" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201312151438" modified="201312151439" tags="scala HoTT" changecount="3">
+<pre>Dependent types are very distinct from path dependent types : see [[Dependent types vs. Path Dependent types|https://groups.google.com/forum/#!topic/scala-types/5J71FpGl4JA]]</pre>
 </div>
 <div title="sbt vs maven" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201105011650" modified="201211241342" tags="duel tools" changecount="21">
 <pre>From Eclipse point of view 
