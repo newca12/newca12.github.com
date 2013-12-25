@@ -522,6 +522,59 @@ noscript {display:none;} /* Fixes a feature in Firefox 1.5.0.2 where print previ
 </div>
 <!--POST-SHADOWAREA-->
 <div id="storeArea">
+<div title="15-819 Homotopy Type Theory" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201312242211" modified="201312251855" tags="HoTT summary wip" changecount="25">
+<pre>@@wip@@
+Some personal notes about [[Homotopy Type Theory course (with lecture notes and videos)|https://www.cs.cmu.edu/~rwh/courses/hott/]] with @@indexed time@@
+*Lecture 01 - Course Introduction
+**Learning type theory from scratch starting from page one of the HoTT book is probably not a good idea
+**Homotopy Type Theory is self standing subject and not really tied to homotopy theory
+**HoTT is a sophisticated analyses of the concept of equality in constructive type theory
+**This course introduction will give some hints about where the type theory come from starting with ultra basic things
+**The foundation of this subject is : Intuitionistic Type Theory called TT (not ITT see later why) @@00:11:18@@
+**TT is primarily nut not exclusively based on the work of Per Martin-L¨of’s and analysis and expansion of Brouwer’s program
+**Intensional type theory (ITT) is the starting point because various other forms of type theories can be seen has extension of ITT
+**For example ETT (Extensional type theory) = ITT + ER (equality reflection) + UIP (uniqueness of identity proof) = intuitionistic theory of sets (types are sets)
+**We can even say that ETT like NuPRL is a kind of constructive set theory
+**Other example HoTT (Homotopy Type Theory) = ITT + HIT (higher inductive types) + UA (univalence axion) = intuitionistic theory of weak inﬁnity groupoids (types are abstract spaces)
+**in order to makes these statements mean-full we need to know more about the origin of type theory
+**Brouwer’s program consequences
+***proofs are forms of construction
+***technical consequence : prrof relevance = proofs are mathematical objects like other (this make this approach different of all other approach for foundation of mathematics)
+**a formal prroof is a mathematical object but this is only a ??? shadow of what a proof is (this is the content of Gödel's incompleteness theorems @@00:25:50@@
+**formal proof is elimining concepts. Formal proof is different from a proof. This is a common mistake.
+**prrof relevance is absolutely central in HoTT : proofs of equality in HoTT correspond to paths in a space &lt;= this is the core of HoTT
+**synthetic vs analytic (ex: LF/Twelf vs coq) @@00:33:00@@
+**HoTT is synthetic so clean and mechanizable
+**the idea of HoTT is intrinsic to the notion type theory
+**What is type theory ? Type theory isan analises + codification of Brouwer’s intuitionism drawing on Gentzen's proff theory
+**Type classify constructions &lt;= this is sufficient to encompass all known mathematical construction and in particular forms of proof
+**What are constructions (statics)
+***Introduction rules : how to create/effect a construction
+***Elimination rules : how to use a construction
+**How constructions compute (dynamics/run)
+***Inversion principle (ie) conservation of proof = elim is post-inv to intro (ie) you can only take out what you put in
+**Herbrand was wrong when he was against Brouwer’s notion of constructivism @@00:43:40@@
+**Constructivism is completely compatible with traditional approach
+**Axiomatic freedom of constructivism mathematic
+***fewer assumptions lead to stronger results
+***selectively/locally introduce assumptions
+**Type theory is the grand unified theory of computation unified with mathematics @@0:52:20@@
+**Type theory is about enriching and extending  what we mean by computable
+**TT (Type Theory), PT (Proof Theory), CT (Category Theory) are related and are different points of view for same subject
+**Intuitionistic Logic is a social process. A is a true proposition mean A has a proof
+**We do not expect either A is true (ie provable) or A is false (ie refutable) because the are open problems @@01:02:40@@  
+**This is called Open-endedness principle. 
+**Logical entailment is a notion anterior to implication (in traditional Herbrand logic distinction between entailment and implication is not drawn an this is a terrible thing)
+**Come next : When are two proofs the same ? , richer type theory called dependent type theory, ITT, HoTT
+*Lecture 02 - Judgements
+**Type theory is not yet another axiomatic theory
+**The set of rules (Trivially true, thruth introduction, conjonction, introductory rule, elimination rule, implication, etc) is not arbitrary, internal coherence and computational properties does matter 
+**Implication introduction (called natural deduction) is the innovation of Gentzen @@00:16:50@@
+**What is entailment (ie) logical consequence (ie) hypothetical judgement (judgement made on hypotheses) ? It's a mapping
+***reflexivity
+***transitivity (ie) composition : this is inlining from a computer science point of view @@00:23:20@@
+***</pre>
+</div>
 <div title="A bit of history" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201109081600" modified="201310130825" tags="intro" changecount="36">
 <pre>!Notable Events
 *1666 : [[Characteristica universalis|http://en.wikipedia.org/wiki/Characteristica_universalis]] concept
@@ -862,7 +915,7 @@ but maven test is ok without ceres
 
 This tiddler was automatically created to record the details of this server</pre>
 </div>
-<div title="GATrackerPlugin" modifier="Olivier ROLAND" created="201105142206" modified="201311272207" tags="systemConfig" server.page.revision="201105182137" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.type="file" changecount="1">
+<div title="GATrackerPlugin" modifier="Olivier ROLAND" created="201105142206" modified="201311272207" tags="systemConfig" changecount="1" server.type="file" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.page.revision="201105182137">
 <pre>/***
 |Name|GATrackerPlugin|
 |Description|Google Analytics tracker|
@@ -1209,11 +1262,11 @@ You can also see algorithms &lt;&lt;tag explained&gt;&gt; and introductory docum
 ** We have no way at all of evaluating whether a formula holds in an interpretation with an infinite domain
 ** Note the contrast with propositional logic, where the propositional variables range over a finite (2-element) set which can therefore be enumerated exhaustively</pre>
 </div>
-<div title="Homotopy Type Theory" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201310130831" modified="201312112212" tags="intro HoTT" changecount="7">
+<div title="Homotopy Type Theory" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201310130831" modified="201312242215" tags="intro HoTT" changecount="8">
 <pre>!Read this first
 *[[Homotopy Type Theory: a new foundation for 21st-century mathematics|http://aperiodical.com/2013/06/homotopy-type-theory-a-new-foundation-for-21st-century-mathematics/]]
 !Highly recommended course
-*[[Homotopy Type Theory course (with lecture notes and videos)|https://www.cs.cmu.edu/~rwh/courses/hott/]]
+*[[15-819 Homotopy Type Theory]] by Robert Harper
 !Resources
 *[[The Types Project|http://www.cse.chalmers.se/research/group/logic/Types/index.html]]
 *[[Homotopy Type Theory|http://homotopytypetheory.org/]]</pre>
@@ -2813,7 +2866,7 @@ attribute ::= &quot;label&quot; &quot;(&quot; string &quot;)&quot; |
               &quot;bsub_hint_wt&quot; &quot;(&quot; integer &quot;)&quot;
 }}}</pre>
 </div>
-<div title="SystemSettings" modifier="Olivier ROLAND" created="201105142207" modified="201106101816" tags="excludeLists" changecount="6" server.page.revision="201105142207" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.type="file">
+<div title="SystemSettings" modifier="Olivier ROLAND" created="201105142207" modified="201106101816" tags="excludeLists" server.type="file" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.page.revision="201105142207" changecount="6">
 <pre>txtUserName: Olivier%20ROLAND
 txt_GATracker_id: UA-4646079-1
 txt_GATracker_track: 1%2C0%2C1%2C1%2C1%2C1%2C1
@@ -2906,7 +2959,7 @@ Extract from  Debasish Ghosh's book [[DSLs in Action |http://books.google.fr/boo
 
 @@WIP@@</pre>
 </div>
-<div title="TWikiFormatterPlugin" modifier="MartinBudden" created="200607210000" tags="systemConfig excludeLists excludeSearch" server.page.revision="200607210000" server.host="http://www.martinswiki.com" server.type="file">
+<div title="TWikiFormatterPlugin" modifier="MartinBudden" created="200607210000" tags="systemConfig excludeLists excludeSearch" server.type="file" server.host="http://www.martinswiki.com" server.page.revision="200607210000">
 <pre>/***
 |''Name:''|TWikiFormatterPlugin|
 |''Description:''|Allows Tiddlers to use [[TWiki|http://twiki.org/cgi-bin/view/TWiki/TextFormattingRules]] text formatting|
