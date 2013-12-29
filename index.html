@@ -522,9 +522,10 @@ noscript {display:none;} /* Fixes a feature in Firefox 1.5.0.2 where print previ
 </div>
 <!--POST-SHADOWAREA-->
 <div id="storeArea">
-<div title="15-819 Homotopy Type Theory" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201312242211" modified="201312251855" tags="HoTT summary wip" changecount="25">
-<pre>@@wip@@
-Some personal notes about [[Homotopy Type Theory course (with lecture notes and videos)|https://www.cs.cmu.edu/~rwh/courses/hott/]] with @@indexed time@@
+<div title="15-819 Homotopy Type Theory" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201312242211" modified="201312291209" tags="HoTT summary wip" changecount="51">
+<pre>[[Homotopy Type Theory course (with lecture notes and videos)|https://www.cs.cmu.edu/~rwh/courses/hott/]]
+
+@@wip@@ Some personal notes about with @@indexed time@@
 *Lecture 01 - Course Introduction
 **Learning type theory from scratch starting from page one of the HoTT book is probably not a good idea
 **Homotopy Type Theory is self standing subject and not really tied to homotopy theory
@@ -568,12 +569,64 @@ Some personal notes about [[Homotopy Type Theory course (with lecture notes and 
 **Come next : When are two proofs the same ? , richer type theory called dependent type theory, ITT, HoTT
 *Lecture 02 - Judgements
 **Type theory is not yet another axiomatic theory
-**The set of rules (Trivially true, thruth introduction, conjonction, introductory rule, elimination rule, implication, etc) is not arbitrary, internal coherence and computational properties does matter 
+**IPL
+**The set of rules (Trivially true, truth introduction, conjonction, introductory rule, elimination rule, implication, etc) is not arbitrary, internal coherence and computational properties does matter 
 **Implication introduction (called natural deduction) is the innovation of Gentzen @@00:16:50@@
-**What is entailment (ie) logical consequence (ie) hypothetical judgement (judgement made on hypotheses) ? It's a mapping
+**What is entailment (ie) logical consequence (ie) hypothetical judgement (judgement made on hypotheses) ? It's a mapping. Here is the structural properties :
 ***reflexivity
 ***transitivity (ie) composition : this is inlining from a computer science point of view @@00:23:20@@
-***</pre>
+***weakening
+***contraction
+***exchange (ie order does not matter)
+**Order Theoretic Formulation @@00:33:20@@
+**Univalence is a principle of mathematical efficiency @@00:48:00@@
+**Positive Fragment IPL
+**Set of rules : trivially false, disjonction, ...
+**Heyting algebra = lattice with exponentials @@01:01:30@@
+**Every Heyting algebra is distributive
+**Negation
+**Complement
+**Boolean algebra = complemented distributive lattice and therefore has exponentials 
+**Boolean algebra = Heyting algebra with complement @@01:12:00@@
+**If something is true in every Heyting algebra it must be provable
+**Lindenbaum algebra is used to show completeness
+**the all subject of HoTT repose on the fact that in HoTT there is no global principe of decidability
+**Come next : Hilbert mistake
+*Lecture 03 - Transitivity
+**Not every Heyting algebra  is a Boolean algebra
+**every Boolean algebra  is an Heyting algebra
+**A proposition could be interpreted in Heyting algebra : conjunction =&gt; meet, disjunction =&gt; join
+**claim: in IPL not all instances of LEM are provable @@00:13:30@@
+**Double negation is not cancelable, this is a weakening @@00:24:20@@
+**Not every proposition is stable@@00:31:30@@
+**Structural properties are admissible@@00:51:30@@
+**weakening is admissible because the rules are polymorphic (ie) the rules holds for any choice of Γ (so we can inductively weaken the premises and re-apply the rules)
+**exchange, contraction, reflexivity, transitivity are admissible
+**Genzen's insight (ie) great idea : the inversion principle (ie) elim is post inverse to intro (origin of computation) @@01:00:45@@
+**This give rise to a dynamics of proof (ie) run the proof (ie) no difference between math en programming
+**Proof relevant logic @@01:08:50@@
+**Proof terms are mappings in category theory
+**Come next : proof of Genzen's normalization property
+*Lecture 04 - Exponentials
+**Proof terms
+***variable = re-exporession of Reflexivity
+***substitution = re-expression of transitivity
+***weakening
+***contraction (replication of variable)
+***exchange(ie order does not matter)
+**we can revisiting the rules for the various connectives  @@00:10:50@@
+**objective : mechanize Gentzen's inversion principle (elim is post inverse to intro)
+**Computation core come from Gentzen's inversion principle and definitional equality is central to explaining that
+**There is no dynamics at all in first order logic
+**we can compute by calculation with closed terms (think about polynomials) @@00:25:25@@
+**Gentzen’s Unicity Principle : intro is post inverse to elim (ie) intro and elim are mutually inverse
+**Propositon as types (the great correspondence)
+**constructive point of view: never talk about things just being true, talk about the reasons why =&gt; this is the essence of proof relevance mathematics @@00:42:20@@
+**Terminal object 1 : for any object A there exists a unique map A → 1 
+**Exponentials @@01:00:00@@
+**Come next : the same with positive fragment
+**The inversion principle and the unicity principle show that propositions together with proofs taking modulo equivalence we defined pass the behavior of product and exponential in a category @@01:17:55@@
+*Lecture 05 - Equality</pre>
 </div>
 <div title="A bit of history" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201109081600" modified="201310130825" tags="intro" changecount="36">
 <pre>!Notable Events
@@ -915,7 +968,7 @@ but maven test is ok without ceres
 
 This tiddler was automatically created to record the details of this server</pre>
 </div>
-<div title="GATrackerPlugin" modifier="Olivier ROLAND" created="201105142206" modified="201311272207" tags="systemConfig" changecount="1" server.type="file" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.page.revision="201105182137">
+<div title="GATrackerPlugin" modifier="Olivier ROLAND" created="201105142206" modified="201311272207" tags="systemConfig" server.page.revision="201105182137" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.type="file" changecount="1">
 <pre>/***
 |Name|GATrackerPlugin|
 |Description|Google Analytics tracker|
@@ -1321,6 +1374,11 @@ Extract from [[Inductive Theorem Proving Automated Reasoning Petros Papapanagiot
 </div>
 <div title="Interval Temporal Logic" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201110202141" modified="201110202152" tags="Uses" changecount="3">
 <pre>* http://www.tech.dmu.ac.uk/STRL/ITL/</pre>
+</div>
+<div title="Introduction à la logique : Théorie de la démonstration" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201312272255" modified="201312272259" tags="book summary wip" changecount="4">
+<pre>https://www.lama.univ-savoie.fr/~raffalli/dnr/
+*Formules et démonstration de la logique du premier ordre
+</pre>
 </div>
 <div title="Language, proof, and logic : summary" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201201130949" modified="201201151501" tags="book summary done" changecount="41">
 <pre>@@this book provides useful remember section which lazily constitute this summary@@
@@ -2866,7 +2924,7 @@ attribute ::= &quot;label&quot; &quot;(&quot; string &quot;)&quot; |
               &quot;bsub_hint_wt&quot; &quot;(&quot; integer &quot;)&quot;
 }}}</pre>
 </div>
-<div title="SystemSettings" modifier="Olivier ROLAND" created="201105142207" modified="201106101816" tags="excludeLists" server.type="file" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.page.revision="201105142207" changecount="6">
+<div title="SystemSettings" modifier="Olivier ROLAND" created="201105142207" modified="201106101816" tags="excludeLists" changecount="6" server.page.revision="201105142207" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.type="file">
 <pre>txtUserName: Olivier%20ROLAND
 txt_GATracker_id: UA-4646079-1
 txt_GATracker_track: 1%2C0%2C1%2C1%2C1%2C1%2C1
@@ -2959,7 +3017,7 @@ Extract from  Debasish Ghosh's book [[DSLs in Action |http://books.google.fr/boo
 
 @@WIP@@</pre>
 </div>
-<div title="TWikiFormatterPlugin" modifier="MartinBudden" created="200607210000" tags="systemConfig excludeLists excludeSearch" server.type="file" server.host="http://www.martinswiki.com" server.page.revision="200607210000">
+<div title="TWikiFormatterPlugin" modifier="MartinBudden" created="200607210000" tags="systemConfig excludeLists excludeSearch" server.page.revision="200607210000" server.host="http://www.martinswiki.com" server.type="file">
 <pre>/***
 |''Name:''|TWikiFormatterPlugin|
 |''Description:''|Allows Tiddlers to use [[TWiki|http://twiki.org/cgi-bin/view/TWiki/TextFormattingRules]] text formatting|
@@ -4510,8 +4568,9 @@ p ∧ r ∧ ¬q ∨ q ∧ ¬p ∨ ¬p ∧ ¬r
 |Goals, LCF-like tactics and Mizar-like proofs|tactics.ml||
 |Unification for first order terms|unif.ml|Unif.lhs|</pre>
 </div>
-<div title="path-dependent type" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201312151438" modified="201312151439" tags="scala HoTT" changecount="3">
-<pre>Dependent types are very distinct from path dependent types : see [[Dependent types vs. Path Dependent types|https://groups.google.com/forum/#!topic/scala-types/5J71FpGl4JA]]</pre>
+<div title="path-dependent type" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201312151438" modified="201312291229" tags="scala HoTT" changecount="5">
+<pre>Dependent types are very distinct from path dependent types : see [[Dependent types vs. Path Dependent types|https://groups.google.com/forum/#!topic/scala-types/5J71FpGl4JA]]
+@@but@@ in combination with singleton types and implicit values [[they allow some support for dependent typing|http://stackoverflow.com/questions/12935731/any-reason-why-scala-does-not-explicitly-support-dependent-types/12937819#12937819]]</pre>
 </div>
 <div title="sbt vs maven" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201105011650" modified="201211241342" tags="duel tools" changecount="21">
 <pre>From Eclipse point of view 
