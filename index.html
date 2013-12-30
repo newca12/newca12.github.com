@@ -968,7 +968,7 @@ but maven test is ok without ceres
 
 This tiddler was automatically created to record the details of this server</pre>
 </div>
-<div title="GATrackerPlugin" modifier="Olivier ROLAND" created="201105142206" modified="201311272207" tags="systemConfig" server.page.revision="201105182137" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.type="file" changecount="1">
+<div title="GATrackerPlugin" modifier="Olivier ROLAND" created="201105142206" modified="201311272207" tags="systemConfig" changecount="1" server.type="file" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.page.revision="201105182137">
 <pre>/***
 |Name|GATrackerPlugin|
 |Description|Google Analytics tracker|
@@ -1375,10 +1375,37 @@ Extract from [[Inductive Theorem Proving Automated Reasoning Petros Papapanagiot
 <div title="Interval Temporal Logic" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201110202141" modified="201110202152" tags="Uses" changecount="3">
 <pre>* http://www.tech.dmu.ac.uk/STRL/ITL/</pre>
 </div>
-<div title="Introduction à la logique : Théorie de la démonstration" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201312272255" modified="201312272259" tags="book summary wip" changecount="4">
+<div title="Introduction à la logique : Théorie de la démonstration" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201312272255" modified="201312301322" tags="book summary wip" changecount="8">
 <pre>https://www.lama.univ-savoie.fr/~raffalli/dnr/
 *Formules et démonstration de la logique du premier ordre
-</pre>
+**Introduction
+***En logique du premier ordre et, en particulier en théorie de la démonstration, les objets que l'on étudie sont les formule et leurs démonstrations.
+***Les termes et les formules forment la grammaire d'une langue simplifiée à l'extrême
+****termes : objets dont on veut prouver les propriétés
+****formules : propriétés des objets
+****démonstrations : déductions sous hypothèses
+***ne pas mélanger le niveau où vivent les termes, les formules et les démonstrations
+****niveau objet : formule, démonstration
+****niveau méta : propriétés, preuve
+**Les formules
+***il suffit de donner la liste de ces symboles pour préciser le langage
+***Un langage de premier ordre est la donnée d'une famille de symboles
+****symboles de constante
+****symboles de fonction
+****symboles de relation
+***un symbole de constante peut être vu comme un symbole de fonction à 0 argument
+***Un terme clos est un terme qui ne contient pas de variables
+***La preuve par induction sur la hauteur d'un terme sera parfois insuffisante =&gt; preuve par récurrence sur la taille du terme
+***Les formules sont construites à partir de formules dites atomiques en utilisant des connecteurs et des quantificateurs
+***Comme pour les termes, on sera amené, dans la suite, à définir des notions (ou à prouver des résultats) par récurrence sur la taille d'une formule
+***@@Variables libres et variables liées@@
+***Pour les logiciels d'aide à l'écriture de preuves, le renommage des variables pose de difficiles problèmes
+***au lieu d'utiliser des noms pour les variables, une solution consiste à utiliser des entiers appelés indices de de Bruijn
+***L’occurrence d'une variable x est remplacée par le nombre de quantificateurs qu'il faut traverser (dans la branche qui va de cette occurrence à la racine de la formule) avant de trouver le quantificateur qui lie cette variable.
+***Malheureusement, cette notation très commode en informatique, rend les formules illisibles pour un être humain
+***Une formule close est une formule sans variables libres
+***Si les seuls symboles de relation du langage sont des relations d'arité 0, les quantificateurs sont alors inutiles. On obtient alors le calcul propositionnel.
+**Les démonstrations en déduction naturelle</pre>
 </div>
 <div title="Language, proof, and logic : summary" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201201130949" modified="201201151501" tags="book summary done" changecount="41">
 <pre>@@this book provides useful remember section which lazily constitute this summary@@
@@ -2924,7 +2951,7 @@ attribute ::= &quot;label&quot; &quot;(&quot; string &quot;)&quot; |
               &quot;bsub_hint_wt&quot; &quot;(&quot; integer &quot;)&quot;
 }}}</pre>
 </div>
-<div title="SystemSettings" modifier="Olivier ROLAND" created="201105142207" modified="201106101816" tags="excludeLists" changecount="6" server.page.revision="201105142207" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.type="file">
+<div title="SystemSettings" modifier="Olivier ROLAND" created="201105142207" modified="201106101816" tags="excludeLists" server.type="file" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.page.revision="201105142207" changecount="6">
 <pre>txtUserName: Olivier%20ROLAND
 txt_GATracker_id: UA-4646079-1
 txt_GATracker_track: 1%2C0%2C1%2C1%2C1%2C1%2C1
@@ -3017,7 +3044,7 @@ Extract from  Debasish Ghosh's book [[DSLs in Action |http://books.google.fr/boo
 
 @@WIP@@</pre>
 </div>
-<div title="TWikiFormatterPlugin" modifier="MartinBudden" created="200607210000" tags="systemConfig excludeLists excludeSearch" server.page.revision="200607210000" server.host="http://www.martinswiki.com" server.type="file">
+<div title="TWikiFormatterPlugin" modifier="MartinBudden" created="200607210000" tags="systemConfig excludeLists excludeSearch" server.type="file" server.host="http://www.martinswiki.com" server.page.revision="200607210000">
 <pre>/***
 |''Name:''|TWikiFormatterPlugin|
 |''Description:''|Allows Tiddlers to use [[TWiki|http://twiki.org/cgi-bin/view/TWiki/TextFormattingRules]] text formatting|
