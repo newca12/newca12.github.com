@@ -968,7 +968,7 @@ but maven test is ok without ceres
 
 This tiddler was automatically created to record the details of this server</pre>
 </div>
-<div title="GATrackerPlugin" modifier="Olivier ROLAND" created="201105142206" modified="201311272207" tags="systemConfig" server.page.revision="201105182137" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.type="file" changecount="1">
+<div title="GATrackerPlugin" modifier="Olivier ROLAND" created="201105142206" modified="201311272207" tags="systemConfig" changecount="1" server.type="file" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.page.revision="201105182137">
 <pre>/***
 |Name|GATrackerPlugin|
 |Description|Google Analytics tracker|
@@ -1375,7 +1375,7 @@ Extract from [[Inductive Theorem Proving Automated Reasoning Petros Papapanagiot
 <div title="Interval Temporal Logic" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201110202141" modified="201110202152" tags="Uses" changecount="3">
 <pre>* http://www.tech.dmu.ac.uk/STRL/ITL/</pre>
 </div>
-<div title="Introduction à la logique : Théorie de la démonstration" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201312272255" modified="201312311552" tags="book summary wip" changecount="15">
+<div title="Introduction à la logique : Théorie de la démonstration" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201312272255" modified="201401022123" tags="book summary wip" changecount="21">
 <pre>https://www.lama.univ-savoie.fr/~raffalli/dnr/
 *Formules et démonstration de la logique du premier ordre
 **Introduction
@@ -1414,23 +1414,47 @@ Extract from [[Inductive Theorem Proving Automated Reasoning Petros Papapanagiot
 ****F est une formule. C'est la formule que l'on veut démontrer
 ***Le signe ⊢ se lit thèse ou démontre
 ***Les règles
-****Axiome
-****Affaiblissement
-****Introduction de l'implication
-****Elimination de l'implication
-****Introduction de la conjonction
-****Elimination de la conjonction
-****Introduction de la disjonction
-****Elimination de la disjonction
-****Introduction de la négation
-****Elimination de la négation
-****Absurdité classique
-****Introduction du quantificateur universel
-****Elimination du quantificateur universel
-****Introduction du quantificateur existenciel
-****@@Elimination du quantificateur existenciel@@
-****Introduction de l'égalité
-****Elimination de l'égalité</pre>
+****Axiome : si la conclusion du séquent est l'une des hypothèses, alors le séquent est prouvable 
+****Affaiblissement : en ajoutant des hypothèses supplémentaires
+****Introduction de l'implication : pour montrer A -&gt; B, on suppose A et on montre B
+****Élimination de l'implication : (modus ponens) pour démontrer B, si on connait un théorème de la forme A -&gt; B, il suffit de démontrer A 
+****Introduction de la conjonction : pour montrer A /\ B, il suffit de montrer A et de montrer B
+****Élimination de la conjonction : de A /\ B on peut déduire A et B
+****Introduction de la disjonction : pour démonter A \/ B, il suffit de démontrer A ou de démontrer B. La conclusion est plus faible que la prémisse.
+****Élimination de la disjonction : raisonnement par cas
+****Introduction de la négation : pour montrer !A, on suppose A et on démontre par l'absurde
+****Élimination de la négation : si on a montré !A et A alors on a montré l'absurde
+****Absurdité classique : cette règle peut être appliqué à tout moment. Pour trouver A, je suppose !A et je vais chercher une contradiction
+****@@Introduction du quantificateur universel@@ : pour démontrer Qx A, il suffit de montrer A en ne faisant aucune hypothèse sur x
+****Élimination du quantificateur universel : si on a prouvé A pour tout x, alors on peut utiliser A avec n'importe quel objet t
+****Introduction du quantificateur existentiel : pour démontrer Ex A, il suffit de trouver un objet t pour lequel on sait montrer A[x := t]
+****@@Élimination du quantificateur existentiel@@ quand on a une hypothèse de la forme Ex A, on peut utiliser cette hypothèse en prenant un x qui satisfait A
+****Introduction de l'égalité : on peut toujours montrer t = t. Cette règle signifie que l'égalité est réflexive.
+****Élimination de l'égalité : cette règle exprime que les objets égaux ont les même propriétés.
+***Quelques heuristiques
+****si on peut appliquer une règle d'introduction, le faire
+****Sinon, appliquer une règle d'élimination avec une hypothèse (ou un théorème)
+***/\i est réversible mais les règles \/i ne le sont pas
+***On gardera donc en mémoire, quand on utilise une règle réversible, que l'on est peut-être parti dans une mauvaise direction
+***Déduction naturelle sans séquents : on note une fois pour toute l'ensemble des hypothèses et on applique les règles uniquement sur la conclusion
+***La notation arborescente est inutilisable dès que la démonstration fait plus de quelques lignes. On lui préférera une notation linéaire
+***Règles dérivées
+****absurdité intuitionniste
+****loi de Peirce
+****tiers exclus
+****contraposition
+****lois de Morgan
+***Simplification de la notation linéaire
+****Affaiblissements implicites
+****Succession de règles
+****Omission de sous-démonstrations
+**Exemples
+**Démonstrations formelles et informelles
+**Premiers résultats théoriques
+**Systèmes alternatifs de démonstration
+***Le calcul des séquents (Gentzen)
+***Les systèmes de Hilbert
+***Les systèmes utilisés en démonstration automatique (présentations différentes du calcul des séquents) </pre>
 </div>
 <div title="Language, proof, and logic : summary" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201201130949" modified="201201151501" tags="book summary done" changecount="41">
 <pre>@@this book provides useful remember section which lazily constitute this summary@@
@@ -2976,7 +3000,7 @@ attribute ::= &quot;label&quot; &quot;(&quot; string &quot;)&quot; |
               &quot;bsub_hint_wt&quot; &quot;(&quot; integer &quot;)&quot;
 }}}</pre>
 </div>
-<div title="SystemSettings" modifier="Olivier ROLAND" created="201105142207" modified="201106101816" tags="excludeLists" changecount="6" server.page.revision="201105142207" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.type="file">
+<div title="SystemSettings" modifier="Olivier ROLAND" created="201105142207" modified="201106101816" tags="excludeLists" server.type="file" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.page.revision="201105142207" changecount="6">
 <pre>txtUserName: Olivier%20ROLAND
 txt_GATracker_id: UA-4646079-1
 txt_GATracker_track: 1%2C0%2C1%2C1%2C1%2C1%2C1
@@ -3069,7 +3093,7 @@ Extract from  Debasish Ghosh's book [[DSLs in Action |http://books.google.fr/boo
 
 @@WIP@@</pre>
 </div>
-<div title="TWikiFormatterPlugin" modifier="MartinBudden" created="200607210000" tags="systemConfig excludeLists excludeSearch" server.page.revision="200607210000" server.host="http://www.martinswiki.com" server.type="file">
+<div title="TWikiFormatterPlugin" modifier="MartinBudden" created="200607210000" tags="systemConfig excludeLists excludeSearch" server.type="file" server.host="http://www.martinswiki.com" server.page.revision="200607210000">
 <pre>/***
 |''Name:''|TWikiFormatterPlugin|
 |''Description:''|Allows Tiddlers to use [[TWiki|http://twiki.org/cgi-bin/view/TWiki/TextFormattingRules]] text formatting|
