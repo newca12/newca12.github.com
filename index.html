@@ -968,7 +968,7 @@ but maven test is ok without ceres
 
 This tiddler was automatically created to record the details of this server</pre>
 </div>
-<div title="GATrackerPlugin" modifier="Olivier ROLAND" created="201105142206" modified="201311272207" tags="systemConfig" server.page.revision="201105182137" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.type="file" changecount="1">
+<div title="GATrackerPlugin" modifier="Olivier ROLAND" created="201105142206" modified="201311272207" tags="systemConfig" changecount="1" server.type="file" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.page.revision="201105182137">
 <pre>/***
 |Name|GATrackerPlugin|
 |Description|Google Analytics tracker|
@@ -1375,7 +1375,7 @@ Extract from [[Inductive Theorem Proving Automated Reasoning Petros Papapanagiot
 <div title="Interval Temporal Logic" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201110202141" modified="201110202152" tags="Uses" changecount="3">
 <pre>* http://www.tech.dmu.ac.uk/STRL/ITL/</pre>
 </div>
-<div title="Introduction à la logique : Théorie de la démonstration" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201312272255" modified="201401032226" tags="book summary wip" changecount="23">
+<div title="Introduction à la logique : Théorie de la démonstration" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201312272255" modified="201401041435" tags="book summary wip" changecount="35">
 <pre>https://www.lama.univ-savoie.fr/~raffalli/dnr/
 *Formules et démonstration de la logique du premier ordre
 **Introduction
@@ -1454,9 +1454,117 @@ Extract from [[Inductive Theorem Proving Automated Reasoning Petros Papapanagiot
 **Systèmes alternatifs de démonstration
 ***Le calcul des séquents (Gentzen)
 ***Les systèmes de Hilbert
-***Les systèmes utilisés en démonstration automatique (présentations différentes du calcul des séquents) </pre>
+***Les systèmes utilisés en démonstration automatique (présentations différentes du calcul des séquents)
+*Complétude de la logique de premier ordre
+**Introduction
+***Le théorème de complétude dit, intuitivement, qu'une formule est vrai si et seulement si elle est démontrable
+***implications :
+****facile : si une formule est démontrable alors elle est vraie
+****difficile : si une formule est vraie, alors il y a une démonstration (avec les règles du chapitre précédent)
+**Interprétation
+***@@On dit qu'une formule F est un théorème (logique) ssi pour toute interprétation M et tout environnement e, M satisfait F dans l'environnement e@@
+***On peut donc sire que les théorèmes sont les formules toujours vraies
+**Le cas du calcul propositionnel
+***Le théorème de complétude du calcul propositionnel (F est une tautologie ssi ¬F) est un cas particulier du théorème de complétude de la logique de premier ordre
+**Un peu de théorie des modèles
+***La théorie des modèles est l'étude générale des structures mathématiques
+***@@Définitions : morphisme, isomorphisme, isomorphes@@
+***On dit quelques fois qu'un morphisme est une fonction qui &quot;respecte&quot; les structures ou qui &quot;transporte&quot; l'une des structures dans l'aure.
+***Deux structures isomorphes seront souvent considérés identiques : on peut, en effet, considérer que ceux sont les mêmes à une bijection près.
+**@@Théorème de complétude@@
+***Une théorie est un ensemble (fini ou infini) de formules closes
+***Les éléments d'une théorie sont souvent appelés les axiomes de cette théorie
+***Théorème de complétude : soient T une théorie et F une formule close. T ⊢ F ssi T ⊨ F
+**@@Théorème de compacité@@
+***il se déduit trivialement du théorème de complétude
+***Théorème de compacité : T est satisfaisable ssi tout sous-ensemble fini de T est satisfaisable
+***Formes canoniques
+***toute formule peut-être mise, à équivalence près, sous certaines formes canoniques
+****conjonctive
+****disjonctive
+****prénexe (sans quantificateur)
+***Toute formule est équivalente à une formule sous forme prénexe
+***Skolémisation
+*Ensemble de théories
+**Introduction
+***quelques exemples de théories classiques
+****théorie des groupes
+****théorie des anneaux
+****les axiome de Peano (PA) : servent de base à l'arithmétique
+****la théorie des ensembles de Zermelo Fraenkle (ZF) : permet de formaliser la totalité des mathématiques
+**Quelques théories algébriques
+***Théorie de l'égalité
+***Théorie des anneaux et des corps
+***Théorie des espaces vectoriels
+**Exemple d'analyse
+***On a vu dans les sections précédentes des démonstrations formelles de résultats d'algèbre
+***dans cette section, démonstration de résultats connus d'analyse pour convaincre le lecteur de la puissance du système de démonstration présenté au chapitre 1
+**L'arithmétique de Peano
+**La théorie des ensembles de Zermelo Fraenkle
+***avec les axiomes de ZF on pourrait construire tous les outils habituellement utilisé en mathématique
+***Dans ZF tout est construit à partir de ∈ et = (ie langage machine)
+***Il y a quelques situations ou des axiomes supplémentaires sont nécessaire pour prouver un théorème
+****Axiome de fondation
+****Axiome de choix
+****L'hypothèse du continu
+**Les phénomènes d'incomplétude
+***Le paradoxe de Russell
+***Le paradoxe de Berry
+***Un problème est décidable s'il existe un algorithme qui le résout
+***Ni PA ni ZF ne sont décidables
+***Théorème d'incomplétude de Gödel
+****Aucune théorie non contradictoire et récursive contenant PA n'est complète
+****On peut écrire, sur le langage de l'arithmétique, une formule Cons qui exprime intuitivement que PA est non contradictoire et qui est telle que PA ⊭ Cons
+***il n'y a aucun espoir de montrer que ZF est non contradictoire
+***Le théorème de complétude dit que les règles de démonstration données au chapitre 1 suffisent pour démontrer tout ce qui est vrai de manière général
+***Le théorème d'incomplétude dit qu'aucun ensemble récursif d'axiomes ne suffira à décider toutes les formules écrites sur le vocabulaire ZF
+***exemple concret de l'incomplétude de PA : suite de Goodstein
+***L'intérêt du théorème de Gödel est qu'il s'applique à toute théorie raisonnable
+**Quelques théories et structures décidables
+***Elimination des quantificateurs
+***La théorie des ordres denses
+***La théorie de l'égalité
+***Le théorème de Tarski
+***L'arithmétique de Presburger
+*Logique intuitionnistique et modèle de Kripke
+**Introduction 
+***En mathématique, certaines preuves sont constructives, d'autres ne le sont pas
+***raisonnement par l'absurde
+****supprimé dans la logique minimale
+****remplacé par un autre, plus faible, dans la logique intuitionnistique
+**Logique minimale, intuitionnistique et classique
+***La logique intuitionnistique est obtenu en ajoutant à la logique minimale la règle d'absurdité intuitionnistique ⊥~~i~~
+***Toute formule démontrable en logique minimale est démontrable en logique intuitionniste. De même toute formule démontable en logique intuitionniste est démontrable en logique classique
+***Les deux réciproques sont fausses @@LM ≠ LI et LI ≠ LC@@
+**Traduction entre ces logiques
+***Traduction de Gödel
+***Traduction de Kuroda
+***@@Etant donné une formule F,  ⊦~~i~~ F (resp ⊦~~m~~ F) n'est pas décidable@@
+**Sémantique du calcul propositionnel
+***@@Modèle de Kripke propositionnel@@
+***une formule est démontrable en logique intuitionniste ssi elle est vraie (ie si elle est réalisée dans tous les modèles de Kripke)
+***@@Thorème de complétude : Soient Γ, A des formules. On a Γ ⊦~~i~~ A ssi Γ ⊩ A@@
+***Autres théorèmes de complétude
+****Les modèles ordonnés
+****Les modèles avec plus petit élément
+****Les modèles arborescents
+****Les modèles finis
+***@@La logique propositionnelle est décidable@@
+**Sémantique de la logique de premier ordre
+***@@Théorème de la constructivité de la logique intuitionnistique@@
+****⊦~~i~~ A~~1~~ ∨ A~~2~~ ssi ⊦~~i~~ A~~1~~ ou ⊦~~i~~ A~~2~~
+****⊦~~i~~ ∃x A ssi il existe un terme t tel que ⊦~~i~~ A[x := t]
+**Sémantique de la logique minimale
+**L'arithmétique de Heyting HA
+***version intuitionnistique de l'arithmétique de Peano
+***Constructivité de HA
+****@@Théorème@@
+*****HA ⊦ A ∨ B ssi HA ⊦ A ou HA ⊦ B
+*****HA ⊦ ∃x A ssi il existe n ∈ IN tel que HA A[x := n]  
+*Calcul des séquents
+**Introduction </pre>
 </div>
-<div title="Language, proof, and logic : summary" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201201130949" modified="201401032224" tags="book summary done" changecount="42">
+<div title="Language, proof, and logic : summary" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201201130949" modified="201401041456" tags="book summary done" changecount="43">
 <pre>@@this book provides useful remember section which lazily constitute this summary@@
 
 * Chapter 1 · Atomic Sentences
@@ -1477,14 +1585,14 @@ Extract from [[Inductive Theorem Proving Automated Reasoning Petros Papapanagiot
 **An argument is a series of statements in which one, called the conclusion, is meant to be a consequence of the others, called the premises.
 **An argument is valid if the conclusion must be true in any circumstance in which the premises are true. We say that the conclusion of a logically valid argument is a logical consequence of its premises.
 **An argument is sound if it is valid and the premises are all true.
-**A proof of a statement S from premises P1,...,Pn is a step-by-step demonstration which shows that S must be true in any circumstances in which the premises P1,..., Pn are all true.
+**A proof of a statement S from premises P~~1~~,...,P~~n~~ is a step-by-step demonstration which shows that S must be true in any circumstances in which the premises P~~1~~,..., P~~n~~ are all true.
 **Informal and formal proofs differ in style, not in rigor.
 **There are four important principles that hold of the identity relation: (The latter two principles follow from the first two.) 
 ***= Elim: If b = c, then whatever holds of b holds of c. This is also known as the indiscernibility of identicals.
 ***= Intro: Sentences of the form b = b are always true (in fol). This is also known as the reflexivity of identity.
 ***Symmetry of Identity: If b = c, then c = b.
 ***Transitivity of Identity: If a = b and b = c, then a = c. 
-**To demonstrate the invalidity of an argument with premises P1,...,Pn and conclusion Q, find a counterexample: a possible circumstance that makes P1,..., Pn all true but Q false. Such a counterexample shows that Q is not a consequence of P1,...,Pn.
+**To demonstrate the invalidity of an argument with premises P1,...,Pn and conclusion Q, find a counterexample: a possible circumstance that makes P~~1~~,..., P~~n~~ all true but Q false. Such a counterexample shows that Q is not a consequence of P~~1~~,...,P~~n~~.
 * Chapter 3 · The Boolean Connectives
 **If P is a sentence of fol, then so is ¬P.
 **The sentence ¬P is true if and only if P is not true.
@@ -1512,9 +1620,9 @@ Extract from [[Inductive Theorem Proving Automated Reasoning Petros Papapanagiot
 ***S and S′ are tautologically equivalent if and only if every row of the joint truth table assigns the same values to S and S′.
 ***If S and S′ are tautologically equivalent, then they are logically equivalent.
 ***Some logically equivalent sentences are not tautologically equivalent.
-**Let P1,...,Pn and Q be sentences of fol built up from atomic sentences by means of truth functional connectives alone. Construct a joint truth table for all of these sentences.
-***Q is a tautological consequence of P1,...,Pn if and only if every row that assigns T to each of P1,...,Pn also assigns T to Q.
-***If Q is a tautological consequence of P1,...,Pn, then Q is also a logical consequence of P1,...,Pn.
+**Let P~~1~~,...,P~~n~~ and Q be sentences of fol built up from atomic sentences by means of truth functional connectives alone. Construct a joint truth table for all of these sentences.
+***Q is a tautological consequence of P~~1~~,...,P~~n~~ if and only if every row that assigns T to each of P~~1~~,...,P~~n~~ also assigns T to Q.
+***If Q is a tautological consequence of P~~1~~,...,P~~n~~, then Q is also a logical consequence of P~~1~~,...,P~~n~~.
 ***Some logical consequences are not tautological consequences.
 **Substitution of equivalents: If P and Q are logically equivalent: P⇔Q then the results of substituting one for the other in the context of a larger sentence are also logically equivalent: S(P) ⇔ S(Q)
 **A sentence is in negation normal form (NNF) if all occurrences of ¬ apply directly to atomic sentences.
@@ -1529,16 +1637,16 @@ Extract from [[Inductive Theorem Proving Automated Reasoning Petros Papapanagiot
 **Distribution of ∨ over ∧ allows you to transform any sentence in negation normal form into conjunctive normal form.
 **Some sentences are in both CNF and DNF.
 * Chapter 5 · Methods of Proof for Boolean Logic
-**In giving an informal proof from some premises, if Q is already known to be a logical consequence of sentences P1,...,Pn and each of P1,...,Pn has been proven from the premises, then you may assert Q in your proof.
+**In giving an informal proof from some premises, if Q is already known to be a logical consequence of sentences P~~1~~,...,P~~n~~ and each of P~~1~~,...,P~~n~~ has been proven from the premises, then you may assert Q in your proof.
 **Each step in an informal proof should be significant but easily understood.
 **Whether a step is significant or easily understood depends on the audience to whom it is addressed.
 **The following are valid patterns of inference that generally go unmentioned in informal proofs:
 ***From P ∧ Q, infer P.
 ***From P and Q, infer P∧Q.
 ***From P, infer P∨Q.
-**Proof by cases: To prove S from P1 ∨ ... ∨ Pn using this method, prove S from each of P1,...,Pn.
+**Proof by cases: To prove S from P~~1~~ ∨ ... ∨ P~~n~~ using this method, prove S from each of P~~1~~,...,P~~n~~.
 **Proof by contradiction: To prove ¬S using this method, assume S and prove a contradiction ⊥.
-**A proof of a contradiction	⊥ from premises P1,...,Pn	(without additional assumptions) shows that the premises are inconsistent. An argument with inconsistent premises is always valid, but more importantly, always unsound.
+**A proof of a contradiction	⊥ from premises P~~1~~,...,P~~n~~	(without additional assumptions) shows that the premises are inconsistent. An argument with inconsistent premises is always valid, but more importantly, always unsound.
 * Chapter 6 · Formal Proofs and Boolean Logic
 **In justifying a step of a subproof, you may cite any earlier step contained in the main proof, or in any subproof whose assumption is still in force. You may never cite individual steps inside a subproof that has already ended.
 **In assessing the validity of an argument, use the following method:
@@ -1551,11 +1659,11 @@ Extract from [[Inductive Theorem Proving Automated Reasoning Petros Papapanagiot
 ***In working backwards, though, always check that your intermediate goals are consequences of the available information.
 **A proof without any premises shows that its conclusion is a logical truth.
 * Chapter 7 · Conditionals
-**If P and Q are sentences of fol, then so is P→Q.
+**If P and Q are sentences of fol, then so is P → Q.
 **The sentence P → Q is false in only one case: if the antecedent P is true and the consequent Q is false. Otherwise, it is true.
 **The following English constructions are all translated P → Q: If P then Q; Q if P; P only if Q; and Provided P, Q.
 **Unless P, Q and Q unless P are translated ¬P → Q.
-**Q is a logical consequence of P1,...,Pn if and only if the sentence (P1 ∧ ... ∧ Pn) → Q is a logical truth.
+**Q is a logical consequence of P~~1~~,...,P~~n~~ if and only if the sentence (P~~1~~ ∧ ... ∧ P~~n~~) → Q is a logical truth.
 **If P and Q are sentences of fol, then sois P ↔ Q.
 **The sentence P ↔ Q is true if and only if P and Q have the same truth value.
 **If the assertion of a sentence carries with it a suggestion that could be cancelled (without contradiction) by further elaboration by the speaker, then the suggestion is a conversational implicature, not part of the content of the original claim.
@@ -1573,8 +1681,8 @@ Extract from [[Inductive Theorem Proving Automated Reasoning Petros Papapanagiot
 **Variables can occur in atomic wffs in any position normally occupied by a name.
 **Complex wffs are built from atomic wffs by means of truth-functional connectives and quantifiers in accord with the following rules :
 ***If P is a wff, so is ¬P.
-***If P1,...,Pn are wffs, so is (P1 ∧ ... ∧ Pn).
-***If P1,...,Pn are wffs, so is (P1 ∨ ... ∨ Pn).
+***If P~~1~~,...,P~~n~~ are wffs, so is (P~~1~~ ∧ ... ∧ P~~n~~).
+***If P~~1~~,...,P~~n~~ are wffs, so is (P~~1~~ ∨ ... ∨ P~~n~~).
 ***If P and Q are wffs, so is (P → Q).
 **When you append either quantifier ∀x or ∃x to a wff P, we say that the quantifier binds all the free occurrences of x in P.
 **A sentence is a wff in which no variables occur free (unbound).
@@ -1597,7 +1705,7 @@ Extract from [[Inductive Theorem Proving Automated Reasoning Petros Papapanagiot
 **Every tautology is a logical truth, but among quantified sentences there are many logical truths that are not tautologies.
 **Similarly, there are many logically valid arguments of fol that are not tautologically valid.
 **A sentence of fol is a first-order validity if it is a logical truth when you ignore the meanings of the names, function symbols, and predicates other than the identity symbol.
-**A sentence S is a first-order consequence of premises P1,...,Pn if it a logical consequence of these premises when you ignore the meanings of the names, function symbols, and predicates other than identity.
+**A sentence S is a first-order consequence of premises P~~1~~,...,P~~n~~ if it a logical consequence of these premises when you ignore the meanings of the names, function symbols, and predicates other than identity.
 **The Replacement Method is useful for determining whether a sentence is a first-order validity and whether the conclusion of an argument is a first-order consequence of the premises.
 **All tautologies are first-order validities; all first-order validities are logical truths. Similarly for consequence.
 **(DeMorgan laws for quantifiers) For any wff P(x):
@@ -1683,7 +1791,7 @@ Extract from [[Inductive Theorem Proving Automated Reasoning Petros Papapanagiot
 **The satisfaction algorithm for Horn sentences gives an efficient algorithm to tell whether a Horn sentence is tt-satisfiable.
 **Every set of propositional sentences can be expressed as a set of clauses.
 **The resolution method is an important method for determining whether a set of clauses is tt-satisfiable. The key notion is that of a resolvent for a set of clauses.
-**A resolvent of clauses C1 and C2 is a clause R provided there is an atomic sentence in one of the clauses whose negation is in the other clause, and if R is the set of all the remaining literals in either clause.
+**A resolvent of clauses C~~1~~ and C~~2~~ is a clause R provided there is an atomic sentence in one of the clauses whose negation is in the other clause, and if R is the set of all the remaining literals in either clause.
 * Chapter 18 · Advanced Topics in FOL
 **First-order structures are mathematical models of the domains about which we make claims using fol.
 **Variable assignments are functions mapping variables into the domain of some first-order structure.
@@ -3000,7 +3108,7 @@ attribute ::= &quot;label&quot; &quot;(&quot; string &quot;)&quot; |
               &quot;bsub_hint_wt&quot; &quot;(&quot; integer &quot;)&quot;
 }}}</pre>
 </div>
-<div title="SystemSettings" modifier="Olivier ROLAND" created="201105142207" modified="201106101816" tags="excludeLists" changecount="6" server.page.revision="201105142207" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.type="file">
+<div title="SystemSettings" modifier="Olivier ROLAND" created="201105142207" modified="201106101816" tags="excludeLists" server.type="file" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.page.revision="201105142207" changecount="6">
 <pre>txtUserName: Olivier%20ROLAND
 txt_GATracker_id: UA-4646079-1
 txt_GATracker_track: 1%2C0%2C1%2C1%2C1%2C1%2C1
@@ -3093,7 +3201,7 @@ Extract from  Debasish Ghosh's book [[DSLs in Action |http://books.google.fr/boo
 
 @@WIP@@</pre>
 </div>
-<div title="TWikiFormatterPlugin" modifier="MartinBudden" created="200607210000" tags="systemConfig excludeLists excludeSearch" server.page.revision="200607210000" server.host="http://www.martinswiki.com" server.type="file">
+<div title="TWikiFormatterPlugin" modifier="MartinBudden" created="200607210000" tags="systemConfig excludeLists excludeSearch" server.type="file" server.host="http://www.martinswiki.com" server.page.revision="200607210000">
 <pre>/***
 |''Name:''|TWikiFormatterPlugin|
 |''Description:''|Allows Tiddlers to use [[TWiki|http://twiki.org/cgi-bin/view/TWiki/TextFormattingRules]] text formatting|
