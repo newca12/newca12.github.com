@@ -968,7 +968,7 @@ but maven test is ok without ceres
 
 This tiddler was automatically created to record the details of this server</pre>
 </div>
-<div title="GATrackerPlugin" modifier="Olivier ROLAND" created="201105142206" modified="201311272207" tags="systemConfig" changecount="1" server.type="file" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.page.revision="201105182137">
+<div title="GATrackerPlugin" modifier="Olivier ROLAND" created="201105142206" modified="201311272207" tags="systemConfig" server.page.revision="201105182137" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.type="file" changecount="1">
 <pre>/***
 |Name|GATrackerPlugin|
 |Description|Google Analytics tracker|
@@ -1375,7 +1375,7 @@ Extract from [[Inductive Theorem Proving Automated Reasoning Petros Papapanagiot
 <div title="Interval Temporal Logic" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201110202141" modified="201110202152" tags="Uses" changecount="3">
 <pre>* http://www.tech.dmu.ac.uk/STRL/ITL/</pre>
 </div>
-<div title="Introduction à la logique : Théorie de la démonstration" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201312272255" modified="201401041435" tags="book summary wip" changecount="35">
+<div title="Introduction à la logique : Théorie de la démonstration" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201312272255" modified="201401050948" tags="book summary done" changecount="41">
 <pre>https://www.lama.univ-savoie.fr/~raffalli/dnr/
 *Formules et démonstration de la logique du premier ordre
 **Introduction
@@ -1562,7 +1562,92 @@ Extract from [[Inductive Theorem Proving Automated Reasoning Petros Papapanagiot
 *****HA ⊦ A ∨ B ssi HA ⊦ A ou HA ⊦ B
 *****HA ⊦ ∃x A ssi il existe n ∈ IN tel que HA A[x := n]  
 *Calcul des séquents
-**Introduction </pre>
+**Introduction
+***Le calcul des séquents est une autre présentation formelle de la notion de démonstration
+***La différence principale avec la déduction naturelle réside dans le remplacement des règles d'élimination par des règles d'introduction à gauche
+***Ce système
+****permet de mieux dégager certaines propriétés mathématiques
+****est plus commode que la déduction naturelle pour la recherche automatique de preuve
+****est indispensable pour comprendre ce qu'est la logique linéaire
+**Les systèmes LK et LJ
+***Le système LK est la version calcul des séquents de la déduction naturelle classique
+***Un séquent est une expression de la forme Γ ⊦ Δ où Γ et Δ sont des multi-ensembles finis de formules
+***@@Un séquent est prouvable dans LK (on écrit Γ ⊦~~LK~~ Δ si on peut l'obtenir en appliquant les règles suivantes :@@
+****Axiomes
+****Règles structurelles
+****Règles des connecteurs logiques
+****Règles des quantificateurs
+****Règle de coupure
+***Le calcul des séquents admet plusieurs présentations équivalentes qui sont plus ou moins commodes en fonction de l'objectif qu'on se donne : recherche automatisé de preuve ou simplicité de la théorie
+***Le système LJ correspond à la déduction naturelle intuitionniste
+***@@Un séquent est prouvable dans LJ (on écrit Γ ⊦~~LJ~~ Δ si on peut l'obtenir en appliquant les règles suivantes :@@
+****Axiomes
+****Règles structurelles
+****Règles des connecteurs logiques
+****Règles des quantificateurs
+****Règle de coupure
+**Déduction naturelle et calcul des séquents
+***la déduction naturelle classique (resp. intuitionniste) démontre exactement les mêmes formules  que le système LK (resp. LJ)
+**Elimination des coupures
+***on peut transformer toute dérivation en une autre (ayant la même conclusion) qui n'utilise pas la règle de coupure
+***@@Théorème d'élimination des coupures (le Haupsatz de Gentzen) : soient Γ,t Δ des formules. Si le séquent Γ ⊦ Δ est dérivable dans LK (resp. LJ), il en existe une dérivation normale dans LK (resp. LJ)@@
+***L'élimination des coupures peut être vue comme un processus de calcul
+***Elimination des coupures / Preuves = Déroulement d'un programme /Programme
+***En déduction naturelle, il n'y a pas de règle de coupure mais la notion de coupure existe néanmoins
+**Conséquence de l'élimination des coupures
+***@@Consistance des systèmes LK et LJ@@
+***Constructivité de la logique intuitionniste
+****@@Théorème@@
+*****⊦~~LJ~~ A~~1~~ ∨ A~~2~~, alors ⊦~~LJ~~ A~~1~~ ou ⊦~~LJ~~ A~~2~~
+*****⊦~~LJ~~ ∃x A alors il existe un terme t tel que ⊦~~LJ~~ A[x := t]
+****A partir d'une dérivation quelconque, on peut donc construire une dérivation sans coupure, et l'avant dernier séquent de cette dérivation donne donc le résultat recherché
+***Propriété de la sous-formule
+****@@Théorème@@
+*****Soient Γ, Δ des formules. Si Γ ⊦~~LK~~ Δ (resp. Γ ⊦~~LJ~~ Δ) alors il existe une dérivation de ce séquent dans LK( resp. dans LJ) dont toutes les formules sont de la forme A[x~~1~~ := t~~1~~, ..., x~~n~~ := t~~n~~], où A est une sous-formule d'une des formules de Γ, Δ et les t~~i~~sont des termes (qui ne sont pas nécessairement des sous-termes des termes apparaissant dans Γ, Δ)
+*Logiques d'ordre supérieur
+**Introduction
+***Des objets tels que les sous-ensembles (sous groupes, idéaux, ...) ou les fonctions ne sont pas des objets du premier ordre
+**Le système
+***Les sortes représentent les divers niveaux des objets. Le symbole o  désigne la sorte des formules
+***La sorte s → s' désigne l'ensemble des fonctions associant un objet de la sorte s un objet de la sorte s'
+***Par exemple si w est la sorte des entiers naturels, la sorte w → w désigne l'ensemble des fonctions des entiers vers les entiers.
+***La sorte (w → w) → w désigne l'ensemble des fonctionnelles qui prennent en argument une fonction (des entiers vers les entiers) et donne comme résultat un entier. 
+***Il ne faudra pas confondre la flèche utilisée pour les sortes et celle utilisée pour les formules
+***En logique de premier ordre, on a définit d'abord les termes puis les formules. En logique d'ordre supérieur, les expressions vont remplacer ces deux notions.
+***La logique de premier ordre est un cas particulier de la logique d'ordre supérieur
+***En logique d'ordre supérieur, la notion de démonstration naturelle, est exactement la même qu'en logique du premier ordre
+**Exemples de logiques et de théories
+***@@Les logiques multisortes de premier ordre@@
+***Les logiques du second ordre
+***@@L'arithmétique du second ordre@@
+****version au second ordre de la logique de Peano. Beaucoup plus puissante que PA
+***Les nombres réels
+****on peut définir les nombres réelles dans PA~~2~~~
+***La théorie des types simples
+****comble les lacunes de PA~~2~~en ne limitant pas les possibilités de quantification
+****On peut en particulier, y faire la construction habituel des réels et, en fait, la quasi-totalité des mathémtiques
+**Extensionnalité et axiome du choix
+***Formalisation de l'axiome du choix dans une logique d'ordre supérieur
+**Sémantique
+***Généralisation de théorème de complétude de la logique de premier ordre
+*Démonstration automatique
+**Introduction
+***Comme le problème de la recherche de preuve est indécidable, on ne peut espérer, au mieux, qu'obtenir un semi-algorithme : si la formule est prouvable l'algorithme en trouvera une démonstration. Si elle ne l'est pas, l'algorithme pourra ne pas se terminer.
+***Seule la logique de premier ordre (sans égalité) sera abordée ici. On n'abordera donc pas la recherche, pourtant également utile, pour la génération de programme corrects, de preuves en logique intuitionniste.
+**L'unification
+***@@L'algortithme élémentaire d'unification@@
+****algorithme très peu performant (exponentiel)
+***algorithme plus performant (permet de ne faire l'occur_check qu'à la fin)
+**La méthode des tableaux
+**La résolution
+***La méthode des tableaux cherche une démonstration d'un séquent.
+***La résolution procède différemment : elle cherche à monter un ensemble de clauses est contradictoire
+***Le problème majeur de la méthode de résolution est le choix des clauses sur lesquelles on fera une résolution ou une contraction. L'ordre dans lequel on applique les règles est, en effet, très important
+****Ce sujet a été longuement étudié. L'idée générale est qu'il faut essayer de faire apparaître les clauses les plus fortes au plus tôt.
+****Elimination des tautologies
+****Filtrage
+****Simplification des clauses
+****Restrictions de la résolution  </pre>
 </div>
 <div title="Language, proof, and logic : summary" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201201130949" modified="201401041456" tags="book summary done" changecount="43">
 <pre>@@this book provides useful remember section which lazily constitute this summary@@
@@ -3108,7 +3193,7 @@ attribute ::= &quot;label&quot; &quot;(&quot; string &quot;)&quot; |
               &quot;bsub_hint_wt&quot; &quot;(&quot; integer &quot;)&quot;
 }}}</pre>
 </div>
-<div title="SystemSettings" modifier="Olivier ROLAND" created="201105142207" modified="201106101816" tags="excludeLists" server.type="file" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.page.revision="201105142207" changecount="6">
+<div title="SystemSettings" modifier="Olivier ROLAND" created="201105142207" modified="201106101816" tags="excludeLists" changecount="6" server.page.revision="201105142207" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.type="file">
 <pre>txtUserName: Olivier%20ROLAND
 txt_GATracker_id: UA-4646079-1
 txt_GATracker_track: 1%2C0%2C1%2C1%2C1%2C1%2C1
@@ -3201,7 +3286,7 @@ Extract from  Debasish Ghosh's book [[DSLs in Action |http://books.google.fr/boo
 
 @@WIP@@</pre>
 </div>
-<div title="TWikiFormatterPlugin" modifier="MartinBudden" created="200607210000" tags="systemConfig excludeLists excludeSearch" server.type="file" server.host="http://www.martinswiki.com" server.page.revision="200607210000">
+<div title="TWikiFormatterPlugin" modifier="MartinBudden" created="200607210000" tags="systemConfig excludeLists excludeSearch" server.page.revision="200607210000" server.host="http://www.martinswiki.com" server.type="file">
 <pre>/***
 |''Name:''|TWikiFormatterPlugin|
 |''Description:''|Allows Tiddlers to use [[TWiki|http://twiki.org/cgi-bin/view/TWiki/TextFormattingRules]] text formatting|
