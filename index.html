@@ -522,7 +522,7 @@ noscript {display:none;} /* Fixes a feature in Firefox 1.5.0.2 where print previ
 </div>
 <!--POST-SHADOWAREA-->
 <div id="storeArea">
-<div title="15-819 Homotopy Type Theory" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201312242211" modified="201312311557" tags="HoTT summary wip" changecount="52">
+<div title="15-819 Homotopy Type Theory" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201312242211" modified="201401062200" tags="HoTT summary wip" changecount="62">
 <pre>[[Homotopy Type Theory course (with lecture notes and videos)|https://www.cs.cmu.edu/~rwh/courses/hott/]]
 
 @@wip@@ Some personal notes about with @@indexed time@@
@@ -598,11 +598,11 @@ noscript {display:none;} /* Fixes a feature in Firefox 1.5.0.2 where print previ
 **A proposition could be interpreted in Heyting algebra : conjunction =&gt; meet, disjunction =&gt; join
 **claim: in IPL not all instances of LEM are provable @@00:13:30@@
 **Double negation is not cancelable, this is a weakening @@00:24:20@@
-**Not every proposition is stable@@00:31:30@@
-**Structural properties are admissible@@00:51:30@@
+**Not every proposition is stable @@00:31:30@@
+**Structural properties are admissible @@00:51:30@@
 **weakening is admissible because the rules are polymorphic (ie) the rules holds for any choice of Γ (so we can inductively weaken the premises and re-apply the rules)
 **exchange, contraction, reflexivity, transitivity are admissible
-**Genzen's insight (ie) great idea : the inversion principle (ie) elim is post inverse to intro (origin of computation) @@01:00:45@@
+**Genzen's insight (ie) great idea : the inversion principle (ie) elim is post inverse to intro (origin of computation)  @@01:00:45@@
 **This give rise to a dynamics of proof (ie) run the proof (ie) no difference between math en programming
 **Proof relevant logic @@01:08:50@@
 **Proof terms are mappings in category theory
@@ -626,7 +626,18 @@ noscript {display:none;} /* Fixes a feature in Firefox 1.5.0.2 where print previ
 **Exponentials @@01:00:00@@
 **Come next : the same with positive fragment
 **The inversion principle and the unicity principle show that propositions together with proofs taking modulo equivalence we defined pass the behavior of product and exponential in a category @@01:17:55@@
-*Lecture 05 - Equality</pre>
+*Lecture 05 - Equality
+**Gentzen's Inversion Principles (β rules) mean that proof are programs (ie we can run them with this principe of simplification)
+**Gentzen's Unicity Principles (η rules)
+**From the point of view of proof theory we can only say there is one lemma in the world, it is just a big conjunction  @@00:19:10@@
+**The unicity principle try to express the idea that every proof of certain type can be putted into some kind of standard form  @@00:40:40@@
+**Shannon expansion is the core of BDD (binary diagram)
+**A case analysis is a degenerate induction @@01:10:50@@
+**The induction principle for a final type is : do all the cases
+**β rules seem to be kind of Analytical judgement (\self-evident&quot;). Be thought as Definitional equality
+**η rules seem to be of the character of Synthetic judgement (&quot;require proof&quot;). Be thought as Propositional equality (ie) express by a type
+**In HoTT the interplay/distinction between definitional equality and propositional equality is central
+**Come next : Gödel's T = IPL + NNO (Natural Number Object)</pre>
 </div>
 <div title="A bit of history" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201109081600" modified="201310130825" tags="intro" changecount="36">
 <pre>!Notable Events
@@ -968,7 +979,7 @@ but maven test is ok without ceres
 
 This tiddler was automatically created to record the details of this server</pre>
 </div>
-<div title="GATrackerPlugin" modifier="Olivier ROLAND" created="201105142206" modified="201311272207" tags="systemConfig" server.page.revision="201105182137" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.type="file" changecount="1">
+<div title="GATrackerPlugin" modifier="Olivier ROLAND" created="201105142206" modified="201311272207" tags="systemConfig" changecount="1" server.type="file" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.page.revision="201105182137">
 <pre>/***
 |Name|GATrackerPlugin|
 |Description|Google Analytics tracker|
@@ -3193,7 +3204,7 @@ attribute ::= &quot;label&quot; &quot;(&quot; string &quot;)&quot; |
               &quot;bsub_hint_wt&quot; &quot;(&quot; integer &quot;)&quot;
 }}}</pre>
 </div>
-<div title="SystemSettings" modifier="Olivier ROLAND" created="201105142207" modified="201106101816" tags="excludeLists" changecount="6" server.page.revision="201105142207" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.type="file">
+<div title="SystemSettings" modifier="Olivier ROLAND" created="201105142207" modified="201106101816" tags="excludeLists" server.type="file" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.page.revision="201105142207" changecount="6">
 <pre>txtUserName: Olivier%20ROLAND
 txt_GATracker_id: UA-4646079-1
 txt_GATracker_track: 1%2C0%2C1%2C1%2C1%2C1%2C1
@@ -3286,7 +3297,7 @@ Extract from  Debasish Ghosh's book [[DSLs in Action |http://books.google.fr/boo
 
 @@WIP@@</pre>
 </div>
-<div title="TWikiFormatterPlugin" modifier="MartinBudden" created="200607210000" tags="systemConfig excludeLists excludeSearch" server.page.revision="200607210000" server.host="http://www.martinswiki.com" server.type="file">
+<div title="TWikiFormatterPlugin" modifier="MartinBudden" created="200607210000" tags="systemConfig excludeLists excludeSearch" server.type="file" server.host="http://www.martinswiki.com" server.page.revision="200607210000">
 <pre>/***
 |''Name:''|TWikiFormatterPlugin|
 |''Description:''|Allows Tiddlers to use [[TWiki|http://twiki.org/cgi-bin/view/TWiki/TextFormattingRules]] text formatting|
