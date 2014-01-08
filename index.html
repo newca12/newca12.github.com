@@ -522,7 +522,7 @@ noscript {display:none;} /* Fixes a feature in Firefox 1.5.0.2 where print previ
 </div>
 <!--POST-SHADOWAREA-->
 <div id="storeArea">
-<div title="15-819 Homotopy Type Theory" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201312242211" modified="201401062200" tags="HoTT summary wip" changecount="62">
+<div title="15-819 Homotopy Type Theory" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201312242211" modified="201401082223" tags="HoTT summary wip" changecount="66">
 <pre>[[Homotopy Type Theory course (with lecture notes and videos)|https://www.cs.cmu.edu/~rwh/courses/hott/]]
 
 @@wip@@ Some personal notes about with @@indexed time@@
@@ -637,7 +637,27 @@ noscript {display:none;} /* Fixes a feature in Firefox 1.5.0.2 where print previ
 **β rules seem to be kind of Analytical judgement (\self-evident&quot;). Be thought as Definitional equality
 **η rules seem to be of the character of Synthetic judgement (&quot;require proof&quot;). Be thought as Propositional equality (ie) express by a type
 **In HoTT the interplay/distinction between definitional equality and propositional equality is central
-**Come next : Gödel's T = IPL + NNO (Natural Number Object)</pre>
+**Come next : Gödel's T = IPL + NNO (Natural Number Object)
+*Lecture 06 - IPL
+**Implication correspond to function space
+**Gentzen's Inversion Principles tell us that elimination should cancel introduction
+**There is 2 introductions for Natural so there is 2 β rules
+***rec(P,Q)(0)  ≡ P
+***rec(P,Q)(s(M))  ≡ [rec(P,Q)(M)/x]Q
+**η rule expressing the unicity
+**Re-orging the NNO into an initial algebra
+**The idea of being a natural number object is the essence of a more general thing @@00:19:15@@
+**≡ is not equality
+**Extensionally equal (same reference), but intentionally not equal (different sense) [ie expressing the same I/O behavior in two different ways (other algorithm)]
+**Extensionally equality is synthetic (require proof)
+**Proof of extensional equality for higher type like (N → N) → (N → N) become complicated and require a proof @@00:34:00@@
+**Recall Martin{Lof's distinction between judgements and propositions. With this in mind:
+***Intensional equality is an inductively dened judgement
+***Extensional equality is a proposition: it may be subject to judgement
+**By propositions as types, extensional equality is a family of types
+**One of the univalence axiom consequence is that equivalence of types is the same as equivalence @@00:49:50@@
+**Setuo for dependent types (aka families)
+**Formation rule (Id-F). You can form a type that express the equality of M and N in A</pre>
 </div>
 <div title="A bit of history" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201109081600" modified="201310130825" tags="intro" changecount="36">
 <pre>!Notable Events
