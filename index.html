@@ -522,7 +522,7 @@ noscript {display:none;} /* Fixes a feature in Firefox 1.5.0.2 where print previ
 </div>
 <!--POST-SHADOWAREA-->
 <div id="storeArea">
-<div title="15-819 Homotopy Type Theory" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201312242211" modified="201401082223" tags="HoTT summary wip" changecount="66">
+<div title="15-819 Homotopy Type Theory" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201312242211" modified="201401122204" tags="HoTT summary wip" changecount="75">
 <pre>[[Homotopy Type Theory course (with lecture notes and videos)|https://www.cs.cmu.edu/~rwh/courses/hott/]]
 
 @@wip@@ Some personal notes about with @@indexed time@@
@@ -656,8 +656,29 @@ noscript {display:none;} /* Fixes a feature in Firefox 1.5.0.2 where print previ
 ***Extensional equality is a proposition: it may be subject to judgement
 **By propositions as types, extensional equality is a family of types
 **One of the univalence axiom consequence is that equivalence of types is the same as equivalence @@00:49:50@@
-**Setuo for dependent types (aka families)
-**Formation rule (Id-F). You can form a type that express the equality of M and N in A</pre>
+**Setup for dependent types (aka families)
+**The functionality principle says that the type families have to respect definitional equality in their free variables@@01:05:25@@
+**Type classify the same things
+**Formation rule (Id-F). You can form a type that express the equality of M and N in A
+**Identity rule (Id-I). M is equal to M in the type A
+**Come next : Id-E
+*Lecture 07 - Dependent Types
+**Families of types (ie) index by a type
+**Example of family of type (Sequence of natural number of length x)  x : Nat ⊦ Seq(x) (other notation {Seq(x)}~~x∈Nat~~)
+**We do not wan't a rule of induction in definitional equivalence because this is what distinguish it from equality @@00:11:00@@
+**A doubly index family of types is a binary relation.
+**Types and propositions are the same thing
+**equivalent formulation of P :  Id~~A~~(M,N)
+***proof/evidence that M is N
+***identification of M with N
+***path between M and N
+**Generalize the propositional negative connectives to their dependent forms @@00:20:55@@
+**The essence of constructive interpretation is that prof of a universally quantify formula is going to be a function, the same way a proof of the implication is going to be a function @@00:32:40@@
+**So far what we had among positives : 0; A +B, Nat @@00:43:38@@
+**The issue is that he positive elim &quot;reach into&quot; arbitrary types
+**From a programming point of view the proof by induction is a primitive recursive function @@01:05:40@@
+**Other form of product type : Σ variant (the one on the HoTT book) idea : elimination as pattern matching)
+**Come next : Identity type</pre>
 </div>
 <div title="A bit of history" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201109081600" modified="201310130825" tags="intro" changecount="36">
 <pre>!Notable Events
@@ -999,7 +1020,7 @@ but maven test is ok without ceres
 
 This tiddler was automatically created to record the details of this server</pre>
 </div>
-<div title="GATrackerPlugin" modifier="Olivier ROLAND" created="201105142206" modified="201311272207" tags="systemConfig" changecount="1" server.type="file" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.page.revision="201105182137">
+<div title="GATrackerPlugin" modifier="Olivier ROLAND" created="201105142206" modified="201311272207" tags="systemConfig" server.page.revision="201105182137" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.type="file" changecount="1">
 <pre>/***
 |Name|GATrackerPlugin|
 |Description|Google Analytics tracker|
@@ -3224,7 +3245,7 @@ attribute ::= &quot;label&quot; &quot;(&quot; string &quot;)&quot; |
               &quot;bsub_hint_wt&quot; &quot;(&quot; integer &quot;)&quot;
 }}}</pre>
 </div>
-<div title="SystemSettings" modifier="Olivier ROLAND" created="201105142207" modified="201106101816" tags="excludeLists" server.type="file" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.page.revision="201105142207" changecount="6">
+<div title="SystemSettings" modifier="Olivier ROLAND" created="201105142207" modified="201106101816" tags="excludeLists" changecount="6" server.page.revision="201105142207" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.type="file">
 <pre>txtUserName: Olivier%20ROLAND
 txt_GATracker_id: UA-4646079-1
 txt_GATracker_track: 1%2C0%2C1%2C1%2C1%2C1%2C1
@@ -3317,7 +3338,7 @@ Extract from  Debasish Ghosh's book [[DSLs in Action |http://books.google.fr/boo
 
 @@WIP@@</pre>
 </div>
-<div title="TWikiFormatterPlugin" modifier="MartinBudden" created="200607210000" tags="systemConfig excludeLists excludeSearch" server.type="file" server.host="http://www.martinswiki.com" server.page.revision="200607210000">
+<div title="TWikiFormatterPlugin" modifier="MartinBudden" created="200607210000" tags="systemConfig excludeLists excludeSearch" server.page.revision="200607210000" server.host="http://www.martinswiki.com" server.type="file">
 <pre>/***
 |''Name:''|TWikiFormatterPlugin|
 |''Description:''|Allows Tiddlers to use [[TWiki|http://twiki.org/cgi-bin/view/TWiki/TextFormattingRules]] text formatting|
