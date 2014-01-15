@@ -522,7 +522,7 @@ noscript {display:none;} /* Fixes a feature in Firefox 1.5.0.2 where print previ
 </div>
 <!--POST-SHADOWAREA-->
 <div id="storeArea">
-<div title="15-819 Homotopy Type Theory" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201312242211" modified="201401122204" tags="HoTT summary wip" changecount="75">
+<div title="15-819 Homotopy Type Theory" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201312242211" modified="201401151705" tags="HoTT summary wip" changecount="81">
 <pre>[[Homotopy Type Theory course (with lecture notes and videos)|https://www.cs.cmu.edu/~rwh/courses/hott/]]
 
 @@wip@@ Some personal notes about with @@indexed time@@
@@ -678,7 +678,25 @@ noscript {display:none;} /* Fixes a feature in Firefox 1.5.0.2 where print previ
 **The issue is that he positive elim &quot;reach into&quot; arbitrary types
 **From a programming point of view the proof by induction is a primitive recursive function @@01:05:40@@
 **Other form of product type : Σ variant (the one on the HoTT book) idea : elimination as pattern matching)
-**Come next : Identity type</pre>
+**Come next : Identity type
+*Lecture 08 - Transport
+**Recap
+***Dependent formulation of
+****negatives ∏ (-&gt;) , Σ (x)
+****positives +, Nat
+***Elim's become induction principle
+**Identity types @@00:19:55@@
+**Notation M =~~A~~ N (Do remember that this is a type)
+**If we wan't to say something about the identity type there is a goto method : apply path induction (the identity elim) @@00:35:35@@
+**The definitional equivalences that hold of a proof can affect the well formed-less of a consequent proof (ie) depend on a specific code and not on his spec @@01:00:00@@
+**The leap from non dependent to dependent type type programming is perhaps a bit more complicated than it might sound at first
+**Simple functionality @@01:02:10@@
+**ap F u (apply the path F to u)
+**Transportation @@01:08:50@@
+**lifting property : lifting the path from the base space to the total space ∫~~A~~
+**Transportation aka functionality of families
+*Lecture 09 - Universes
+** </pre>
 </div>
 <div title="A bit of history" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201109081600" modified="201310130825" tags="intro" changecount="36">
 <pre>!Notable Events
