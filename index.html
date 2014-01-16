@@ -522,7 +522,7 @@ noscript {display:none;} /* Fixes a feature in Firefox 1.5.0.2 where print previ
 </div>
 <!--POST-SHADOWAREA-->
 <div id="storeArea">
-<div title="15-819 Homotopy Type Theory" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201312242211" modified="201401151705" tags="HoTT summary wip" changecount="81">
+<div title="15-819 Homotopy Type Theory" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201312242211" modified="201401162148" tags="HoTT summary wip" changecount="86">
 <pre>[[Homotopy Type Theory course (with lecture notes and videos)|https://www.cs.cmu.edu/~rwh/courses/hott/]]
 
 @@wip@@ Some personal notes about with @@indexed time@@
@@ -696,7 +696,19 @@ noscript {display:none;} /* Fixes a feature in Firefox 1.5.0.2 where print previ
 **lifting property : lifting the path from the base space to the total space ∫~~A~~
 **Transportation aka functionality of families
 *Lecture 09 - Universes
-** </pre>
+**Recap
+***Identity type
+****map preserve identifications (ie profs of identity) : (aka functionality)
+**Universes / Large elims @@00:09:20@@
+**if(M, Nat, Bool) is not a well-formed type (at this point)
+**Large eliminations (had hoc way) @@00:17:10@@ 
+**Universal types
+**A universe is a type of types
+**Burali-Forte paradox can be reproduce inside of type theory (ie) the class of all type cannot be a type @@00:26:20@@
+**In constructive theories the ordinals do not forme a linear ordering
+**if(M, Nat, Bool) : U
+**Idea: cumulative hierarchy of universes U~~0~~, U~~1~~, U~~2~~, ... @@00:38:15@@
+**wip @@00:48:00@@</pre>
 </div>
 <div title="A bit of history" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201109081600" modified="201310130825" tags="intro" changecount="36">
 <pre>!Notable Events
@@ -793,6 +805,11 @@ Thank's to [[Lizao Li|http://math.umn.edu/~lixx1445]] for the [[MathJax Plugin f
 See [[demo|MathJaxTiddlyPluginDemo]]
 
 Some hints about MathJax [[here|http://wiki.math.toronto.edu/TorontoMathWiki/index.php/JsMath/MathJax_(TeX_for_Web)]] </pre>
+</div>
+<div title="Coq vs others" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201401162149" modified="201401162153" tags="proof-assistants duel" changecount="3">
+<pre>CPDT has an interesting “Why Coq?” section:
+http://adam.chlipala.net/cpdt/html/Intro.html
+It compares Coq with other proof assistants and dependently typed languages.</pre>
 </div>
 <div title="DefaultTiddlers" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201103191837" modified="201104251010" tags="systemNotes" changecount="2">
 <pre>[[Etat De L'Art]]</pre>
@@ -1038,7 +1055,7 @@ but maven test is ok without ceres
 
 This tiddler was automatically created to record the details of this server</pre>
 </div>
-<div title="GATrackerPlugin" modifier="Olivier ROLAND" created="201105142206" modified="201311272207" tags="systemConfig" server.page.revision="201105182137" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.type="file" changecount="1">
+<div title="GATrackerPlugin" modifier="Olivier ROLAND" created="201105142206" modified="201311272207" tags="systemConfig" changecount="1" server.type="file" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.page.revision="201105182137">
 <pre>/***
 |Name|GATrackerPlugin|
 |Description|Google Analytics tracker|
@@ -1385,14 +1402,15 @@ You can also see algorithms &lt;&lt;tag explained&gt;&gt; and introductory docum
 ** We have no way at all of evaluating whether a formula holds in an interpretation with an infinite domain
 ** Note the contrast with propositional logic, where the propositional variables range over a finite (2-element) set which can therefore be enumerated exhaustively</pre>
 </div>
-<div title="Homotopy Type Theory" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201310130831" modified="201312242215" tags="intro HoTT" changecount="8">
+<div title="Homotopy Type Theory" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201310130831" modified="201401162157" tags="intro HoTT" changecount="9">
 <pre>!Read this first
 *[[Homotopy Type Theory: a new foundation for 21st-century mathematics|http://aperiodical.com/2013/06/homotopy-type-theory-a-new-foundation-for-21st-century-mathematics/]]
 !Highly recommended course
 *[[15-819 Homotopy Type Theory]] by Robert Harper
 !Resources
 *[[The Types Project|http://www.cse.chalmers.se/research/group/logic/Types/index.html]]
-*[[Homotopy Type Theory|http://homotopytypetheory.org/]]</pre>
+*[[Homotopy Type Theory|http://homotopytypetheory.org/]]
+*[[The HoTT book : the story|http://audrey.fmf.uni-lj.si/hott.html]]</pre>
 </div>
 <div title="Homotopy Type Theory (The HoTT Book) : summary" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201310131112" modified="201312071404" tags="book summary wip HoTT" changecount="18">
 <pre>!Introduction
@@ -3263,7 +3281,7 @@ attribute ::= &quot;label&quot; &quot;(&quot; string &quot;)&quot; |
               &quot;bsub_hint_wt&quot; &quot;(&quot; integer &quot;)&quot;
 }}}</pre>
 </div>
-<div title="SystemSettings" modifier="Olivier ROLAND" created="201105142207" modified="201106101816" tags="excludeLists" changecount="6" server.page.revision="201105142207" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.type="file">
+<div title="SystemSettings" modifier="Olivier ROLAND" created="201105142207" modified="201106101816" tags="excludeLists" server.type="file" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.page.revision="201105142207" changecount="6">
 <pre>txtUserName: Olivier%20ROLAND
 txt_GATracker_id: UA-4646079-1
 txt_GATracker_track: 1%2C0%2C1%2C1%2C1%2C1%2C1
@@ -3356,7 +3374,7 @@ Extract from  Debasish Ghosh's book [[DSLs in Action |http://books.google.fr/boo
 
 @@WIP@@</pre>
 </div>
-<div title="TWikiFormatterPlugin" modifier="MartinBudden" created="200607210000" tags="systemConfig excludeLists excludeSearch" server.page.revision="200607210000" server.host="http://www.martinswiki.com" server.type="file">
+<div title="TWikiFormatterPlugin" modifier="MartinBudden" created="200607210000" tags="systemConfig excludeLists excludeSearch" server.type="file" server.host="http://www.martinswiki.com" server.page.revision="200607210000">
 <pre>/***
 |''Name:''|TWikiFormatterPlugin|
 |''Description:''|Allows Tiddlers to use [[TWiki|http://twiki.org/cgi-bin/view/TWiki/TextFormattingRules]] text formatting|
@@ -4079,7 +4097,7 @@ config.parsers.twikiFormatter.formatTag = 'TWikiFormat';
 } // end of 'install only once'
 //}}}</pre>
 </div>
-<div title="Tags" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104250931" modified="201312071430" tags="meta editing" changecount="77">
+<div title="Tags" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104250931" modified="201401162152" tags="meta editing" changecount="78">
 <pre>*&lt;&lt;tag atp&gt;&gt;- Automated Theorem Proving, what this site is all about
 **&lt;&lt;tag intro&gt;&gt;- Getting started
 **&lt;&lt;tag scala-atp&gt;&gt;- Scala port of [[Handbook of Practical Logic and Automated Reasoning|http://www.cambridge.org/catalogue/catalogue.asp?isbn=9780521899574]]
@@ -4091,6 +4109,7 @@ config.parsers.twikiFormatter.formatTag = 'TWikiFormat';
 ***&lt;&lt;tag explained&gt;&gt;- Algorithms explained
 **&lt;&lt;tag Techniques&gt;&gt;
 **&lt;&lt;tag SMT&gt;&gt;- Satisfiability Modulo Theories
+**&lt;&lt;tag proof-assistants&gt;&gt;
 **&lt;&lt;tag provers&gt;&gt;
 ***&lt;&lt;tag gapt&gt;&gt;- General Architecture for proof
 ***&lt;&lt;tag MELIA&gt;&gt;- Model Evolution Calculus with Equality and built-in linear integer arithmetic 
