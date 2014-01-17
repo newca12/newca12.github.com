@@ -522,10 +522,10 @@ noscript {display:none;} /* Fixes a feature in Firefox 1.5.0.2 where print previ
 </div>
 <!--POST-SHADOWAREA-->
 <div id="storeArea">
-<div title="15-819 Homotopy Type Theory" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201312242211" modified="201401162148" tags="HoTT summary wip" changecount="86">
+<div title="15-819 Homotopy Type Theory" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201312242211" modified="201401171708" tags="HoTT summary wip" changecount="91">
 <pre>[[Homotopy Type Theory course (with lecture notes and videos)|https://www.cs.cmu.edu/~rwh/courses/hott/]]
 
-@@wip@@ Some personal notes about with @@indexed time@@
+@@wip@@ Some personal notes with @@indexed time@@
 *Lecture 01 - Course Introduction
 **Learning type theory from scratch starting from page one of the HoTT book is probably not a good idea
 **Homotopy Type Theory is self standing subject and not really tied to homotopy theory
@@ -708,7 +708,28 @@ noscript {display:none;} /* Fixes a feature in Firefox 1.5.0.2 where print previ
 **In constructive theories the ordinals do not forme a linear ordering
 **if(M, Nat, Bool) : U
 **Idea: cumulative hierarchy of universes U~~0~~, U~~1~~, U~~2~~, ... @@00:38:15@@
-**wip @@00:48:00@@</pre>
+**Typical Ambiguity/Universe polymorphism : pretend U:U in fact U~~i~~:U~~i+1~~ @@00:48:00@@
+**ITT introduced in 1973 by Martin-L¨of
+**--Axiom--Theorem of choice : every total binary relation contain a function
+**A special case of proof relevance is proof irrelevance (the constructive framework is strictly superior @@01:00:00@@
+**That is axiom of extensionality fail ! This is a weakness of ITT
+**The big open problem is to understand the computational meaning of HoTT @@01:11:53@@
+**ETT : extensional theory of type (the word extensional is overuse in type theory : many different meaning)
+***idea : only identifications is reflexives
+**NuPRL is based on ETT. M:A is undecidable but a derivation is decidable
+**Coq is based on ITT : M:A is decidable (not feasible)
+**Coq is a rewritten of NuPRL but this is the same architecture
+*Lecture 10
+**ETT
+***+no muching about/w transport
+***+&quot;standard mathematics&quot; in that there is &quot;just&quot; equality
+***+function extensionality &quot;for free&quot;
+***-type checking is no longer decidable
+**type in ETT (limited to) sets (where only paths/identifications are reflexivities) aka (hsets) @@00:12:20@@
+**types in ITT are more general, they are ∞-groupoïd (ie has reacher path structure)
+**for set level mathematics it really easiest to work with ETT @@00:20:45@@
+**HoTT is ITT + axioms that introduce new identifications among element of a type
+**wip @@00:30:00@@</pre>
 </div>
 <div title="A bit of history" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201109081600" modified="201310130825" tags="intro" changecount="36">
 <pre>!Notable Events
@@ -1402,9 +1423,10 @@ You can also see algorithms &lt;&lt;tag explained&gt;&gt; and introductory docum
 ** We have no way at all of evaluating whether a formula holds in an interpretation with an infinite domain
 ** Note the contrast with propositional logic, where the propositional variables range over a finite (2-element) set which can therefore be enumerated exhaustively</pre>
 </div>
-<div title="Homotopy Type Theory" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201310130831" modified="201401162157" tags="intro HoTT" changecount="9">
+<div title="Homotopy Type Theory" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201310130831" modified="201401171752" tags="intro HoTT" changecount="12">
 <pre>!Read this first
 *[[Homotopy Type Theory: a new foundation for 21st-century mathematics|http://aperiodical.com/2013/06/homotopy-type-theory-a-new-foundation-for-21st-century-mathematics/]]
+*Short story of HoTT : [[Vladimir Voevodsky's talk at the Heidelberg Laureate Forum (Video, ~30 min)|http://www.heidelberg-laureate-forum.org/blog/video/lecture-thursday-september-26-vladimir-voevodsky/]]
 !Highly recommended course
 *[[15-819 Homotopy Type Theory]] by Robert Harper
 !Resources
