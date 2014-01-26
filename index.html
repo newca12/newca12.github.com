@@ -522,7 +522,7 @@ noscript {display:none;} /* Fixes a feature in Firefox 1.5.0.2 where print previ
 </div>
 <!--POST-SHADOWAREA-->
 <div id="storeArea">
-<div title="15-819 Homotopy Type Theory" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201312242211" modified="201401191305" tags="HoTT summary wip" changecount="94">
+<div title="15-819 Homotopy Type Theory" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201312242211" modified="201401261227" tags="HoTT summary wip" changecount="106">
 <pre>[[Homotopy Type Theory course (with lecture notes and videos)|https://www.cs.cmu.edu/~rwh/courses/hott/]]
 
 @@wip@@ Some personal notes with @@indexed time@@
@@ -738,7 +738,19 @@ noscript {display:none;} /* Fixes a feature in Firefox 1.5.0.2 where print previ
 **Id~~A~~(M,M) form a (higher) group
 **to prove that a type is true mean to write a program that has that type @@01:00:45@@
 **Maps/Functions are functors @@01:10:15@@
-*Lecture 11</pre>
+*Lecture 11
+**Paths-over-Paths @@00:24:54@@
+**Equivalence of Types @@00:31:20@@
+**Types are not sets @@00:52:18@@
+**The notion of bijection is irrelevant-less useful when working with high order types
+**Elements of type should not be thought in terms of atoms because they are not @@01:08:40@@
+**In a proof relevant environment everything we do is defined in terms of structure
+**isomorphism is not a proposition, it is a structure
+**Equivalence @@01:10:50@@
+**The axiom of functionality say : path and homotopy are the same thing
+**The univalence axiom say : there is an equivalence between paths in a universe and equivalences between the elements (A ≃ B) ≃ (A =~~U~~ B)
+**A ≃ B is a type not a proposition
+*Lecture 12 - Equivalence of Types</pre>
 </div>
 <div title="A bit of history" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201109081600" modified="201310130825" tags="intro" changecount="36">
 <pre>!Notable Events
@@ -2871,10 +2883,9 @@ See also : [[Roadmap]]</pre>
 **Compared to existing declarative theorem proving systems (like Mizar), Isar avoids several shortcomings
 *[[TPTP language]]</pre>
 </div>
-<div title="Reading roadmap" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201107022122" modified="201310130941" tags="book" changecount="21">
-<pre>@@wip@@
-
-!These book are recommended for first reading
+<div title="Reading roadmap" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201107022122" modified="201401252212" tags="book" changecount="27">
+<pre>!These book are recommended for first reading
+*@@The best introductory book is french : [[Introduction à la logique : Théorie de la démonstration]]@@
 *[[Language, proof, and logic|http://books.google.fr/books?id=we4YAQAAIAAJ&amp;hl=fr&amp;source=gbs_slider_cls_metadata_1003_mylibrary]]
 ** Starts with a great review of logic and goes on to discuss proofs of soundness and Godel's incompleteness theorems.
 ** Textbook and software package, intended for use in undergraduate level logic courses.
@@ -2896,6 +2907,8 @@ See also : [[Roadmap]]</pre>
 **The authors have learnt the lesson of Russell and Whitehead, and use notation deftly to avoid losing the reader in a morass of symbols.
 **The introductory sections are short and to the point, giving definitions and justification concisely and clearly.
 **The language is approachable and not at all high-falutin.
+**@@That said, learning type theory from scratch starting from page one of the HoTT book is probably not a good idea.@@
+**@@Consider [[15-819 Homotopy Type Theory]] course as an indispensable companion to the book.@@
 !These books are not for first reading
 *[[Basic proof theory|http://books.google.fr/books?id=LA_mg2nSbBoC&amp;source=gbs_slider_cls_metadata_1003_mylibrary]]
 **Require a moderately advanced knowledge of proof theory
