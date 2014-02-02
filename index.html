@@ -522,7 +522,7 @@ noscript {display:none;} /* Fixes a feature in Firefox 1.5.0.2 where print previ
 </div>
 <!--POST-SHADOWAREA-->
 <div id="storeArea">
-<div title="15-819 Homotopy Type Theory" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201312242211" modified="201401261227" tags="HoTT summary wip" changecount="106">
+<div title="15-819 Homotopy Type Theory" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201312242211" modified="201402021717" tags="HoTT summary wip" changecount="114">
 <pre>[[Homotopy Type Theory course (with lecture notes and videos)|https://www.cs.cmu.edu/~rwh/courses/hott/]]
 
 @@wip@@ Some personal notes with @@indexed time@@
@@ -750,7 +750,18 @@ noscript {display:none;} /* Fixes a feature in Firefox 1.5.0.2 where print previ
 **The axiom of functionality say : path and homotopy are the same thing
 **The univalence axiom say : there is an equivalence between paths in a universe and equivalences between the elements (A ≃ B) ≃ (A =~~U~~ B)
 **A ≃ B is a type not a proposition
-*Lecture 12 - Equivalence of Types</pre>
+*Lecture 12 - Equivalence of Types
+**isequiv(f) express an HPROP (has at most proof up to higher homotopy)
+**Naturality (&quot;polymorphism&quot;) @@00:14:50@@
+**Structure of paths in types @@00:28:20@@
+**With the negative types characterize what the paths structure are is straightforward but arbitrary hard for the positive types
+**The proof that I'm doing in &quot;my&quot; library need to know the code in the standard library @@00:50:33@@
+**same problem as &quot;why inheritance is a bad idea&quot; : code encode dependency
+**rely on on definitional equivalences is a code encode dependency which is fly in the face about everything we know about modularity @@00:55:00@@
+**The definitional equality influence which things are well typed @@01:00:00@@
+**Coproduct is a nice programming problem
+**Haskell GADT is garbage, the right thing is dependent type @@01:18:30@@
+*Lecture 13 - HOTT</pre>
 </div>
 <div title="A bit of history" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201109081600" modified="201310130825" tags="intro" changecount="36">
 <pre>!Notable Events
@@ -1097,7 +1108,7 @@ but maven test is ok without ceres
 
 This tiddler was automatically created to record the details of this server</pre>
 </div>
-<div title="GATrackerPlugin" modifier="Olivier ROLAND" created="201105142206" modified="201311272207" tags="systemConfig" changecount="1" server.type="file" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.page.revision="201105182137">
+<div title="GATrackerPlugin" modifier="Olivier ROLAND" created="201105142206" modified="201311272207" tags="systemConfig" server.page.revision="201105182137" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.type="file" changecount="1">
 <pre>/***
 |Name|GATrackerPlugin|
 |Description|Google Analytics tracker|
@@ -2045,6 +2056,257 @@ Extract from [[Inductive Theorem Proving Automated Reasoning Petros Papapanagiot
 [[Tags]]
 [[Project Status Report]]
 </pre>
+</div>
+<div title="MatchTagsPlugin" modifier="ELSDesignStudios" created="200802290709" modified="201110280154" tags="systemConfig" server.type="file" server.host="http://www.tiddlytools.com/#MatchTagsPlugin" server.page.revision="201110280154">
+<pre>/***
+|Name|MatchTagsPlugin|
+|Source|http://www.TiddlyTools.com/#MatchTagsPlugin|
+|Documentation|http://www.TiddlyTools.com/#MatchTagsPluginInfo|
+|Version|2.0.6|
+|Author|Eric Shulman|
+|License|http://www.TiddlyTools.com/#LegalStatements|
+|~CoreVersion|2.1|
+|Type|plugin|
+|Description|'tag matching' with full boolean expressions (AND, OR, NOT, and nested parentheses)|
+!!!!!Documentation
+&gt; see [[MatchTagsPluginInfo]]
+!!!!!Revisions
+&lt;&lt;&lt;
+2011.10.28 2.0.6 added .matchTags CSS class to popups to enable custom styling via StyleSheet
+2011.01.23 2.0.5 fix core tweak for TW262+: adjust code in config.filters['tag'] instead of filterTiddlers()
+2010.08.11 2.0.4 in getMatchingTiddlers(), fixed sorting for descending order (e.g, &quot;-created&quot;)
+| please see [[MatchTagsPluginInfo]] for additional revision details |
+2008.02.28 1.0.0 initial release
+&lt;&lt;&lt;
+!!!!!Code
+***/
+//{{{
+version.extensions.MatchTagsPlugin= {major: 2, minor: 0, revision: 6, date: new Date(2011,10,28)};
+
+// store.getMatchingTiddlers() processes boolean expressions for tag matching
+//    sortfield (optional) sets sort order for tiddlers - default=title
+//    tiddlers (optional) use alternative set of tiddlers (instead of current store)
+TiddlyWiki.prototype.getMatchingTiddlers = function(tagexpr,sortfield,tiddlers) {
+
+	var debug=config.options.chkDebug; // abbreviation
+	var cmm=config.macros.matchTags; // abbreviation
+	var r=[]; // results are an array of tiddlers
+	var tids=tiddlers||store.getTiddlers();
+	if (tids &amp;&amp; sortfield) tids=store.sortTiddlers(tids,sortfield);
+	if (debug) displayMessage(cmm.msg1.format([tids.length]));
+
+	// try simple lookup to quickly find single tags or tags that
+	// contain boolean operators as literals, e.g. &quot;foo and bar&quot;
+	for (var t=0; t&lt;tids.length; t++)
+		if (tids[t].isTagged(tagexpr)) r.pushUnique(tids[t]);
+	if (r.length) {
+		if (debug) displayMessage(cmm.msg4.format([r.length,tagexpr]));
+		return r;
+	}
+	
+	// convert expression into javascript code with regexp tests,
+	// so that &quot;tag1 AND ( tag2 OR NOT tag3 )&quot; becomes
+	// &quot;/\~tag1\~/.test(...) &amp;&amp; ( /\~tag2\~/.test(...) || ! /\~tag3\~/.test(...) )&quot;
+
+	// normalize whitespace, tokenize operators, delimit with &quot;~&quot;
+	var c=tagexpr.trim(); // remove leading/trailing spaces
+	c = c.replace(/\s+/ig,&quot; &quot;); // reduce multiple spaces to single spaces
+	c = c.replace(/\(\s?/ig,&quot;~(~&quot;); // open parens
+	c = c.replace(/\s?\)/ig,&quot;~)~&quot;); // close parens
+	c = c.replace(/(\s|~)?&amp;&amp;(\s|~)?/ig,&quot;~&amp;&amp;~&quot;); // &amp;&amp;
+	c = c.replace(/(\s|~)AND(\s|~)/ig,&quot;~&amp;&amp;~&quot;); // AND
+	c = c.replace(/(\s|~)?\|\|(\s|~)?/ig,&quot;~||~&quot;); // ||
+	c = c.replace(/(\s|~)OR(\s|~)/ig,&quot;~||~&quot;); // OR
+	c = c.replace(/(\s|~)?!(\s|~)?/ig,&quot;~!~&quot;); // !
+	c = c.replace(/(^|~|\s)NOT(\s|~)/ig,&quot;~!~&quot;); // NOT
+	c = c.replace(/(^|~|\s)NOT~\(/ig,&quot;~!~(&quot;); // NOT(
+	// change tag terms to regexp tests
+	var terms=c.split(&quot;~&quot;); for (var i=0; i&lt;terms.length; i++) { var t=terms[i];
+		if (/(&amp;&amp;)|(\|\|)|[!\(\)]/.test(t) || t==&quot;&quot;) continue; // skip operators/parens/spaces
+		if (t==config.macros.matchTags.untaggedKeyword)
+			terms[i]=&quot;tiddlertags=='~~'&quot;; // 'untagged' tiddlers
+		else
+			terms[i]=&quot;/\\~&quot;+t+&quot;\\~/.test(tiddlertags)&quot;;
+	}
+	c=terms.join(&quot; &quot;);
+	if (debug) { displayMessage(cmm.msg2.format([tagexpr])); displayMessage(cmm.msg3.format([c])); }
+
+	// scan tiddlers for matches
+	for (var t=0; t&lt;tids.length; t++) {
+	 	// assemble tags from tiddler into string &quot;~tag1~tag2~tag3~&quot;
+		var tiddlertags = &quot;~&quot;+tids[t].tags.join(&quot;~&quot;)+&quot;~&quot;;
+		try { if(eval(c)) r.push(tids[t]); } // test tags
+		catch(e) { // error in test
+			displayMessage(cmm.msg2.format([tagexpr]));
+			displayMessage(cmm.msg3.format([c]));
+			displayMessage(e.toString());
+			break; // skip remaining tiddlers
+		}
+	}
+	if (debug) displayMessage(cmm.msg4.format([r.length,tagexpr]));
+	return r;
+}
+//}}}
+//{{{
+config.macros.matchTags = {
+	msg1: &quot;scanning %0 input tiddlers&quot;,
+	msg2: &quot;looking for '%0'&quot;,
+	msg3: &quot;using expression: '%0'&quot;,
+	msg4: &quot;found %0 tiddlers matching '%1'&quot;,
+	noMatch: &quot;no matching tiddlers&quot;,
+	untaggedKeyword: &quot;-&quot;,
+	untaggedLabel: &quot;no tags&quot;,
+	untaggedPrompt: &quot;show tiddlers with no tags&quot;,
+	defTiddler: &quot;MatchingTiddlers&quot;,
+	defTags: &quot;&quot;,
+	defFormat: &quot;[[%0]]&quot;,
+	defSeparator: &quot;\n&quot;,
+	reportHeading: &quot;Found %0 tiddlers tagged with: '{{{%1}}}'\n----\n&quot;,
+	handler: function(place,macroName,params,wikifier,paramString,tiddler) {
+		var mode=params[0]?params[0].toLowerCase():'';
+		if (mode==&quot;inline&quot;)
+			params.shift();
+		if (mode==&quot;report&quot; || mode==&quot;panel&quot;) {
+			params.shift();
+			var target=params.shift()||this.defTiddler;
+		}
+		if (mode==&quot;popup&quot;) {
+			params.shift();
+			if (params[0]&amp;&amp;params[0].substr(0,6)==&quot;label:&quot;) var label=params.shift().substr(6);
+			if (params[0]&amp;&amp;params[0].substr(0,7)==&quot;prompt:&quot;) var prompt=params.shift().substr(7);
+		} else {
+			var fmt=(params.shift()||this.defFormat).unescapeLineBreaks();
+			var sep=(params.shift()||this.defSeparator).unescapeLineBreaks();
+		}
+		var sortBy=&quot;+title&quot;;
+		if (params[0]&amp;&amp;params[0].substr(0,5)==&quot;sort:&quot;) sortBy=params.shift().substr(5);
+		var expr = params.join(&quot; &quot;);
+		if (mode!=&quot;panel&quot; &amp;&amp; (!expr||!expr.trim().length)) return;
+		if (expr==this.untaggedKeyword)
+			{ var label=this.untaggedLabel; var prompt=this.untaggedPrompt };
+		switch (mode) {
+			case &quot;popup&quot;: this.createPopup(place,label,expr,prompt,sortBy); break;
+			case &quot;panel&quot;: this.createPanel(place,expr,fmt,sep,sortBy,target); break;
+			case &quot;report&quot;: this.createReport(target,this.defTags,expr,fmt,sep,sortBy); break;
+			case &quot;inline&quot;: default: this.createInline(place,expr,fmt,sep,sortBy); break;
+		}
+	},
+	formatList: function(tids,fmt,sep) {
+		var out=[];
+		for (var i=0; i&lt;tids.length; i++) { var t=tids[i];
+			var title=t.title;
+			var who=t.modifier;
+			var when=t.modified.toLocaleString();
+			var text=t.text;
+			var first=t.text.split(&quot;\n&quot;)[0];
+			var desc=store.getTiddlerSlice(t.title,&quot;description&quot;);
+			desc=desc||store.getTiddlerSlice(t.title,&quot;Description&quot;);
+			desc=desc||store.getTiddlerText(t.title+&quot;##description&quot;);
+			desc=desc||store.getTiddlerText(t.title+&quot;##Description&quot;);
+			var tags=t.tags.length?'[['+t.tags.join(']] [[')+']]':'';
+			out.push(fmt.format([title,who,when,text,first,desc,tags]));
+		}
+		return out.join(sep);
+	},
+	createInline: function(place,expr,fmt,sep,sortBy) {
+		wikify(this.formatList(store.sortTiddlers(store.getMatchingTiddlers(expr),sortBy),fmt,sep),place);
+	},
+	createPopup: function(place,label,expr,prompt,sortBy) {
+		var btn=createTiddlyButton(place,
+			(label||expr).format([expr]),
+			(prompt||config.views.wikified.tag.tooltip).format([expr]),
+			function(ev){ return config.macros.matchTags.showPopup(this,ev||window.event); });
+		btn.setAttribute(&quot;sortBy&quot;,sortBy);
+		btn.setAttribute(&quot;expr&quot;,expr);
+	},
+	showPopup: function(here,ev) {
+		var p=Popup.create(here,null,&quot;matchTags popup&quot;); if (!p) return false;
+		var tids=store.getMatchingTiddlers(here.getAttribute(&quot;expr&quot;));
+		store.sortTiddlers(tids,here.getAttribute(&quot;sortBy&quot;));
+		var list=[]; for (var t=0; t&lt;tids.length; t++) list.push(tids[t].title);
+		if (!list.length) createTiddlyText(p,this.noMatch);
+		else {
+			var b=createTiddlyButton(createTiddlyElement(p,&quot;li&quot;),
+				config.views.wikified.tag.openAllText,
+				config.views.wikified.tag.openAllTooltip,
+				function() {
+					var list=this.getAttribute(&quot;list&quot;).readBracketedList();
+					story.displayTiddlers(null,tids);
+				});
+			b.setAttribute(&quot;list&quot;,&quot;[[&quot;+list.join(&quot;]] [[&quot;)+&quot;]]&quot;);
+			createTiddlyElement(p,&quot;hr&quot;);
+		}
+		var out=this.formatList(tids,&quot; &amp;nbsp;[[%0]]&amp;nbsp; &quot;,&quot;\n&quot;); wikify(out,p);
+		Popup.show();
+		ev.cancelBubble=true;
+		if(ev.stopPropagation) ev.stopPropagation();
+		return false;
+	},
+	createReport: function(target,tags,expr,fmt,sep,sortBy) {
+		var tids=store.sortTiddlers(store.getMatchingTiddlers(expr),sortBy);
+		if (!tids.length) { displayMessage('no matches for: '+expr); return false; }
+		var msg=config.messages.overwriteWarning.format([target]);
+		if (store.tiddlerExists(target) &amp;&amp; !confirm(msg)) return false;
+		var out=this.reportHeading.format([tids.length,expr])
+		out+=this.formatList(tids,fmt,sep);
+		store.saveTiddler(target,target,out,config.options.txtUserName,new Date(),tags,{});
+		story.closeTiddler(target); story.displayTiddler(null,target);
+	},
+	createPanel: function(place,expr,fmt,sep,sortBy,tid) {
+		var s=createTiddlyElement(place,&quot;span&quot;); s.innerHTML=store.getTiddlerText(&quot;MatchTagsPlugin##html&quot;);
+		var f=s.getElementsByTagName(&quot;form&quot;)[0];
+		f.expr.value=expr; f.fmt.value=fmt; f.sep.value=sep.escapeLineBreaks();
+		f.tid.value=tid; f.tags.value=this.defTags;
+	}
+};
+//}}}
+/***
+//{{{
+!html
+&lt;form style='display:inline;white-space:nowrap'&gt;
+&lt;input type='text'    name='expr' style='width:50%' title='tag expression'&gt;&lt;!--
+--&gt;&lt;input type='text'    name='fmt'  style='width:10%' title='list item format'&gt;&lt;!--
+--&gt;&lt;input type='text'    name='sep'  style='width:5%'  title='list item separator'&gt;&lt;!--
+--&gt;&lt;input type='text'    name='tid'  style='width:12%' title='target tiddler title'&gt;&lt;!--
+--&gt;&lt;input type='text'    name='tags' style='width:10%' title='target tiddler tags'&gt;&lt;!--
+--&gt;&lt;input type='button'  name='go'   style='width:8%'  value='go' onclick=&quot;
+	var expr=this.form.expr.value;
+	if (!expr.length) { alert('Enter a boolean tag expression'); return false; }
+	var fmt=this.form.fmt.value;
+	if (!fmt.length) { alert('Enter the list item output format'); return false; }
+	var sep=this.form.sep.value.unescapeLineBreaks();
+	var tid=this.form.tid.value;
+	if (!tid.length) { alert('Enter a target tiddler title'); return false; }
+	var tags=this.form.tags.value;
+	config.macros.matchTags.createReport(tid,tags,expr,fmt,sep,'title');
+	return false;&quot;&gt;
+&lt;/form&gt;
+!end
+//}}}
+***/
+//{{{
+// SHADOW TIDDLER for displaying default panel input form
+config.shadowTiddlers.MatchTags=&quot;&lt;&lt;matchTags panel&gt;&gt;&quot;;
+//}}}
+//{{{
+// TWEAK core filterTiddlers() or config.filters['tag'] (in TW262+)
+// to use getMatchingTiddlers instead getTaggedTiddlers
+// for enhanced boolean matching in [tag[...]] syntax
+var TW262=config.filters &amp;&amp; config.filters['tag']; // detect TW262+
+var fname=TW262?&quot;config.filters['tag']&quot;:&quot;TiddlyWiki.prototype.filterTiddlers&quot;;
+var code=eval(fname).toString().replace(/getTaggedTiddlers/g,'getMatchingTiddlers');
+eval(fname+'='+code);
+//}}}
+//{{{
+// REDEFINE core handler for enhanced boolean matching in tag:&quot;...&quot; paramifier
+// use filterTiddlers() instead of getTaggedTiddlers() to get list of tiddlers.
+config.paramifiers.tag = {
+	onstart: function(v) {
+		var tagged = store.filterTiddlers(&quot;[tag[&quot;+v+&quot;]]&quot;);
+		story.displayTiddlers(null,tagged,null,false,null);
+	}
+};
+//}}}</pre>
 </div>
 <div title="MathJax plugin" modifier="Olivier ROLAND" created="201104241346" modified="201104251238" tags="systemServer plugins editing tools" changecount="5">
 <pre>|''Type:''|file|
@@ -3325,7 +3587,7 @@ attribute ::= &quot;label&quot; &quot;(&quot; string &quot;)&quot; |
               &quot;bsub_hint_wt&quot; &quot;(&quot; integer &quot;)&quot;
 }}}</pre>
 </div>
-<div title="SystemSettings" modifier="Olivier ROLAND" created="201105142207" modified="201106101816" tags="excludeLists" server.type="file" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.page.revision="201105142207" changecount="6">
+<div title="SystemSettings" modifier="Olivier ROLAND" created="201105142207" modified="201106101816" tags="excludeLists" changecount="6" server.page.revision="201105142207" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.type="file">
 <pre>txtUserName: Olivier%20ROLAND
 txt_GATracker_id: UA-4646079-1
 txt_GATracker_track: 1%2C0%2C1%2C1%2C1%2C1%2C1
@@ -3418,7 +3680,7 @@ Extract from  Debasish Ghosh's book [[DSLs in Action |http://books.google.fr/boo
 
 @@WIP@@</pre>
 </div>
-<div title="TWikiFormatterPlugin" modifier="MartinBudden" created="200607210000" tags="systemConfig excludeLists excludeSearch" server.type="file" server.host="http://www.martinswiki.com" server.page.revision="200607210000">
+<div title="TWikiFormatterPlugin" modifier="MartinBudden" created="200607210000" tags="systemConfig excludeLists excludeSearch" server.page.revision="200607210000" server.host="http://www.martinswiki.com" server.type="file">
 <pre>/***
 |''Name:''|TWikiFormatterPlugin|
 |''Description:''|Allows Tiddlers to use [[TWiki|http://twiki.org/cgi-bin/view/TWiki/TextFormattingRules]] text formatting|
@@ -4884,6 +5146,9 @@ Nota : anything in quotations with | gets passed to secondary_parser, while anth
 The winner is : [[m2eclipse-subversive|https://github.com/sonatype/m2eclipse-subversive]]
 
 (*) Support of maven multi-project in eclipse is actually far for Netbeans or  IntelliJ IDEA but eclipse Scala plugin is the more promising.</pre>
+</div>
+<div title="no tags" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201401272217" changecount="1">
+<pre>&lt;&lt;list filter [tag[-]]&gt;&gt;</pre>
 </div>
 <div title="ocaml-atp vs haskell-atp syntax" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104251612" modified="201105301658" tags="ocaml-atp haskell-atp scala-atp" changecount="17">
 <pre>*gilmore_2
