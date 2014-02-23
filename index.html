@@ -522,7 +522,7 @@ noscript {display:none;} /* Fixes a feature in Firefox 1.5.0.2 where print previ
 </div>
 <!--POST-SHADOWAREA-->
 <div id="storeArea">
-<div title="15-819 Homotopy Type Theory" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201312242211" modified="201402111703" tags="HoTT summary wip" changecount="129">
+<div title="15-819 Homotopy Type Theory" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201312242211" modified="201402131246" tags="HoTT summary wip" changecount="131">
 <pre>[[Homotopy Type Theory course (with lecture notes and videos)|https://www.cs.cmu.edu/~rwh/courses/hott/]]
 
 @@wip@@ Some personal notes with @@indexed time@@
@@ -762,7 +762,7 @@ noscript {display:none;} /* Fixes a feature in Firefox 1.5.0.2 where print previ
 **Coproduct is a nice programming problem
 **Haskell GADT is garbage, the right thing is dependent type @@01:18:30@@
 *Lecture 13 - HOTT
-**A path in the natural number types is either path from 0 to 0 or the ap of the successor to a path between the predecessor @@00:25:00@@
+**A path in the natural number types is either path from 0 to 0 or the ap of the successor to a path between the predecessor @@00:30:00@@
 **The essence of dealing with nats is dealing with coproducts
 **Mechanization in synthetic homotopy theory is not a total mess (because of details) like in analytic homotopy theory @@00:32:30@@
 **Characterize paths in identity type @@00:35:00@@
@@ -778,7 +778,10 @@ noscript {display:none;} /* Fixes a feature in Firefox 1.5.0.2 where print previ
 **HoTT give up on computation (maybe we can recover one)
 **The identity type occupy a special position in type theory @@00:54:50@@
 **Homotopy (Type Theory) is (Homotopy Type) Theory @@08:10:00@@
-*Lecture 15 - Homotopy Type Theory Part 2</pre>
+*Lecture 15 - Homotopy Type Theory Part 2
+**Interval type I @@00:03:40@@
+**The idea In HoTT is we think of paths being equations because path are reversible and composable =&gt; equivalence relation =&gt; notion of equality
+**@@00:47:00@@</pre>
 </div>
 <div title="A bit of history" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201109081600" modified="201310130825" tags="intro" changecount="36">
 <pre>!Notable Events
@@ -1355,6 +1358,11 @@ handler: function(place, macroName, params, wikifier, paramString, tiddler) {
 
 })(jQuery);}
 //}}}</pre>
+</div>
+<div title="General purpose programming language as proof system" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201402121442" modified="201402231301" tags="proof-assistants" changecount="5">
+<pre>*[[Standard ML as a Proof System, without GADTs|http://www.jonmsterling.com/posts/2014-01-04-standard-ml-as-a-theorem-prover.html]]
+*[[Proving Type Inequality in C++|http://www.jonmsterling.com/posts/2013-02-10-proving-type-inequality-in-cpp.html]]
+*[[EvenOdd in Agda, Idris, Haskell, Scala|http://brianmckenna.org/blog/evenodd_agda_idris_haskell_scala]]</pre>
 </div>
 <div title="Gentzen systems explained" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201202231658" modified="201202231845" tags="explained" changecount="71">
 <pre>Let's prove C, C ⇒ A, ¬A ∨ B → B by refutation.
