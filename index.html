@@ -47,7 +47,7 @@ DAMAGE.
 
 <!--PRE-HEAD-END-->
 <title>  
-Etat De L'Art  - a site about Homotopy Type Theory and Automated Theorem Proving </title>
+Etat De L'Art  - a site about Homotopy Type Theory, Theory of Programming Language and Automated Theorem Proving </title>
 <style id="styleArea" type="text/css">
 #saveTest {display:none;}
 #messageArea {display:none;}
@@ -943,8 +943,13 @@ If you wan't an overview of what is available on this site you can use [[Tags]] 
 
 @@If you came thru google search due to the uniqueness of ~TiddlyWiki the web result you saw on google may not appear on this website.  To find it just remember the query items and put on the search line to the upper right of this page. You should be able to find the item you were looking for.@@</pre>
 </div>
-<div title="First-class resources" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201103191829" modified="201403231428" tags="intro" changecount="70">
-<pre>@@see also [[Dependent type]] and [[Homotopy Type Theory]]
+<div title="First-class resources" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201103191829" modified="201404201241" tags="intro" changecount="91">
+<pre>@@see also [[Dependent type]] and [[Homotopy Type Theory]]@@
+*THEORY OF PROGRAMMING LANGUAGES
+**[[Practical Foundations for Programming Languages|http://www.cambridge.org/us/academic/subjects/computer-science/programming-languages-and-applied-logic/practical-foundations-programming-languages?format=HB]]. Online edition is also [[available|http://www.cs.cmu.edu/~rwh/plbook/book.pdf]].
+**[[Types and Programming Languages|http://www.cis.upenn.edu/~bcpierce/tapl/]]
+a little comparaison of those two books [[here|http://blog.ezyang.com/2012/08/practical-foundations-for-programming-languages/]]
+
 * LOGIC
 ** Open Course Project from general introduction to Automated Theorem Proving : [[Logic in Action|http://www.logicinaction.org/]]
 ** Free online (Coursera) course with Michael Genesereth : [[Introduction to Logic|https://www.coursera.org/course/intrologic]]
@@ -958,6 +963,7 @@ If you wan't an overview of what is available on this site you can use [[Tags]] 
 ** Not free* but far better introduction to Scala : [[Programming in Scala, Second Edition|http://www.artima.com/shop/programming_in_scala_2ed]]
 *** * the first edition is now available for free : http://www.artima.com/pins1ed/
 ** Practical techniques for coding in Scala : [[Scala in Depth|http://www.manning.com/suereth/]]
+** Functional programming from square one in clear, readable language : [[Functional Programming in Scala|http://www.manning.com/bjarnason/]]
 
 * AUTOMATED THEOREM PROVING
 ** Recommended book about ATP (OCaml oriented) : [[Handbook of Practical Logic and Automated Reasoning|http://www.cambridge.org/catalogue/catalogue.asp?isbn=9780521899574]]
@@ -993,6 +999,55 @@ If you wan't an overview of what is available on this site you can use [[Tags]] 
 
 *PORTAL
 ** The Philosophy of Roger Bishop Jones : http://www.rbjones.com/rbjpub/index.htm</pre>
+</div>
+<div title="Functional Programming in Scala : summary" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201404072120" modified="201404172135" tags="scala book summary wip" changecount="22">
+<pre>*PART 1: INTRODUCTION TO FUNCTIONAL PROGRAMMING
+**1. What is functional programming?
+***1.1 The fundamental premise of functional programming
+****We construct our programs using only @@pure functions@@. In other words, functions that have no @@side effects@@.
+****Because of their modularity, pure functions are easier to test, to reuse, to parallelize, to generalize, and to reason about.
+***1.2 Exactly what is a (pure) function?
+****We can formalize this idea of pure functions by using the concept of @@referential transparency@@ (RT).
+****to be referentially transparent—in any program, the expression can be replaced by its result without changing the meaning of the program
+****we say that a function is pure if its body is RT, assuming RT inputs.
+***1.3 Functional and non-functional: an example
+****Referential transparency enables a mode of reasoning about program evaluation called the @@substitution model@@.
+****RT enables @@equational reasoning@@ about programs.
+****the substitution model is simple to reason about since effects of evaluation are purely local (they affect only the expression being evaluated)
+***1.4 Why functional programming?
+****pure function is @@modular@@ and @@composable@@ because it separates the logic of the computation itself from &quot;what to do with the result&quot; and &quot;how to obtain the input&quot;
+****any function with side effects can be split into a pure function at the &quot;core&quot; and possibly a pair of functions with side effects; one on the input side, and one on the output side. 
+****Functional programmers often speak of implementing programs with a pure core and a thin layer on the outside that handles effects.
+***1.5 Conclusion
+**2. Getting Started
+***2.1 Introduction
+****@@higher-order functions@@. These are functions that take other functions as arguments, and may themselves return functions as their output.
+***2.2 An example Scala program
+****We declare an object (also known as a &quot;@@module@@&quot;)
+***2.3 Running our program
+***2.4 Modules, objects, and namespaces
+****Aside from a few technical corner cases, every value in Scala is what's called an &quot;object&quot;.
+****he difference between a package and a module is that a package cannot contain val or def members and can't be passed around as if it were an object.
+***2.5 Function objects: passing functions to functions
+****A call is said to be in 'tail position' if the caller does nothing other than return the value of the recursive call.
+****It is a common convention to use f, g, and h as parameter names for functions passed to a HOF.
+****In FP, we tend to use one-letter or very short variable names, especially when everything there is to say about a value is implied by its type.
+****2.5.1 @@Annonymous functions@@
+*****Also often called @@function literals@@, lambda functions, @@lambda expressions@@, or just lambdas.
+*****When we define a function literal, what is actually being defined is an object with a method called apply.
+*****objects that have an apply method can be called as if they were themselves methods.
+*****Because functions are really just ordinary Scala objects, we say that they are first-class values.
+***2.6 Polymorphic functions: abstracting over types
+****So far we have been defining only @@monomorphic@@ functions. That is, functions that operate on only one type of data.
+****We can call the @@type parameters@@ anything we want—though by convention we typically use short, one letter type parameter names, like [A,B,C].
+****We are using the term 'polymorphism' in a slightly different way than mainstream object-oriented programming, where that term usually connotes some form of subtyping. One will occasionally see the term parametric polymorphism used to refer to this form of polymorphism.
+****A function that is polymorphic in some type is generally forced to represent values of these types as boxed, or non-primitive values
+****Scala compiler to produce specialized versions of a function for each of the primitive types, just by adding an annotation to that type parameter: def binarySearch@@[@specialized A]@@(as: Array[A], key: A,gt: (A,A) =&gt; Boolean): Int
+***2.7 Conclusion
+****We saw how the implementations of polymorphic functions are often significantly constrained, such that one can often simply 'follow the types' to the correct implementation. 
+**3. Functional data structures
+***3.1 Introduction
+</pre>
 </div>
 <div title="GAPT and TPTP notation" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201111030855" modified="201201221754" tags="parsing gapt" changecount="21">
 <pre>! notes (from Tomer mails)
@@ -1132,7 +1187,7 @@ but maven test is ok without ceres
 
 This tiddler was automatically created to record the details of this server</pre>
 </div>
-<div title="GATrackerPlugin" modifier="Olivier ROLAND" created="201105142206" modified="201311272207" tags="systemConfig" server.page.revision="201105182137" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.type="file" changecount="1">
+<div title="GATrackerPlugin" modifier="Olivier ROLAND" created="201105142206" modified="201311272207" tags="systemConfig" changecount="1" server.type="file" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.page.revision="201105182137">
 <pre>/***
 |Name|GATrackerPlugin|
 |Description|Google Analytics tracker|
@@ -2095,7 +2150,7 @@ Extract from [[Inductive Theorem Proving Automated Reasoning Petros Papapanagiot
 [[Project Status Report]]
 </pre>
 </div>
-<div title="MatchTagsPlugin" modifier="ELSDesignStudios" created="200802290709" modified="201110280154" tags="systemConfig" server.type="file" server.host="http://www.tiddlytools.com/#MatchTagsPlugin" server.page.revision="201110280154">
+<div title="MatchTagsPlugin" modifier="ELSDesignStudios" created="200802290709" modified="201110280154" tags="systemConfig" server.page.revision="201110280154" server.host="http://www.tiddlytools.com/#MatchTagsPlugin" server.type="file">
 <pre>/***
 |Name|MatchTagsPlugin|
 |Source|http://www.TiddlyTools.com/#MatchTagsPlugin|
@@ -2563,8 +2618,8 @@ in a paragraph is also important. This expression \(\sqrt{3x-1}+(1+x)^2\) is an 
 inline equation.  As you see, ~MathJax equations can be used this way as well, without unduly
 disturbing the spacing between lines.</pre>
 </div>
-<div title="Modules in Scala" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201403242155" modified="201403242209" tags="languages pb" changecount="3">
-<pre>[[This|http://existentialtype.net/2008/05/26/modules-in-scala/]] compile with old Scala but break at runtime.
+<div title="Modules in Scala" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201403242155" modified="201405041526" tags="languages pb" changecount="10">
+<pre>[[This|http://existentialtype.net/2008/05/26/modules-in-scala/]] --[[(broken link replaced with google cache)|http://webcache.googleusercontent.com/search?q=cache:NWDcSnkryuYJ:existentialtype.net/2008/05/26/modules-in-scala/+&amp;cd=1&amp;hl=fr&amp;ct=clnk&amp;gl=fr]]-- compile with old Scala but break at runtime.
 This was [[fixed|http://stackoverflow.com/a/7836173]] but then don't compile anymore </pre>
 </div>
 <div title="Navigating this site" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201106041127" tags="intro" changecount="1">
@@ -3512,8 +3567,8 @@ scalacOptions in (Compile, doc) ++= Seq(&quot;-diagrams&quot;,&quot;-implicits&q
 
 </pre>
 </div>
-<div title="SiteSubtitle" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201103191828" modified="201310130713" tags="systemNotes" changecount="7">
-<pre>a site about Homotopy Type Theory and Automated Theorem Proving</pre>
+<div title="SiteSubtitle" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201103191828" modified="201404201224" tags="systemNotes" changecount="8">
+<pre>a site about Homotopy Type Theory, Theory of Programming Language and Automated Theorem Proving</pre>
 </div>
 <div title="SiteTitle" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201103191829" modified="201403231423" tags="systemNotes" changecount="21">
 <pre>{{right{&lt;html&gt; &lt;a href=&quot;http://github.com/newca12&quot;&gt;&lt;img style=&quot;position: absolute; top: 0; right: 0; border: 0;&quot; src=&quot;https://camo.githubusercontent.com/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67&quot; alt=&quot;Fork me on GitHub&quot;&gt;&lt;/a&gt;
@@ -3630,7 +3685,7 @@ attribute ::= &quot;label&quot; &quot;(&quot; string &quot;)&quot; |
               &quot;bsub_hint_wt&quot; &quot;(&quot; integer &quot;)&quot;
 }}}</pre>
 </div>
-<div title="SystemSettings" modifier="Olivier ROLAND" created="201105142207" modified="201106101816" tags="excludeLists" changecount="6" server.page.revision="201105142207" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.type="file">
+<div title="SystemSettings" modifier="Olivier ROLAND" created="201105142207" modified="201106101816" tags="excludeLists" server.type="file" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.page.revision="201105142207" changecount="6">
 <pre>txtUserName: Olivier%20ROLAND
 txt_GATracker_id: UA-4646079-1
 txt_GATracker_track: 1%2C0%2C1%2C1%2C1%2C1%2C1
@@ -3723,7 +3778,7 @@ Extract from  Debasish Ghosh's book [[DSLs in Action |http://books.google.fr/boo
 
 @@WIP@@</pre>
 </div>
-<div title="TWikiFormatterPlugin" modifier="MartinBudden" created="200607210000" tags="systemConfig excludeLists excludeSearch" server.page.revision="200607210000" server.host="http://www.martinswiki.com" server.type="file">
+<div title="TWikiFormatterPlugin" modifier="MartinBudden" created="200607210000" tags="systemConfig excludeLists excludeSearch" server.type="file" server.host="http://www.martinswiki.com" server.page.revision="200607210000">
 <pre>/***
 |''Name:''|TWikiFormatterPlugin|
 |''Description:''|Allows Tiddlers to use [[TWiki|http://twiki.org/cgi-bin/view/TWiki/TextFormattingRules]] text formatting|
