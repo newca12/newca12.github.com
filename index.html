@@ -1000,7 +1000,7 @@ a little comparaison of those two books [[here|http://blog.ezyang.com/2012/08/pr
 *PORTAL
 ** The Philosophy of Roger Bishop Jones : http://www.rbjones.com/rbjpub/index.htm</pre>
 </div>
-<div title="Functional Programming in Scala : summary" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201404072120" modified="201404172135" tags="scala book summary wip" changecount="22">
+<div title="Functional Programming in Scala : summary" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201404072120" modified="201405101621" tags="scala book summary wip" changecount="24">
 <pre>*PART 1: INTRODUCTION TO FUNCTIONAL PROGRAMMING
 **1. What is functional programming?
 ***1.1 The fundamental premise of functional programming
@@ -1027,7 +1027,7 @@ a little comparaison of those two books [[here|http://blog.ezyang.com/2012/08/pr
 ***2.3 Running our program
 ***2.4 Modules, objects, and namespaces
 ****Aside from a few technical corner cases, every value in Scala is what's called an &quot;object&quot;.
-****he difference between a package and a module is that a package cannot contain val or def members and can't be passed around as if it were an object.
+****The difference between a package and a module is that a package cannot contain val or def members and can't be passed around as if it were an object.
 ***2.5 Function objects: passing functions to functions
 ****A call is said to be in 'tail position' if the caller does nothing other than return the value of the recursive call.
 ****It is a common convention to use f, g, and h as parameter names for functions passed to a HOF.
@@ -1047,6 +1047,9 @@ a little comparaison of those two books [[here|http://blog.ezyang.com/2012/08/pr
 ****We saw how the implementations of polymorphic functions are often significantly constrained, such that one can often simply 'follow the types' to the correct implementation. 
 **3. Functional data structures
 ***3.1 Introduction
+***3.2 Defining functional data structures
+****A functional data structure is (not surprisingly!) operated on using only pure functions.
+
 </pre>
 </div>
 <div title="GAPT and TPTP notation" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201111030855" modified="201201221754" tags="parsing gapt" changecount="21">
@@ -2130,7 +2133,7 @@ Extract from [[Inductive Theorem Proving Automated Reasoning Petros Papapanagiot
 <div title="MELIA source code analysis" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201107301005" modified="201107301141" tags="code-analysis MELIA" changecount="3">
 <pre>All classes are inter-dependent, TPTPTParser need all other classes.</pre>
 </div>
-<div title="MainMenu" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201103191830" modified="201310130911" tags="meta editing systemNotes" changecount="37">
+<div title="MainMenu" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201103191830" modified="201405041643" tags="meta editing systemNotes" changecount="41">
 <pre>[[About]]
 [[Navigating this site]]
 [[Getting started]]
@@ -2148,7 +2151,8 @@ Extract from [[Inductive Theorem Proving Automated Reasoning Petros Papapanagiot
 [[Roadmap]]
 [[Tags]]
 [[Project Status Report]]
-</pre>
+
+[[Quotes worth remembering]]</pre>
 </div>
 <div title="MatchTagsPlugin" modifier="ELSDesignStudios" created="200802290709" modified="201110280154" tags="systemConfig" server.page.revision="201110280154" server.host="http://www.tiddlytools.com/#MatchTagsPlugin" server.type="file">
 <pre>/***
@@ -3242,6 +3246,11 @@ See also : [[Roadmap]]</pre>
 **Compared to existing declarative theorem proving systems (like Mizar), Isar avoids several shortcomings
 *[[TPTP language]]</pre>
 </div>
+<div title="Quotes worth remembering" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201405041613" modified="201405041621" changecount="13">
+<pre>![[I've never used my own union/negation types in real code. On every occasion it initially seemed justified, a type class turned out better|https://twitter.com/milessabin/status/462597500046958593]] (Miles Sabin 05/2014)
+![[Actors are overly nondeterminstic|http://pchiusano.blogspot.fr/2013/09/actors-are-overly-nondeterminstic.html]] (Paul Chiusano 09/2013)
+scalaz-stream can already express lots of the use cases that people might otherwise express with actors</pre>
+</div>
 <div title="Reading roadmap" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201107022122" modified="201401252212" tags="book" changecount="27">
 <pre>!These book are recommended for first reading
 *@@The best introductory book is french : [[Introduction à la logique : Théorie de la démonstration]]@@
@@ -3513,21 +3522,25 @@ System.err.format(&quot;[UPTIME: %5ds] %s%n&quot;, (System.currentTimeMillis() -
 The winner is : [[Scala]]. The only language of the three with strong IDE support. 
 @@None of the languages explicitly support dependent types, that's why [[Idris]] is now also considered</pre>
 </div>
-<div title="ScalaTest vs Specs2" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201306220859" modified="201306220922" tags="duel tools" changecount="8">
+<div title="ScalaTest vs Specs2" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201306220859" modified="201405170739" tags="duel tools" changecount="16">
 <pre>*ScalaTest pros
 **usable Eclipse plugin
 **Akka’s own test suite is written using ScalaTest
 **used by Martin Odersky in Coursera
 *ScalaTest cons
-**source repository on svn, ant build, ... (but this is going to change =&gt; [[see this thread|https://groups.google.com/forum/#!topic/scalatest-users/cExfcfMgNcQ]])
+**--source repository on svn, ant build, ... (but this is going to change =&gt; [[see this thread|https://groups.google.com/forum/#!topic/scalatest-users/cExfcfMgNcQ]])--
 *Specs2 pros
 **Eric Torreborre support is amazing
 **parallel tests proved to be usefull for thread safety check  
-**The Scala community seem to prefer Specs2
+**The Scala community seem to prefer Specs2 (1)
 *Specs2 cons
 **no Eclipse plugin, Junit is needed
+**Slow time compilation : https://www.artima.com/articles/compile_time.html
 
-No winner. </pre>
+No winner.
+
+(1) but Twitter migrate from Specs to Scalatest : https://github.com/twitter/util/issues/95
+//we found that scalatest was typically a lot more conscientious about breaking API changes (we are still getting tests off of specs, as you can see), didn't require that you used a metric ton of implicits, which slow down compilation significantly, and is more responsive to bug reports. In general, scalatest is flexible, simple to reason about, and doesn't get in your way.//</pre>
 </div>
 <div title="Scaladoc &amp; Co" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201106221658" modified="201211241641" tags="tools" changecount="54">
 <pre>Netty Javadoc use [[apiviz|http://code.google.com/p/apiviz/]] which is a rewrite of [[umlgraph|http://www.umlgraph.org/]] to embed class diagram in Javadoc
