@@ -887,7 +887,7 @@ It compares Coq with other proof assistants and dependently typed languages.</pr
 <div title="DefaultTiddlers" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201103191837" modified="201104251010" tags="systemNotes" changecount="2">
 <pre>[[Etat De L'Art]]</pre>
 </div>
-<div title="Dependent type" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201211241732" modified="201312151434" tags="intro HoTT" changecount="28">
+<div title="Dependent type" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201211241732" modified="201407282054" tags="intro HoTT" changecount="31">
 <pre>@@see also [[Homotopy Type Theory]]@@
 !Read this first
 *[[Unifying Programming and Math – The Dependent Type Revolution|http://spin.atomicobject.com/2012/11/11/unifying-programming-and-math-the-dependent-type-revolution/]]
@@ -896,13 +896,16 @@ It compares Coq with other proof assistants and dependently typed languages.</pr
 !Scala and dependent type
 *[[Scala has surprisingly good support for dependent typing|http://stackoverflow.com/questions/12935731/any-reason-why-scala-does-not-explicitly-support-dependent-types/12937819#12937819]]
 *[[Miles Sabin on Dependent Types with Scala, Shapeless, Scala Macros|http://www.infoq.com/interviews/sabin-types]]
+*[[Scala vs Idris: Dependent Types, Now and in the Future|http://www.infoq.com/presentations/scala-idris]]
 !Languages with dependent type support
 [[Agda|http://en.wikipedia.org/wiki/Agda_(programming_language)]]
 [[Idris|http://en.wikipedia.org/wiki/Idris_(programming_language)]]
 [[Coq|http://en.wikipedia.org/wiki/Coq]]
 --[[Dotty]]-- @@this is a common mistake, see [[path-dependent type]] for clarification@@
 See also [[Comparison of languages with dependent types|http://en.wikipedia.org/wiki/Dependent_types#Comparison_of_languages_with_dependent_types]]
-</pre>
+!How to make language with no dependent type support more dependent type friendly
+*[[42.type: Literal-based Singleton types|https://speakerdeck.com/folone/42-dot-type-literal-based-singleton-types]]
+*[[LiquidHaskell|http://goto.ucsd.edu/~rjhala/liquid/haskell/blog/about/]]</pre>
 </div>
 <div title="Dotty" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201310191127" modified="201312151439" tags="scala" changecount="11">
 <pre>Odersky unveils Dotty at [[Strange Loop 2013|https://thestrangeloop.com/sessions/the-trouble-with-types]]
@@ -1190,7 +1193,7 @@ but maven test is ok without ceres
 
 This tiddler was automatically created to record the details of this server</pre>
 </div>
-<div title="GATrackerPlugin" modifier="Olivier ROLAND" created="201105142206" modified="201311272207" tags="systemConfig" server.page.revision="201105182137" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.type="file" changecount="1">
+<div title="GATrackerPlugin" modifier="Olivier ROLAND" created="201105142206" modified="201311272207" tags="systemConfig" changecount="1" server.type="file" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.page.revision="201105182137">
 <pre>/***
 |Name|GATrackerPlugin|
 |Description|Google Analytics tracker|
@@ -1421,11 +1424,12 @@ handler: function(place, macroName, params, wikifier, paramString, tiddler) {
 })(jQuery);}
 //}}}</pre>
 </div>
-<div title="General purpose programming language as proof system" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201402121442" modified="201403242208" tags="proof-assistants languages" changecount="7">
+<div title="General purpose programming language as proof system" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201402121442" modified="201407211746" tags="proof-assistants languages" changecount="9">
 <pre>*[[Standard ML as a Proof System, without GADTs|http://www.jonmsterling.com/posts/2014-01-04-standard-ml-as-a-theorem-prover.html]]
 *[[Proving Type Inequality in C++|http://www.jonmsterling.com/posts/2013-02-10-proving-type-inequality-in-cpp.html]]
 *[[EvenOdd in Agda, Idris, Haskell, Scala|http://brianmckenna.org/blog/evenodd_agda_idris_haskell_scala]]
-*[[Proof that numbers go even-odd-even-odd...|https://gist.github.com/nvanderw/9643739]] in haskell</pre>
+*[[Proof that numbers go even-odd-even-odd...|https://gist.github.com/nvanderw/9643739]] in haskell
+*[[How to get the Scala compiler to prove e.g. that a type-level natural number isn't divisible by three|http://stackoverflow.com/questions/24853615/how-in-shapeless-do-you-say-that-a-proof-is-the-empty-type-i-e-false/24854219#24854219]]</pre>
 </div>
 <div title="Gentzen systems explained" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201202231658" modified="201202231845" tags="explained" changecount="71">
 <pre>Let's prove C, C ⇒ A, ¬A ∨ B → B by refutation.
@@ -1887,11 +1891,12 @@ Extract from [[Inductive Theorem Proving Automated Reasoning Petros Papapanagiot
 ****Simplification des clauses
 ****Restrictions de la résolution  </pre>
 </div>
-<div title="Lambda calculus" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201407051704" modified="201407060735" changecount="5">
+<div title="Lambda calculus" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201407051704" modified="201407191347" changecount="6">
 <pre>http://en.wikipedia.org/wiki/Lambda_calculus
 https://www.google.fr/webhp?sourceid=chrome-instant&amp;ion=1&amp;espv=2&amp;ie=UTF-8#q=scala%20lambda%20calcul
 http://lambda-the-ultimate.org/node/679
-http://www.reddit.com/comments/1fnddm</pre>
+http://www.reddit.com/comments/1fnddm
+http://docs.scala-lang.org/tutorials/tour/case-classes.html</pre>
 </div>
 <div title="Language, proof, and logic : summary" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201201130949" modified="201401041456" tags="book summary done" changecount="43">
 <pre>@@this book provides useful remember section which lazily constitute this summary@@
@@ -2160,7 +2165,7 @@ http://www.reddit.com/comments/1fnddm</pre>
 
 [[Quotes worth remembering]]</pre>
 </div>
-<div title="MatchTagsPlugin" modifier="ELSDesignStudios" created="200802290709" modified="201110280154" tags="systemConfig" server.type="file" server.host="http://www.tiddlytools.com/#MatchTagsPlugin" server.page.revision="201110280154">
+<div title="MatchTagsPlugin" modifier="ELSDesignStudios" created="200802290709" modified="201110280154" tags="systemConfig" server.page.revision="201110280154" server.host="http://www.tiddlytools.com/#MatchTagsPlugin" server.type="file">
 <pre>/***
 |Name|MatchTagsPlugin|
 |Source|http://www.TiddlyTools.com/#MatchTagsPlugin|
@@ -2767,14 +2772,15 @@ See also [[Parser combinators vs others]]</pre>
 [[Parboiled2|https://github.com/sirthias/parboiled2]] implementation provide both elegant combinator-style parser construction and fast runtime speed
 [[Early benchmarks|http://users.parboiled.org/Parboiled2-vs-td4024244.html#none]] seem to confirm the potential of Parboiled2</pre>
 </div>
-<div title="Pretty Printing" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201108131210" modified="201108131731" tags="parsing" changecount="22">
+<div title="Pretty Printing" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201108131210" modified="201407282057" tags="parsing" changecount="23">
 <pre>!What is it ?
 If a parser takes a stream of characters and turns them into an abstract syntax tree, a pretty printer does the opposite: it turns some tree into a string, subject to some constraints (to keep the output &quot;pretty&quot;)
 
 !Some pretty printer implementation
 *The Scala's standard library already has one Wadler's Pretty-Printer, but it's rather limited and has only few basic combinators. [[Scala doc|http://www.scala-lang.org/archives/downloads/distrib/files/nightly/docs/library/index.html#scala.text.Document]] about it is really weak. Some useful hints on [[this blog|http://www.scala-blogs.org/2009/04/combinators-for-pretty-printers-part-1.html]]
 *A Scala port of Lindig’s implementation of Wadler’s pretty printer from Ocaml, adding all combinators and whole API from Haskell PPrint - which is another implementation of Wadler’s prettier-printer by Daan Leijen : [[source code|http://scala-programming-language.1934581.n4.nabble.com/file/n1995937/zPPrint.scala]] and [[demo|http://scala-programming-language.1934581.n4.nabble.com/scala-pretty-printing-tp1995936p1995939.html]]
-*A rudimentary pretty printer combinator : http://www.scala-blogs.org/2009/04/combinators-for-pretty-printers-part-1.html</pre>
+*A rudimentary pretty printer combinator : http://www.scala-blogs.org/2009/04/combinators-for-pretty-printers-part-1.html
+*State of the art : http://www.cs.kent.ac.uk/people/staff/oc/pretty.html</pre>
 </div>
 <div title="Pro JavaFX 2 : summary" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201311110808" modified="201311111050" tags="GUI book summary wip" changecount="4">
 <pre>*Chapter 1: Getting a Jump Start in JavaFX
@@ -3706,7 +3712,7 @@ attribute ::= &quot;label&quot; &quot;(&quot; string &quot;)&quot; |
               &quot;bsub_hint_wt&quot; &quot;(&quot; integer &quot;)&quot;
 }}}</pre>
 </div>
-<div title="SystemSettings" modifier="Olivier ROLAND" created="201105142207" modified="201106101816" tags="excludeLists" changecount="6" server.page.revision="201105142207" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.type="file">
+<div title="SystemSettings" modifier="Olivier ROLAND" created="201105142207" modified="201106101816" tags="excludeLists" server.type="file" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.page.revision="201105142207" changecount="6">
 <pre>txtUserName: Olivier%20ROLAND
 txt_GATracker_id: UA-4646079-1
 txt_GATracker_track: 1%2C0%2C1%2C1%2C1%2C1%2C1
@@ -3799,7 +3805,7 @@ Extract from  Debasish Ghosh's book [[DSLs in Action |http://books.google.fr/boo
 
 @@WIP@@</pre>
 </div>
-<div title="TWikiFormatterPlugin" modifier="MartinBudden" created="200607210000" tags="systemConfig excludeLists excludeSearch" server.page.revision="200607210000" server.host="http://www.martinswiki.com" server.type="file">
+<div title="TWikiFormatterPlugin" modifier="MartinBudden" created="200607210000" tags="systemConfig excludeLists excludeSearch" server.type="file" server.host="http://www.martinswiki.com" server.page.revision="200607210000">
 <pre>/***
 |''Name:''|TWikiFormatterPlugin|
 |''Description:''|Allows Tiddlers to use [[TWiki|http://twiki.org/cgi-bin/view/TWiki/TextFormattingRules]] text formatting|
