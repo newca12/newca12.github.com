@@ -1003,7 +1003,7 @@ a little comparaison of those two books [[here|http://blog.ezyang.com/2012/08/pr
 *PORTAL
 ** The Philosophy of Roger Bishop Jones : http://www.rbjones.com/rbjpub/index.htm</pre>
 </div>
-<div title="Functional Programming in Scala : summary" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201404072120" modified="201405101621" tags="scala book summary wip" changecount="24">
+<div title="Functional Programming in Scala : summary" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201404072120" modified="201411090935" tags="scala book summary wip" changecount="52">
 <pre>*PART 1: INTRODUCTION TO FUNCTIONAL PROGRAMMING
 **1. What is functional programming?
 ***1.1 The fundamental premise of functional programming
@@ -1042,18 +1042,96 @@ a little comparaison of those two books [[here|http://blog.ezyang.com/2012/08/pr
 *****Because functions are really just ordinary Scala objects, we say that they are first-class values.
 ***2.6 Polymorphic functions: abstracting over types
 ****So far we have been defining only @@monomorphic@@ functions. That is, functions that operate on only one type of data.
-****We can call the @@type parameters@@ anything we want—though by convention we typically use short, one letter type parameter names, like [A,B,C].
+****We can call the @@type parameters@@ anything we want though by convention we typically use short, one letter type parameter names, like [A,B,C].
 ****We are using the term 'polymorphism' in a slightly different way than mainstream object-oriented programming, where that term usually connotes some form of subtyping. One will occasionally see the term parametric polymorphism used to refer to this form of polymorphism.
 ****A function that is polymorphic in some type is generally forced to represent values of these types as boxed, or non-primitive values
-****Scala compiler to produce specialized versions of a function for each of the primitive types, just by adding an annotation to that type parameter: def binarySearch@@[@specialized A]@@(as: Array[A], key: A,gt: (A,A) =&gt; Boolean): Int
+****It is possible to instruct the Scala compiler to produce specialized versions of a function for each of the primitive types, just by adding an annotation to that type parameter: def binarySearch@@[@specialized A]@@(as: Array[A], key: A,gt: (A,A) =&gt; Boolean): Int
 ***2.7 Conclusion
 ****We saw how the implementations of polymorphic functions are often significantly constrained, such that one can often simply 'follow the types' to the correct implementation. 
 **3. Functional data structures
 ***3.1 Introduction
 ***3.2 Defining functional data structures
 ****A functional data structure is (not surprisingly!) operated on using only pure functions.
-
-</pre>
+****Technically, an abstract class can contain constructors, in the OO sense, which is what separates it from a trait, which cannot contain constructors. 
+****Just as functions can be polymorphic, data types can be as well, and by adding the type parameter [+A]
+****In the declaration trait List[+A], the + in front of the type parameter A is a variance annotation which signals that A is a @@covariant@@ or 'positive' parameter of List. This means that, for instance, List[Dog] is considered a subtype of List[Animal], assuming Dog is a subtype of Animal.
+****Nothing is a subtype of all types
+****@@Companion objects@@ are more of a convention in Scala.
+****For data types, it is a common idiom to have a variadic apply method in the companion object to conveniently construct instances of the data type.
+****We can convert a Seq[A], x, back into something that can be passed to a variadic function using the syntax x: _*, where x can be any expression
+***3.3 Functional data structures and @@data sharing@@
+****Data sharing of immutable data often lets us implement functions more efficiently
+***3.4 Recursion over lists and generalizing to higher-order functions
+****In the Scala standard library, foldRight is a method on List and its arguments are curried similarly for better type inference.
+****all operators ending in : are right-associative
+***3.5 Trees
+****List is just one example of what is called an algebraic data type (ADT).
+****Pairs and other arity tuples are also algebraic data types.
+****Algebraic data types can be used to define other data structures.
+***3.6 Summary
+****We introduced algebraic data types and pattern matching and showed how to implement purely functional data structures, including the singly-linked list.
+**4 Handling errors without exceptions
+***4.1 Introduction
+****throwing an exception breaks referential transparency
+***4.2 Possible alternatives to exceptions
+****We need a way to defer the decision of how to handle undefined cases so that they can be dealt with at the most appropriate level.
+***4.3 The Option data type
+****total function. It takes each value of the input type to exactly one value of the output type.
+****The general rule of thumb is that we use exceptions only if no reasonable program would ever catch the exception—if for some callers the exception might be a recoverable error, we use Option to give them flexibility.
+****we can @@lift@@ ordinary functions to become functions that operate on Option.
+****It's also possible to lift a function by using a @@for-comprehension@@, which in Scala is a convenient syntax for writing a sequence of nested calls to map and flatMap
+****Either has only two cases, just like Option. The essential difference is that both cases carry a value
+****When we use it to indicate success or failure, by convention the Left constructor is reserved for the failure case.
+***4.4 Conclusion
+****Using algebraic data types such as Option and Either, we can handle errors in a way that is modular, compositional, and simple to reason about.
+**5 Strictness and laziness
+***we'll see that non-strictness is a fundamental technique for improving on the efficiency and modularity of functional programs in general.
+***5.1 Strict and @@non-strict@@ functions
+****A function f is @@strict@@ if the expression f(x) evaluates to bottom for all x that evaluate to bottom.
+****To say a function is non-strict just means that the function may choose not to evaluate one or more of its arguments.
+****For example, the Boolean functions &amp;&amp; and || are non-strict.
+****The arguments we would like to pass unevaluated have =&gt; immediately before their type.
+****The unevaluated form of an expression is often called a @@thunk@@.
+****An argument that is passed unevaluated to a function will be evaluated once for each place it is referenced in the body of the function.
+****Adding the lazy keyword to a val declaration will cause Scala to delay evaluation of the right hand side until it is first referenced and will also cache the result
+****We'll often refer to unevaluated parameters in Scala as by-name parameters.
+***5.2 An extended example: lazy lists
+****We'll see how chains of transformations on streams are fused into a single pass, through the use of laziness.
+***5.3 Separating program description from evaluation
+****This kind of separation of concerns is a central theme in functional programming.
+****people sometimes describe streams as &quot;first-class loops&quot; whose logic can be combined using higher-order functions like map and filter.
+****The incremental nature of stream transformations also has important consequences for memory usage.
+***5.4 Infinite streams and corecursion
+****Because they are incremental, the functions we've written also work fine for infinite streams.
+****Be careful though, since it's easy to write an expression that never terminates.
+****While a recursive function consumes data and eventually terminates, a corecursive function produces data and coterminates.
+****Corecursion is also sometimes called guarded recursion.
+***5.5 Summary
+****non-strictness can improve modularity by separating the description of an expression from the &quot;how and when&quot; of its evaluation.
+**6 Purely functio6nal state
+***6.1 Generating random numbers using side-effects
+****Because these state updates are performed as a side effect, these methods are not referentially transparent.
+***6.2 Purely functional random number generation
+****That is, do not update the state as a side effect, but simply return the new state along with the value we are generating.
+***6.3 A better API for state actions
+****We're starting to see a pattern: We're progressing towards implementations that don't explicitly mention or pass along the RNG value.
+***6.4 Purely functional imperative programming
+****Functional programming has excellent support for writing imperative programs
+***6.5 Summary
+****In this chapter, we touched on the subject of how to deal with state and state propagation.
+**7 Purely functional parallelism
+***7.1 Introduction
+****In this chapter, we are going to build a library for creating and composing parallel and asynchronous computations.
+***7.2 Choosing data types and functions
+****this law disallows downcasting or isInstanceOf checks (often grouped under the term @@typecasing@@)
+****Thus, given map(y)(id) == y, it must be true that map(unit(x))(f) == unit(f(x)). Since we get this second law or theorem &quot;for free&quot;, simply because of the @@parametricity@@ of map
+****We say that map is required to be @@structure-preserving@@, in that it does not alter the structure of the parallel computation, only the value &quot;inside&quot; the computation.
+****Given map(y)(id) == y, it is a @@free theorem@@ that map(map(y)(g))(f) == map(y)(f compose g). (This is sometimes called @@map fusion@@, and it can be used as an optimization)
+***7.3 Conclusion
+****the goal of this chapter was to give you a window into the process of functional design
+**8 Property-based testing
+***8.1 Introduction
+****</pre>
 </div>
 <div title="GAPT and TPTP notation" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201111030855" modified="201201221754" tags="parsing gapt" changecount="21">
 <pre>! notes (from Tomer mails)
@@ -1424,7 +1502,7 @@ handler: function(place, macroName, params, wikifier, paramString, tiddler) {
 })(jQuery);}
 //}}}</pre>
 </div>
-<div title="General purpose programming language as proof system" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201402121442" modified="201407211746" tags="proof-assistants languages" changecount="9">
+<div title="General purpose programming language as proof system" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201402121442" modified="201412261859" tags="proof-assistants languages type-system" changecount="10">
 <pre>*[[Standard ML as a Proof System, without GADTs|http://www.jonmsterling.com/posts/2014-01-04-standard-ml-as-a-theorem-prover.html]]
 *[[Proving Type Inequality in C++|http://www.jonmsterling.com/posts/2013-02-10-proving-type-inequality-in-cpp.html]]
 *[[EvenOdd in Agda, Idris, Haskell, Scala|http://brianmckenna.org/blog/evenodd_agda_idris_haskell_scala]]
@@ -4528,12 +4606,13 @@ config.parsers.twikiFormatter.formatTag = 'TWikiFormat';
 } // end of 'install only once'
 //}}}</pre>
 </div>
-<div title="Tags" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104250931" modified="201402091355" tags="meta editing" changecount="79">
+<div title="Tags" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104250931" modified="201412261859" tags="meta editing" changecount="81">
 <pre>*&lt;&lt;tag atp&gt;&gt;- Automated Theorem Proving, what this site is all about
 **&lt;&lt;tag intro&gt;&gt;- Getting started
 **&lt;&lt;tag scala-atp&gt;&gt;- Scala port of [[Handbook of Practical Logic and Automated Reasoning|http://www.cambridge.org/catalogue/catalogue.asp?isbn=9780521899574]]
 **&lt;&lt;tag who&gt;&gt;- People and organizations working on ATP
 **&lt;&lt;tag HoTT&gt;&gt;- Related to Type theorie
+***&lt;&lt;tag type-system&gt;&gt;- Related to type system
 **&lt;&lt;tag book&gt;&gt;- Some books
 ***&lt;&lt;tag summary&gt;&gt;- Reading notes
 **&lt;&lt;tag Algorithms&gt;&gt;- Algorithms related to Automated Theorem Proving
@@ -5149,6 +5228,29 @@ Also most of the JVM optimizations are not necessary anymore. Details [[here|htt
 #Click on finish and that is : @@you've got automatically a fully* configured Scala Maven multi-modules project git managed !@@
 --*You need to manually add /src/main/java to the build path in the treeviz module--</pre>
 </div>
+<div title="howto Scala IDE for Eclipse 4.4 (Luna)" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201411031816" modified="201412261856" tags="tools scala-ide howto" changecount="12">
+<pre>!Installation
+*@@[[Download Scala IDE|http://scala-ide.org/download/sdk.html]]@@
+*--m2eclipse-scala - http://alchim31.free.fr/m2e-scala/update-site--
+*--m2e-egit - http://repository.tesla.io:8081/nexus/content/sites/m2e.extras/m2eclipse-egit/0.14.0/N/0.14.0.201305250025/ (unselect Group items by category)--
+#Go to /File/Import/Maven/Check out Maven Projects from SCM
+#click on Find more SCM connectors in the m2e  Marketplace
+#install m2e-egit for git and m2e-subclipse or m2e-subversive for subversion (you will after restart be prompted to install Svn Connector, choose SVN Kit 1.8.3)
+!Post installation
+*--Eclipse/Preference/General/Workspace/ =&gt; set text file encoding to UTF-8--
+*Eclipse/Preference/Maven/ =&gt; set hide folders of physically nested modules @@doesn't work but does not hurt either@@
+*Eclipse/Preference/Team/Git/Ignored Resources/ =&gt; add .cache,.classpath,.project,*.prefs,*/target/*
+!Optimal memory configuration for Scala IDE
+Also most of the JVM optimizations are not necessary anymore. Details [[here|http://download.oracle.com/javase/7/docs/technotes/guides/vm/performance-enhancements-7.html]].
+*Compressed oops is supported and enabled by default in Java SE 6u23 and later. In Java SE 7, use of compressed oops is the default for 64-bit JVM processes when -Xmx isn't specified and for values of -Xmx less than 32 gigabytes.
+*Escape analysis is supported and enabled by default in Java SE 6u23 and later.
+!Checkout a maven project to check everything is OK
+#Go to /File/Import/Maven/Check out Maven Projects from SCM 
+#Choose git and enter https://github.com/newca12/scala-atp.git
+#Click on finish and that is : @@you've got automatically a fully configured Scala Maven project ( evt git managed) !@@
+!Test also with an sbt managed project like gapt to check everything is OK
+Follow instructions [[here|https://code.google.com/p/gapt/wiki/ForDevelopers#Eclipse]]</pre>
+</div>
 <div title="howto Vampire" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201110311539" modified="201204211603" tags="Vampire howto pb" changecount="13">
 <pre>[[Vampire|http://www.vprover.org/]] is actually the best automatic theorem prover for first-order classical logic 
 *very easy to use : vampire &lt;TPTP filename&gt;
@@ -5390,6 +5492,10 @@ p ∧ r ∧ ¬q ∨ q ∧ ¬p ∨ ¬p ∧ ¬r
 @@No winner@@
 Maven and sbt together is the better option.
 The idea is to drive the project with sbt and auto generate a pom.xml with sbt make-pom to have the best of both worlds.</pre>
+</div>
+<div title="type system" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201412261848" modified="201412261900" tags="HoTT type-system" changecount="2">
+<pre>!What are the programming languages with the best type system? Why?
+http://www.quora.com/What-are-the-programming-languages-with-the-best-type-system-Why</pre>
 </div>
 </div>
 <!--POST-STOREAREA-->
