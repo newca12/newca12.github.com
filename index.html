@@ -1277,7 +1277,7 @@ but maven test is ok without ceres
 
 This tiddler was automatically created to record the details of this server</pre>
 </div>
-<div title="GATrackerPlugin" modifier="Olivier ROLAND" created="201105142206" modified="201311272207" tags="systemConfig" changecount="1" server.type="file" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.page.revision="201105182137">
+<div title="GATrackerPlugin" modifier="Olivier ROLAND" created="201105142206" modified="201311272207" tags="systemConfig" server.page.revision="201105182137" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.type="file" changecount="1">
 <pre>/***
 |Name|GATrackerPlugin|
 |Description|Google Analytics tracker|
@@ -2249,7 +2249,7 @@ http://docs.scala-lang.org/tutorials/tour/case-classes.html</pre>
 
 [[Quotes worth remembering]]</pre>
 </div>
-<div title="MatchTagsPlugin" modifier="ELSDesignStudios" created="200802290709" modified="201110280154" tags="systemConfig" server.page.revision="201110280154" server.host="http://www.tiddlytools.com/#MatchTagsPlugin" server.type="file">
+<div title="MatchTagsPlugin" modifier="ELSDesignStudios" created="200802290709" modified="201110280154" tags="systemConfig" server.type="file" server.host="http://www.tiddlytools.com/#MatchTagsPlugin" server.page.revision="201110280154">
 <pre>/***
 |Name|MatchTagsPlugin|
 |Source|http://www.TiddlyTools.com/#MatchTagsPlugin|
@@ -3417,6 +3417,14 @@ scalaz-stream can already express lots of the use cases that people might otherw
 ***Validate and test the language’s semantics (abandoned)--
 </pre>
 </div>
+<div title="SAT" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201502131726" modified="201502131727" tags="SMT" changecount="2">
+<pre>!Recent news about SAT
+http://www.satlive.org/
+!The international SAT Competitions web page
+http://www.satcompetition.org/
+!Resources
+http://www.cril.univ-artois.fr/~leberre/</pre>
+</div>
 <div title="SMT vs. ATP" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201212291452" modified="201301232144" tags="SMT" changecount="15">
 <pre>Extract from [[Michal Jan Moskal PhD Thesis : Satisfiability Modulo Software|https://docs.google.com/file/d/0B7LbY7bJaltlMEFRczA1QWJOSlE/edit]]
 //There is certain overlap between what is referred to as SMT solvers and first-order Automated Theorem Proving (ATP) systems. Both check satisfiability (or equivalently validity) of first-order formulas. However, unlike in SMT, the logic considered in ATP systems is usually just plain first-order logic with or without equality, but always without any additional theories. On the other hand, SMT solvers usually accept only ground (quantifier-free) problems, whereas ATP systems use reasoning methods like resolution or superposition, which are complete also in presence of non-ground formulas. Still, there are SMT solvers supporting quantifiers, and there are ATP solvers handling some background theories. The crucial differences are thus in the application areas and search methods.
@@ -3620,7 +3628,7 @@ System.err.format(&quot;[UPTIME: %5ds] %s%n&quot;, (System.currentTimeMillis() -
 The winner is : [[Scala]]. The only language of the three with strong IDE support. 
 @@None of the languages explicitly support dependent types, that's why [[Idris]] is now also considered</pre>
 </div>
-<div title="ScalaTest vs Specs2" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201306220859" modified="201405170739" tags="duel tools" changecount="16">
+<div title="ScalaTest vs Specs2" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201306220859" modified="201502111437" tags="duel tools" changecount="18">
 <pre>*ScalaTest pros
 **usable Eclipse plugin
 **Akka’s own test suite is written using ScalaTest
@@ -3632,10 +3640,10 @@ The winner is : [[Scala]]. The only language of the three with strong IDE suppor
 **parallel tests proved to be usefull for thread safety check  
 **The Scala community seem to prefer Specs2 (1)
 *Specs2 cons
-**no Eclipse plugin, Junit is needed
+**no Eclipse plugin, Junit is needed and result is far from perfect (no message for skipped test and fragment not found glitch)
 **Slow time compilation : https://www.artima.com/articles/compile_time.html
 
-No winner.
+ScalaTest win
 
 (1) but Twitter migrate from Specs to Scalatest : https://github.com/twitter/util/issues/95
 //we found that scalatest was typically a lot more conscientious about breaking API changes (we are still getting tests off of specs, as you can see), didn't require that you used a metric ton of implicits, which slow down compilation significantly, and is more responsive to bug reports. In general, scalatest is flexible, simple to reason about, and doesn't get in your way.//</pre>
@@ -3796,7 +3804,7 @@ attribute ::= &quot;label&quot; &quot;(&quot; string &quot;)&quot; |
               &quot;bsub_hint_wt&quot; &quot;(&quot; integer &quot;)&quot;
 }}}</pre>
 </div>
-<div title="SystemSettings" modifier="Olivier ROLAND" created="201105142207" modified="201106101816" tags="excludeLists" server.type="file" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.page.revision="201105142207" changecount="6">
+<div title="SystemSettings" modifier="Olivier ROLAND" created="201105142207" modified="201106101816" tags="excludeLists" changecount="6" server.page.revision="201105142207" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.type="file">
 <pre>txtUserName: Olivier%20ROLAND
 txt_GATracker_id: UA-4646079-1
 txt_GATracker_track: 1%2C0%2C1%2C1%2C1%2C1%2C1
@@ -3889,7 +3897,7 @@ Extract from  Debasish Ghosh's book [[DSLs in Action |http://books.google.fr/boo
 
 @@WIP@@</pre>
 </div>
-<div title="TWikiFormatterPlugin" modifier="MartinBudden" created="200607210000" tags="systemConfig excludeLists excludeSearch" server.type="file" server.host="http://www.martinswiki.com" server.page.revision="200607210000">
+<div title="TWikiFormatterPlugin" modifier="MartinBudden" created="200607210000" tags="systemConfig excludeLists excludeSearch" server.page.revision="200607210000" server.host="http://www.martinswiki.com" server.type="file">
 <pre>/***
 |''Name:''|TWikiFormatterPlugin|
 |''Description:''|Allows Tiddlers to use [[TWiki|http://twiki.org/cgi-bin/view/TWiki/TextFormattingRules]] text formatting|
@@ -4892,7 +4900,7 @@ This tiddler was automatically created to record the details of this server</pre
 <div title="Type theory based theorem prover" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201312071416" modified="201312071430" tags="HoTT provers" changecount="3">
 <pre>*[[Ivor|http://eb.host.cs.st-andrews.ac.uk/ivor.php]]</pre>
 </div>
-<div title="Who's who" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104241635" modified="201307291756" tags="who" changecount="50">
+<div title="Who's who" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201104241635" modified="201502070907" tags="who" changecount="55">
 <pre>In no particular order.
 *Australian National University (Australia)
 ** College of Engineering &amp; Computer Science
@@ -4918,6 +4926,8 @@ This tiddler was automatically created to record the details of this server</pre
 ****gapt
 ***[[Giselle Machado Nogueira Reis|http://www.logic.at/people/giselle/]]
 ****gapt,ASCOP
+***[[Stefan Hetzl|http://www.logic.at/staff/hetzl]]
+****gapt, ASCOP
 * University of Miami (USA)
 **Department of Computer Science
 ***[[Geoff Sutcliffe|http://www.cs.miami.edu/~geoff/]]
@@ -4932,8 +4942,6 @@ This tiddler was automatically created to record the details of this server</pre
 ****Coq
 ***[[Benjamin Werner|http://www.lix.polytechnique.fr/Labo/Benjamin.Werner/]]
 ****Coq
-***[[Stefan Hetzl|http://www.lix.polytechnique.fr/~hetzl/index.html]]
-****gapt,ASCOP
 *Radboud University of Nijmegen (Netherlands)
 **Foundations group
 ***[[Carst Tankink|http://cs.ru.nl/~carst/index.html]]
