@@ -1009,7 +1009,7 @@ a little comparaison of those two books [[here|http://blog.ezyang.com/2012/08/pr
 *PORTAL
 ** The Philosophy of Roger Bishop Jones : http://www.rbjones.com/rbjpub/index.htm</pre>
 </div>
-<div title="Functional Programming in Scala : summary" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201404072120" modified="201411090935" tags="scala book summary wip" changecount="52">
+<div title="Functional Programming in Scala : summary" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201404072120" modified="201504061127" tags="scala book summary wip" changecount="60">
 <pre>*PART 1: INTRODUCTION TO FUNCTIONAL PROGRAMMING
 **1. What is functional programming?
 ***1.1 The fundamental premise of functional programming
@@ -1058,12 +1058,14 @@ a little comparaison of those two books [[here|http://blog.ezyang.com/2012/08/pr
 ***3.1 Introduction
 ***3.2 Defining functional data structures
 ****A functional data structure is (not surprisingly!) operated on using only pure functions.
+****A trait is an abstract interface that may optionally contain implementations of some methods.Adding sealed in front means that all implementations of our trait must be declared in this file.
 ****Technically, an abstract class can contain constructors, in the OO sense, which is what separates it from a trait, which cannot contain constructors. 
 ****Just as functions can be polymorphic, data types can be as well, and by adding the type parameter [+A]
 ****In the declaration trait List[+A], the + in front of the type parameter A is a variance annotation which signals that A is a @@covariant@@ or 'positive' parameter of List. This means that, for instance, List[Dog] is considered a subtype of List[Animal], assuming Dog is a subtype of Animal.
 ****Nothing is a subtype of all types
-****@@Companion objects@@ are more of a convention in Scala.
-****For data types, it is a common idiom to have a variadic apply method in the companion object to conveniently construct instances of the data type.
+****We will often declare a @@companion object@@ in addition to our data type and its data constructors. This is just an object with the same name as the data type where we put various convenience functions for creating or working with values of the data type.
+****Companion objects are more of a convention in Scala. We could have called this module Foo if we wanted.
+****For data types, it is a common idiom to have a variadic apply method in the companion object to conveniently construct instances of the data type. (is a variadic function, meaning it accepts zero or more arguments of type A) 
 ****We can convert a Seq[A], x, back into something that can be passed to a variadic function using the syntax x: _*, where x can be any expression
 ***3.3 Functional data structures and @@data sharing@@
 ****Data sharing of immutable data often lets us implement functions more efficiently
@@ -1072,6 +1074,7 @@ a little comparaison of those two books [[here|http://blog.ezyang.com/2012/08/pr
 ****all operators ending in : are right-associative
 ***3.5 Trees
 ****List is just one example of what is called an algebraic data type (ADT).
+****An ADT is just a data type defined by one or more @@data constructors@@, each of which may contain zero or more arguments.
 ****Pairs and other arity tuples are also algebraic data types.
 ****Algebraic data types can be used to define other data structures.
 ***3.6 Summary
@@ -1087,6 +1090,7 @@ a little comparaison of those two books [[here|http://blog.ezyang.com/2012/08/pr
 ****we can @@lift@@ ordinary functions to become functions that operate on Option.
 ****It's also possible to lift a function by using a @@for-comprehension@@, which in Scala is a convenient syntax for writing a sequence of nested calls to map and flatMap
 ****Either has only two cases, just like Option. The essential difference is that both cases carry a value
+****The Either data type represents, in a very general way, values that can be one of two things. We can say that it is a @@disjoint union@@ of two types.
 ****When we use it to indicate success or failure, by convention the Left constructor is reserved for the failure case.
 ***4.4 Conclusion
 ****Using algebraic data types such as Option and Either, we can handle errors in a way that is modular, compositional, and simple to reason about.
@@ -1277,7 +1281,7 @@ but maven test is ok without ceres
 
 This tiddler was automatically created to record the details of this server</pre>
 </div>
-<div title="GATrackerPlugin" modifier="Olivier ROLAND" created="201105142206" modified="201311272207" tags="systemConfig" server.page.revision="201105182137" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.type="file" changecount="1">
+<div title="GATrackerPlugin" modifier="Olivier ROLAND" created="201105142206" modified="201311272207" tags="systemConfig" changecount="1" server.type="file" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.page.revision="201105182137">
 <pre>/***
 |Name|GATrackerPlugin|
 |Description|Google Analytics tracker|
@@ -1557,7 +1561,7 @@ You can also see algorithms &lt;&lt;tag explained&gt;&gt; and introductory docum
 !And then ?
 @@You can see all these from a new angle, welcome to [[Dependent type]] and begin the journey !@@</pre>
 </div>
-<div title="Glossary" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201109101656" modified="201212291712" tags="intro" changecount="14">
+<div title="Glossary" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201109101656" modified="201504212102" tags="intro" changecount="16">
 <pre>!related to formal logic 
 *[[Predicate|http://en.wikipedia.org/wiki/Predicate_(mathematical_logic)]]
 *[[Atomic formula|http://en.wikipedia.org/wiki/Atomic_formula]]
@@ -1572,6 +1576,7 @@ You can also see algorithms &lt;&lt;tag explained&gt;&gt; and introductory docum
 *[[First-order logic|http://en.wikipedia.org/wiki/First-order_logic]]
 *[[Higher-order logic|http://en.wikipedia.org/wiki/Higher-order_logic]]
 *[[Combinatory logic|http://en.wikipedia.org/wiki/Combinatory_logic]]
+*[[Principle of explosion|http://en.wikipedia.org/wiki/Principle_of_explosion]]
 !related to sequent calculus
 *[[Turnstile (symbol)|http://en.wikipedia.org/wiki/Turnstile_(symbol)]]
 *[[Sequent|http://en.wikipedia.org/wiki/Sequent]]
@@ -2249,7 +2254,7 @@ http://docs.scala-lang.org/tutorials/tour/case-classes.html</pre>
 
 [[Quotes worth remembering]]</pre>
 </div>
-<div title="MatchTagsPlugin" modifier="ELSDesignStudios" created="200802290709" modified="201110280154" tags="systemConfig" server.type="file" server.host="http://www.tiddlytools.com/#MatchTagsPlugin" server.page.revision="201110280154">
+<div title="MatchTagsPlugin" modifier="ELSDesignStudios" created="200802290709" modified="201110280154" tags="systemConfig" server.page.revision="201110280154" server.host="http://www.tiddlytools.com/#MatchTagsPlugin" server.type="file">
 <pre>/***
 |Name|MatchTagsPlugin|
 |Source|http://www.TiddlyTools.com/#MatchTagsPlugin|
@@ -3804,7 +3809,7 @@ attribute ::= &quot;label&quot; &quot;(&quot; string &quot;)&quot; |
               &quot;bsub_hint_wt&quot; &quot;(&quot; integer &quot;)&quot;
 }}}</pre>
 </div>
-<div title="SystemSettings" modifier="Olivier ROLAND" created="201105142207" modified="201106101816" tags="excludeLists" changecount="6" server.page.revision="201105142207" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.type="file">
+<div title="SystemSettings" modifier="Olivier ROLAND" created="201105142207" modified="201106101816" tags="excludeLists" server.type="file" server.host="http://suiryc.github.com/TiddlyWiki-dev" server.page.revision="201105142207" changecount="6">
 <pre>txtUserName: Olivier%20ROLAND
 txt_GATracker_id: UA-4646079-1
 txt_GATracker_track: 1%2C0%2C1%2C1%2C1%2C1%2C1
@@ -3897,7 +3902,7 @@ Extract from  Debasish Ghosh's book [[DSLs in Action |http://books.google.fr/boo
 
 @@WIP@@</pre>
 </div>
-<div title="TWikiFormatterPlugin" modifier="MartinBudden" created="200607210000" tags="systemConfig excludeLists excludeSearch" server.page.revision="200607210000" server.host="http://www.martinswiki.com" server.type="file">
+<div title="TWikiFormatterPlugin" modifier="MartinBudden" created="200607210000" tags="systemConfig excludeLists excludeSearch" server.type="file" server.host="http://www.martinswiki.com" server.page.revision="200607210000">
 <pre>/***
 |''Name:''|TWikiFormatterPlugin|
 |''Description:''|Allows Tiddlers to use [[TWiki|http://twiki.org/cgi-bin/view/TWiki/TextFormattingRules]] text formatting|
@@ -4986,6 +4991,16 @@ This tiddler was automatically created to record the details of this server</pre
 ****ScalaZ3
 See also [[Notable people|http://en.wikipedia.org/wiki/Automated_theorem_proving#Notable_people]]
 </pre>
+</div>
+<div title="akka" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201505052143" modified="201505052144" tags="scala" changecount="2">
+<pre>!criticisms
+*http://stew.vireo.org/posts/I-hate-akka/
+*http://pchiusano.blogspot.fr/2010/01/actors-are-not-good-concurrency-model.html
+*http://pchiusano.blogspot.fr/2010/03/follow-up-to-actors-are-not-good.html
+*http://pchiusano.blogspot.fr/2013/09/actors-are-overly-nondeterminstic.html
+!answers to criticisms
+*http://tech.kinja.com/5-myths-about-actors-1190754834
+*http://doc.akka.io/docs/akka/snapshot/scala/typed.html#typed-scala</pre>
 </div>
 <div title="gapt problems" creator="Olivier ROLAND" modifier="Olivier ROLAND" created="201107102128" modified="201201301341" tags="pb gapt" changecount="15">
 <pre>!gapt should return true (PUZ031-1 : TPTP v3.1.0. Released v1.0.0)
