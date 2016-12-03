@@ -121,6 +121,8 @@ Error message and password prompt
 
 <li>$:/_MyRibbon</li>
 
+<li>$:/config/DefaultSidebarTab</li>
+
 <li>$:/config/Plugins/Disabled/$:/plugins/kantorsite/mathjax</li>
 
 <li>$:/core</li>
@@ -180,6 +182,10 @@ Error message and password prompt
 <li>$:/state/tab/moresidebar-401116514</li>
 
 <li>$:/state/tab/sidebar--1835078512</li>
+
+<li>$:/state/toc/TableOfContents-Algorithms--81657105</li>
+
+<li>$:/state/toc/TableOfContents-Techniques--81657105</li>
 
 <li>$:/StoryList</li>
 
@@ -314,6 +320,8 @@ Error message and password prompt
 <li>About</li>
 
 <li>akka</li>
+
+<li>Algorithms</li>
 
 <li>Algorithms for Herbrand sequent extraction</li>
 
@@ -507,7 +515,11 @@ Error message and password prompt
 
 <li>SystemSettings</li>
 
+<li>TableOfContents</li>
+
 <li>Tags</li>
+
+<li>Techniques</li>
 
 <li>The Big Picture</li>
 
@@ -529,6 +541,8 @@ Error message and password prompt
 
 <li>Type theory based theorem prover</li>
 
+<li>Uses</li>
+
 <li>Who's who</li>
 
 <li>Why are most UI frameworks single threaded ?</li>
@@ -546,6 +560,9 @@ Error message and password prompt
 <div created="20141222113720428" creator="Dept of Experimental Experiments Department" id="CE457D81-8452-4D52-9453-E77BB199902D" modified="20161202184442655" modifier="Dept of Experimental Experiments Department" tags="$:/tags/PageControls" title="$:/_MyRibbon" type="text/vnd.tiddlywiki">
 <pre>&lt;div class=&quot;github-fork-ribbon-wrapper right&quot;&gt;&lt;div class=&quot;github-fork-ribbon&quot;&gt;&lt;a href=&quot;https://github.com/newca12&quot;&gt;Fork me on ~GitHub&lt;/a&gt;&lt;/div&gt;
 &lt;/div&gt;</pre>
+</div>
+<div created="20161203123914559" modified="20161203123914559" title="$:/config/DefaultSidebarTab">
+<pre>TableOfContents</pre>
 </div>
 <div created="20161202181829493" modified="20161202181829493" title="$:/config/Plugins/Disabled/$:/plugins/kantorsite/mathjax">
 <pre>yes</pre>
@@ -8356,20 +8373,26 @@ Error message and password prompt
 <div created="20161202182835403" modified="20161202183250170" title="$:/state/sidebar">
 <pre>yes</pre>
 </div>
-<div created="20161202182905232" modified="20161202183013623" title="$:/state/tab--1963855381">
-<pre>$:/core/ui/ControlPanel/Palette</pre>
+<div created="20161202182905232" modified="20161203123945583" title="$:/state/tab--1963855381">
+<pre>$:/themes/tiddlywiki/vanilla/themetweaks</pre>
 </div>
 <div created="20161202174119653" modified="20161202174125829" title="$:/state/tab-1342078386">
 <pre>$:/core/ui/ControlPanel/Plugins/Add/Plugins</pre>
 </div>
-<div created="20161202171933387" modified="20161202183511308" title="$:/state/tab-1749438307">
-<pre>$:/core/ui/ControlPanel/Plugins</pre>
+<div created="20161202171933387" modified="20161203123925212" title="$:/state/tab-1749438307">
+<pre>$:/core/ui/ControlPanel/Appearance</pre>
 </div>
 <div created="20161202172914070" modified="20161202172914070" title="$:/state/tab/moresidebar-401116514">
 <pre>$:/core/ui/MoreSideBar/System</pre>
 </div>
-<div created="20161202171910028" modified="20161202223236361" title="$:/state/tab/sidebar--1835078512">
-<pre>$:/core/ui/SideBar/Recent</pre>
+<div created="20161202171910028" modified="20161203123854388" title="$:/state/tab/sidebar--1835078512">
+<pre>TableOfContents</pre>
+</div>
+<div created="20161203125015602" modified="20161203125112495" title="$:/state/toc/TableOfContents-Algorithms--81657105">
+<pre>close</pre>
+</div>
+<div created="20161203125107334" modified="20161203125111111" title="$:/state/toc/TableOfContents-Techniques--81657105">
+<pre>close</pre>
 </div>
 <div list="[[Etat De L'Art]]" title="$:/StoryList">
 <pre></pre>
@@ -8724,7 +8747,7 @@ This plugin contains tools to help slice up long texts into individual tiddlers.
 <div created="20161202174052982" modified="20161202175806004" title="$:/temp/RemoteAssetSearch/$:/config/OfficialPluginLibrary">
 <pre>math</pre>
 </div>
-<div created="20161202173835425" modified="20161202183322787" title="$:/temp/search">
+<div created="20161202173835425" modified="20161203130638748" title="$:/temp/search">
 <pre></pre>
 </div>
 <div created="20161202172008326" modified="20161202172008326" tags="$:/tags/ServerConnection" title="$:/temp/ServerConnection/http://tiddlywiki.com/library/v5.1.13/index.html" url="http://tiddlywiki.com/library/v5.1.13/index.html">
@@ -9100,7 +9123,7 @@ This plugin contains tools to help slice up long texts into individual tiddlers.
 **The idea In HoTT is we think of paths being equations because path are reversible and composable =&gt; equivalence relation =&gt; notion of equality
 **@@background-color:#ffd700;00:47:00@@</pre>
 </div>
-<div changecount="36" created="20110908160000000" creator="Olivier ROLAND" modified="20131013082500000" modifier="Olivier ROLAND" tags="intro" title="A bit of history" type="text/x-tiddlywiki">
+<div changecount="36" created="20110908160000000" creator="Olivier ROLAND" modified="20161203124057496" modifier="Olivier ROLAND" tags="intro TableOfContents" title="A bit of history" type="text/x-tiddlywiki">
 <pre>!Notable Events
 *1666 : [[Characteristica universalis|http://en.wikipedia.org/wiki/Characteristica_universalis]] concept
 *1879 : Frege invente axiomatic predicate logic
@@ -9128,7 +9151,7 @@ This plugin contains tools to help slice up long texts into individual tiddlers.
 *[[Georges Gonthier|http://fr.wikipedia.org/wiki/Georges_Gonthier]] ?
 *[[Vladimir Voevodsky|http://en.wikipedia.org/wiki/Vladimir_Voevodsky]] 1966 -</pre>
 </div>
-<div changecount="10" created="20110319183000000" creator="Olivier ROLAND" modified="20110612154100000" modifier="Olivier ROLAND" tags="intro" title="About" type="text/x-tiddlywiki">
+<div changecount="10" created="20110319183000000" creator="Olivier ROLAND" modified="20161203123528505" modifier="Olivier ROLAND" tags="intro TableOfContents" title="About" type="text/x-tiddlywiki">
 <pre>This site is highly inspired by [[Garrett Lisi's site|http://deferentialgeometry.org]]
 The idea germinated in 2009 after fortuity visiting [[vdash web site|http://www.vdash.org/]]. That site was the starting point.
 The short term objective is to centralize valuable resources about Automated Theorem Proving.
@@ -9151,6 +9174,9 @@ The [[HED|http://code.google.com/p/edla-hed/]] theorem prover is* free software,
 *http://www.cakesolutions.net/teamblogs/understanding-akkas-recommended-practice-for-actor-creation-in-scala
 *http://stackoverflow.com/questions/21297619/any-way-to-avoid-defining-a-props-method-in-an-akka-companion-object
 *http://stackoverflow.com/questions/26707337/akka-actor-props-factory</pre>
+</div>
+<div created="20161203124933951" modified="20161203125013160" tags="TableOfContents" title="Algorithms">
+<pre>&lt;&lt;list-links &quot;[tag[Algorithms]]&quot;&gt;&gt;</pre>
 </div>
 <div changecount="6" created="20110626074700000" creator="Olivier ROLAND" modified="20110815084000000" modifier="Olivier ROLAND" tags="Algorithms atp" title="Algorithms for Herbrand sequent extraction" type="text/x-tiddlywiki">
 <pre>*Algorithms for [[Herbrand|http://en.wikipedia.org/wiki/Herbrand's_theorem]]  sequent extraction
@@ -9238,7 +9264,7 @@ https://www.codenameone.com/
 <div changecount="2" created="20110319183700000" creator="Olivier ROLAND" modified="20110425101000000" modifier="Olivier ROLAND" tags="systemNotes" title="DefaultTiddlers" type="text/x-tiddlywiki">
 <pre>[[Etat De L'Art]]</pre>
 </div>
-<div changecount="32" created="20121124173200000" creator="Olivier ROLAND" modified="20150102221900000" modifier="Olivier ROLAND" tags="intro HoTT" title="Dependent type" type="text/x-tiddlywiki">
+<div changecount="32" created="20121124173200000" creator="Olivier ROLAND" modified="20161203124309177" modifier="Olivier ROLAND" tags="intro HoTT TableOfContents" title="Dependent type" type="text/x-tiddlywiki">
 <pre>@@background-color:#ffd700;see also [[Homotopy Type Theory]]@@
 !Read this first
 *[[Unifying Programming and Math – The Dependent Type Revolution|http://spin.atomicobject.com/2012/11/11/unifying-programming-and-math-the-dependent-type-revolution/]]
@@ -9305,7 +9331,7 @@ If you wan't an overview of what is available on this site you can use [[Tags]] 
 
 @@background-color:#ffd700;If you came thru google search due to the uniqueness of ~TiddlyWiki the web result you saw on google may not appear on this website.  To find it just remember the query items and put on the search line to the upper right of this page. You should be able to find the item you were looking for.@@</pre>
 </div>
-<div changecount="91" created="20110319182900000" creator="Olivier ROLAND" modified="20140420124100000" modifier="Olivier ROLAND" tags="intro" title="First-class resources" type="text/x-tiddlywiki">
+<div changecount="91" created="20110319182900000" creator="Olivier ROLAND" modified="20161203124231488" modifier="Olivier ROLAND" tags="intro TableOfContents" title="First-class resources" type="text/x-tiddlywiki">
 <pre>@@background-color:#ffd700;see also [[Dependent type]] and [[Homotopy Type Theory]]@@
 *THEORY OF PROGRAMMING LANGUAGES
 **[[Practical Foundations for Programming Languages|http://www.cambridge.org/us/academic/subjects/computer-science/programming-languages-and-applied-logic/practical-foundations-programming-languages?format=HB]]. Online edition is also [[available|http://www.cs.cmu.edu/~rwh/plbook/book.pdf]].
@@ -9677,7 +9703,7 @@ We can represent this proof as an array. Read it from the bottom to the up.
 *, mean a conjunction on the left and a disjunction on the right
 ''This is the very essence of sequent calculus.''</pre>
 </div>
-<div changecount="33" created="20110424221200000" creator="Olivier ROLAND" modified="20131005152400000" modifier="Olivier ROLAND" tags="intro" title="Getting started" type="text/x-tiddlywiki">
+<div changecount="33" created="20110424221200000" creator="Olivier ROLAND" modified="20161203123715569" modifier="Olivier ROLAND" tags="intro TableOfContents" title="Getting started" type="text/x-tiddlywiki">
 <pre>!What is Automated Theorem Proving and what has it been really useful for ?
 *[[Geoff Sutcliffe's overview|http://www.cs.miami.edu/~tptp/OverviewOfATP.html]]
 *[[Wikipedia article|http://en.wikipedia.org/wiki/Automated_theorem_proving]]
@@ -9693,7 +9719,7 @@ You can also see algorithms &lt;&lt;tag explained&gt;&gt; and introductory docum
 !And then ?
 @@background-color:#ffd700;You can see all these from a new angle, welcome to [[Dependent type]] and begin the journey !@@</pre>
 </div>
-<div changecount="16" created="20110910165600000" creator="Olivier ROLAND" modified="20150421210200000" modifier="Olivier ROLAND" tags="intro" title="Glossary" type="text/x-tiddlywiki">
+<div changecount="16" created="20110910165600000" creator="Olivier ROLAND" modified="20161203125134713" modifier="Olivier ROLAND" tags="intro TableOfContents" title="Glossary" type="text/x-tiddlywiki">
 <pre>!related to formal logic 
 *[[Predicate|http://en.wikipedia.org/wiki/Predicate_(mathematical_logic)]]
 *[[Atomic formula|http://en.wikipedia.org/wiki/Atomic_formula]]
@@ -9768,7 +9794,7 @@ You can also see algorithms &lt;&lt;tag explained&gt;&gt; and introductory docum
 ** We have no way at all of evaluating whether a formula holds in an interpretation with an infinite domain
 ** Note the contrast with propositional logic, where the propositional variables range over a finite (2-element) set which can therefore be enumerated exhaustively</pre>
 </div>
-<div changecount="12" created="20131013083100000" creator="Olivier ROLAND" modified="20140117175200000" modifier="Olivier ROLAND" tags="intro HoTT" title="Homotopy Type Theory" type="text/x-tiddlywiki">
+<div changecount="12" created="20131013083100000" creator="Olivier ROLAND" modified="20161203124414368" modifier="Olivier ROLAND" tags="intro HoTT TableOfContents" title="Homotopy Type Theory" type="text/x-tiddlywiki">
 <pre>!Read this first
 *[[Homotopy Type Theory: a new foundation for 21st-century mathematics|http://aperiodical.com/2013/06/homotopy-type-theory-a-new-foundation-for-21st-century-mathematics/]]
 *Short story of HoTT : [[Vladimir Voevodsky's talk at the Heidelberg Laureate Forum (Video, ~30 min)|http://www.heidelberg-laureate-forum.org/blog/video/lecture-thursday-september-26-vladimir-voevodsky/]]
@@ -10739,7 +10765,7 @@ http://docs.scala-lang.org/tutorials/tour/case-classes.html</pre>
 **immediate consequences of the Completeness Theorem is the first-order Compactness Theorem
 **G&amp;ouml;del’s Incompleteness Theorem showed the positive progress was misleading, and that in fact the goal of Hilbert’s Program could never be accomplished.</pre>
 </div>
-<div changecount="10" created="20110613162900000" creator="Olivier ROLAND" modified="20110805210000000" modifier="Olivier ROLAND" title="Library" type="text/x-tiddlywiki">
+<div changecount="10" created="20110613162900000" creator="Olivier ROLAND" modified="20161203125628622" modifier="Olivier ROLAND" tags="TableOfContents" title="Library" type="text/x-tiddlywiki">
 <pre>[[EDLA book collection|http://books.google.fr/books?uid=116287463809571408586&amp;source=gbs_lp_bookshelf_list]]
 [[EDLA document collection|https://docs.google.com/leaf?id=0B7LbY7bJaltlMTljZWIyZWEtOWFjZi00Njc1LWE4ZjctMDk4YWY2NzliMjVl&amp;hl=en_US]]</pre>
 </div>
@@ -10760,7 +10786,7 @@ The winner is : [[m2eclipse-subversive|https://github.com/sonatype/m2eclipse-sub
 
 (*) Support of maven multi-project in eclipse is actually far for Netbeans or  IntelliJ IDEA but eclipse Scala plugin is the more promising.</pre>
 </div>
-<div changecount="41" created="20110319183000000" creator="Olivier ROLAND" modified="20140504164300000" modifier="Olivier ROLAND" tags="meta editing systemNotes" title="MainMenu" type="text/x-tiddlywiki">
+<div changecount="41" created="20110319183000000" creator="Olivier ROLAND" modified="20161203123443244" modifier="Olivier ROLAND" tags="meta editing systemNotes" title="MainMenu" type="text/x-tiddlywiki">
 <pre>[[About]]
 [[Navigating this site]]
 [[Getting started]]
@@ -10836,7 +10862,7 @@ disturbing the spacing between lines.</pre>
 <pre>[[This|http://existentialtype.net/2008/05/26/modules-in-scala/]] --[[(broken link replaced with google cache)|http://webcache.googleusercontent.com/search?q=cache:NWDcSnkryuYJ:existentialtype.net/2008/05/26/modules-in-scala/+&amp;cd=1&amp;hl=fr&amp;ct=clnk&amp;gl=fr]]-- compile with old Scala but break at runtime.
 This was [[fixed|http://stackoverflow.com/a/7836173]] but then don't compile anymore </pre>
 </div>
-<div changecount="1" created="20110604112700000" creator="Olivier ROLAND" modifier="Olivier ROLAND" tags="intro" title="Navigating this site" type="text/x-tiddlywiki">
+<div changecount="1" created="20110604112700000" creator="Olivier ROLAND" modified="20161203123636664" modifier="Olivier ROLAND" tags="intro TableOfContents" title="Navigating this site" type="text/x-tiddlywiki">
 <pre>Navigating this site is a bit tricky and un-conventional.  Each page is not static.  It is created dynamically according to what you have clicked on.  Everything you click on opens in front of you while 'older' stuff are below in the page.  If you open something that its not to your interest you can close it.
 
 You can use the left navigation bar to open major areas.  You can also use the search to find things that you like.  Phrases underlined are external links while phrases in bold blue font are internal links.</pre>
@@ -11508,7 +11534,7 @@ If a parser takes a stream of characters and turns them into an abstract syntax 
 * Chapter 34 - GUI Programming [[skipped|http://www.oracle.com/technetwork/java/javafx/overview/faq-1446554.html#6]]
 * Chapter 35 - The SCells Spreadsheet [[skipped|http://www.oracle.com/technetwork/java/javafx/overview/faq-1446554.html#6]]  </pre>
 </div>
-<div changecount="73" created="20110810180700000" creator="Olivier ROLAND" modified="20140714134100000" modifier="Olivier ROLAND" tags="done wip" title="Project Status Report" type="text/x-tiddlywiki">
+<div changecount="73" created="20110810180700000" creator="Olivier ROLAND" modified="20161203130439227" modifier="Olivier ROLAND" tags="done wip TableOfContents" title="Project Status Report" type="text/x-tiddlywiki">
 <pre>!What we've learned so far
 All issues related to &lt;&lt;tag parsing&gt;&gt; have been undervalued. ATP and parsing are tightly coupled.
 A theorem prover need a solid parsing foundation.
@@ -11550,14 +11576,14 @@ See also : [[Roadmap]]</pre>
 **Compared to existing declarative theorem proving systems (like Mizar), Isar avoids several shortcomings
 *[[TPTP language]]</pre>
 </div>
-<div changecount="16" created="20140504161300000" creator="Olivier ROLAND" modified="20151118222000000" modifier="Olivier ROLAND" title="Quotes worth remembering" type="text/x-tiddlywiki">
+<div changecount="16" created="20140504161300000" creator="Olivier ROLAND" modified="20161203130506556" modifier="Olivier ROLAND" tags="TableOfContents" title="Quotes worth remembering" type="text/x-tiddlywiki">
 <pre>![[Oh my god. The monad laws are the *category laws* in the kleisli category. How did I not see this until now|https://twitter.com/extempore2/status/667017405432881152]] (Paul Phillips 11/18/2015)
 ![[indeed.  type classes are a very limited mode of use of modules.|https://twitter.com/existentialtype/status/470230532975263744]] (Robert Harper 05/2014)
 ![[I've never used my own union/negation types in real code. On every occasion it initially seemed justified, a type class turned out better|https://twitter.com/milessabin/status/462597500046958593]] (Miles Sabin 05/2014)
 ![[Actors are overly nondeterminstic|http://pchiusano.blogspot.fr/2013/09/actors-are-overly-nondeterminstic.html]] (Paul Chiusano 09/2013)
 scalaz-stream can already express lots of the use cases that people might otherwise express with actors</pre>
 </div>
-<div changecount="27" created="20110702212200000" creator="Olivier ROLAND" modified="20140125221200000" modifier="Olivier ROLAND" tags="book" title="Reading roadmap" type="text/x-tiddlywiki">
+<div changecount="27" created="20110702212200000" creator="Olivier ROLAND" modified="20161203125608275" modifier="Olivier ROLAND" tags="book TableOfContents" title="Reading roadmap" type="text/x-tiddlywiki">
 <pre>!These book are recommended for first reading
 *@@background-color:#ffd700;The best introductory book is french : [[Introduction à la logique : Théorie de la démonstration]]@@
 *[[Language, proof, and logic|http://books.google.fr/books?id=we4YAQAAIAAJ&amp;hl=fr&amp;source=gbs_slider_cls_metadata_1003_mylibrary]]
@@ -11594,7 +11620,7 @@ scalaz-stream can already express lots of the use cases that people might otherw
 **Full review : http://www.math.ucla.edu/~asl/bsl/0604/0604-003.ps
 </pre>
 </div>
-<div changecount="86" created="20110424124700000" creator="Olivier ROLAND" modified="20140714133900000" modifier="Olivier ROLAND" tags="intro done" title="Roadmap" type="text/x-tiddlywiki">
+<div changecount="86" created="20110424124700000" creator="Olivier ROLAND" modified="20161203125646977" modifier="Olivier ROLAND" tags="intro done TableOfContents" title="Roadmap" type="text/x-tiddlywiki">
 <pre>!Tasks to complete
 *Phase 1 : Initialization
 ** --Select the appropriate Content Management System-- ([[done|Content Management System]])
@@ -12040,7 +12066,14 @@ txt_GATracker_id: UA-4646079-1
 txt_GATracker_track: 1%2C0%2C1%2C1%2C1%2C1%2C1
 txt_GATracker_url_exclude: dropboxusercontent</pre>
 </div>
-<div changecount="82" created="20110425093100000" creator="Olivier ROLAND" modified="20150102141100000" modifier="Olivier ROLAND" tags="meta editing" title="Tags" type="text/x-tiddlywiki">
+<div caption="{{$:/language/SideBar/Contents/Caption}}" created="20161203120800414" list="About [[Navigating this site]] [[Getting started]] [[The Big Picture]] [[A bit of history]] [[First-class resources]] [[Dependent type]] [[Homotopy Type Theory]] Algorithms Techniques Glossary Uses [[Reading roadmap]] Library Roadmap [[Project Status Report]] [[Quotes worth remembering]]" list-after="$:/core/ui/SideBar/Open" modified="20161203125442994" tags="$:/tags/SideBar" title="TableOfContents" type="text/vnd.tiddlywiki">
+<pre>&lt;div class=&quot;tc-table-of-contents&quot;&gt;
+
+&lt;&lt;toc-selective-expandable 'TableOfContents'&gt;&gt;
+
+&lt;/div&gt;</pre>
+</div>
+<div changecount="82" created="20110425093100000" creator="Olivier ROLAND" modified="20161203130357217" modifier="Olivier ROLAND" tags="meta editing TableOfContents" title="Tags" type="text/x-tiddlywiki">
 <pre>*&lt;&lt;tag atp&gt;&gt;- Automated Theorem Proving, what this site is all about
 **&lt;&lt;tag intro&gt;&gt;- Getting started
 **&lt;&lt;tag scala-atp&gt;&gt;- Scala port of [[Handbook of Practical Logic and Automated Reasoning|http://www.cambridge.org/catalogue/catalogue.asp?isbn=9780521899574]]
@@ -12089,7 +12122,10 @@ txt_GATracker_url_exclude: dropboxusercontent</pre>
 
 The tags group collections of notes into sets — they're adjectives, directories, or folders. By selecting a tag, visible in the upper right of each note, you can jump to any note labeled with that tag — a navigational convenience. It's efficacious to build a flexible hierarchy of tagged content. Each note should be labeled by its most appropriate, &quot;lowest&quot; leaf tags — more than one as appropriate. Click on the tag to see a popup menu of notes with that tag. Alternatively, these folders and their contents may be selectively displayed in the &quot;Contents&quot; tab to the left.</pre>
 </div>
-<div changecount="9" created="20120131215500000" creator="Olivier ROLAND" modified="20131013091200000" modifier="Olivier ROLAND" tags="intro" title="The Big Picture" type="text/x-tiddlywiki">
+<div created="20161203125032384" modified="20161203125104983" tags="TableOfContents" title="Techniques">
+<pre>&lt;&lt;list-links &quot;[tag[Techniques]]&quot;&gt;&gt;</pre>
+</div>
+<div changecount="9" created="20120131215500000" creator="Olivier ROLAND" modified="20161203124017118" modifier="Olivier ROLAND" tags="intro TableOfContents" title="The Big Picture" type="text/x-tiddlywiki">
 <pre>@@background-color:#ffd700;This site is about [[Homotopy Type Theory]] &amp; ATP. What did you expect ?@@</pre>
 </div>
 <div changecount="7" created="20110425211700000" creator="Olivier ROLAND" modified="20120131215200000" modifier="Olivier ROLAND" tags="TWikiFormat intro" title="The Big Picture (Wikipedia links)" type="text/x-tiddlywiki">
@@ -12410,6 +12446,9 @@ http://www.quora.com/What-are-the-programming-languages-with-the-best-type-syste
 </div>
 <div changecount="3" created="20131207141600000" creator="Olivier ROLAND" modified="20131207143000000" modifier="Olivier ROLAND" tags="HoTT provers" title="Type theory based theorem prover" type="text/x-tiddlywiki">
 <pre>*[[Ivor|http://eb.host.cs.st-andrews.ac.uk/ivor.php]]</pre>
+</div>
+<div created="20161203125521717" modified="20161203125543288" tags="TableOfContents" title="Uses">
+<pre>&lt;&lt;list-links &quot;[tag[Uses]]&quot;&gt;&gt;</pre>
 </div>
 <div changecount="55" created="20110424163500000" creator="Olivier ROLAND" modified="20150207090700000" modifier="Olivier ROLAND" tags="who" title="Who's who" type="text/x-tiddlywiki">
 <pre>In no particular order.
