@@ -145,6 +145,10 @@ Error message and password prompt
 
 <li>$:/plugins/cyrius/ga-tracker</li>
 
+<li>$:/plugins/kantorsite/mathjax</li>
+
+<li>$:/plugins/kantorsite/mathjax/init.js</li>
+
 <li>$:/plugins/tiddlywiki/github-fork-ribbon</li>
 
 <li>$:/plugins/tiddlywiki/tw2parser</li>
@@ -200,6 +204,8 @@ Error message and password prompt
 <li>$:/state/toc/TableOfContents-Uses--81657105</li>
 
 <li>$:/StoryList</li>
+
+<li>$:/temp/ga-tracker/state</li>
 
 <li>$:/temp/HidePluginWarning</li>
 
@@ -373,8 +379,6 @@ Error message and password prompt
 
 <li>GAPT source code analysis</li>
 
-<li>GATracker plugin</li>
-
 <li>General purpose programming language as proof system</li>
 
 <li>Gentzen systems explained</li>
@@ -435,7 +439,7 @@ Error message and password prompt
 
 <li>MainMenu</li>
 
-<li>MathJax plugin</li>
+<li>MathJax plugin for TiddlyWiki 5</li>
 
 <li>MathJaxTiddlyPluginDemo</li>
 
@@ -541,8 +545,6 @@ Error message and password prompt
 
 <li>The Big Picture</li>
 
-<li>The Big Picture (Wikipedia links)</li>
-
 <li>TiddlyWiki problems</li>
 
 <li>Tools</li>
@@ -552,8 +554,6 @@ Error message and password prompt
 <li>TPTP language</li>
 
 <li>TPTP parser</li>
-
-<li>Twiki plugin</li>
 
 <li>type system</li>
 
@@ -591,8 +591,8 @@ Error message and password prompt
 <div created="20161203140851998" modified="20161203140851998" title="$:/config/Navigation/UpdateAddressBar">
 <pre>permalink</pre>
 </div>
-<div created="20161202181829493" modified="20161202181829493" title="$:/config/Plugins/Disabled/$:/plugins/kantorsite/mathjax">
-<pre>yes</pre>
+<div created="20161202181829493" modified="20161231185315436" title="$:/config/Plugins/Disabled/$:/plugins/kantorsite/mathjax">
+<pre>no</pre>
 </div>
 <div created="20161228213923814" modified="20161228213923814" title="$:/config/Plugins/Disabled/$:/plugins/tiddlywiki/googleanalytics">
 <pre>yes</pre>
@@ -8255,7 +8255,7 @@ Error message and password prompt
 <div status="complete" title="$:/Import">
 <pre>The following tiddlers were imported:
 
-# [[$:/plugins/cyrius/ga-tracker]]</pre>
+# [[$:/plugins/kantorsite/mathjax]]</pre>
 </div>
 <div title="$:/isEncrypted">
 <pre>no</pre>
@@ -8284,6 +8284,21 @@ Error message and password prompt
         }
     }
 }</pre>
+</div>
+<div created="20140207231004992" dependents="" description="Adds support of MathJax" modified="20140520145420337" plugin-type="plugin" title="$:/plugins/kantorsite/mathjax" type="application/json" version="5.0.12-beta">
+<pre>{
+    &quot;tiddlers&quot;: {
+        &quot;$:/plugins/kantorsite/mathjax/init.js&quot;: {
+            &quot;text&quot;: &quot;(function(){function e(e,t,n){var r=document.getElementsByTagName('head')[0]||document.documentElement;var i=document.createElement('script');if(typeof e=='function'){i[window.opera?'innerHTML':'text']='('+e.toString()+')()'}else if(typeof e=='string'){i.src=e}if(t){for(var s in t){if(t.hasOwnProperty(s)){i[s]=t[s]}}}var o=false;i.onload=i.onreadystatechange=function(){if(!o&amp;&amp;(!this.readyState||this.readyState=='loaded'||this.readyState=='complete')){o=true;i.onload=i.onreadystatechange=null;if(r&amp;&amp;i.parentNode){r.removeChild(i)}if(typeof n=='function'){n()}}};r.insertBefore(i,r.firstChild);return i}e(function(){MathJax.Hub.Config({tex2jax:{inlineMath:[['$','$'],['\\\\(','\\\\)']]}})},{type:'text/x-mathjax-config'});e('http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML',null,function(){e(function(){var e=window.MutationObserver||window.WebKitMutationObserver;if(!e){alert('MathJax plugin for TW5: Sorry, but current version of your browser is not supported!')}else{var t=new e(function(e,t){MathJax.Hub.Queue(['Typeset',MathJax.Hub])});var n=document.getElementsByClassName('story-river')[0];t.observe(n,{subtree:false,attributes:true,childList:true})}})})})()&quot;,
+            &quot;title&quot;: &quot;$:/plugins/kantorsite/mathjax/init.js&quot;,
+            &quot;type&quot;: &quot;application/javascript&quot;,
+            &quot;module-type&quot;: &quot;startup&quot;
+        }
+    }
+}</pre>
+</div>
+<div created="20161231213308383" modified="20161231213314273" module-type="startup" title="$:/plugins/kantorsite/mathjax/init.js" type="application/javascript">
+<pre>(function(){function e(e,t,n){var r=document.getElementsByTagName('head')[0]||document.documentElement;var i=document.createElement('script');if(typeof e=='function'){i[window.opera?'innerHTML':'text']='('+e.toString()+')()'}else if(typeof e=='string'){i.src=e}if(t){for(var s in t){if(t.hasOwnProperty(s)){i[s]=t[s]}}}var o=false;i.onload=i.onreadystatechange=function(){if(!o&amp;&amp;(!this.readyState||this.readyState=='loaded'||this.readyState=='complete')){o=true;i.onload=i.onreadystatechange=null;if(r&amp;&amp;i.parentNode){r.removeChild(i)}if(typeof n=='function'){n()}}};r.insertBefore(i,r.firstChild);return i}e(function(){MathJax.Hub.Config({tex2jax:{inlineMath:[['$','$'],['\\(','\\)']]}})},{type:'text/x-mathjax-config'});e('http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML',null,function(){e(function(){var e=window.MutationObserver||window.WebKitMutationObserver;if(!e){alert('MathJax plugin for TW5: Sorry, but current version of your browser is not supported!')}else{var t=new e(function(e,t){MathJax.Hub.Queue(['Typeset',MathJax.Hub])});var n=document.getElementsByClassName('tc-story-river')[0];t.observe(n,{subtree:false,attributes:true,childList:true})}})})})()</pre>
 </div>
 <div author="Simon Whitaker, adapted for TiddlyWiki by JeremyRuston" dependents="" description="Corner ribbon" list="readme usage" plugin-type="plugin" title="$:/plugins/tiddlywiki/github-fork-ribbon" type="application/json" version="5.1.13">
 <pre>{
@@ -8384,8 +8399,8 @@ Error message and password prompt
 <div created="20161202172140841" modified="20161202172140841" title="$:/state/add-plugin-info/$:/temp/ServerConnection/http://tiddlywiki.com/library/v5.1.13/index.html/$:/temp/RemoteAssetInfo/http://tiddlywiki.com/library/v5.1.13/index.html/$:/plugins/tiddlywiki/tw2parser">
 <pre>yes</pre>
 </div>
-<div created="20161228214036708" modified="20161228214036708" title="$:/state/plugin-info--896887961-$:/plugins/cyrius/ga-tracker">
-<pre>yes</pre>
+<div created="20161228214036708" modified="20161231184823643" title="$:/state/plugin-info--896887961-$:/plugins/cyrius/ga-tracker">
+<pre>no</pre>
 </div>
 <div created="20161202181827344" modified="20161202181827344" title="$:/state/plugin-info--896887961-$:/plugins/kantorsite/mathjax">
 <pre>yes</pre>
@@ -8402,10 +8417,10 @@ Error message and password prompt
 <div created="20161202184947330" modified="20161202184947330" title="$:/state/plugin-info--896887961-$:/plugins/tiddlywiki/googleanalytics---896887961">
 <pre>usage</pre>
 </div>
-<div created="20161202181336991" modified="20161202184425805" title="$:/state/showeditpreview">
-<pre>no</pre>
+<div created="20161202181336991" modified="20161231183413213" title="$:/state/showeditpreview">
+<pre>yes</pre>
 </div>
-<div created="20161202182835403" modified="20161222224141537" title="$:/state/sidebar">
+<div created="20161202182835403" modified="20161231215225293" title="$:/state/sidebar">
 <pre>yes</pre>
 </div>
 <div created="20161202182905232" modified="20161203123945583" title="$:/state/tab--1963855381">
@@ -8420,14 +8435,14 @@ Error message and password prompt
 <div created="20161202171933387" modified="20161228213739634" title="$:/state/tab-1749438307">
 <pre>$:/core/ui/ControlPanel/Plugins</pre>
 </div>
-<div created="20161202172914070" modified="20161203165418793" title="$:/state/tab/moresidebar-401116514">
-<pre>$:/core/ui/MoreSideBar/Tags</pre>
+<div created="20161202172914070" modified="20161231214848306" title="$:/state/tab/moresidebar-401116514">
+<pre>$:/core/ui/MoreSideBar/Orphans</pre>
 </div>
-<div created="20161202171910028" modified="20161228214535951" title="$:/state/tab/sidebar--1835078512">
+<div created="20161202171910028" modified="20161231214938608" title="$:/state/tab/sidebar--1835078512">
 <pre>TableOfContents</pre>
 </div>
-<div created="20161203125015602" modified="20161203125112495" title="$:/state/toc/TableOfContents-Algorithms--81657105">
-<pre>close</pre>
+<div created="20161203125015602" modified="20161231214717559" title="$:/state/toc/TableOfContents-Algorithms--81657105">
+<pre>open</pre>
 </div>
 <div created="20161203125107334" modified="20161203164522978" title="$:/state/toc/TableOfContents-Techniques--81657105">
 <pre>open</pre>
@@ -8435,7 +8450,10 @@ Error message and password prompt
 <div created="20161203164143866" modified="20161203164143866" title="$:/state/toc/TableOfContents-Uses--81657105">
 <pre>open</pre>
 </div>
-<div list="$:/Import $:/plugins/cyrius/ga-tracker $:/ControlPanel [[Lambda calculus]] [[Interval Temporal Logic]] [[Etat De L'Art]]" title="$:/StoryList">
+<div list="[[Etat De L'Art]]" title="$:/StoryList">
+<pre></pre>
+</div>
+<div created="20161231163104705" gat_can_track="1" gat_enabled="1" gat_id_defined="1" gat_on="0" gat_online="0" gat_plugged="1" gat_script_loaded="0" gat_track_actions="0" gat_url_allowed="1" gat_working="0" modified="20161231214954280" title="$:/temp/ga-tracker/state">
 <pre></pre>
 </div>
 <div created="20161228214009137" modified="20161228214009137" title="$:/temp/HidePluginWarning">
@@ -8791,7 +8809,7 @@ This plugin contains tools to help slice up long texts into individual tiddlers.
 <div created="20161202174052982" modified="20161202175806004" title="$:/temp/RemoteAssetSearch/$:/config/OfficialPluginLibrary">
 <pre>math</pre>
 </div>
-<div created="20161202173835425" modified="20161228214540725" title="$:/temp/search">
+<div created="20161202173835425" modified="20161231214712914" title="$:/temp/search">
 <pre></pre>
 </div>
 <div created="20161202172008326" modified="20161202172008326" tags="$:/tags/ServerConnection" title="$:/temp/ServerConnection/http://tiddlywiki.com/library/v5.1.13/index.html" url="http://tiddlywiki.com/library/v5.1.13/index.html">
@@ -9713,13 +9731,6 @@ but maven test is ok without ceres
 *code update from scala 2.7 to scala 2.8 in [[r457|http://code.google.com/p/gapt/source/detail?r=457]]
 *scala 2.8 warning cleanup in [[r460|http://code.google.com/p/gapt/source/detail?r=460]]
 *scala 2.8 warning cleanup ended in [[r470|http://code.google.com/p/gapt/source/detail?r=470]]</pre>
-</div>
-<div changecount="2" created="20110519175500000" modified="20110519175900000" modifier="Olivier ROLAND" tags="systemServer plugins" title="GATracker plugin" type="text/x-tiddlywiki">
-<pre>|''Type:''|file|
-|''URL:''|http://suiryc.github.com/TiddlyWiki-dev/|
-|''Workspace:''|(default)|
-
-This tiddler was automatically created to record the details of this server</pre>
 </div>
 <div changecount="11" created="20140212144200000" creator="Olivier ROLAND" modified="20160312124600000" modifier="Olivier ROLAND" tags="proof-assistants languages type-system" title="General purpose programming language as proof system" type="text/x-tiddlywiki">
 <pre>*[[Standard ML as a Proof System, without GADTs|http://www.jonmsterling.com/posts/2014-01-04-standard-ml-as-a-theorem-prover.html]]
@@ -10859,12 +10870,52 @@ The winner is : [[m2eclipse-subversive|https://github.com/sonatype/m2eclipse-sub
 
 [[Quotes worth remembering]]</pre>
 </div>
-<div changecount="5" created="20110424134600000" modified="20110425123800000" modifier="Olivier ROLAND" tags="systemServer plugins editing tools" title="MathJax plugin" type="text/x-tiddlywiki">
-<pre>|''Type:''|file|
-|''URL:''|http://www.math.umn.edu/~lixx1445/MainPage/index.html|
-|''Workspace:''|(default)|
+<div created="20140208135834128" modified="20140520172831685" title="MathJax plugin for TiddlyWiki 5">
+<pre>Welcome.
+I have created plugin for [[TiddlyWiki|http://tiddlywiki.com]] 5 which allowes you use [[MathJax|http://www.mathjax.org/]] (math in TeX and MathML) inside TiddlyWiki 5. It's ''unofficial'' plugin and it doesn't follow general policy of TiddlyWiki as stand-alone solution but it works. So you can use it if you want.
 
-This tiddler was automatically created to record the details of this server</pre>
+In case you need MathJax plugin for TiddlyWiki ''Classic'' - [[there is solution too|http://www.guyrutenberg.com/2011/06/25/latex-for-tiddlywiki-a-mathjax-plugin/]].
+
+''Example of MathJax in TW5:''
+$$P(E)   = {n \choose k} p^k (1-p)^{ n-k}$$
+
+''Installation''
+
+Note: this version uses CDN so internet connection is required! [[Offline version of plugin here|Offline installation]].
+
+# Create a backup of your current TiddlyWiki 5 installation (just for case)
+# Open your TiddlyWiki 5 in browser
+# Move this link: [[$:/plugins/kantorsite/mathjax]] to browser window where is opened your TiddlyWiki
+# Save your TiddlyWiki
+# Refresh the window
+# Now, you can use it (try MathJax)
+
+''Fast Download''
+
+You can download empty TiddlyWiki 5.0.12-beta with pre-installed plugin (uses CDN MathJax 2.3 so internet connection required!).
+
+&gt; &lt;a href=&quot;./empty/empty5-0-12-with-mathjax-cdn-rev3.zip&quot;&gt;Download here (zip)&lt;/a&gt; | &lt;a href=&quot;./empty/empty5-0-12-with-mathjax-cdn-rev3.htm&quot;&gt;online file (html)&lt;/a&gt;
+
+Please note that Fast download is provided for your comfort. Check the licenses of both software products first before use.
+
+''Requirements''
+
+*TiddlyWiki 5
+*Internet connection (it uses MathJax CDN)
+
+''Lincense''
+
+Plugin is free but it uses MathJax CDN so by using the plugin you agree with MathJax CDN [[Terms of Service|http://www.mathjax.org/download/mathjax-cdn-terms-of-service/]].
+
+''Current version of plugin:'' revision 3 (see the [[change-log|Change-log]]) 
+
+''Compatibility:'' Read more about [[compatibility|Compatibility]].
+
+''Contact Me:'' &lt;a href=&quot;mailto:Martin.Kantor@email.cz&quot;&gt;Martin.Kantor@email.cz&lt;/a&gt; (English or Czech)
+
+''Thanks for help:''
+
+*Revision 3 is based on code from https://gist.github.com/kpe/cc0547b318e6f8d4ddaa (big thanks to author [[kpe|https://github.com/kpe]])</pre>
 </div>
 <div changecount="1" created="20110331063900000" modified="20110821135800000" modifier="Olivier ROLAND" tags="math editing" title="MathJaxTiddlyPluginDemo" type="text/x-tiddlywiki">
 <pre>$A_B$ now renders correctly, so does $A_{B}$.
@@ -12577,7 +12628,7 @@ txt_GATracker_url_exclude: dropboxusercontent</pre>
 
 &lt;/div&gt;</pre>
 </div>
-<div changecount="82" created="20110425093100000" creator="Olivier ROLAND" modified="20161203130357217" modifier="Olivier ROLAND" tags="meta editing TableOfContents" title="Tags" type="text/x-tiddlywiki">
+<div changecount="82" created="20110425093100000" creator="Olivier ROLAND" modified="20161231214825218" modifier="Olivier ROLAND" tags="meta editing TableOfContents" title="Tags" type="text/x-tiddlywiki">
 <pre>*&lt;&lt;tag atp&gt;&gt;- Automated Theorem Proving, what this site is all about
 **&lt;&lt;tag intro&gt;&gt;- Getting started
 **&lt;&lt;tag scala-atp&gt;&gt;- Scala port of [[Handbook of Practical Logic and Automated Reasoning|http://www.cambridge.org/catalogue/catalogue.asp?isbn=9780521899574]]
@@ -12619,221 +12670,15 @@ txt_GATracker_url_exclude: dropboxusercontent</pre>
 *&lt;&lt;tag meta&gt;&gt;- describes the operation of this site
 **&lt;&lt;tag editing&gt;&gt;- tips on editing and authoring notes, including all sorts of tools
 **&lt;&lt;tag system&gt;&gt;- control how the site operates and is layed out
-***&lt;&lt;tag systemConfig&gt;&gt;- this is a special tag, marking notes with code to be loaded at startup
 ***&lt;&lt;tag systemNotes&gt;&gt;- system control notes loaded at startup, used to control content
-***&lt;&lt;tag plugins&gt;&gt;- code snippets enhancing functionality, and containing descriptions of what they do
-***&lt;&lt;tag systemServer&gt;&gt;- tiddlers automatically created to record the details of source server
 
 The tags group collections of notes into sets — they're adjectives, directories, or folders. By selecting a tag, visible in the upper right of each note, you can jump to any note labeled with that tag — a navigational convenience. It's efficacious to build a flexible hierarchy of tagged content. Each note should be labeled by its most appropriate, &quot;lowest&quot; leaf tags — more than one as appropriate. Click on the tag to see a popup menu of notes with that tag. Alternatively, these folders and their contents may be selectively displayed in the &quot;Contents&quot; tab to the left.</pre>
 </div>
 <div created="20161203125032384" modified="20161203125104983" tags="TableOfContents" title="Techniques">
 <pre>&lt;&lt;list-links &quot;[tag[Techniques]]&quot;&gt;&gt;</pre>
 </div>
-<div changecount="9" created="20120131215500000" creator="Olivier ROLAND" modified="20161203124017118" modifier="Olivier ROLAND" tags="intro TableOfContents" title="The Big Picture" type="text/x-tiddlywiki">
-<pre>@@background-color:#ffd700;This site is about [[Homotopy Type Theory]] &amp; ATP. What did you expect ?@@</pre>
-</div>
-<div changecount="7" created="20110425211700000" creator="Olivier ROLAND" modified="20120131215200000" modifier="Olivier ROLAND" tags="TWikiFormat intro" title="The Big Picture (Wikipedia links)" type="text/x-tiddlywiki">
-<pre>---+ [[http://en.wikipedia.org/wiki/Automated_theorem_proving Automated theorem proving]]
-
-   * [[http://en.wikipedia.org/wiki/automated_reasoning automated reasoning]]
-
-   * [[http://en.wikipedia.org/wiki/mathematical_proof mathematical proof / proving]]
-
-   * [[http://en.wikipedia.org/wiki/mathematical_theorem mathematical theorem]]
-
-   * [[http://en.wikipedia.org/wiki/computer_program computer program]]
-
-   * [[http://en.wikipedia.org/wiki/Automated_theorem_proving#Decidability_of_the_problem  Decidability of the problem ]]
-      * [[http://en.wikipedia.org/wiki/propositional_logic propositional logic]]
-      * [[http://en.wikipedia.org/wiki/NP-complete NP-complete]]
-      * [[http://en.wikipedia.org/wiki/first-order_logic first-order logic / first order predicate calculus]]
-      * [[http://en.wikipedia.org/wiki/Gˆdel's_completeness_theorem Gödels completeness theorem]]
-      * [[http://en.wikipedia.org/wiki/well-formed_formula well-formed formula]]
-      * [[http://en.wikipedia.org/wiki/recursively_enumerable recursively enumerable]]
-      * [[http://en.wikipedia.org/wiki/first-order_theory_of_the_natural_numbers first-order theory of the natural numbers]]
-      * [[http://en.wikipedia.org/wiki/Gˆdel's_incompleteness_theorem Gödels incompleteness theorem]]
-
-   * [[http://en.wikipedia.org/wiki/Automated_theorem_proving#Related_problems  Related problems ]]
-      * [[http://en.wikipedia.org/wiki/proof_verification proof verification]]
-      * [[http://en.wikipedia.org/wiki/primitive_recursive_function primitive recursive function]]
-      * [[http://en.wikipedia.org/wiki/Interactive_theorem_proving Interactive theorem proving / Interactive theorem provers]]
-      * [[http://en.wikipedia.org/wiki/model_checking model checking]]
-      * [[http://en.wikipedia.org/wiki/four_color_theorem four color theorem]]
-      * [[http://en.wikipedia.org/wiki/non-surveyable_proofs non-surveyable proofs]]
-      * [[http://en.wikipedia.org/wiki/Connect_Four Connect Four]]
-
-   * [[http://en.wikipedia.org/wiki/Automated_theorem_proving#Industrial_uses  Industrial uses ]]
-      * [[http://en.wikipedia.org/wiki/Pentium_FDIV_bug Pentium FDIV bug]]
-      * [[http://en.wikipedia.org/wiki/floating_point_unit floating point unit]]
-      * [[http://en.wikipedia.org/wiki/AMD AMD]]
-      * [[http://en.wikipedia.org/wiki/Intel Intel]]
-
-   * [[http://en.wikipedia.org/wiki/Automated_theorem_proving#First-order_theorem_proving First-order theorem proving]]
-      * [[http://en.wikipedia.org/wiki/First-order_logic First-order logic / First-order]]
-      * [[http://en.wikipedia.org/wiki/CADE_ATP_System_Competition CADE ATP System Competition]]
-      * [[http://en.wikipedia.org/wiki/E_equational_theorem_prover E equational theorem prover / E]]
-      * [[http://en.wikipedia.org/wiki/superposition_calculus superposition calculus / purely equational calculus]]
-      * [[http://en.wikipedia.org/wiki/Technical_University_of_Munich Technical University of Munich]]
-      * [[http://en.wikipedia.org/wiki/Otter_theorem_prover Otter theorem prover / Otter]]
-      * [[http://en.wikipedia.org/wiki/Argonne_National_Laboratory Argonne National Laboratory]]
-      * [[http://en.wikipedia.org/wiki/first-order_resolution first-order resolution]]
-      * [[http://en.wikipedia.org/wiki/paramodulation paramodulation]]
-      * [[http://en.wikipedia.org/wiki/Prover9_theorem_prover Prover9 theorem prover / Prover9]]
-      * [[http://en.wikipedia.org/wiki/Mace4 Mace4]]
-      * [[http://en.wikipedia.org/wiki/SETHEO SETHEO]]
-      * [[http://en.wikipedia.org/wiki/model_elimination model elimination]]
-      * [[http://en.wikipedia.org/wiki/Vampire_theorem_prover Vampire theorem prover / Vampire]]
-      * [[http://www.manchester.ac.uk/  Manchester University]]
-      * [[http://www.cs.man.ac.uk/~voronkov/  Andrei Voronkov]]
-      * [[http://www.freewebs.com/riazanov/  Alexandre Riazanov]]
-
-   * [[http://en.wikipedia.org/wiki/Automated_theorem_proving#Deontic_theorem_proving Deontic theorem proving]]
-      * [[http://en.wikipedia.org/wiki/Deontic_logic Deontic logic]]
-
-   * [[http://en.wikipedia.org/wiki/Automated_theorem_proving#Popular_techniques  Popular techniques ]]
-      * [[http://en.wikipedia.org/wiki/First-order_resolution First-order resolution]]
-      * [[http://en.wikipedia.org/wiki/unification unification]]
-      * [[http://en.wikipedia.org/wiki/Lean_theorem_prover Lean theorem prover / Lean theorem proving]]
-      * [[http://en.wikipedia.org/wiki/Model_elimination Model elimination]]
-      * [[http://en.wikipedia.org/wiki/Method_of_analytic_tableaux Method of analytic tableaux]]
-      * [[http://en.wikipedia.org/wiki/Superposition_calculus Superposition calculus / Superposition]]
-      * [[http://en.wikipedia.org/wiki/rewriting rewriting]]
-      * [[http://en.wikipedia.org/wiki/Model_checking Model checking]]
-      * [[http://en.wikipedia.org/wiki/Mathematical_induction Mathematical induction]]
-      * [[http://en.wikipedia.org/wiki/Binary_decision_diagram Binary decision diagram]]
-      * [[http://en.wikipedia.org/wiki/DPLL_algorithm DPLL algorithm / DPLL]]
-      * [[http://en.wikipedia.org/wiki/Unification#Higher-order_unification Unification#Higher-order unification / Higher-order unification]]
-
-   * [[http://en.wikipedia.org/wiki/Automated_theorem_proving#Available_implementations  Available implementations ]]
-      * [[http://en.wikipedia.org/wiki/:Category:Theorem_proving_software_systems :Category:Theorem proving software systems]]
-      * [[http://en.wikipedia.org/wiki/Automated_theorem_proving#Free_software  Free software ]]
-         * [[http://en.wikipedia.org/wiki/ACL2 ACL2]]
-         * [[http://en.wikipedia.org/wiki/Alt-Ergo Alt-Ergo]]
-         * [[http://en.wikipedia.org/wiki/Automath Automath]]
-         * [[http://en.wikipedia.org/wiki/CVC_(theorem_prover) CVC (theorem prover) / CVC]]
-         * [[http://en.wikipedia.org/wiki/E_equational_theorem_prover E equational theorem prover / E]]
-         * [[http://en.wikipedia.org/wiki/EQP EQP]]
-         * [[http://en.wikipedia.org/wiki/Gandalf_(theorem_prover) Gandalf (theorem prover) / Gandalf]]
-         * [[http://en.wikipedia.org/wiki/Gˆdel-machines Gödel-machines]]
-         * [[http://en.wikipedia.org/wiki/HOL_theorem_prover_family HOL theorem prover family / HOL]]
-         * [[http://en.wikipedia.org/wiki/HOL_Light HOL Light]]
-         * [[http://en.wikipedia.org/wiki/Isabelle_(theorem_prover) Isabelle (theorem prover) / Isabelle]]
-         * [[http://en.wikipedia.org/wiki/IsaPlanner IsaPlanner]]
-         * [[http://en.wikipedia.org/wiki/Jape Jape]]
-         * [[http://en.wikipedia.org/wiki/KED KED]]
-         * [[http://en.wikipedia.org/wiki/KeY KeY]]
-         * [[http://en.wikipedia.org/wiki/KeYmaera KeYmaera]]
-         * [[http://en.wikipedia.org/wiki/LCF_(theorem_prover) LCF (theorem prover) / LCF]]
-         * [[http://www.leoprover.org  Leo II]]
-         * [[http://en.wikipedia.org/wiki/LoTREC LoTREC]]
-         * [[http://en.wikipedia.org/wiki/MetaPRL MetaPRL]]
-         * [[http://en.wikipedia.org/wiki/Matita Matita]]
-         * [[http://en.wikipedia.org/wiki/NuPRL NuPRL]]
-         * [[http://en.wikipedia.org/wiki/Otter_(theorem_prover) Otter (theorem prover) / Otter]]
-         * [[http://en.wikipedia.org/wiki/Paradox_(theorem_prover) Paradox (theorem prover) / Paradox]]
-         * [[http://en.wikipedia.org/wiki/PhoX PhoX]]
-         * [[http://en.wikipedia.org/wiki/Prover9 Prover9]]
-         * [[http://en.wikipedia.org/wiki/Prototype_Verification_System Prototype Verification System / PVS]]
-         * [[http://nevidal.org/sad.en.html  SAD]]
-         * [[http://en.wikipedia.org/wiki/SNARK_theorem_prover SNARK theorem prover / SNARK]]
-         * [[http://en.wikipedia.org/wiki/SPASS SPASS]]
-         * [[http://en.wikipedia.org/wiki/Tau_(theorem_prover) Tau (theorem prover) / Tau]]
-         * [[http://en.wikipedia.org/wiki/Theorema Theorema]]
-         * [[http://en.wikipedia.org/wiki/Theorem_Checker Theorem Checker]]
-      * [[http://en.wikipedia.org/wiki/Automated_theorem_proving#Proprietary_software_including_Share-alike_Non-commercial  Proprietary software including Share-alike Non-commercial]]
-         * [[http://en.wikipedia.org/wiki/Acumen_RuleManager Acumen RuleManager]]
-         * [[http://en.wikipedia.org/wiki/Alligator_(software) Alligator (software) / Alligator]]
-         * [[http://en.wikipedia.org/wiki/CARINE CARINE]]
-         * [[http://en.wikipedia.org/wiki/KIV KIV]]
-         * [[http://en.wikipedia.org/wiki/Mizar_system Mizar system / Mizar]]
-         * [[http://en.wikipedia.org/wiki/Prover_Plug-In Prover Plug-In]]
-         * [[http://en.wikipedia.org/wiki/ProverBox ProverBox]]
-         * [[http://en.wikipedia.org/wiki/Cyc#ResearchCyc Cyc#ResearchCyc / ResearchCyc]]
-         * [[http://en.wikipedia.org/wiki/Simplify_(software) Simplify (software) / Simplify]]
-         * [[http://en.wikipedia.org/wiki/SPARK_(programming_language) SPARK (programming language)]]
-         * [[http://en.wikipedia.org/wiki/Spear_modular_arithmetic_theorem_prover Spear modular arithmetic theorem prover]]
-         * [[http://en.wikipedia.org/wiki/Theorem_Proving_System Theorem Proving System]]
-         * [[http://en.wikipedia.org/wiki/Twelf Twelf]]
-         * [[http://en.wikipedia.org/wiki/Vampire_theorem_prover Vampire theorem prover / Vampire/Vampyre]]
-         * [[http://en.wikipedia.org/wiki/Waldmeister Waldmeister]]
-
-   * [[http://en.wikipedia.org/wiki/Automated_theorem_proving#Notable_people  Notable people ]]
-      * [[http://en.wikipedia.org/wiki/Leo_Bachmair Leo Bachmair]]
-      * [[http://en.wikipedia.org/wiki/superposition_calculus superposition calculus]]
-      * [[http://en.wikipedia.org/wiki/Woody_Bledsoe Woody Bledsoe]]
-      * [[http://en.wikipedia.org/wiki/artificial_intelligence artificial intelligence]]
-      * [[http://en.wikipedia.org/wiki/Robert_S._Boyer Robert S. Boyer]]
-      * [[http://en.wikipedia.org/wiki/Nqthm Nqthm / Boyer-Moore theorem prover]]
-      * [[http://en.wikipedia.org/wiki/Herbrand_Award Herbrand Award]]
-      * [[http://en.wikipedia.org/wiki/Alan_Bundy Alan Bundy]]
-      * [[http://en.wikipedia.org/wiki/University_of_Edinburgh University of Edinburgh]]
-      * [[http://en.wikipedia.org/wiki/IJCAI_Award_for_Research_Excellence IJCAI Award for Research Excellence]]
-      * [[http://en.wikipedia.org/wiki/Donald_E._Walker_Distinguished_Service_Award Donald E. Walker Distinguished Service Award]]
-      * [[http://www-unix.mcs.anl.gov/~mccune/  William McCune]]
-      * [[http://www.lsv.ens-cachan.fr/~comon/  Hubert Comon]]
-      * [[http://en.wikipedia.org/wiki/CNRS CNRS]]
-      * [[http://en.wikipedia.org/wiki/ENS_Cachan ENS Cachan]]
-      * [[http://en.wikipedia.org/wiki/Robert_Constable Robert Constable]]
-      * [[http://www.cs.nyu.edu/cs/faculty/davism/  Martin Davis]]
-      * [[http://en.wikipedia.org/wiki/DPLL_algorithm DPLL algorithm]]
-      * [[http://www.fitelson.org/  Branden Fitelson]]
-      * [[http://en.wikipedia.org/wiki/Harald_Ganzinger Harald Ganzinger]]
-      * [[http://logic.stanford.edu/people/genesereth/  Michael Genesereth]]
-      * [[http://en.wikipedia.org/wiki/Stanford_University Stanford University]]
-      * [[http://en.wikipedia.org/wiki/Keith_Goolsbey Keith Goolsbey]]
-      * [[http://en.wikipedia.org/wiki/Cyc Cyc]]
-      * [[http://en.wikipedia.org/wiki/Michael_J._C._Gordon Michael J. C. Gordon]]
-      * [[http://pauillac.inria.fr/~huet/  Gerard Huet]]
-      * [[http://en.wikipedia.org/wiki/Robert_Kowalski Robert Kowalski]]
-      * [[http://en.wikipedia.org/wiki/SLD_resolution SLD resolution]]
-      * [[http://en.wikipedia.org/wiki/logic_programming logic programming / logic programs]]
-      * [[http://www.cs.duke.edu/~dwl/  Donald W. Loveland]]
-      * [[http://en.wikipedia.org/wiki/Metamath Metamath]]
-      * [[http://www.metamath.org  metamath.org]]
-      * [[http://en.wikipedia.org/wiki/J_Strother_Moore J Strother Moore]]
-      * [[http://en.wikipedia.org/wiki/Nqthm Nqthm / Boyer-Moore theorem prover]]
-      * [[http://en.wikipedia.org/wiki/Robert_Nieuwenhuis Robert Nieuwenhuis]]
-      * [[http://en.wikipedia.org/wiki/Tobias_Nipkow Tobias Nipkow]]
-      * [[http://en.wikipedia.org/wiki/Isabelle_theorem_prover Isabelle theorem prover / Isabelle]]
-      * [[http://en.wikipedia.org/wiki/Ross_Overbeek Ross Overbeek]]
-      * [[http://theseed.uchicago.edu/FIG/Html/FIG.html  The Fellowship for Interpretation of Genomes]]
-      * [[http://en.wikipedia.org/wiki/Lawrence_C._Paulson Lawrence C. Paulson]]
-      * [[http://en.wikipedia.org/wiki/University_of_Cambridge University of Cambridge]]
-      * [[http://en.wikipedia.org/wiki/David_A._Plaisted David A. Plaisted]]
-      * [[http://en.wikipedia.org/wiki/University_of_North_Carolina_at_Chapel_Hill University of North Carolina at Chapel Hill]]
-      * [[http://en.wikipedia.org/wiki/Knuth-Bendix_completion_algorithm Knuth-Bendix completion algorithm / completion]]
-      * [[http://www.csl.sri.com/users/rushby/  John Rushby]]
-      * [[http://en.wikipedia.org/wiki/SRI_International SRI International]]
-      * [[http://en.wikipedia.org/wiki/John_Alan_Robinson_(Computer_Scientist) John Alan Robinson (Computer Scientist) / J. Alan Robinson]]
-      * [[http://en.wikipedia.org/wiki/J¸rgen_Schmidhuber Jürgen Schmidhuber]]
-      * [[http://www.idsia.ch/~juergen/goedelmachine.html  G%26#246;del Machines: Self-Referential Universal Problem Solvers Making Provably Optimal Self-Improvements]]
-      * [[http://en.wikipedia.org/wiki/Stephan_Schulz Stephan Schulz]]
-      * [[http://en.wikipedia.org/wiki/Natarajan_Shankar Natarajan Shankar]]
-      * [[http://en.wikipedia.org/wiki/Prototype_Verification_System Prototype Verification System / PVS]]
-      * [[http://en.wikipedia.org/wiki/Mark_Stickel Mark Stickel]]
-      * [[http://en.wikipedia.org/wiki/SRI SRI]]
-      * [[http://en.wikipedia.org/wiki/Geoff_Sutcliffe Geoff Sutcliffe]]
-      * [[http://web.ics.purdue.edu/~dulrich/Home-page.htm  Dolph Ulrich]]
-      * [[http://www.cs.unm.edu/~veroff/  Robert Veroff]]
-      * [[http://www.voronkov.com/  Andrei Voronkov]]
-      * [[http://www-unix.mcs.anl.gov/~wos/  Larry Wos]]
-      * [[http://en.wikipedia.org/wiki/Wen-Tsun_Wu Wen-Tsun Wu]]
-      * [[http://en.wikipedia.org/wiki/Wu's_method Wus method]]
-
-   * [[http://en.wikipedia.org/wiki/Automated_theorem_proving#See_also  See also ]]
-      * [[http://en.wikipedia.org/wiki/Symbolic_computation Symbolic computation]]
-      * [[http://en.wikipedia.org/wiki/Computer-aided_proof Computer-aided proof]]
-      * [[http://en.wikipedia.org/wiki/Automated_reasoning Automated reasoning]]
-      * [[http://en.wikipedia.org/wiki/Formal_verification Formal verification]]
-      * [[http://en.wikipedia.org/wiki/Logic_programming Logic programming]]
-      * [[http://en.wikipedia.org/wiki/Proof_checking Proof checking]]
-      * [[http://en.wikipedia.org/wiki/Proof_complexity Proof complexity]]
-      * [[http://en.wikipedia.org/wiki/Computer_algebra_system Computer algebra system]]
-      * [[http://en.wikipedia.org/wiki/Program_analysis_(computer_science) Program analysis (computer science)]]
-
-   * [[http://en.wikipedia.org/wiki/Automated_theorem_proving#Notes  Notes ]]
-
-   * [[http://en.wikipedia.org/wiki/Automated_theorem_proving#References  References ]]</pre>
+<div changecount="9" created="20120131215500000" creator="Olivier ROLAND" modified="20161231215113927" modifier="Olivier ROLAND" tags="intro TableOfContents" title="The Big Picture" type="text/x-tiddlywiki">
+<pre>@@background-color:#ffd700;Flash plugin is required@@ for this [[link|http://www.wikimindmap.org/viewmap.php?wiki=en.wikipedia.org&amp;topic=Automated+theorem+proving&amp;Submit=Search]]</pre>
 </div>
 <div changecount="2" created="20110604080000000" creator="Olivier ROLAND" modified="20110604080000000" modifier="Olivier ROLAND" tags="pb" title="TiddlyWiki problems" type="text/x-tiddlywiki">
 <pre>*Google doesn't understand TW's syntax (including the hyperlink format), and nor does it know how to link directly to the correct tiddler within a TiddlyWiki.</pre>
@@ -12936,13 +12781,6 @@ Extract from  Debasish Ghosh's book [[DSLs in Action |http://books.google.fr/boo
 //Parser generators like ANTLR are a big step forward toward developing external DSLs at a higher level of abstraction. But you still need to embed your target actions directly within the grammar rules. The EBNF rules and the logic for generating your semantic model are still not sufficiently decoupled. If you need to implement multiple semantic models for a single set of grammar rules, you might even end up duplicating the code for the parser itself; either that, or you’ll have to derive your semantic models from a common base abstraction that the grammar rules offer.//
 
 @@background-color:#ffd700;WIP@@</pre>
-</div>
-<div changecount="2" created="20110425220500000" modified="20110425220900000" modifier="Olivier ROLAND" tags="systemServer plugins editing tools" title="Twiki plugin" type="text/x-tiddlywiki">
-<pre>|''Type:''|file|
-|''URL:''|http://www.martinswiki.com/|
-|''Workspace:''|(default)|
-
-This tiddler was automatically created to record the details of this server</pre>
 </div>
 <div changecount="2" created="20141226184800000" creator="Olivier ROLAND" modified="20141226190000000" modifier="Olivier ROLAND" tags="HoTT type-system" title="type system" type="text/x-tiddlywiki">
 <pre>!What are the programming languages with the best type system? Why?
