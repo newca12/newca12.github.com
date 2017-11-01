@@ -368,6 +368,8 @@ Error message and password prompt
 
 <li>First-class resources</li>
 
+<li>FRP Functional Reactive Programming</li>
+
 <li>Functional Programming in Scala : summary</li>
 
 <li>GAPT and TPTP notation</li>
@@ -9336,16 +9338,16 @@ CodeBlockWidget.prototype.postRender = function() {
 <div created="20170714112651275" modified="20170725205306670" title="$:/state/tab-1749438307">
 <pre>$:/core/ui/ControlPanel/Plugins</pre>
 </div>
-<div created="20170729072126375" modified="20170729164825504" title="$:/state/tab/moresidebar-401116514">
-<pre>$:/core/ui/MoreSideBar/Plugins</pre>
+<div created="20170729072126375" modified="20171101143249085" title="$:/state/tab/moresidebar-401116514">
+<pre>$:/core/ui/MoreSideBar/Tags</pre>
 </div>
-<div created="20170602210359026" modified="20170729165935913" title="$:/state/tab/sidebar--1835078512">
+<div created="20170602210359026" modified="20171101163801882" title="$:/state/tab/sidebar--1835078512">
 <pre>TableOfContents</pre>
 </div>
 <div list="[[Etat De L'Art]] [[Introduction Video]]" title="$:/StoryList">
 <pre></pre>
 </div>
-<div created="20170602210350162" gat_can_track="1" gat_enabled="1" gat_id_defined="1" gat_on="0" gat_online="0" gat_plugged="1" gat_script_loaded="0" gat_track_actions="0" gat_url_allowed="1" gat_working="0" modified="20170729164304450" title="$:/temp/ga-tracker/state">
+<div created="20170602210350162" gat_can_track="1" gat_enabled="1" gat_id_defined="1" gat_on="0" gat_online="0" gat_plugged="1" gat_script_loaded="0" gat_track_actions="0" gat_url_allowed="1" gat_working="0" modified="20171101163752740" title="$:/temp/ga-tracker/state">
 <pre></pre>
 </div>
 <div plugin-type="info" title="$:/temp/info-plugin" type="application/json">
@@ -9832,7 +9834,7 @@ This plugin also requires the JSZip plugin ([[$:/plugins/tiddlywiki/jszip]]) to 
 <div created="20170725205317216" modified="20170725205317435" title="$:/temp/RemoteAssetSearch/$:/config/OfficialPluginLibrary">
 <pre>hi</pre>
 </div>
-<div created="20170604162203733" modified="20170729074027277" title="$:/temp/search">
+<div created="20170604162203733" modified="20171101163759791" title="$:/temp/search">
 <pre></pre>
 </div>
 <div created="20170725205314722" modified="20170725205314722" tags="$:/tags/ServerConnection" title="$:/temp/ServerConnection/http://tiddlywiki.com/library/v5.1.14/index.html" url="http://tiddlywiki.com/library/v5.1.14/index.html">
@@ -10533,6 +10535,12 @@ a little comparaison of those two books [[here|http://blog.ezyang.com/2012/08/pr
 
 *PORTAL
 ** The Philosophy of Roger Bishop Jones : http://www.rbjones.com/rbjpub/index.htm</pre>
+</div>
+<div created="20171101143322954" modified="20171101145112123" tags="GUI concept" title="FRP Functional Reactive Programming">
+<pre>*[[Is functional GUI programming possible?|https://stackoverflow.com/questions/2672791/is-functional-gui-programming-possible]]
+*RxJava vs Sodium
+**[[RX is FRP minus transactions (vaguely speaking)|https://stackoverflow.com/a/31298378]]
+**[[Why Use RxJava with JavaFX?|https://thomasnield.gitbooks.io/rxjavafx-guide/content/1.%20Getting%20Started.html]]</pre>
 </div>
 <div changecount="60" created="20140407212000000" creator="Olivier ROLAND" modified="20150406112700000" modifier="Olivier ROLAND" tags="scala book summary wip" title="Functional Programming in Scala : summary" type="text/x-tiddlywiki">
 <pre>*PART 1: INTRODUCTION TO FUNCTIONAL PROGRAMMING
@@ -12146,7 +12154,7 @@ The winner is : [[m2eclipse-subversive|https://github.com/sonatype/m2eclipse-sub
 <div changecount="3" created="20110730100500000" creator="Olivier ROLAND" modified="20110730114100000" modifier="Olivier ROLAND" tags="code-analysis MELIA" title="MELIA source code analysis" type="text/x-tiddlywiki">
 <pre>All classes are inter-dependent, TPTPTParser need all other classes.</pre>
 </div>
-<div created="20170714064234567" modified="20170715082711302" tags="summary book" title="ML for the Working Programmer : summary">
+<div created="20170714064234567" modified="20170730211149988" tags="summary book" title="ML for the Working Programmer : summary">
 <pre>*Standard ML
 **ML is not pure because of its assignments and input/output commands
 **ml was intended for the programming of one particular theorem prover called Edinburgh LCF (Logic for Computable Functions)
@@ -12155,7 +12163,18 @@ The winner is : [[m2eclipse-subversive|https://github.com/sonatype/m2eclipse-sub
 *Names, Functions and Types
 **The unary minus sign is a tilde (~).
 **The evaluation rule in ML is call-by-value (or  strict evaluation), while most purely functional languages adopt call-by-need (or lazy evaluation).
-**Any combination of goto and assignment statements — the worst of procedural code — can be translated into a set of mutually recursive functions.</pre>
+**Any combination of goto and assignment statements — the worst of procedural code — can be translated into a set of mutually recursive functions.
+**This type is polymorphic because it contains a type variable, namely ' a. In ML, type variables begin with a prime (single quote) character.
+**Note that a polymorphic function can have different types within the same expression.
+**Overloading sits uneasily with polymorphism. It complicates the type checking algorithm and frequently forces programmers to write type constraints.
+*Lists
+**Making change is much harder than it first appears, in the general case. It is closely related to the subset-sum problem, which is NP-complete.
+**Equality testing is polymorphic, but in a restricted sense.
+**Equality types: good or bad? Appel (1993) criticises ML's equality polymorphism on several grounds.
+**ML's treatment of overloading seems unsatisfactory, especially compared with Haskell's elegant type classes
+**A recursive function, by accumulating its results in an extra argument, may avoid inefficient list concatenation.
+*Trees and Concrete Data
+**</pre>
 </div>
 <div changecount="10" created="20140324215500000" creator="Olivier ROLAND" modified="20161203141509179" modifier="Olivier ROLAND" tags="pb scala" title="Modules in Scala" type="text/x-tiddlywiki">
 <pre>[[This|http://existentialtype.net/2008/05/26/modules-in-scala/]] --[[(broken link replaced with google cache)|http://webcache.googleusercontent.com/search?q=cache:NWDcSnkryuYJ:existentialtype.net/2008/05/26/modules-in-scala/+&amp;cd=1&amp;hl=fr&amp;ct=clnk&amp;gl=fr]]-- compile with old Scala but break at runtime.
@@ -12385,9 +12404,9 @@ See also [[Parser combinators vs others]]</pre>
 [[Parboiled2|https://github.com/sirthias/parboiled2]] implementation provide both elegant combinator-style parser construction and fast runtime speed
 [[Early benchmarks|http://users.parboiled.org/Parboiled2-vs-td4024244.html#none]] seem to confirm the potential of Parboiled2</pre>
 </div>
-<div changecount="6" created="20131215143800000" creator="Olivier ROLAND" modified="20140309144300000" modifier="Olivier ROLAND" tags="scala HoTT" title="path-dependent type" type="text/x-tiddlywiki">
-<pre>Dependent types are very distinct from path dependent types : see [[Dependent types vs. Path Dependent types|https://groups.google.com/forum/#!topic/scala-types/5J71FpGl4JA]] or [[Dependent Types in Scala|http://www.reddit.com/r/programming/comments/1hpwl2/dependent_types_in_scala/]]
-@@background-color:#ffd700;but@@ in combination with singleton types and implicit values [[they allow some support for dependent typing|http://stackoverflow.com/questions/12935731/any-reason-why-scala-does-not-explicitly-support-dependent-types/12937819#12937819]]</pre>
+<div changecount="6" created="20131215143800000" creator="Olivier ROLAND" modified="20170916114133421" modifier="Olivier ROLAND" tags="scala HoTT" title="path-dependent type" type="text/x-tiddlywiki">
+<pre>Dependent types are very distinct from path dependent types : see [[Dependent types vs. Path Dependent types|https://groups.google.com/forum/#!topic/scala-types/5J71FpGl4JA]] or [[Dependent Types in Scala|http://www.reddit.com/r/programming/comments/1hpwl2/dependent_types_in_scala/]] @@background-color:#ffd700;but@@ in combination with singleton types and implicit values [[they allow some support for dependent typing|http://stackoverflow.com/questions/12935731/any-reason-why-scala-does-not-explicitly-support-dependent-types/12937819#12937819]].
+See also [[this comparaison with Idris dependent type|https://users.scala-lang.org/t/does-the-dependent-types-of-dotty-allow-for-the-same-abilities-idris-provides/225/2]]</pre>
 </div>
 <div changecount="23" created="20110813121000000" creator="Olivier ROLAND" modified="20140728205700000" modifier="Olivier ROLAND" tags="parsing" title="Pretty Printing" type="text/x-tiddlywiki">
 <pre>!What is it ?
@@ -13637,8 +13656,24 @@ http://stackoverflow.com/questions/9891407/getting-the-desugared-part-of-a-scala
 The winner is : [[Scala]]. The only language of the three with strong IDE support. 
 @@background-color:#ffd700;None of the languages explicitly support dependent types, that's why [[Idris]] is now also considered</pre>
 </div>
-<div created="20170715072838698" modified="20170715073018094" tags="scala" title="Scala way">
-<pre>*[[Construct similar to let .. in|https://stackoverflow.com/questions/20568872/let-in-expression-in-scala]]</pre>
+<div created="20170715072838698" modified="20170729210010060" tags="scala" title="Scala way">
+<pre>*[[Construct similar to let .. in|https://stackoverflow.com/questions/20568872/let-in-expression-in-scala]]
+
+!Polymorphic function declarations
+SML
+
+```sml
+fun pairself x = (x,x);
+fun fst (x,y) = x;
+fun fstfst z = fst (fst z);
+```
+Scala
+
+```scala
+def pairSelf[T](x: T) = (x, x)
+def fst[A](ab: (A, _)) = ab._1
+def fstfst[A](abc: ((A,_),_)) = fst(fst(abc))
+```</pre>
 </div>
 <div changecount="54" created="20110622165800000" creator="Olivier ROLAND" modified="20121124164100000" modifier="Olivier ROLAND" tags="tools" title="Scaladoc &amp; Co" type="text/x-tiddlywiki">
 <pre>Netty Javadoc use [[apiviz|http://code.google.com/p/apiviz/]] which is a rewrite of [[umlgraph|http://www.umlgraph.org/]] to embed class diagram in Javadoc
