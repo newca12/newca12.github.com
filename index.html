@@ -9349,7 +9349,7 @@ CodeBlockWidget.prototype.postRender = function() {
 <div list="[[Functional Reactive Programming : summary]] [[Etat De L'Art]] [[Introduction Video]]" title="$:/StoryList">
 <pre></pre>
 </div>
-<div created="20170602210350162" gat_can_track="1" gat_enabled="1" gat_id_defined="1" gat_on="0" gat_online="0" gat_plugged="1" gat_script_loaded="0" gat_track_actions="0" gat_url_allowed="1" gat_working="0" modified="20171105132511250" title="$:/temp/ga-tracker/state">
+<div created="20170602210350162" gat_can_track="1" gat_enabled="1" gat_id_defined="1" gat_on="0" gat_online="0" gat_plugged="1" gat_script_loaded="0" gat_track_actions="0" gat_url_allowed="1" gat_working="0" modified="20171105213756630" title="$:/temp/ga-tracker/state">
 <pre></pre>
 </div>
 <div plugin-type="info" title="$:/temp/info-plugin" type="application/json">
@@ -10678,7 +10678,7 @@ a little comparaison of those two books [[here|http://blog.ezyang.com/2012/08/pr
 ***8.1 Introduction
 ****</pre>
 </div>
-<div created="20171101185812695" modified="20171105133237517" tags="summary book" title="Functional Reactive Programming : summary">
+<div created="20171101185812695" modified="20171105213952900" tags="summary book" title="Functional Reactive Programming : summary">
 <pre>*Stop listening!
 ** Listeners or callbacks have a set of problems that we call the six plagues.
 ** FRP replaces state machines and listeners or callbacks.
@@ -10702,7 +10702,20 @@ a little comparaison of those two books [[here|http://blog.ezyang.com/2012/08/pr
 ** constant gives a cell with a constant value.
 ** Functions that you pass to FRP primitives must be referentially transparent: they mustn’t affect or be affected by the outside world, except through their argu- ments and return value.
 ** In Sodium, cell updates aren’t visible in the cell until the next transaction. Other FRP systems may have different policies.
-** We talked about looping things with CellLoop and StreamLoop, and how they can be used to implement accumulators. Other FRP systems can take different approaches to this.</pre>
+** We talked about looping things with CellLoop and StreamLoop, and how they can be used to implement accumulators. Other FRP systems can take different approaches to this.
+*Some everyday widget stuff
+**FRP fits nicely into GUI programming, as illustrated with a couple of practical widget examples.
+*Writing a real application
+** FRP code is typically half pure logic and half management of variable scoping.
+** You usually write modules in a class or static method.
+** If a module is written as a class, you write all the code in the constructor and the outputs as public final fields.
+** FRP code is naturally testable because you’re forced to make all inputs and outputs explicit.
+*New concepts
+** Our machines aren’t really von Neumann machines. This idea ties us to sequence, making parallelism difficult, making the programmer’s job difficult, and limiting hardware innovation.
+**You should program to the problem and let the compiler deal with the machine. FRP is a step in the right direction.
+**FRP tames complexity by enforcing compositionality.
+**FRP requires the use of immutable data structures and referential transparency (purity).
+**You should aim for clarity of intent in your code. The code should be simple to understand.</pre>
 </div>
 <div changecount="21" created="20111103085500000" creator="Olivier ROLAND" modified="20120122175400000" modifier="Olivier ROLAND" tags="parsing gapt" title="GAPT and TPTP notation" type="text/x-tiddlywiki">
 <pre>! notes (from Tomer mails)
