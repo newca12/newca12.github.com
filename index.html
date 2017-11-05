@@ -9349,7 +9349,7 @@ CodeBlockWidget.prototype.postRender = function() {
 <div list="[[Functional Reactive Programming : summary]] [[Etat De L'Art]] [[Introduction Video]]" title="$:/StoryList">
 <pre></pre>
 </div>
-<div created="20170602210350162" gat_can_track="1" gat_enabled="1" gat_id_defined="1" gat_on="0" gat_online="0" gat_plugged="1" gat_script_loaded="0" gat_track_actions="0" gat_url_allowed="1" gat_working="0" modified="20171103222629185" title="$:/temp/ga-tracker/state">
+<div created="20170602210350162" gat_can_track="1" gat_enabled="1" gat_id_defined="1" gat_on="0" gat_online="0" gat_plugged="1" gat_script_loaded="0" gat_track_actions="0" gat_url_allowed="1" gat_working="0" modified="20171105132511250" title="$:/temp/ga-tracker/state">
 <pre></pre>
 </div>
 <div plugin-type="info" title="$:/temp/info-plugin" type="application/json">
@@ -10678,7 +10678,7 @@ a little comparaison of those two books [[here|http://blog.ezyang.com/2012/08/pr
 ***8.1 Introduction
 ****</pre>
 </div>
-<div created="20171101185812695" modified="20171103222854112" tags="summary book" title="Functional Reactive Programming : summary">
+<div created="20171101185812695" modified="20171105133237517" tags="summary book" title="Functional Reactive Programming : summary">
 <pre>*Stop listening!
 ** Listeners or callbacks have a set of problems that we call the six plagues.
 ** FRP replaces state machines and listeners or callbacks.
@@ -10687,7 +10687,22 @@ a little comparaison of those two books [[here|http://blog.ezyang.com/2012/08/pr
 ** FRP code has a structure like a directed graph, and an FRP engine derives execution order automatically from it.
 ** FRP uses a declarative programming style, meaning you think of the program in terms of what it is, not what it does.
 ** FRP is something fundamental: it’s a discovery, not an invention.
-** FRP allows functional programming to be used as a meta-language for writing event-based logic.</pre>
+** FRP allows functional programming to be used as a meta-language for writing event-based logic.
+*Core FRP
+** A stream is a stream of events, each consisting of a payload value. We also say that a stream has fired. Other names for stream include event, event stream, observable, and signal.
+** map is a primitive that gives you a new stream or cell that modifies the contained value according to a specified function.
+** Given two streams, merge gives you a stream that combines the events from both input streams.
+** Two events are simultaneous if they occur within the same transaction. By default, in the simultaneous case with sLeft.orElse(sRight), the event from the sLeft argument takes precedence, and the sRight event is dropped. If you want to combine simultaneous events some other way, you can use sLeft.merge(sRight, f) with your own combining function f.
+** A cell contains a value that changes over time. Other names for cell include behavior, property, and signal.
+** hold constructs a cell that has an initial value, and changes its value according to the values fired at it by a stream.
+** Given a stream and a cell, snapshot captures the cell’s value when the stream fires and allows you to combine the two values (from the stream and the cell) using a specified function.
+** filter gives you a new stream that lets only some of the events through, decided by a predicate (a function that returns a Boolean value).
+** Give lift a function that works on two or more input values, and that number of cells, and it’ll give you a cell that combines the input cells using the specified function. It’s like map on a cell, but for more than one cell. It’s called lift because it lifts a function into the world of cells.
+** never gives a stream that never fires.
+** constant gives a cell with a constant value.
+** Functions that you pass to FRP primitives must be referentially transparent: they mustn’t affect or be affected by the outside world, except through their argu- ments and return value.
+** In Sodium, cell updates aren’t visible in the cell until the next transaction. Other FRP systems may have different policies.
+** We talked about looping things with CellLoop and StreamLoop, and how they can be used to implement accumulators. Other FRP systems can take different approaches to this.</pre>
 </div>
 <div changecount="21" created="20111103085500000" creator="Olivier ROLAND" modified="20120122175400000" modifier="Olivier ROLAND" tags="parsing gapt" title="GAPT and TPTP notation" type="text/x-tiddlywiki">
 <pre>! notes (from Tomer mails)
