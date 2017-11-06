@@ -9349,7 +9349,7 @@ CodeBlockWidget.prototype.postRender = function() {
 <div list="[[Functional Reactive Programming : summary]] [[Etat De L'Art]] [[Introduction Video]]" title="$:/StoryList">
 <pre></pre>
 </div>
-<div created="20170602210350162" gat_can_track="1" gat_enabled="1" gat_id_defined="1" gat_on="0" gat_online="0" gat_plugged="1" gat_script_loaded="0" gat_track_actions="0" gat_url_allowed="1" gat_working="0" modified="20171105213756630" title="$:/temp/ga-tracker/state">
+<div created="20170602210350162" gat_can_track="1" gat_enabled="1" gat_id_defined="1" gat_on="0" gat_online="0" gat_plugged="1" gat_script_loaded="0" gat_track_actions="0" gat_url_allowed="1" gat_working="0" modified="20171106213739902" title="$:/temp/ga-tracker/state">
 <pre></pre>
 </div>
 <div plugin-type="info" title="$:/temp/info-plugin" type="application/json">
@@ -10538,8 +10538,9 @@ a little comparaison of those two books [[here|http://blog.ezyang.com/2012/08/pr
 *PORTAL
 ** The Philosophy of Roger Bishop Jones : http://www.rbjones.com/rbjpub/index.htm</pre>
 </div>
-<div created="20171101143322954" modified="20171101145112123" tags="GUI concept" title="FRP Functional Reactive Programming">
-<pre>*[[Is functional GUI programming possible?|https://stackoverflow.com/questions/2672791/is-functional-gui-programming-possible]]
+<div created="20171101143322954" modified="20171106083015741" tags="GUI concept" title="FRP Functional Reactive Programming">
+<pre>*[[Limitations of FRP?|http://lambda-the-ultimate.org/node/4900]]
+*[[Is functional GUI programming possible?|https://stackoverflow.com/questions/2672791/is-functional-gui-programming-possible]]
 *RxJava vs Sodium
 **[[RX is FRP minus transactions (vaguely speaking)|https://stackoverflow.com/a/31298378]]
 **[[Why Use RxJava with JavaFX?|https://thomasnield.gitbooks.io/rxjavafx-guide/content/1.%20Getting%20Started.html]]</pre>
@@ -10678,7 +10679,7 @@ a little comparaison of those two books [[here|http://blog.ezyang.com/2012/08/pr
 ***8.1 Introduction
 ****</pre>
 </div>
-<div created="20171101185812695" modified="20171105213952900" tags="summary book" title="Functional Reactive Programming : summary">
+<div created="20171101185812695" modified="20171106224109697" tags="summary book" title="Functional Reactive Programming : summary">
 <pre>*Stop listening!
 ** Listeners or callbacks have a set of problems that we call the six plagues.
 ** FRP replaces state machines and listeners or callbacks.
@@ -10715,7 +10716,64 @@ a little comparaison of those two books [[here|http://blog.ezyang.com/2012/08/pr
 **You should program to the problem and let the compiler deal with the machine. FRP is a step in the right direction.
 **FRP tames complexity by enforcing compositionality.
 **FRP requires the use of immutable data structures and referential transparency (purity).
-**You should aim for clarity of intent in your code. The code should be simple to understand.</pre>
+**You should aim for clarity of intent in your code. The code should be simple to understand.
+*FRP on the web
+** The RxJS observable is the same as the FRP concept of a stream of events.
+** Instead of a Cell-equivalent type, three methods and one class are used to manage state: scan(), withLatestFrom(), combineLatest(), and BehaviorSubject.
+** Observables can be cold—producing output immediately on subscription, or hot, producing output later as events happen. BehaviorSubject starts cold, outputting the current value once on initial subscription, and then becomes hot.
+** startWith() is a shortcut for BehaviorSubject, but it’s not exactly equivalent.
+** RxJS doesn’t prevent glitches and doesn’t handle simultaneous events consistently, which means it doesn’t have compositionality. This means it’s not strictly a true FRP system.
+* Switch
+** The sample primitive allows cells to be sampled directly. You can use it when constructing FRP logic or in functions passed to FRP primitives that work on events (Stream.map, snapshot, filter, merge, Stream.accum). Or it can be called any time from I/O code to sample a cell’s current value.
+** Without switch, the data-flow graph that implements the FRP logic is static.
+** switch lets you use FRP to construct FRP, so you can change the FRP data-flow graph dynamically.
+** Merging long lists of cells or streams has performance implications, but there are ways to make this scalable.
+** Making invalid states not representable is desirable because it reduces the possibilities for bugs. switch can help with this.
+*Operational primitives
+** listen() and send() are the interface between FRP and the outside world.
+** The Operational.updates() and Operational.value() primitives convert a cell to a stream representing the state changes. They have deliberately cumbersome names to remind you to only use them for operational reasons because they break an important property of FRP where the steps in a cell’s value shouldn’t be detectable.
+** split/defer primitives let you spawn new transactions.
+*Continuous time
+** We liken continuous-time FRP to vector graphics and animation frames to raster graphics, but in the domain of time instead of space.
+** The mechanism of continuous time is to update a cell representing time before passing external events into the FRP system. Externally, you’re saying, “Please sample the model at time t,” but within the model, you can think of time as varying continuously. Different systems abstract these mechanics away in different ways.
+** If you lift or map something against a continuously varying time variable, then the resulting value is continuous.
+** Continuous time requires that you can measure time. Sodium provides Timer- System.at() to do this.
+** With continuous-time FRP, you can simulate physics in a natural way.
+*Battle of the paradigms
+** The classic callback/listener style code often involves calling some kind of update() method. There are many opportunities to forget to do it or to call things in the wrong order.
+** The actor model can flatten one state variable into a flow of control, often greatly simplifying the implementation. But it doesn’t cope well when the prob- lem demands more than one independent state variable.
+** FRP copes well with multiple independent state variables. So does classic, but complexity is always threatening to creep in.
+** Actor is best where the problem has a clear, linear flow of control.
+*Programming in the real world
+** In FRP, you can model an I/O action as a function from Stream[A] to Stream[B]
+** We’ve given an implementation of promises based on FRP.
+** If you want to associate state with the execution of I/O, it can be useful to use switch and model the I/O result as a promise.
+** It’s good to write unit tests to verify the correctness of your logic, but we don’t generally recommend test-driven development for FRP.
+*Helpers and patterns
+** Junction is an imperative idea, but it allows you to instantiate modules extensibly that can push their own data into a preexisting stream or cell.
+** Writable remote values are a way to deal neatly with impedance mismatches between a data back end and a GUI interface.
+** The orderliness of state management in FRP means snapshotting the current state of something complex for persistent storage is easy to achieve.
+** Supply is a technique from functional programming to generate unique IDs in a way that’s referentially transparent to the caller.
+** A graphical user interface (GUI) library can be implemented nicely in FRP— and the code is arguably much better than the common object-oriented approach.
+*Refactoring
+** Sometimes the difficulty and risk of refactoring lead us to favor short-term con- siderations. Refactoring gets put off, and code gets messy.
+** FRP code doesn’t get messy as easily due to its compositionality.
+** FRP code is automatically safe and easy to refactor.
+** FRP protects against refactoring breakage so well that unit tests aren’t necessary for this purpose.
+** The dilemma of short-term versus long-term considerations largely disappears with FRP.
+*Adding FRP to existing projects
+** Streams and cells can be used as drop-in replacements for listeners and mutable variables, respectively.
+** FRP requires values to be immutable, so it can be a good policy to refactor your code to use immutable variables first. This is a good idea in any case.
+** When refactoring with FRP, you should do it in small chunks where you can keep the external interface so existing code can use it.
+** We recommend that you put one big transaction around your program initial- ization.
+** The Junction class described in section 12.3 can be a useful helper when you need extensibility.
+*Future directions
+** Standardization is highly desirable.
+** FRP syntax tends to be clunky and could be greatly improved.
+** We think FRP has the potential to go very fast.
+** FRP is currently constructed at runtime, making it suitable for just-in-time compilers and runtime optimization. But we think it could also be compiled statically for embedded systems.
+** We think FRP could be developed to express database applications, such as those found commonly on the web.
+** We think FRP could be well suited to visual programming, visual debugging tools, and automatic refactoring.</pre>
 </div>
 <div changecount="21" created="20111103085500000" creator="Olivier ROLAND" modified="20120122175400000" modifier="Olivier ROLAND" tags="parsing gapt" title="GAPT and TPTP notation" type="text/x-tiddlywiki">
 <pre>! notes (from Tomer mails)
