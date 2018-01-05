@@ -9343,13 +9343,13 @@ CodeBlockWidget.prototype.postRender = function() {
 <div created="20170729072126375" modified="20171101143249085" title="$:/state/tab/moresidebar-401116514">
 <pre>$:/core/ui/MoreSideBar/Tags</pre>
 </div>
-<div created="20170602210359026" modified="20171101185807451" title="$:/state/tab/sidebar--1835078512">
-<pre>$:/core/ui/SideBar/Recent</pre>
+<div created="20170602210359026" modified="20180105223637476" title="$:/state/tab/sidebar--1835078512">
+<pre>TableOfContents</pre>
 </div>
-<div list="[[Functional Reactive Programming : summary]] [[Etat De L'Art]] [[Introduction Video]]" title="$:/StoryList">
+<div list="Glossary Tags [[Functional Reactive Programming : summary]] [[FRP Functional Reactive Programming]] [[Etat De L'Art]] [[Introduction Video]]" title="$:/StoryList">
 <pre></pre>
 </div>
-<div created="20170602210350162" gat_can_track="1" gat_enabled="1" gat_id_defined="1" gat_on="0" gat_online="0" gat_plugged="1" gat_script_loaded="0" gat_track_actions="0" gat_url_allowed="1" gat_working="0" modified="20171106213739902" title="$:/temp/ga-tracker/state">
+<div created="20170602210350162" gat_can_track="1" gat_enabled="1" gat_id_defined="1" gat_on="0" gat_online="0" gat_plugged="1" gat_script_loaded="0" gat_track_actions="0" gat_url_allowed="1" gat_working="0" modified="20180105221604728" title="$:/temp/ga-tracker/state">
 <pre></pre>
 </div>
 <div plugin-type="info" title="$:/temp/info-plugin" type="application/json">
@@ -9836,8 +9836,8 @@ This plugin also requires the JSZip plugin ([[$:/plugins/tiddlywiki/jszip]]) to 
 <div created="20170725205317216" modified="20170725205317435" title="$:/temp/RemoteAssetSearch/$:/config/OfficialPluginLibrary">
 <pre>hi</pre>
 </div>
-<div created="20170604162203733" modified="20171101163759791" title="$:/temp/search">
-<pre></pre>
+<div created="20170604162203733" modified="20180105223716394" title="$:/temp/search">
+<pre>defini</pre>
 </div>
 <div created="20170725205314722" modified="20170725205314722" tags="$:/tags/ServerConnection" title="$:/temp/ServerConnection/http://tiddlywiki.com/library/v5.1.14/index.html" url="http://tiddlywiki.com/library/v5.1.14/index.html">
 <pre>loaded</pre>
@@ -10965,7 +10965,7 @@ You can also see algorithms &lt;&lt;tag explained&gt;&gt; and introductory docum
 !And then ?
 @@background-color:#ffd700;You can see all these from a new angle, welcome to [[Dependent type]] and begin the journey !@@</pre>
 </div>
-<div changecount="16" created="20110910165600000" creator="Olivier ROLAND" modified="20161203125134713" modifier="Olivier ROLAND" tags="intro TableOfContents" title="Glossary" type="text/x-tiddlywiki">
+<div changecount="16" created="20110910165600000" creator="Olivier ROLAND" modified="20180105224422880" modifier="Olivier ROLAND" tags="intro TableOfContents" title="Glossary" type="text/x-tiddlywiki">
 <pre>!related to formal logic 
 *[[Predicate|http://en.wikipedia.org/wiki/Predicate_(mathematical_logic)]]
 *[[Atomic formula|http://en.wikipedia.org/wiki/Atomic_formula]]
@@ -10985,8 +10985,9 @@ You can also see algorithms &lt;&lt;tag explained&gt;&gt; and introductory docum
 *[[Turnstile (symbol)|http://en.wikipedia.org/wiki/Turnstile_(symbol)]]
 *[[Sequent|http://en.wikipedia.org/wiki/Sequent]]
 *[[Sequent calculus|http://en.wikipedia.org/wiki/Sequent_calculus]]
-!unclassified
+!Related to computer science
 *[[Satisfiability Modulo Theories|http://en.wikipedia.org/wiki/Satisfiability_Modulo_Theories]]
+*[[Denotational semantics|https://en.wikipedia.org/wiki/Denotational_semantics]]
 </pre>
 </div>
 <div changecount="6" created="20130101092800000" creator="Olivier ROLAND" modified="20130101134100000" modifier="Olivier ROLAND" tags="parsing" title="Grammar combinators" type="text/x-tiddlywiki">
@@ -11328,15 +11329,14 @@ MacBook-Pro-de-hack:maude hack$
 ./tptp2X  -f protein /tmp/PUZ001-1.p
 }}}</pre>
 </div>
-<div changecount="12" created="20110423213400000" creator="Olivier ROLAND" modified="20110516211400000" modifier="Olivier ROLAND" tags="ocaml-atp scala-atp howto" title="howto ocaml-atp" type="text/x-tiddlywiki">
+<div changecount="12" created="20110423213400000" creator="Olivier ROLAND" modified="20171115221759326" modifier="Olivier ROLAND" tags="ocaml-atp scala-atp howto" title="howto ocaml-atp" type="text/x-tiddlywiki">
 <pre>{{{
-cd Ocaml
-ocaml
+cd ocaml-atp
 #use &quot;init.ml&quot;;;
 resolution &lt;&lt;(exists y. forall x. P(x, y)) ==&gt; forall x. exists y. P(x, y)&gt;&gt;;;
 }}}
 
-Nota : anything in quotations with | gets passed to secondary_parser, while anthing else in quotations gets passed to default_parser.
+Nota : anything in quotations with | gets passed to secondary_parser, while anything else in quotations gets passed to default_parser.
 {{{
 # &lt;&lt;(forall x. x &lt; 2 ==&gt; 2 * x &lt;= 3) \/ false&gt;&gt;;;
 - : fol formula = &lt;&lt;(forall x. x &lt; 2 ==&gt; 2 * x &lt;= 3) \/ false&gt;&gt;
