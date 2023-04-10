@@ -175,31 +175,6 @@ function getStringFromWasm0(ptr, len) {
     return cachedTextDecoder.decode(getUint8Memory0().subarray(ptr, ptr + len));
 }
 
-function makeClosure(arg0, arg1, dtor, f) {
-    const state = { a: arg0, b: arg1, cnt: 1, dtor };
-    const real = (...args) => {
-        // First up with a closure we increment the internal reference
-        // count. This ensures that the Rust closure environment won't
-        // be deallocated while we're invoking it.
-        state.cnt++;
-        try {
-            return f(state.a, state.b, ...args);
-        } finally {
-            if (--state.cnt === 0) {
-                wasm.__wbindgen_export_2.get(state.dtor)(state.a, state.b);
-                state.a = 0;
-
-            }
-        }
-    };
-    real.original = state;
-
-    return real;
-}
-function __wbg_adapter_16(arg0, arg1, arg2, arg3, arg4) {
-    wasm._dyn_core__ops__function__Fn__A_B_C___Output___R_as_wasm_bindgen__closure__WasmClosure___describe__invoke__hba2c4a2216d4a7da(arg0, arg1, addHeapObject(arg2), arg3, arg4);
-}
-
 function makeMutClosure(arg0, arg1, dtor, f) {
     const state = { a: arg0, b: arg1, cnt: 1, dtor };
     const real = (...args) => {
@@ -224,12 +199,37 @@ function makeMutClosure(arg0, arg1, dtor, f) {
 
     return real;
 }
-function __wbg_adapter_19(arg0, arg1) {
-    wasm._dyn_core__ops__function__FnMut_____Output___R_as_wasm_bindgen__closure__WasmClosure___describe__invoke__h2224115ec614bf34(arg0, arg1);
+function __wbg_adapter_16(arg0, arg1) {
+    wasm._dyn_core__ops__function__FnMut_____Output___R_as_wasm_bindgen__closure__WasmClosure___describe__invoke__h48b5f3914a96d9c8(arg0, arg1);
+}
+
+function makeClosure(arg0, arg1, dtor, f) {
+    const state = { a: arg0, b: arg1, cnt: 1, dtor };
+    const real = (...args) => {
+        // First up with a closure we increment the internal reference
+        // count. This ensures that the Rust closure environment won't
+        // be deallocated while we're invoking it.
+        state.cnt++;
+        try {
+            return f(state.a, state.b, ...args);
+        } finally {
+            if (--state.cnt === 0) {
+                wasm.__wbindgen_export_2.get(state.dtor)(state.a, state.b);
+                state.a = 0;
+
+            }
+        }
+    };
+    real.original = state;
+
+    return real;
+}
+function __wbg_adapter_19(arg0, arg1, arg2, arg3, arg4) {
+    wasm._dyn_core__ops__function__Fn__A_B_C___Output___R_as_wasm_bindgen__closure__WasmClosure___describe__invoke__h5b9d4a485b954ce9(arg0, arg1, addHeapObject(arg2), arg3, arg4);
 }
 
 function __wbg_adapter_22(arg0, arg1, arg2) {
-    wasm._dyn_core__ops__function__FnMut__A____Output___R_as_wasm_bindgen__closure__WasmClosure___describe__invoke__h9323891df7c84f84(arg0, arg1, addHeapObject(arg2));
+    wasm._dyn_core__ops__function__FnMut__A____Output___R_as_wasm_bindgen__closure__WasmClosure___describe__invoke__hbd2611d61537121a(arg0, arg1, addHeapObject(arg2));
 }
 
 function isLikeNone(x) {
@@ -247,7 +247,7 @@ function handleError(f) {
     };
 }
 function __wbg_adapter_61(arg0, arg1, arg2, arg3) {
-    wasm.wasm_bindgen__convert__closures__invoke2_mut__h38030c3d25826e1f(arg0, arg1, addHeapObject(arg2), addHeapObject(arg3));
+    wasm.wasm_bindgen__convert__closures__invoke2_mut__ha3a0b7973b37c07f(arg0, arg1, addHeapObject(arg2), addHeapObject(arg3));
 }
 
 async function load(module, imports) {
@@ -443,11 +443,11 @@ async function init(input) {
         return addHeapObject(ret);
     };
     imports.wbg.__wbindgen_closure_wrapper335 = function(arg0, arg1, arg2) {
-        var ret = makeClosure(arg0, arg1, 132, __wbg_adapter_16);
+        var ret = makeMutClosure(arg0, arg1, 132, __wbg_adapter_16);
         return addHeapObject(ret);
     };
     imports.wbg.__wbindgen_closure_wrapper337 = function(arg0, arg1, arg2) {
-        var ret = makeMutClosure(arg0, arg1, 132, __wbg_adapter_19);
+        var ret = makeClosure(arg0, arg1, 132, __wbg_adapter_19);
         return addHeapObject(ret);
     };
     imports.wbg.__wbindgen_closure_wrapper628 = function(arg0, arg1, arg2) {
