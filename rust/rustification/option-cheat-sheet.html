@@ -173,7 +173,7 @@
 <pre><code class="language-rust.ignore">match option {
      None =&gt; None,
      Some(x) =&gt; foo(x)
- };</code></pre>
+ }</code></pre>
 <p>This code is equivalent to :</p>
 <pre><code class="language-rust.ignore">option.and_then(foo)</code></pre>
 <hr />
@@ -181,7 +181,7 @@
 <pre><code class="language-rust.ignore">match option {
      None =&gt; None,
      Some(x) =&gt; x
- };</code></pre>
+ }</code></pre>
 <p>This code is equivalent to :</p>
 <pre><code class="language-rust.ignore">flatten() //(and not unwrap() that would fail for option = None)</code></pre>
 <hr />
@@ -189,23 +189,23 @@
 <pre><code class="language-rust.ignore">match option {
      None =&gt; None,
      Some(x) =&gt; Some(foo(x))
- };</code></pre>
+ }</code></pre>
 <p>This code is equivalent to :</p>
 <pre><code class="language-rust.ignore">option.map(foo)</code></pre>
 <hr />
 <p><strong>for_each</strong></p>
 <pre><code class="language-rust.ignore">match option {
-     None =&gt; None,
-     Some(x) =&gt; Some(foo(x))
- };</code></pre>
+     None =&gt; (),
+     Some(x) =&gt; foo(x)
+ }</code></pre>
 <p>This code is equivalent to :</p>
-<pre><code class="language-rust.ignore">option.into_iter().for_each(foo))</code></pre>
+<pre><code class="language-rust.ignore">option.into_iter().for_each(foo);</code></pre>
 <hr />
 <p><strong>is_some</strong></p>
 <pre><code class="language-rust.ignore">match option {
       None =&gt; false,
       Some(_) =&gt; true
- };</code></pre>
+ }</code></pre>
 <p>This code is equivalent to :</p>
 <pre><code class="language-rust.ignore">option.is_some()</code></pre>
 <hr />
@@ -213,7 +213,7 @@
 <pre><code class="language-rust.ignore">match option {
       None =&gt; true,
       Some(_) =&gt; false
- };</code></pre>
+ }</code></pre>
 <p>This code is equivalent to :</p>
 <pre><code class="language-rust.ignore">option.is_none()</code></pre>
 <hr />
@@ -221,7 +221,7 @@
 <pre><code class="language-rust.ignore">match option {
       None =&gt; true,
       Some(x) =&gt; foo(x)
- };</code></pre>
+ }</code></pre>
 <p>This code is equivalent to :</p>
 <pre><code class="language-rust.ignore">option.into_iter().all (|x| foo(x))</code></pre>
 <hr />
@@ -229,7 +229,7 @@
 <pre><code class="language-rust.ignore">match option {
       None =&gt; false,
       Some(x) =&gt; foo(x)
- };</code></pre>
+ }</code></pre>
 <p>This code is equivalent to :</p>
 <pre><code class="language-rust.ignore">option.into_iter().any (|x| foo(x))</code></pre>
 <hr />
@@ -237,7 +237,7 @@
 <pre><code class="language-rust.ignore">match option {
       None =&gt; foo,
       Some(x) =&gt; Some(x)
- };</code></pre>
+ }</code></pre>
 <p>This code is equivalent to :</p>
 <pre><code class="language-rust.ignore">option.or(foo)</code></pre>
 <hr />
@@ -245,7 +245,7 @@
 <pre><code class="language-rust.ignore">match option {
       None =&gt; foo,
       Some(x) =&gt; x
- };</code></pre>
+ }</code></pre>
 <p>This code is equivalent to :</p>
 <pre><code class="language-rust.ignore">option.unwrap_or(foo)</code></pre>
 <hr />
@@ -253,9 +253,9 @@
 <pre><code class="language-rust.ignore">match option {
       None =&gt; Vec::new(),
       Some(x) =&gt; vec![x]
- };</code></pre>
+ }</code></pre>
 <p>This code is equivalent to :</p>
-<pre><code class="language-rust.ignore">option.into_iter().filter_map(|x| Some(x)).collect::&lt;Vec&lt;i32&gt;&gt;())</code></pre>
+<pre><code class="language-rust.ignore">option.into_iter().filter_map(|x| Some(x)).collect::&lt;Vec&lt;_&gt;&gt;()</code></pre>
 <hr />
 <h2 id="resources"><a class="header" href="#resources">Resources</a></h2>
 <p><a href="https://rust-unofficial.github.io/patterns/idioms/option-iter.html">Iterating over an Option</a></p>
