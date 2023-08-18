@@ -254,83 +254,95 @@ LBB2_5:
 <p>Articles adapted to rust.</p>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="option-cheat-sheet"><a class="header" href="#option-cheat-sheet">Option Cheat Sheet</a></h2>
 <p>Adapted from <a href="https://web.archive.org/web/20130429013704/http://blog.tmorris.net/posts/scalaoption-cheat-sheet/">λ Tony's blog λ scala.Option Cheat Sheet</a></p>
+<hr />
 <p><strong>and_then</strong> (aka flatMap in Scala)</p>
 <pre><code class="language-rust.ignore">match option {
      None =&gt; None,
      Some(x) =&gt; foo(x)
  };</code></pre>
-<p>This code is equivalent to :<br />
-option.and_then(foo)</p>
+<p>This code is equivalent to :</p>
+<pre><code class="language-rust.ignore">option.and_then(foo)</code></pre>
+<hr />
 <p><strong>flatten</strong></p>
 <pre><code class="language-rust.ignore">match option {
      None =&gt; None,
      Some(x) =&gt; x
  };</code></pre>
-<p>This code is equivalent to :<br />
-flatten() (and not unwrap() that would fail for option = None)</p>
+<p>This code is equivalent to :</p>
+<pre><code class="language-rust.ignore">flatten() //(and not unwrap() that would fail for option = None)</code></pre>
+<hr />
 <p><strong>map</strong></p>
 <pre><code class="language-rust.ignore">match option {
      None =&gt; None,
      Some(x) =&gt; Some(foo(x))
  };</code></pre>
-<p>This code is equivalent to :<br />
-option.map(foo)</p>
+<p>This code is equivalent to :</p>
+<pre><code class="language-rust.ignore">option.map(foo)</code></pre>
+<hr />
 <p><strong>for_each</strong></p>
 <pre><code class="language-rust.ignore">match option {
      None =&gt; None,
      Some(x) =&gt; Some(foo(x))
  };</code></pre>
-<p>This code is equivalent to :<br />
-option.into_iter().for_each(foo))</p>
+<p>This code is equivalent to :</p>
+<pre><code class="language-rust.ignore">option.into_iter().for_each(foo))</code></pre>
+<hr />
 <p><strong>is_some</strong></p>
 <pre><code class="language-rust.ignore">match option {
       None =&gt; false,
       Some(_) =&gt; true
  };</code></pre>
-<p>This code is equivalent to :<br />
-option.is_some()</p>
+<p>This code is equivalent to :</p>
+<pre><code class="language-rust.ignore">option.is_some()</code></pre>
+<hr />
 <p><strong>is_none</strong></p>
 <pre><code class="language-rust.ignore">match option {
       None =&gt; true,
       Some(_) =&gt; false
  };</code></pre>
-<p>This code is equivalent to :<br />
-option.is_none()</p>
+<p>This code is equivalent to :</p>
+<pre><code class="language-rust.ignore">option.is_none()</code></pre>
+<hr />
 <p><strong>all</strong> (aka forall in Scala)</p>
 <pre><code class="language-rust.ignore">match option {
       None =&gt; true,
       Some(x) =&gt; foo(x)
  };</code></pre>
-<p>This code is equivalent to :<br />
-option.into_iter().all (|x| foo(x))</p>
+<p>This code is equivalent to :</p>
+<pre><code class="language-rust.ignore">option.into_iter().all (|x| foo(x))</code></pre>
+<hr />
 <p><strong>any</strong> (aka exists in Scala)</p>
 <pre><code class="language-rust.ignore">match option {
       None =&gt; false,
       Some(x) =&gt; foo(x)
  };</code></pre>
-<p>This code is equivalent to :<br />
-option.into_iter().any (|x| foo(x))</p>
+<p>This code is equivalent to :</p>
+<pre><code class="language-rust.ignore">option.into_iter().any (|x| foo(x))</code></pre>
+<hr />
 <p><strong>or</strong> (aka orElse in Scala)</p>
 <pre><code class="language-rust.ignore">match option {
       None =&gt; foo,
       Some(x) =&gt; Some(x)
  };</code></pre>
-<p>This code is equivalent to :<br />
-option.or(foo)</p>
+<p>This code is equivalent to :</p>
+<pre><code class="language-rust.ignore">option.or(foo)</code></pre>
+<hr />
 <p><strong>unwrap_or</strong> (aka getOrElse in Scala)</p>
 <pre><code class="language-rust.ignore">match option {
       None =&gt; foo,
       Some(x) =&gt; x
  };</code></pre>
-<p>This code is equivalent to :<br />
-option.unwrap_or(foo)</p>
+<p>This code is equivalent to :</p>
+<pre><code class="language-rust.ignore">option.unwrap_or(foo)</code></pre>
+<hr />
 <p><strong>filter_map().collect()</strong> (aka toList in Scala)</p>
 <pre><code class="language-rust.ignore">match option {
       None =&gt; Vec::new(),
       Some(x) =&gt; vec![x]
  };</code></pre>
-<p>This code is equivalent to :<br />
-option.into_iter().filter_map(|x| Some(x)).collect::&lt;Vec<i32>&gt;())</p>
+<p>This code is equivalent to :</p>
+<pre><code class="language-rust.ignore">option.into_iter().filter_map(|x| Some(x)).collect::&lt;Vec&lt;i32&gt;&gt;())</code></pre>
+<hr />
 <h2 id="resources"><a class="header" href="#resources">Resources</a></h2>
 <p><a href="https://rust-unofficial.github.io/patterns/idioms/option-iter.html">Iterating over an Option</a></p>
 
