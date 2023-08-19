@@ -269,7 +269,7 @@ LBB2_5:
      Some(x) =&gt; x
  }</code></pre>
 <p>This code is equivalent to :</p>
-<pre><code class="language-rust.ignore">flatten() //(and not unwrap() that would fail for option = None)</code></pre>
+<pre><code class="language-rust.ignore">option.flatten() //(and not unwrap() that would fail for option = None)</code></pre>
 <hr />
 <p><strong>map</strong></p>
 <pre><code class="language-rust.ignore">match option {
