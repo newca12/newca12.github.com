@@ -1,17 +1,17 @@
 <!DOCTYPE HTML>
-<html lang="en" class="sidebar-visible no-js light">
+<html lang="en" class="light" dir="ltr">
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
         <title>Rust Gallery : a journey with Rust by side roads</title>
-        <meta name="robots" content="noindex" />
+        <meta name="robots" content="noindex">
 
 
         <!-- Custom HTML head -->
         
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="theme-color" content="#ffffff" />
+        <meta name="theme-color" content="#ffffff">
 
         <link rel="icon" href="favicon.svg">
         <link rel="shortcut icon" href="favicon.png">
@@ -32,7 +32,7 @@
         <!-- Custom theme stylesheets -->
 
     </head>
-    <body>
+    <body class="sidebar-visible no-js">
     <div id="body-container">
         <!-- Provide site root to javascript -->
         <script>
@@ -62,29 +62,34 @@
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
             var html = document.querySelector('html');
-            html.classList.remove('no-js')
             html.classList.remove('light')
             html.classList.add(theme);
-            html.classList.add('js');
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
         </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
 
         <!-- Hide / unhide sidebar before it is displayed -->
         <script>
-            var html = document.querySelector('html');
+            var body = document.querySelector('body');
             var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
             if (document.body.clientWidth >= 1080) {
                 try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
                 sidebar = sidebar || 'visible';
             } else {
                 sidebar = 'hidden';
             }
-            html.classList.remove('sidebar-visible');
-            html.classList.add("sidebar-" + sidebar);
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="title-page.html">A journey with Rust by side roads</a></li><li class="chapter-item expanded "><a href="not-obvious-at-first.html"><strong aria-hidden="true">1.</strong> Not obvious at first</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="not-obvious-at-first/mutable-reference.html"><strong aria-hidden="true">1.1.</strong> Mutable reference</a></li></ol></li><li class="chapter-item expanded "><a href="rustification.html"><strong aria-hidden="true">2.</strong> Rustification</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="rustification/option-cheat-sheet.html"><strong aria-hidden="true">2.1.</strong> Option Cheat Sheet</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="title-page.html">A journey with Rust by side roads</a></li><li class="chapter-item expanded "><a href="not-obvious-at-first.html"><strong aria-hidden="true">1.</strong> Not obvious at first</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="not-obvious-at-first/mutable-reference.html"><strong aria-hidden="true">1.1.</strong> Mutable reference</a></li><li class="chapter-item expanded "><a href="not-obvious-at-first/tokio-vs-futures.html"><strong aria-hidden="true">1.2.</strong> Tokio vs Futures</a></li></ol></li><li class="chapter-item expanded "><a href="rustification.html"><strong aria-hidden="true">2.</strong> Rustification</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="rustification/option-cheat-sheet.html"><strong aria-hidden="true">2.1.</strong> Option Cheat Sheet</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -117,9 +122,9 @@
                                 <div id="menu-bar-hover-placeholder"></div>
                 <div id="menu-bar" class="menu-bar sticky">
                     <div class="left-buttons">
-                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
                             <i class="fa fa-bars"></i>
-                        </button>
+                        </label>
                         <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
                             <i class="fa fa-paint-brush"></i>
                         </button>
@@ -170,6 +175,13 @@
                         <h1 id="a-journey-with-rust-by-side-roads"><a class="header" href="#a-journey-with-rust-by-side-roads">A journey with Rust by side roads</a></h1>
 <p>This is the companion book for the Rust Language Code Gallery covering a variety of fields and programming styles </p>
 <p><img src="VW-1960.jpg?raw=true" alt="Image" /></p>
+<h2 id="acknowledgement"><a class="header" href="#acknowledgement">Acknowledgement</a></h2>
+<p>This book use the same organization of this <a href="https://github.com/jamesgraves/rust-cookbook">rust-cookbook fork</a>, as a consequence :</p>
+<ul>
+<li>All examples are runnable via cargo run --example</li>
+<li>All examples are also run via cargo test</li>
+<li>This makes it easier for users to run the examples that are incompatible with the Rust Playground</li>
+</ul>
 <p><a href="https://github.com/newca12/gallery-rs">Source code</a></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="not-obvious-at-first"><a class="header" href="#not-obvious-at-first">Not obvious at first</a></h1>
 <p>Clarification never hurt even for trivial things.</p>
@@ -250,6 +262,80 @@ LBB2_5:
  call    __Unwind_Resume
  ud2
 </code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="tokio-vs-futures"><a class="header" href="#tokio-vs-futures">Tokio vs Futures</a></h1>
+<p>There are slight but sometimes confusing differences between tokio and the standard library.
+<a href="https://docs.rs/futures/0.3.28/futures/io/trait.AsyncBufReadExt.html#method.lines"><code>futures_util::io::AsyncBufReadExt.lines()</code></a> is an iterator but surprisingly <a href="https://docs.rs/tokio/1.32.0/tokio/io/trait.AsyncBufReadExt.html#method.lines"><code>tokio::io::util::async_buf_read_ext::AsyncBufReadExt.lines()</code></a> is not.<br />
+Fortunatly <a href="https://docs.rs/tokio-stream/0.1.14/tokio_stream/wrappers/struct.LinesStream.html"><code>tokio_stream::wrappers::LinesStream</code></a> is a wrapper around <a href="https://docs.rs/tokio/1.28.0/tokio/io/struct.Lines.html"><code>tokio::io::Lines</code></a> that implements <a href="https://docs.rs/futures-core/0.3.28/futures_core/stream/trait.Stream.html"><code>Stream</code></a>.</p>
+<h2 id="implementation-with-futures"><a class="header" href="#implementation-with-futures">Implementation with Futures</a></h2>
+<p><a href="https://docs.rs/async-compression/"><img src="https://badge-cache.kominick.com/crates/v/async-compression.svg?label=async-compression" alt="async-compression-badge" /></a> <a href="https://docs.rs/async-fs/"><img src="https://badge-cache.kominick.com/crates/v/async-fs.svg?label=async-fs" alt="async-fs-badge" /></a> <a href="https://docs.rs/futures/"><img src="https://badge-cache.kominick.com/crates/v/futures.svg?label=futures" alt="futures-badge" /></a></p>
+<pre><pre class="playground"><code class="language-rust edition2021  no_run">use async_compression::futures::bufread::GzipDecoder;
+use futures::{io::BufReader, AsyncBufReadExt, StreamExt};
+
+use async_fs::File;
+use gallery_rs_utils::locate;
+
+#[tokio::main]
+async fn main() {
+    let file = File::open(locate(&quot;123.gz&quot;)).await.unwrap();
+    let decoder = BufReader::new(file);
+
+    //this is an iterator
+    let lines = BufReader::new(GzipDecoder::new(decoder)).lines();
+
+    let sum = lines.fold(0, |acc, n| async move {
+        acc + n.unwrap().trim().parse::&lt;u32&gt;().unwrap()
+    });
+    assert_eq!(sum.await, 6);
+}</code></pre></pre>
+<h2 id="implementation-with-tokio"><a class="header" href="#implementation-with-tokio">Implementation with Tokio</a></h2>
+<p><a href="https://docs.rs/async-compression/"><img src="https://badge-cache.kominick.com/crates/v/async-compression.svg?label=async-compression" alt="async-compression-badge" /></a> <a href="https://docs.rs/tokio/"><img src="https://badge-cache.kominick.com/crates/v/tokio.svg?label=tokio" alt="tokio-badge" /></a></p>
+<pre><pre class="playground"><code class="language-rust edition2021  no_run">use async_compression::tokio::bufread::GzipDecoder;
+
+use gallery_rs_utils::locate;
+use tokio::{
+    fs::File,
+    io::{AsyncBufReadExt, BufReader},
+};
+
+#[tokio::main]
+async fn main() {
+    let file = File::open(locate(&quot;123.gz&quot;)).await.unwrap();
+    let decoder = BufReader::new(file);
+
+    //this is not an iterator
+    let mut lines = BufReader::new(GzipDecoder::new(decoder)).lines();
+
+    assert_eq!(lines.next_line().await.unwrap().unwrap(), &quot;1&quot;);
+    assert_eq!(lines.next_line().await.unwrap().unwrap(), &quot;2&quot;);
+    assert_eq!(lines.next_line().await.unwrap().unwrap(), &quot;3&quot;);
+}</code></pre></pre>
+<h2 id="implementation-with-tokio-stream"><a class="header" href="#implementation-with-tokio-stream">Implementation with Tokio Stream</a></h2>
+<p><a href="https://docs.rs/async-compression/"><img src="https://badge-cache.kominick.com/crates/v/async-compression.svg?label=async-compression" alt="async-compression-badge" /></a> <a href="https://docs.rs/tokio/"><img src="https://badge-cache.kominick.com/crates/v/tokio.svg?label=tokio" alt="tokio-badge" /></a> <a href="https://docs.rs/tokio-stream/"><img src="https://badge-cache.kominick.com/crates/v/tokio-stream.svg?label=tokio-stream" alt="tokio-stream-badge" /></a></p>
+<pre><pre class="playground"><code class="language-rust edition2021  no_run">use async_compression::tokio::bufread::GzipDecoder;
+
+use futures::StreamExt;
+use gallery_rs_utils::locate;
+use tokio::{
+    fs::File,
+    io::{AsyncBufReadExt, BufReader},
+};
+use tokio_stream::wrappers::LinesStream;
+
+#[tokio::main]
+async fn main() {
+    let file = File::open(locate(&quot;123.gz&quot;)).await.unwrap();
+    let decoder = BufReader::new(file);
+
+    //this is not an iterator
+    let lines = BufReader::new(GzipDecoder::new(decoder)).lines();
+    //but we can wrap it to be one
+    let stream = LinesStream::new(lines);
+
+    let sum = stream.fold(0, |acc, n| async move {
+        acc + n.unwrap().trim().parse::&lt;u32&gt;().unwrap()
+    });
+    assert_eq!(sum.await, 6);
+}</code></pre></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="rustification"><a class="header" href="#rustification">Rustification</a></h1>
 <p>Articles adapted to rust.</p>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="option-cheat-sheet"><a class="header" href="#option-cheat-sheet">Option Cheat Sheet</a></h2>

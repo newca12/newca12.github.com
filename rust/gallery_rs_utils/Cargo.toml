@@ -1,0 +1,9 @@
+[package]
+name = "gallery_rs_utils"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+doctest = false
+
+[dependencies]
