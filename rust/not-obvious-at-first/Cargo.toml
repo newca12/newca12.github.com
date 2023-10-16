@@ -7,12 +7,50 @@ edition = "2021"
 doctest = false
 
 [dependencies]
-async-compression = { version = "0.4.3", features = ["tokio", "gzip", "futures-io"] }
+async-compression = { version = "0.4.4", features = ["tokio", "gzip", "futures-io"] }
 async-fs = "1.6.0"
 futures = "0.3.28"
 #itertools = "0.11.0"
-tokio = { version = "1.32.0", features = ["full"] }
+tokio = { version = "1.33.0", features = ["full"] }
 tokio-stream = { version = "0.1.14", features = ["io-util"] }
 
 [dev-dependencies]
 gallery_rs_utils = { path = "../gallery_rs_utils" }
+
+#tokio-vs-futures
+[[example]]
+name = "futures"
+path = "examples/tokio-vs-futures/futures.rs"
+
+[[example]]
+name = "tokio"
+path = "examples/tokio-vs-futures/tokio.rs"
+
+[[example]]
+name = "tokio_stream"
+path = "examples/tokio-vs-futures/tokio_stream.rs"
+
+#spurious-stream-lock
+[[example]]
+name = "string_stream"
+path = "examples/spurious-stream-lock/string_stream.rs"
+
+[[example]]
+name = "async_string_stream"
+path = "examples/spurious-stream-lock/async_string_stream.rs"
+
+[[example]]
+name = "async_string_futures_stream_lock"
+path = "examples/spurious-stream-lock/async_string_futures_stream_lock.rs"
+
+[[example]]
+name = "async_string_tokio_stream_nolock"
+path = "examples/spurious-stream-lock/async_string_tokio_stream_nolock.rs"
+
+[[example]]
+name = "async_string_tokio_gz_stream_nolock"
+path = "examples/spurious-stream-lock/async_string_tokio_gz_stream_nolock.rs"
+
+[[example]]
+name = "async_string_futures_gz_stream_lock"
+path = "examples/spurious-stream-lock/async_string_futures_gz_stream_lock.rs"

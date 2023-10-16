@@ -89,7 +89,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="title-page.html">A journey with Rust by side roads</a></li><li class="chapter-item expanded "><a href="not-obvious-at-first.html"><strong aria-hidden="true">1.</strong> Not obvious at first</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="not-obvious-at-first/mutable-reference.html"><strong aria-hidden="true">1.1.</strong> Mutable reference</a></li><li class="chapter-item expanded "><a href="not-obvious-at-first/tokio-vs-futures.html"><strong aria-hidden="true">1.2.</strong> Tokio vs Futures</a></li></ol></li><li class="chapter-item expanded "><a href="rustification.html"><strong aria-hidden="true">2.</strong> Rustification</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="rustification/option-cheat-sheet.html"><strong aria-hidden="true">2.1.</strong> Option Cheat Sheet</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="title-page.html">A journey with Rust by side roads</a></li><li class="chapter-item expanded "><a href="not-obvious-at-first.html"><strong aria-hidden="true">1.</strong> Not obvious at first</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="not-obvious-at-first/mutable-reference.html"><strong aria-hidden="true">1.1.</strong> Mutable reference</a></li><li class="chapter-item expanded "><a href="not-obvious-at-first/tokio-vs-futures.html"><strong aria-hidden="true">1.2.</strong> Tokio vs Futures</a></li><li class="chapter-item expanded "><a href="not-obvious-at-first/spurious-stream-lock.html"><strong aria-hidden="true">1.3.</strong> Spurious stream lock</a></li></ol></li><li class="chapter-item expanded "><a href="rustification.html"><strong aria-hidden="true">2.</strong> Rustification</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="rustification/option-cheat-sheet.html"><strong aria-hidden="true">2.1.</strong> Option Cheat Sheet</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -268,7 +268,9 @@ LBB2_5:
 Fortunatly <a href="https://docs.rs/tokio-stream/0.1.14/tokio_stream/wrappers/struct.LinesStream.html"><code>tokio_stream::wrappers::LinesStream</code></a> is a wrapper around <a href="https://docs.rs/tokio/1.28.0/tokio/io/struct.Lines.html"><code>tokio::io::Lines</code></a> that implements <a href="https://docs.rs/futures-core/0.3.28/futures_core/stream/trait.Stream.html"><code>Stream</code></a>.</p>
 <h2 id="implementation-with-futures"><a class="header" href="#implementation-with-futures">Implementation with Futures</a></h2>
 <p><a href="https://docs.rs/async-compression/"><img src="https://badge-cache.kominick.com/crates/v/async-compression.svg?label=async-compression" alt="async-compression-badge" /></a> <a href="https://docs.rs/async-fs/"><img src="https://badge-cache.kominick.com/crates/v/async-fs.svg?label=async-fs" alt="async-fs-badge" /></a> <a href="https://docs.rs/futures/"><img src="https://badge-cache.kominick.com/crates/v/futures.svg?label=futures" alt="futures-badge" /></a></p>
-<pre><pre class="playground"><code class="language-rust edition2021  no_run">use async_compression::futures::bufread::GzipDecoder;
+<pre><pre class="playground"><code class="language-rust edition2021 no_run">use std::future;
+
+use async_compression::futures::bufread::GzipDecoder;
 use futures::{io::BufReader, AsyncBufReadExt, StreamExt};
 
 use async_fs::File;
@@ -282,14 +284,19 @@ async fn main() {
     //this is an iterator
     let lines = BufReader::new(GzipDecoder::new(decoder)).lines();
 
-    let sum = lines.fold(0, |acc, n| async move {
-        acc + n.unwrap().trim().parse::&lt;u32&gt;().unwrap()
+    let res = lines.for_each(|l| {
+        println!(&quot;{:?}&quot;, l);
+        future::ready(())
     });
-    assert_eq!(sum.await, 6);
+    res.await
+    //let sum = lines.fold(0, |acc, n| async move {
+    //    acc + n.unwrap().trim().parse::&lt;u32&gt;().unwrap()
+    //});
+    //assert_eq!(sum.await, 6);
 }</code></pre></pre>
 <h2 id="implementation-with-tokio"><a class="header" href="#implementation-with-tokio">Implementation with Tokio</a></h2>
 <p><a href="https://docs.rs/async-compression/"><img src="https://badge-cache.kominick.com/crates/v/async-compression.svg?label=async-compression" alt="async-compression-badge" /></a> <a href="https://docs.rs/tokio/"><img src="https://badge-cache.kominick.com/crates/v/tokio.svg?label=tokio" alt="tokio-badge" /></a></p>
-<pre><pre class="playground"><code class="language-rust edition2021  no_run">use async_compression::tokio::bufread::GzipDecoder;
+<pre><pre class="playground"><code class="language-rust edition2021 no_run">use async_compression::tokio::bufread::GzipDecoder;
 
 use gallery_rs_utils::locate;
 use tokio::{
@@ -311,7 +318,7 @@ async fn main() {
 }</code></pre></pre>
 <h2 id="implementation-with-tokio-stream"><a class="header" href="#implementation-with-tokio-stream">Implementation with Tokio Stream</a></h2>
 <p><a href="https://docs.rs/async-compression/"><img src="https://badge-cache.kominick.com/crates/v/async-compression.svg?label=async-compression" alt="async-compression-badge" /></a> <a href="https://docs.rs/tokio/"><img src="https://badge-cache.kominick.com/crates/v/tokio.svg?label=tokio" alt="tokio-badge" /></a> <a href="https://docs.rs/tokio-stream/"><img src="https://badge-cache.kominick.com/crates/v/tokio-stream.svg?label=tokio-stream" alt="tokio-stream-badge" /></a></p>
-<pre><pre class="playground"><code class="language-rust edition2021  no_run">use async_compression::tokio::bufread::GzipDecoder;
+<pre><pre class="playground"><code class="language-rust edition2021 no_run">use async_compression::tokio::bufread::GzipDecoder;
 
 use futures::StreamExt;
 use gallery_rs_utils::locate;
@@ -335,6 +342,72 @@ async fn main() {
         acc + n.unwrap().trim().parse::&lt;u32&gt;().unwrap()
     });
     assert_eq!(sum.await, 6);
+}</code></pre></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="spurious-stream-lock"><a class="header" href="#spurious-stream-lock">Spurious stream lock</a></h1>
+<p>Without extra care, a simple stream of String can be viciously locked at runtime if not fully UTF-8 compliant.</p>
+<h2 id="simple-stream-of-string"><a class="header" href="#simple-stream-of-string">Simple stream of String</a></h2>
+<p>Does show an error when unvalid UTF-8 line is encountered</p>
+<pre><pre class="playground"><code class="language-rust edition2021 no_run">use gallery_rs_utils::locate;
+
+use std::fs::File;
+use std::io::{self, BufRead};
+
+fn main() {
+    let file = File::open(locate(&quot;corrupted_utf8&quot;)).unwrap();
+    let stream = io::BufReader::new(file).lines();
+    stream.for_each(|line| println!(&quot;{}&quot;, line.unwrap()));
+}</code></pre></pre>
+<p>Does filter bad lines when unvalid UTF-8 line is encountered</p>
+<pre><pre class="playground"><code class="language-rust edition2021 no_run">use gallery_rs_utils::locate;
+
+use futures::{pin_mut, stream, Stream, StreamExt};
+use tokio::fs::File;
+use tokio::io::{AsyncBufReadExt, BufReader};
+use tokio_stream::wrappers::LinesStream;
+
+//lock not reproduced
+#[tokio::main]
+async fn main() {
+    let file = File::open(locate(&quot;corrupted_utf8&quot;)).await.unwrap();
+
+    let decoder = BufReader::new(file).lines();
+    let lines = LinesStream::new(decoder);
+    let stream = lines.flat_map(stream::iter);
+
+    process(stream).await;
+}
+
+pub async fn process(stream: impl Stream&lt;Item = String&gt;) {
+    pin_mut!(stream);
+    let mut total = 0;
+    while let Some(line) = tokio_stream::StreamExt::next(&amp;mut stream).await {
+        println!(&quot;{} {}&quot;, total, line);
+        total += 1;
+    }
+}</code></pre></pre>
+<p>Does <strong>lock</strong> when unvalid UTF-8 line is encountered</p>
+<pre><pre class="playground"><code class="language-rust edition2021 no_run">use gallery_rs_utils::locate;
+
+use async_fs::File;
+use futures::{io::BufReader, pin_mut, stream, AsyncBufReadExt, Stream, StreamExt};
+
+//lock reproduced
+#[tokio::main]
+async fn main() {
+    let file = File::open(locate(&quot;corrupted_utf8&quot;)).await.unwrap();
+
+    let stream = BufReader::new(file).lines().flat_map(stream::iter);
+
+    process(stream).await;
+}
+
+pub async fn process(stream: impl Stream&lt;Item = String&gt;) {
+    pin_mut!(stream);
+    let mut total = 0;
+    while let Some(line) = tokio_stream::StreamExt::next(&amp;mut stream).await {
+        println!(&quot;{} {}&quot;, total, line);
+        total += 1;
+    }
 }</code></pre></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="rustification"><a class="header" href="#rustification">Rustification</a></h1>
 <p>Articles adapted to rust.</p>
