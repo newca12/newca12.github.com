@@ -32,13 +32,11 @@ mod tests {
     }
 
     #[test]
-    #[ignore]
     fn async_string_futures_stream_lock() {
         run_example("async_string_futures_stream_lock");
     }
 
     #[test]
-    #[ignore]
     fn async_string_futures_gz_stream_lock() {
         run_example("async_string_futures_gz_stream_lock");
     }

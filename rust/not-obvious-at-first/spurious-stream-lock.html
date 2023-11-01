@@ -172,7 +172,10 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="spurious-stream-lock"><a class="header" href="#spurious-stream-lock">Spurious stream lock</a></h1>
-<p>Without extra care, a simple stream of String can be viciously locked at runtime if not fully UTF-8 compliant.</p>
+<p><del>Without extra care, a simple stream of String can be viciously locked at runtime if not fully UTF-8 compliant.</del></p>
+<blockquote>
+<p><strong>Update:</strong> This turn out to be a real <a href="https://github.com/rust-lang/futures-rs/issues/2784">bug</a> in <img src="https://badge-cache.kominick.com/badge/futures-0.3.28-orange.svg" alt="futures-0.3.28-badge" /> and was <a href="https://github.com/rust-lang/futures-rs/pull/2785">fixed</a>  in <img src="https://badge-cache.kominick.com/badge/futures-0.3.29-orange.svg" alt="futures-0.3.29-badge" /></p>
+</blockquote>
 <h2 id="simple-stream-of-string"><a class="header" href="#simple-stream-of-string">Simple stream of String</a></h2>
 <p>Does show an error when unvalid UTF-8 line is encountered</p>
 <pre><pre class="playground"><code class="language-rust edition2021 no_run">use gallery_rs_utils::locate;
@@ -185,7 +188,8 @@ fn main() {
     let stream = io::BufReader::new(file).lines();
     stream.for_each(|line| println!(&quot;{}&quot;, line.unwrap()));
 }</code></pre></pre>
-<p>Does filter bad lines when unvalid UTF-8 line is encountered</p>
+<p>Does filter bad lines when unvalid UTF-8 line is encountered<br />
+<a href="https://docs.rs/tokio/"><img src="https://badge-cache.kominick.com/crates/v/tokio.svg?label=tokio" alt="tokio-badge" /></a> <a href="https://docs.rs/tokio-stream/"><img src="https://badge-cache.kominick.com/crates/v/tokio-stream.svg?label=tokio-stream" alt="tokio-stream-badge" /></a></p>
 <pre><pre class="playground"><code class="language-rust edition2021 no_run">use gallery_rs_utils::locate;
 
 use futures::{pin_mut, stream, Stream, StreamExt};
@@ -213,7 +217,8 @@ pub async fn process(stream: impl Stream&lt;Item = String&gt;) {
         total += 1;
     }
 }</code></pre></pre>
-<p>Does <strong>lock</strong> when unvalid UTF-8 line is encountered</p>
+<p><del>Does <strong>lock</strong> when unvalid UTF-8 line is encountered</del><br />
+<a href="https://badge-cache.kominick.com/badge/futures-0.3.28-orange.svg"><img src="https://badge-cache.kominick.com/badge/futures-0.3.28-orange.svg" alt="futures-0.3.28-badge" /></a></p>
 <pre><pre class="playground"><code class="language-rust edition2021 no_run">use gallery_rs_utils::locate;
 
 use async_fs::File;
