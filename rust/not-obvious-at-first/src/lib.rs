@@ -50,4 +50,24 @@ mod tests {
     fn async_string_tokio_gz_stream_lock() {
         run_example("async_string_tokio_gz_stream_nolock");
     }
+
+    #[test]
+    fn lifetimes_puzzle1_solution() {
+        run_example("lifetimes_puzzle1_solution");
+    }
+
+    #[test]
+    fn lifetimes_puzzle1_minimized_solution1() {
+        run_example("lifetimes_puzzle1_minimized_solution1");
+    }
+
+    #[test]
+    fn lifetimes_puzzle1_minimized_solution2() {
+        run_example("lifetimes_puzzle1_minimized_solution2");
+    }
+
+    #[test]
+    fn recipe1() {
+        run_example("recipe1");
+    }
 }

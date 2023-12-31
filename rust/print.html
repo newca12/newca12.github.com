@@ -89,9 +89,11 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="title-page.html">A journey with Rust by side roads</a></li><li class="chapter-item expanded "><a href="not-obvious-at-first.html"><strong aria-hidden="true">1.</strong> Not obvious at first</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="not-obvious-at-first/mutable-reference.html"><strong aria-hidden="true">1.1.</strong> Mutable reference</a></li><li class="chapter-item expanded "><a href="not-obvious-at-first/tokio-vs-futures.html"><strong aria-hidden="true">1.2.</strong> Tokio vs Futures</a></li><li class="chapter-item expanded "><a href="not-obvious-at-first/spurious-stream-lock.html"><strong aria-hidden="true">1.3.</strong> Spurious stream lock</a></li></ol></li><li class="chapter-item expanded "><a href="rustification.html"><strong aria-hidden="true">2.</strong> Rustification</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="rustification/option-cheat-sheet.html"><strong aria-hidden="true">2.1.</strong> Option Cheat Sheet</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="title-page.html">A journey with Rust by side roads</a></li><li class="chapter-item expanded "><a href="not-obvious-at-first.html"><strong aria-hidden="true">1.</strong> Not obvious at first</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="not-obvious-at-first/mutable-reference.html"><strong aria-hidden="true">1.1.</strong> Mutable reference</a></li><li class="chapter-item expanded "><a href="not-obvious-at-first/tokio-vs-futures.html"><strong aria-hidden="true">1.2.</strong> Tokio vs Futures</a></li><li class="chapter-item expanded "><a href="not-obvious-at-first/spurious-stream-lock.html"><strong aria-hidden="true">1.3.</strong> Spurious stream lock</a></li><li class="chapter-item expanded "><a href="not-obvious-at-first/tokio-spawn-&-lifetime.html"><strong aria-hidden="true">1.4.</strong> Tokio spawn & lifetime</a></li></ol></li><li class="chapter-item expanded "><a href="rustification.html"><strong aria-hidden="true">2.</strong> Rustification</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="rustification/option-cheat-sheet.html"><strong aria-hidden="true">2.1.</strong> Option Cheat Sheet</a></li></ol></li><li class="chapter-item expanded "><a href="cookbook.html"><strong aria-hidden="true">3.</strong> Cookbook</a></li></ol>
             </div>
-            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
         </nav>
 
         <!-- Track and set sidebar scroll position -->
@@ -187,21 +189,21 @@
 <p>Clarification never hurt even for trivial things.</p>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="mutable-reference"><a class="header" href="#mutable-reference">Mutable reference</a></h2>
 <h3 id="a-mutable-reference-can-be-store-in-an-immutable-variable"><a class="header" href="#a-mutable-reference-can-be-store-in-an-immutable-variable">A mutable reference can be store in an immutable variable</a></h3>
-<pre><code class="language-rust.ignore"> let mut s = String::from(&quot;hello&quot;);
+<pre><code class="language-rust ignore"> let mut s = String::from(&quot;hello&quot;);
  let r1 = &amp;mut s;</code></pre>
 <p><code>r1</code> is inferred as <code>&amp;mut String</code> but using an immutable type is allowed by the compiler and</p>
 <pre><code class="language-rust.ignore"> let r1: &amp;String = &amp;mut s;</code></pre>
 <p>compile without errors.</p>
 <p>Does it compile to the same code if we use immutable reference ?</p>
-<pre><code class="language-rust.ignore"> let r1 = &amp;s;</code></pre>
+<pre><code class="language-rust ignore"> let r1 = &amp;s;</code></pre>
 <p>Let's compare</p>
-<pre><code class="language-rust.ignore">pub fn review() {
+<pre><code class="language-rust ignore">pub fn review() {
     let mut s = String::from(&quot;hello&quot;);
     let r1: &amp;String = &amp;mut s;
     println!(&quot;{}&quot;,r1);
 }</code></pre>
 <p>and</p>
-<pre><code class="language-rust.ignore">pub fn review() {
+<pre><code class="language-rust ignore">pub fn review() {
     let mut s = String::from(&quot;hello&quot;);
     let r1 = &amp;s; 
     println!(&quot;{}&quot;,r1);
@@ -268,7 +270,7 @@ LBB2_5:
 Fortunatly <a href="https://docs.rs/tokio-stream/0.1.14/tokio_stream/wrappers/struct.LinesStream.html"><code>tokio_stream::wrappers::LinesStream</code></a> is a wrapper around <a href="https://docs.rs/tokio/1.28.0/tokio/io/struct.Lines.html"><code>tokio::io::Lines</code></a> that implements <a href="https://docs.rs/futures-core/0.3.28/futures_core/stream/trait.Stream.html"><code>Stream</code></a>.</p>
 <h2 id="implementation-with-futures"><a class="header" href="#implementation-with-futures">Implementation with Futures</a></h2>
 <p><a href="https://docs.rs/async-compression/"><img src="https://badge-cache.kominick.com/crates/v/async-compression.svg?label=async-compression" alt="async-compression-badge" /></a> <a href="https://docs.rs/async-fs/"><img src="https://badge-cache.kominick.com/crates/v/async-fs.svg?label=async-fs" alt="async-fs-badge" /></a> <a href="https://docs.rs/futures/"><img src="https://badge-cache.kominick.com/crates/v/futures.svg?label=futures" alt="futures-badge" /></a></p>
-<pre><pre class="playground"><code class="language-rust edition2021 no_run">use std::future;
+<pre><code class="language-rust ignore">use std::future;
 
 use async_compression::futures::bufread::GzipDecoder;
 use futures::{io::BufReader, AsyncBufReadExt, StreamExt};
@@ -293,10 +295,10 @@ async fn main() {
     //    acc + n.unwrap().trim().parse::&lt;u32&gt;().unwrap()
     //});
     //assert_eq!(sum.await, 6);
-}</code></pre></pre>
+}</code></pre>
 <h2 id="implementation-with-tokio"><a class="header" href="#implementation-with-tokio">Implementation with Tokio</a></h2>
 <p><a href="https://docs.rs/async-compression/"><img src="https://badge-cache.kominick.com/crates/v/async-compression.svg?label=async-compression" alt="async-compression-badge" /></a> <a href="https://docs.rs/tokio/"><img src="https://badge-cache.kominick.com/crates/v/tokio.svg?label=tokio" alt="tokio-badge" /></a></p>
-<pre><pre class="playground"><code class="language-rust edition2021 no_run">use async_compression::tokio::bufread::GzipDecoder;
+<pre><code class="language-rust ignore">use async_compression::tokio::bufread::GzipDecoder;
 
 use gallery_rs_utils::locate;
 use tokio::{
@@ -315,10 +317,10 @@ async fn main() {
     assert_eq!(lines.next_line().await.unwrap().unwrap(), &quot;1&quot;);
     assert_eq!(lines.next_line().await.unwrap().unwrap(), &quot;2&quot;);
     assert_eq!(lines.next_line().await.unwrap().unwrap(), &quot;3&quot;);
-}</code></pre></pre>
+}</code></pre>
 <h2 id="implementation-with-tokio-stream"><a class="header" href="#implementation-with-tokio-stream">Implementation with Tokio Stream</a></h2>
 <p><a href="https://docs.rs/async-compression/"><img src="https://badge-cache.kominick.com/crates/v/async-compression.svg?label=async-compression" alt="async-compression-badge" /></a> <a href="https://docs.rs/tokio/"><img src="https://badge-cache.kominick.com/crates/v/tokio.svg?label=tokio" alt="tokio-badge" /></a> <a href="https://docs.rs/tokio-stream/"><img src="https://badge-cache.kominick.com/crates/v/tokio-stream.svg?label=tokio-stream" alt="tokio-stream-badge" /></a></p>
-<pre><pre class="playground"><code class="language-rust edition2021 no_run">use async_compression::tokio::bufread::GzipDecoder;
+<pre><code class="language-rust ignore">use async_compression::tokio::bufread::GzipDecoder;
 
 use futures::StreamExt;
 use gallery_rs_utils::locate;
@@ -342,7 +344,7 @@ async fn main() {
         acc + n.unwrap().trim().parse::&lt;u32&gt;().unwrap()
     });
     assert_eq!(sum.await, 6);
-}</code></pre></pre>
+}</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="spurious-stream-lock"><a class="header" href="#spurious-stream-lock">Spurious stream lock</a></h1>
 <p><del>Without extra care, a simple stream of String can be viciously locked at runtime if not fully UTF-8 compliant.</del></p>
 <blockquote>
@@ -350,7 +352,7 @@ async fn main() {
 </blockquote>
 <h2 id="simple-stream-of-string"><a class="header" href="#simple-stream-of-string">Simple stream of String</a></h2>
 <p>Does show an error when unvalid UTF-8 line is encountered</p>
-<pre><pre class="playground"><code class="language-rust edition2021 no_run">use gallery_rs_utils::locate;
+<pre><code class="language-rust edition2021 ignore">use gallery_rs_utils::locate;
 
 use std::fs::File;
 use std::io::{self, BufRead};
@@ -359,10 +361,10 @@ fn main() {
     let file = File::open(locate(&quot;corrupted_utf8&quot;)).unwrap();
     let stream = io::BufReader::new(file).lines();
     stream.for_each(|line| println!(&quot;{}&quot;, line.unwrap()));
-}</code></pre></pre>
-<p>Does filter bad lines when unvalid UTF-8 line is encountered<br />
-<a href="https://docs.rs/tokio/"><img src="https://badge-cache.kominick.com/crates/v/tokio.svg?label=tokio" alt="tokio-badge" /></a> <a href="https://docs.rs/tokio-stream/"><img src="https://badge-cache.kominick.com/crates/v/tokio-stream.svg?label=tokio-stream" alt="tokio-stream-badge" /></a></p>
-<pre><pre class="playground"><code class="language-rust edition2021 no_run">use gallery_rs_utils::locate;
+}</code></pre>
+<p>Does filter bad lines when unvalid UTF-8 line is encountered</p>
+<p><a href="https://docs.rs/tokio/"><img src="https://badge-cache.kominick.com/crates/v/tokio.svg?label=tokio" alt="tokio-badge" /></a> <a href="https://docs.rs/tokio-stream/"><img src="https://badge-cache.kominick.com/crates/v/tokio-stream.svg?label=tokio-stream" alt="tokio-stream-badge" /></a></p>
+<pre><code class="language-rust ignore">use gallery_rs_utils::locate;
 
 use futures::{pin_mut, stream, Stream, StreamExt};
 use tokio::fs::File;
@@ -388,10 +390,10 @@ pub async fn process(stream: impl Stream&lt;Item = String&gt;) {
         println!(&quot;{} {}&quot;, total, line);
         total += 1;
     }
-}</code></pre></pre>
-<p><del>Does <strong>lock</strong> when unvalid UTF-8 line is encountered</del><br />
-<a href="https://badge-cache.kominick.com/badge/futures-0.3.28-orange.svg"><img src="https://badge-cache.kominick.com/badge/futures-0.3.28-orange.svg" alt="futures-0.3.28-badge" /></a></p>
-<pre><pre class="playground"><code class="language-rust edition2021 no_run">use gallery_rs_utils::locate;
+}</code></pre>
+<p><del>Does <strong>lock</strong> when unvalid UTF-8 line is encountered</del></p>
+<p><a href="https://badge-cache.kominick.com/badge/futures-0.3.28-orange.svg"><img src="https://badge-cache.kominick.com/badge/futures-0.3.28-orange.svg" alt="futures-0.3.28-badge" /></a></p>
+<pre><code class="language-rust ignore">use gallery_rs_utils::locate;
 
 use async_fs::File;
 use futures::{io::BufReader, pin_mut, stream, AsyncBufReadExt, Stream, StreamExt};
@@ -413,102 +415,261 @@ pub async fn process(stream: impl Stream&lt;Item = String&gt;) {
         println!(&quot;{} {}&quot;, total, line);
         total += 1;
     }
+}</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="tokio-spawn--lifetime"><a class="header" href="#tokio-spawn--lifetime">Tokio spawn &amp; lifetime</a></h1>
+<p>Excerpt from the Tokio <a href="https://tokio.rs/tokio/tutorial/spawning">documentation</a></p>
+<blockquote>
+<p>When you spawn a task on the Tokio runtime, its type's lifetime must be 'static. This means that the spawned task must not contain any references to data owned outside the task.</p>
+</blockquote>
+<p>Run this to show the compiler error when this requirement is no met.</p>
+<p><a href="https://docs.rs/tokio/"><img src="https://badge-cache.kominick.com/crates/v/tokio.svg?label=tokio" alt="tokio-badge" /></a></p>
+<pre><pre class="playground"><code class="language-rust compile_fail edition2021">use tokio::task::JoinSet;
+use tokio::time::{sleep, Duration};
+
+async fn compute(item: &amp;str) {
+    println!(&quot;{}&quot;, item);
+}
+
+#[tokio::main]
+async fn main() {
+    let v: Vec&lt;String&gt; = vec![String::from(&quot;john&quot;), String::from(&quot;doe&quot;)];
+
+    let mut v_ref = Vec::&lt;&amp;str&gt;::with_capacity(v.len());
+    for item in &amp;v {
+        v_ref.push(item);
+    }
+
+    let mut join_set = JoinSet::new();
+    for item in v_ref {
+        join_set.spawn(async { compute(item).await });
+    }
+    sleep(Duration::from_millis(100)).await;
 }</code></pre></pre>
+<p>The fact that the drop of v after main is not compatible with ```argument requires that <code>v</code> is borrowed for `'static```` is not obvious.<br />
+The issue is that v has the lifetime defined by the scope of main() and not the 'static lifetime required by the Trait bound<sup class="footnote-reference"><a href="#ref1">1</a></sup> of the spawn function.</p>
+<p>The solution for Tokio API is <code>Arc</code>.</p>
+<p><a href="https://docs.rs/tokio/"><img src="https://badge-cache.kominick.com/crates/v/tokio.svg?label=tokio" alt="tokio-badge" /></a></p>
+<pre><code class="language-rust ignore">use std::sync::Arc;
+
+use tokio::task::JoinSet;
+use tokio::time::{sleep, Duration};
+
+async fn compute(item: Arc&lt;str&gt;) {
+    println!(&quot;{}&quot;, item)
+}
+
+#[tokio::main]
+async fn main() {
+    let v: Vec&lt;String&gt; = vec![String::from(&quot;john&quot;), String::from(&quot;doe&quot;)];
+
+    let mut v_ref = Vec::&lt;Arc&lt;str&gt;&gt;::with_capacity(v.len());
+    for item in &amp;v {
+        v_ref.push(Arc::from(item.as_str()));
+    }
+
+    let mut join_set = JoinSet::new();
+    for item in v_ref {
+        join_set.spawn(async { compute(item).await });
+    }
+    sleep(Duration::from_millis(100)).await;
+}</code></pre>
+<p>We can minimize the same issue without Tokio.</p>
+<pre><pre class="playground"><code class="language-rust compile_fail edition2021">use std::fmt::Debug;
+
+fn compute(item: impl Debug + 'static) {
+    println!(&quot;{:?}&quot;, item);
+}
+
+fn main() {
+    let v: Vec&lt;String&gt; = vec![String::from(&quot;john&quot;), String::from(&quot;doe&quot;)];
+
+    let mut v_ref = Vec::&lt;&amp;str&gt;::with_capacity(v.len());
+    for item in &amp;v {
+        v_ref.push(item);
+    }
+
+    for item in v_ref {
+        compute(item);
+    }
+}</code></pre></pre>
+<p>And solved it the same way with <code>Arc</code>.</p>
+<pre><pre class="playground"><code class="language-rust run edition2021">use std::{fmt::Debug, sync::Arc};
+
+fn compute(item: impl Debug + 'static) {
+    println!(&quot;{:?}&quot;, item);
+}
+
+fn main() {
+    let v: Vec&lt;String&gt; = vec![String::from(&quot;john&quot;), String::from(&quot;doe&quot;)];
+
+    let mut v_ref = Vec::&lt;Arc&lt;str&gt;&gt;::with_capacity(v.len());
+    for item in &amp;v {
+        v_ref.push(Arc::from(item.as_str()));
+    }
+
+    for item in v_ref {
+        compute(item);
+    }
+}</code></pre></pre>
+<p>But why is the Tokio requirement so strong ?<br />
+If the requirement was simply a regular lifetime we can do :</p>
+<pre><pre class="playground"><code class="language-rust run edition2021">fn compute&lt;'a&gt;(item: impl std::fmt::Debug + 'a) {
+    println!(&quot;{:?}&quot;, item)
+}
+
+fn main() {
+    let v: Vec&lt;String&gt; = vec![String::from(&quot;john&quot;), String::from(&quot;doe&quot;)];
+
+    let mut v_ref = Vec::&lt;&amp;str&gt;::with_capacity(v.len());
+    for item in &amp;v {
+        v_ref.push(item);
+    }
+
+    for item in v_ref {
+        compute(item);
+    }
+}</code></pre></pre>
+<p>It turn out<sup class="footnote-reference"><a href="#ref2">2</a></sup> that the async executor has exactly this requirement.<br />
+spawn in smol is defined ike this :</p>
+<pre><code class="language-rust ignore">fn spawn&lt;T: Send + 'a&gt;(&amp;self, future: impl Future&lt;Output = T&gt; + Send + 'a) -&gt; Task&lt;T&gt;</code></pre>
+<p>whereas Tokio spawn is defined ike this :</p>
+<pre><code class="language-rust ignore">    pub fn spawn&lt;F&gt;(&amp;mut self, task: F) -&gt; AbortHandle
+    where
+        F: Future&lt;Output = T&gt;,
+        F: Send + 'static,
+        T: Send,</code></pre>
+<p>So I would expect this code to compile :</p>
+<p><a href="https://docs.rs/async-executor/"><img src="https://badge-cache.kominick.com/crates/v/async-executor.svg?label=async-executor" alt="async-executor-badge" /></a></p>
+<pre><code class="language-rust ignore">use async_executor::Executor;
+
+async fn compute&lt;'a&gt;(item: impl std::fmt::Debug + 'a) {
+    println!(&quot;{:?}&quot;, item)
+}
+
+fn main() {
+    let ex: Executor = Executor::new();
+    let v: Vec&lt;String&gt; = vec![String::from(&quot;john&quot;), String::from(&quot;doe&quot;)];
+
+    let mut v_ref: Vec&lt;&amp;str&gt; = Vec::&lt;&amp;str&gt;::with_capacity(v.len());
+    for item in &amp;v {
+        v_ref.push(item);
+    }
+
+    for item in v_ref {
+        let _task = ex.spawn(async {
+            compute(item).await;
+        });
+    }
+}</code></pre>
+<div class="footnote-definition" id="ref1"><sup class="footnote-definition-label">1</sup>
+<p><a href="https://doc.rust-lang.org/rust-by-example/scope/lifetime/static_lifetime.html#trait-bound">Lifetime as a trait bound</a><br />
+<sup class="footnote-reference"><a href="#ref2">2</a></sup>: <a href="https://stackoverflow.com/a/69963971">How to deal with tokio::spawn closure required to be 'static and &amp;self?</a></p>
+</div>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="rustification"><a class="header" href="#rustification">Rustification</a></h1>
 <p>Articles adapted to rust.</p>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="option-cheat-sheet"><a class="header" href="#option-cheat-sheet">Option Cheat Sheet</a></h2>
 <p>Adapted from <a href="https://web.archive.org/web/20130429013704/http://blog.tmorris.net/posts/scalaoption-cheat-sheet/">λ Tony's blog λ scala.Option Cheat Sheet</a></p>
 <hr />
 <p><strong>and_then</strong> (aka flatMap in Scala)</p>
-<pre><code class="language-rust.ignore">match option {
+<pre><code class="language-rust ignore">match option {
      None =&gt; None,
      Some(x) =&gt; foo(x)
  }</code></pre>
 <p>This code is equivalent to :</p>
-<pre><code class="language-rust.ignore">option.and_then(foo)</code></pre>
+<pre><code class="language-rust ignore">option.and_then(foo)</code></pre>
 <hr />
 <p><strong>flatten</strong></p>
-<pre><code class="language-rust.ignore">match option {
+<pre><code class="language-rust ignore">match option {
      None =&gt; None,
      Some(x) =&gt; x
  }</code></pre>
 <p>This code is equivalent to :</p>
-<pre><code class="language-rust.ignore">option.flatten() //(and not unwrap() that would fail for option = None)</code></pre>
+<pre><code class="language-rust ignore">option.flatten() //(and not unwrap() that would fail for option = None)</code></pre>
 <hr />
 <p><strong>map</strong></p>
-<pre><code class="language-rust.ignore">match option {
+<pre><code class="language-rust ignore">match option {
      None =&gt; None,
      Some(x) =&gt; Some(foo(x))
  }</code></pre>
 <p>This code is equivalent to :</p>
-<pre><code class="language-rust.ignore">option.map(foo)</code></pre>
+<pre><code class="language-rust ignore">option.map(foo)</code></pre>
 <hr />
 <p><strong>for_each</strong></p>
-<pre><code class="language-rust.ignore">match option {
+<pre><code class="language-rust ignore">match option {
      None =&gt; (),
      Some(x) =&gt; foo(x)
  }</code></pre>
 <p>This code is equivalent to :</p>
-<pre><code class="language-rust.ignore">option.into_iter().for_each(foo);</code></pre>
+<pre><code class="language-rust ignore">option.into_iter().for_each(foo);</code></pre>
 <hr />
 <p><strong>is_some</strong></p>
-<pre><code class="language-rust.ignore">match option {
+<pre><code class="language-rust ignore">match option {
       None =&gt; false,
       Some(_) =&gt; true
  }</code></pre>
 <p>This code is equivalent to :</p>
-<pre><code class="language-rust.ignore">option.is_some()</code></pre>
+<pre><code class="language-rust ignore">option.is_some()</code></pre>
 <hr />
 <p><strong>is_none</strong></p>
-<pre><code class="language-rust.ignore">match option {
+<pre><code class="language-rust ignore">match option {
       None =&gt; true,
       Some(_) =&gt; false
  }</code></pre>
 <p>This code is equivalent to :</p>
-<pre><code class="language-rust.ignore">option.is_none()</code></pre>
+<pre><code class="language-rust ignore">option.is_none()</code></pre>
 <hr />
 <p><strong>all</strong> (aka forall in Scala)</p>
-<pre><code class="language-rust.ignore">match option {
+<pre><code class="language-rust ignore">match option {
       None =&gt; true,
       Some(x) =&gt; foo(x)
  }</code></pre>
 <p>This code is equivalent to :</p>
-<pre><code class="language-rust.ignore">option.into_iter().all (|x| foo(x))</code></pre>
+<pre><code class="language-rust ignore">option.into_iter().all (|x| foo(x))</code></pre>
 <hr />
 <p><strong>any</strong> (aka exists in Scala)</p>
-<pre><code class="language-rust.ignore">match option {
+<pre><code class="language-rust ignore">match option {
       None =&gt; false,
       Some(x) =&gt; foo(x)
  }</code></pre>
 <p>This code is equivalent to :</p>
-<pre><code class="language-rust.ignore">option.into_iter().any (|x| foo(x))</code></pre>
+<pre><code class="language-rust ignore">option.into_iter().any (|x| foo(x))</code></pre>
 <hr />
 <p><strong>or</strong> (aka orElse in Scala)</p>
-<pre><code class="language-rust.ignore">match option {
+<pre><code class="language-rust ignore">match option {
       None =&gt; foo,
       Some(x) =&gt; Some(x)
  }</code></pre>
 <p>This code is equivalent to :</p>
-<pre><code class="language-rust.ignore">option.or(foo)</code></pre>
+<pre><code class="language-rust ignore">option.or(foo)</code></pre>
 <hr />
 <p><strong>unwrap_or</strong> (aka getOrElse in Scala)</p>
-<pre><code class="language-rust.ignore">match option {
+<pre><code class="language-rust ignore">match option {
       None =&gt; foo,
       Some(x) =&gt; x
  }</code></pre>
 <p>This code is equivalent to :</p>
-<pre><code class="language-rust.ignore">option.unwrap_or(foo)</code></pre>
+<pre><code class="language-rust ignore">option.unwrap_or(foo)</code></pre>
 <hr />
 <p><strong>filter_map().collect()</strong> (aka toList in Scala)</p>
-<pre><code class="language-rust.ignore">match option {
+<pre><code class="language-rust ignore">match option {
       None =&gt; Vec::new(),
       Some(x) =&gt; vec![x]
  }</code></pre>
 <p>This code is equivalent to :</p>
-<pre><code class="language-rust.ignore">option.into_iter().filter_map(|x| Some(x)).collect::&lt;Vec&lt;_&gt;&gt;()</code></pre>
+<pre><code class="language-rust ignore">option.into_iter().filter_map(|x| Some(x)).collect::&lt;Vec&lt;_&gt;&gt;()</code></pre>
 <hr />
 <h2 id="resources"><a class="header" href="#resources">Resources</a></h2>
 <p><a href="https://rust-unofficial.github.io/patterns/idioms/option-iter.html">Iterating over an Option</a></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="cookbook"><a class="header" href="#cookbook">Cookbook</a></h1>
+<h2 id="1-convert-vecstring-to-vecstr"><a class="header" href="#1-convert-vecstring-to-vecstr">1. Convert Vec&lt;String&gt; to Vec&lt;&amp;str&gt;</a></h2>
+<pre><pre class="playground"><code class="language-rust run edition2021">fn main() {
+    let v: Vec&lt;String&gt; = vec![String::from(&quot;john&quot;), String::from(&quot;doe&quot;)];
+
+    let mut v_ref = Vec::&lt;&amp;str&gt;::with_capacity(v.len());
+    for item in &amp;v {
+        v_ref.push(item);
+    }
+}</code></pre></pre>
 
                     </main>
 

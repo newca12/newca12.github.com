@@ -88,9 +88,11 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../title-page.html">A journey with Rust by side roads</a></li><li class="chapter-item expanded "><a href="../not-obvious-at-first.html"><strong aria-hidden="true">1.</strong> Not obvious at first</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../not-obvious-at-first/mutable-reference.html"><strong aria-hidden="true">1.1.</strong> Mutable reference</a></li><li class="chapter-item expanded "><a href="../not-obvious-at-first/tokio-vs-futures.html"><strong aria-hidden="true">1.2.</strong> Tokio vs Futures</a></li><li class="chapter-item expanded "><a href="../not-obvious-at-first/spurious-stream-lock.html"><strong aria-hidden="true">1.3.</strong> Spurious stream lock</a></li></ol></li><li class="chapter-item expanded "><a href="../rustification.html"><strong aria-hidden="true">2.</strong> Rustification</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../rustification/option-cheat-sheet.html" class="active"><strong aria-hidden="true">2.1.</strong> Option Cheat Sheet</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../title-page.html">A journey with Rust by side roads</a></li><li class="chapter-item expanded "><a href="../not-obvious-at-first.html"><strong aria-hidden="true">1.</strong> Not obvious at first</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../not-obvious-at-first/mutable-reference.html"><strong aria-hidden="true">1.1.</strong> Mutable reference</a></li><li class="chapter-item expanded "><a href="../not-obvious-at-first/tokio-vs-futures.html"><strong aria-hidden="true">1.2.</strong> Tokio vs Futures</a></li><li class="chapter-item expanded "><a href="../not-obvious-at-first/spurious-stream-lock.html"><strong aria-hidden="true">1.3.</strong> Spurious stream lock</a></li><li class="chapter-item expanded "><a href="../not-obvious-at-first/tokio-spawn-&-lifetime.html"><strong aria-hidden="true">1.4.</strong> Tokio spawn & lifetime</a></li></ol></li><li class="chapter-item expanded "><a href="../rustification.html"><strong aria-hidden="true">2.</strong> Rustification</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../rustification/option-cheat-sheet.html" class="active"><strong aria-hidden="true">2.1.</strong> Option Cheat Sheet</a></li></ol></li><li class="chapter-item expanded "><a href="../cookbook.html"><strong aria-hidden="true">3.</strong> Cookbook</a></li></ol>
             </div>
-            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
         </nav>
 
         <!-- Track and set sidebar scroll position -->
@@ -175,92 +177,92 @@
 <p>Adapted from <a href="https://web.archive.org/web/20130429013704/http://blog.tmorris.net/posts/scalaoption-cheat-sheet/">λ Tony's blog λ scala.Option Cheat Sheet</a></p>
 <hr />
 <p><strong>and_then</strong> (aka flatMap in Scala)</p>
-<pre><code class="language-rust.ignore">match option {
+<pre><code class="language-rust ignore">match option {
      None =&gt; None,
      Some(x) =&gt; foo(x)
  }</code></pre>
 <p>This code is equivalent to :</p>
-<pre><code class="language-rust.ignore">option.and_then(foo)</code></pre>
+<pre><code class="language-rust ignore">option.and_then(foo)</code></pre>
 <hr />
 <p><strong>flatten</strong></p>
-<pre><code class="language-rust.ignore">match option {
+<pre><code class="language-rust ignore">match option {
      None =&gt; None,
      Some(x) =&gt; x
  }</code></pre>
 <p>This code is equivalent to :</p>
-<pre><code class="language-rust.ignore">option.flatten() //(and not unwrap() that would fail for option = None)</code></pre>
+<pre><code class="language-rust ignore">option.flatten() //(and not unwrap() that would fail for option = None)</code></pre>
 <hr />
 <p><strong>map</strong></p>
-<pre><code class="language-rust.ignore">match option {
+<pre><code class="language-rust ignore">match option {
      None =&gt; None,
      Some(x) =&gt; Some(foo(x))
  }</code></pre>
 <p>This code is equivalent to :</p>
-<pre><code class="language-rust.ignore">option.map(foo)</code></pre>
+<pre><code class="language-rust ignore">option.map(foo)</code></pre>
 <hr />
 <p><strong>for_each</strong></p>
-<pre><code class="language-rust.ignore">match option {
+<pre><code class="language-rust ignore">match option {
      None =&gt; (),
      Some(x) =&gt; foo(x)
  }</code></pre>
 <p>This code is equivalent to :</p>
-<pre><code class="language-rust.ignore">option.into_iter().for_each(foo);</code></pre>
+<pre><code class="language-rust ignore">option.into_iter().for_each(foo);</code></pre>
 <hr />
 <p><strong>is_some</strong></p>
-<pre><code class="language-rust.ignore">match option {
+<pre><code class="language-rust ignore">match option {
       None =&gt; false,
       Some(_) =&gt; true
  }</code></pre>
 <p>This code is equivalent to :</p>
-<pre><code class="language-rust.ignore">option.is_some()</code></pre>
+<pre><code class="language-rust ignore">option.is_some()</code></pre>
 <hr />
 <p><strong>is_none</strong></p>
-<pre><code class="language-rust.ignore">match option {
+<pre><code class="language-rust ignore">match option {
       None =&gt; true,
       Some(_) =&gt; false
  }</code></pre>
 <p>This code is equivalent to :</p>
-<pre><code class="language-rust.ignore">option.is_none()</code></pre>
+<pre><code class="language-rust ignore">option.is_none()</code></pre>
 <hr />
 <p><strong>all</strong> (aka forall in Scala)</p>
-<pre><code class="language-rust.ignore">match option {
+<pre><code class="language-rust ignore">match option {
       None =&gt; true,
       Some(x) =&gt; foo(x)
  }</code></pre>
 <p>This code is equivalent to :</p>
-<pre><code class="language-rust.ignore">option.into_iter().all (|x| foo(x))</code></pre>
+<pre><code class="language-rust ignore">option.into_iter().all (|x| foo(x))</code></pre>
 <hr />
 <p><strong>any</strong> (aka exists in Scala)</p>
-<pre><code class="language-rust.ignore">match option {
+<pre><code class="language-rust ignore">match option {
       None =&gt; false,
       Some(x) =&gt; foo(x)
  }</code></pre>
 <p>This code is equivalent to :</p>
-<pre><code class="language-rust.ignore">option.into_iter().any (|x| foo(x))</code></pre>
+<pre><code class="language-rust ignore">option.into_iter().any (|x| foo(x))</code></pre>
 <hr />
 <p><strong>or</strong> (aka orElse in Scala)</p>
-<pre><code class="language-rust.ignore">match option {
+<pre><code class="language-rust ignore">match option {
       None =&gt; foo,
       Some(x) =&gt; Some(x)
  }</code></pre>
 <p>This code is equivalent to :</p>
-<pre><code class="language-rust.ignore">option.or(foo)</code></pre>
+<pre><code class="language-rust ignore">option.or(foo)</code></pre>
 <hr />
 <p><strong>unwrap_or</strong> (aka getOrElse in Scala)</p>
-<pre><code class="language-rust.ignore">match option {
+<pre><code class="language-rust ignore">match option {
       None =&gt; foo,
       Some(x) =&gt; x
  }</code></pre>
 <p>This code is equivalent to :</p>
-<pre><code class="language-rust.ignore">option.unwrap_or(foo)</code></pre>
+<pre><code class="language-rust ignore">option.unwrap_or(foo)</code></pre>
 <hr />
 <p><strong>filter_map().collect()</strong> (aka toList in Scala)</p>
-<pre><code class="language-rust.ignore">match option {
+<pre><code class="language-rust ignore">match option {
       None =&gt; Vec::new(),
       Some(x) =&gt; vec![x]
  }</code></pre>
 <p>This code is equivalent to :</p>
-<pre><code class="language-rust.ignore">option.into_iter().filter_map(|x| Some(x)).collect::&lt;Vec&lt;_&gt;&gt;()</code></pre>
+<pre><code class="language-rust ignore">option.into_iter().filter_map(|x| Some(x)).collect::&lt;Vec&lt;_&gt;&gt;()</code></pre>
 <hr />
 <h2 id="resources"><a class="header" href="#resources">Resources</a></h2>
 <p><a href="https://rust-unofficial.github.io/patterns/idioms/option-iter.html">Iterating over an Option</a></p>
@@ -273,6 +275,9 @@
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
+                            <a rel="next prefetch" href="../cookbook.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
 
                         <div style="clear: both"></div>
                     </nav>
@@ -284,6 +289,9 @@
                         <i class="fa fa-angle-left"></i>
                     </a>
 
+                    <a rel="next prefetch" href="../cookbook.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
             </nav>
 
         </div>

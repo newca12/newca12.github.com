@@ -7,11 +7,14 @@ edition = "2021"
 doctest = false
 
 [dependencies]
-async-compression = { version = "0.4.4", features = ["tokio", "gzip", "futures-io"] }
-async-fs = "2.0.0"
-futures = "0.3.29"
-#itertools = "0.11.0"
-tokio = { version = "1.33.0", features = ["full"] }
+async-compression = { version = "0.4.5", features = ["tokio", "gzip", "futures-io"] }
+async-executor = "1.8.0"
+async-fs = "2.1.0"
+async-io = "2.2.2"
+#async-std = "1.12.0"
+futures = "0.3.30"
+#itertools = "0.11.0""
+tokio = { version = "1.35.1", features = ["full"] }
 tokio-stream = { version = "0.1.14", features = ["io-util"] }
 
 [dev-dependencies]
@@ -54,3 +57,23 @@ path = "examples/spurious-stream-lock/async_string_tokio_gz_stream_nolock.rs"
 [[example]]
 name = "async_string_futures_gz_stream_lock"
 path = "examples/spurious-stream-lock/async_string_futures_gz_stream_lock.rs"
+
+[[example]]
+name = "lifetimes_puzzle1_solution"
+path = "examples/lifetimes/puzzle1_solution.rs"
+
+# [[example]]
+# name = "lifetimes_puzzle1_problem_extended"
+# path = "examples/lifetimes/puzzle1_problem_extended.rs"
+
+[[example]]
+name = "lifetimes_puzzle1_minimized_solution1"
+path = "examples/lifetimes/puzzle1_minimized_solution1.rs"
+
+[[example]]
+name = "lifetimes_puzzle1_minimized_solution2"
+path = "examples/lifetimes/puzzle1_minimized_solution2.rs"
+
+[[example]]
+name = "recipe1"
+path = "examples/cookbook/recipe1.rs"

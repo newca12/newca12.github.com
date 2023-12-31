@@ -88,9 +88,11 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../title-page.html">A journey with Rust by side roads</a></li><li class="chapter-item expanded "><a href="../not-obvious-at-first.html"><strong aria-hidden="true">1.</strong> Not obvious at first</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../not-obvious-at-first/mutable-reference.html"><strong aria-hidden="true">1.1.</strong> Mutable reference</a></li><li class="chapter-item expanded "><a href="../not-obvious-at-first/tokio-vs-futures.html"><strong aria-hidden="true">1.2.</strong> Tokio vs Futures</a></li><li class="chapter-item expanded "><a href="../not-obvious-at-first/spurious-stream-lock.html" class="active"><strong aria-hidden="true">1.3.</strong> Spurious stream lock</a></li></ol></li><li class="chapter-item expanded "><a href="../rustification.html"><strong aria-hidden="true">2.</strong> Rustification</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../rustification/option-cheat-sheet.html"><strong aria-hidden="true">2.1.</strong> Option Cheat Sheet</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../title-page.html">A journey with Rust by side roads</a></li><li class="chapter-item expanded "><a href="../not-obvious-at-first.html"><strong aria-hidden="true">1.</strong> Not obvious at first</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../not-obvious-at-first/mutable-reference.html"><strong aria-hidden="true">1.1.</strong> Mutable reference</a></li><li class="chapter-item expanded "><a href="../not-obvious-at-first/tokio-vs-futures.html"><strong aria-hidden="true">1.2.</strong> Tokio vs Futures</a></li><li class="chapter-item expanded "><a href="../not-obvious-at-first/spurious-stream-lock.html" class="active"><strong aria-hidden="true">1.3.</strong> Spurious stream lock</a></li><li class="chapter-item expanded "><a href="../not-obvious-at-first/tokio-spawn-&-lifetime.html"><strong aria-hidden="true">1.4.</strong> Tokio spawn & lifetime</a></li></ol></li><li class="chapter-item expanded "><a href="../rustification.html"><strong aria-hidden="true">2.</strong> Rustification</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../rustification/option-cheat-sheet.html"><strong aria-hidden="true">2.1.</strong> Option Cheat Sheet</a></li></ol></li><li class="chapter-item expanded "><a href="../cookbook.html"><strong aria-hidden="true">3.</strong> Cookbook</a></li></ol>
             </div>
-            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
         </nav>
 
         <!-- Track and set sidebar scroll position -->
@@ -178,7 +180,7 @@
 </blockquote>
 <h2 id="simple-stream-of-string"><a class="header" href="#simple-stream-of-string">Simple stream of String</a></h2>
 <p>Does show an error when unvalid UTF-8 line is encountered</p>
-<pre><pre class="playground"><code class="language-rust edition2021 no_run">use gallery_rs_utils::locate;
+<pre><code class="language-rust edition2021 ignore">use gallery_rs_utils::locate;
 
 use std::fs::File;
 use std::io::{self, BufRead};
@@ -187,10 +189,10 @@ fn main() {
     let file = File::open(locate(&quot;corrupted_utf8&quot;)).unwrap();
     let stream = io::BufReader::new(file).lines();
     stream.for_each(|line| println!(&quot;{}&quot;, line.unwrap()));
-}</code></pre></pre>
-<p>Does filter bad lines when unvalid UTF-8 line is encountered<br />
-<a href="https://docs.rs/tokio/"><img src="https://badge-cache.kominick.com/crates/v/tokio.svg?label=tokio" alt="tokio-badge" /></a> <a href="https://docs.rs/tokio-stream/"><img src="https://badge-cache.kominick.com/crates/v/tokio-stream.svg?label=tokio-stream" alt="tokio-stream-badge" /></a></p>
-<pre><pre class="playground"><code class="language-rust edition2021 no_run">use gallery_rs_utils::locate;
+}</code></pre>
+<p>Does filter bad lines when unvalid UTF-8 line is encountered</p>
+<p><a href="https://docs.rs/tokio/"><img src="https://badge-cache.kominick.com/crates/v/tokio.svg?label=tokio" alt="tokio-badge" /></a> <a href="https://docs.rs/tokio-stream/"><img src="https://badge-cache.kominick.com/crates/v/tokio-stream.svg?label=tokio-stream" alt="tokio-stream-badge" /></a></p>
+<pre><code class="language-rust ignore">use gallery_rs_utils::locate;
 
 use futures::{pin_mut, stream, Stream, StreamExt};
 use tokio::fs::File;
@@ -216,10 +218,10 @@ pub async fn process(stream: impl Stream&lt;Item = String&gt;) {
         println!(&quot;{} {}&quot;, total, line);
         total += 1;
     }
-}</code></pre></pre>
-<p><del>Does <strong>lock</strong> when unvalid UTF-8 line is encountered</del><br />
-<a href="https://badge-cache.kominick.com/badge/futures-0.3.28-orange.svg"><img src="https://badge-cache.kominick.com/badge/futures-0.3.28-orange.svg" alt="futures-0.3.28-badge" /></a></p>
-<pre><pre class="playground"><code class="language-rust edition2021 no_run">use gallery_rs_utils::locate;
+}</code></pre>
+<p><del>Does <strong>lock</strong> when unvalid UTF-8 line is encountered</del></p>
+<p><a href="https://badge-cache.kominick.com/badge/futures-0.3.28-orange.svg"><img src="https://badge-cache.kominick.com/badge/futures-0.3.28-orange.svg" alt="futures-0.3.28-badge" /></a></p>
+<pre><code class="language-rust ignore">use gallery_rs_utils::locate;
 
 use async_fs::File;
 use futures::{io::BufReader, pin_mut, stream, AsyncBufReadExt, Stream, StreamExt};
@@ -241,7 +243,7 @@ pub async fn process(stream: impl Stream&lt;Item = String&gt;) {
         println!(&quot;{} {}&quot;, total, line);
         total += 1;
     }
-}</code></pre></pre>
+}</code></pre>
 
                     </main>
 
@@ -251,7 +253,7 @@ pub async fn process(stream: impl Stream&lt;Item = String&gt;) {
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next prefetch" href="../rustification.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="../not-obvious-at-first/tokio-spawn-&amp;-lifetime.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -265,7 +267,7 @@ pub async fn process(stream: impl Stream&lt;Item = String&gt;) {
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next prefetch" href="../rustification.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="../not-obvious-at-first/tokio-spawn-&amp;-lifetime.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>
