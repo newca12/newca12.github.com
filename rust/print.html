@@ -445,11 +445,11 @@ async fn main() {
     }
     sleep(Duration::from_millis(100)).await;
 }</code></pre></pre>
-<p>The fact that the drop of v after main is not compatible with ```argument requires that <code>v</code> is borrowed for `'static```` is not obvious.<br />
+<p>The fact that the drop of v after main is not compatible with <code>&quot;argument requires that `v` is borrowed for `'static`&quot;</code> is not obvious.<br />
 The issue is that v has the lifetime defined by the scope of main() and not the 'static lifetime required by the Trait bound<sup class="footnote-reference"><a href="#ref1">1</a></sup> of the spawn function.</p>
 <p>The solution for Tokio API is <code>Arc</code>.</p>
 <p><a href="https://docs.rs/tokio/"><img src="https://badge-cache.kominick.com/crates/v/tokio.svg?label=tokio" alt="tokio-badge" /></a></p>
-<pre><code class="language-rust ignore">use std::sync::Arc;
+<pre><pre class="playground"><code class="language-rust mdbook-runnable ignore edition2021">use std::sync::Arc;
 
 use tokio::task::JoinSet;
 use tokio::time::{sleep, Duration};
@@ -472,7 +472,7 @@ async fn main() {
         join_set.spawn(async { compute(item).await });
     }
     sleep(Duration::from_millis(100)).await;
-}</code></pre>
+}</code></pre></pre>
 <p>We can minimize the same issue without Tokio.</p>
 <pre><pre class="playground"><code class="language-rust compile_fail edition2021">use std::fmt::Debug;
 
