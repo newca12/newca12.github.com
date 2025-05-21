@@ -2,7 +2,7 @@ use gallery_rs_utils::locate;
 
 use async_compression::futures::bufread::GzipDecoder;
 use async_fs::File;
-use futures::{io::BufReader, pin_mut, stream, AsyncBufReadExt, Stream, StreamExt};
+use futures::{AsyncBufReadExt, Stream, StreamExt, io::BufReader, pin_mut, stream};
 
 //lock reproduced
 #[tokio::main]

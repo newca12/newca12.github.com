@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="en" class="light" dir="ltr">
+<html lang="en" class="light sidebar-visible" dir="ltr">
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
@@ -7,7 +7,7 @@
 
 
         <!-- Custom HTML head -->
-        
+
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff">
@@ -24,26 +24,29 @@
         <link rel="stylesheet" href="../fonts/fonts.css">
 
         <!-- Highlight.js Stylesheets -->
-        <link rel="stylesheet" href="../highlight.css">
-        <link rel="stylesheet" href="../tomorrow-night.css">
-        <link rel="stylesheet" href="../ayu-highlight.css">
+        <link rel="stylesheet" id="highlight-css" href="../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
 
-    </head>
-    <body class="sidebar-visible no-js">
-    <div id="body-container">
-        <!-- Provide site root to javascript -->
-        <script>
-            var path_to_root = "../";
-            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
-        </script>
 
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
         <script>
             try {
-                var theme = localStorage.getItem('mdbook-theme');
-                var sidebar = localStorage.getItem('mdbook-sidebar');
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
 
                 if (theme.startsWith('"') && theme.endsWith('"')) {
                     localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
@@ -57,24 +60,22 @@
 
         <!-- Set the theme before any content is loaded, prevents flash -->
         <script>
-            var theme;
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
-            var html = document.querySelector('html');
+            const html = document.documentElement;
             html.classList.remove('light')
             html.classList.add(theme);
-            var body = document.querySelector('body');
-            body.classList.remove('no-js')
-            body.classList.add('js');
+            html.classList.add("js");
         </script>
 
         <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
 
         <!-- Hide / unhide sidebar before it is displayed -->
         <script>
-            var body = document.querySelector('body');
-            var sidebar = null;
-            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
             if (document.body.clientWidth >= 1080) {
                 try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
                 sidebar = sidebar || 'visible';
@@ -82,45 +83,25 @@
                 sidebar = 'hidden';
             }
             sidebar_toggle.checked = sidebar === 'visible';
-            body.classList.remove('sidebar-visible');
-            body.classList.add("sidebar-" + sidebar);
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../title-page.html">A journey with Rust by side roads</a></li><li class="chapter-item expanded "><a href="../not-obvious-at-first.html"><strong aria-hidden="true">1.</strong> Not obvious at first</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../not-obvious-at-first/mutable-reference.html"><strong aria-hidden="true">1.1.</strong> Mutable reference</a></li><li class="chapter-item expanded "><a href="../not-obvious-at-first/tokio-vs-futures.html"><strong aria-hidden="true">1.2.</strong> Tokio vs Futures</a></li><li class="chapter-item expanded "><a href="../not-obvious-at-first/spurious-stream-lock.html"><strong aria-hidden="true">1.3.</strong> Spurious stream lock</a></li><li class="chapter-item expanded "><a href="../not-obvious-at-first/tokio-spawn-&-lifetime.html" class="active"><strong aria-hidden="true">1.4.</strong> Tokio spawn & lifetime</a></li></ol></li><li class="chapter-item expanded "><a href="../rustification.html"><strong aria-hidden="true">2.</strong> Rustification</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../rustification/option-cheat-sheet.html"><strong aria-hidden="true">2.1.</strong> Option Cheat Sheet</a></li></ol></li><li class="chapter-item expanded "><a href="../cookbook.html"><strong aria-hidden="true">3.</strong> Cookbook</a></li></ol>
-            </div>
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
             </div>
         </nav>
 
-        <!-- Track and set sidebar scroll position -->
-        <script>
-            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
-            sidebarScrollbox.addEventListener('click', function(e) {
-                if (e.target.tagName === 'A') {
-                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
-                }
-            }, { passive: true });
-            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
-            sessionStorage.removeItem('sidebar-scroll');
-            if (sidebarScrollTop) {
-                // preserve sidebar scroll position when navigating via links within sidebar
-                sidebarScrollbox.scrollTop = sidebarScrollTop;
-            } else {
-                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
-                var activeSection = document.querySelector('#sidebar .active');
-                if (activeSection) {
-                    activeSection.scrollIntoView({ block: 'center' });
-                }
-            }
-        </script>
-
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
-                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar-hover-placeholder"></div>
                 <div id="menu-bar" class="menu-bar sticky">
                     <div class="left-buttons">
                         <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
@@ -130,6 +111,7 @@
                             <i class="fa fa-paint-brush"></i>
                         </button>
                         <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
@@ -184,12 +166,12 @@
 use tokio::time::{sleep, Duration};
 
 async fn compute(item: &amp;str) {
-    println!(&quot;{}&quot;, item);
+    println!("{}", item);
 }
 
 #[tokio::main]
 async fn main() {
-    let v: Vec&lt;String&gt; = vec![String::from(&quot;john&quot;), String::from(&quot;doe&quot;)];
+    let v: Vec&lt;String&gt; = vec![String::from("john"), String::from("doe")];
 
     let mut v_ref = Vec::&lt;&amp;str&gt;::with_capacity(v.len());
     for item in &amp;v {
@@ -202,22 +184,22 @@ async fn main() {
     }
     sleep(Duration::from_millis(100)).await;
 }</code></pre></pre>
-<p>The fact that the drop of v after main is not compatible with <code>&quot;argument requires that `v` is borrowed for `'static`&quot;</code> is not obvious.<br />
-The issue is that v has the lifetime defined by the scope of main() and not the 'static lifetime required by the Trait bound<sup class="footnote-reference"><a href="#ref1">1</a></sup> of the spawn function.</p>
+<p>The fact that the drop of v after main is not compatible with <code>"argument requires that `v` is borrowed for `'static`"</code> is not obvious.<br />
+The issue is that v has the lifetime defined by the scope of main() and not the 'static lifetime required by the Trait bound<sup class="footnote-reference" id="fr-ref1-1"><a href="#footnote-ref1">1</a></sup> of the spawn function.</p>
 <p>The solution for Tokio API is <code>Arc</code>.</p>
 <p><a href="https://docs.rs/tokio/"><img src="https://badge-cache.kominick.com/crates/v/tokio.svg?label=tokio" alt="tokio-badge" /></a></p>
 <pre><pre class="playground"><code class="language-rust mdbook-runnable ignore edition2021">use std::sync::Arc;
 
 use tokio::task::JoinSet;
-use tokio::time::{sleep, Duration};
+use tokio::time::{Duration, sleep};
 
 async fn compute(item: Arc&lt;str&gt;) {
-    println!(&quot;{}&quot;, item)
+    println!("{}", item)
 }
 
 #[tokio::main]
 async fn main() {
-    let v: Vec&lt;String&gt; = vec![String::from(&quot;john&quot;), String::from(&quot;doe&quot;)];
+    let v: Vec&lt;String&gt; = vec![String::from("john"), String::from("doe")];
 
     let mut v_ref = Vec::&lt;Arc&lt;str&gt;&gt;::with_capacity(v.len());
     for item in &amp;v {
@@ -234,11 +216,11 @@ async fn main() {
 <pre><pre class="playground"><code class="language-rust compile_fail edition2021">use std::fmt::Debug;
 
 fn compute(item: impl Debug + 'static) {
-    println!(&quot;{:?}&quot;, item);
+    println!("{:?}", item);
 }
 
 fn main() {
-    let v: Vec&lt;String&gt; = vec![String::from(&quot;john&quot;), String::from(&quot;doe&quot;)];
+    let v: Vec&lt;String&gt; = vec![String::from("john"), String::from("doe")];
 
     let mut v_ref = Vec::&lt;&amp;str&gt;::with_capacity(v.len());
     for item in &amp;v {
@@ -253,11 +235,11 @@ fn main() {
 <pre><pre class="playground"><code class="language-rust run edition2021">use std::{fmt::Debug, sync::Arc};
 
 fn compute(item: impl Debug + 'static) {
-    println!(&quot;{:?}&quot;, item);
+    println!("{:?}", item);
 }
 
 fn main() {
-    let v: Vec&lt;String&gt; = vec![String::from(&quot;john&quot;), String::from(&quot;doe&quot;)];
+    let v: Vec&lt;String&gt; = vec![String::from("john"), String::from("doe")];
 
     let mut v_ref = Vec::&lt;Arc&lt;str&gt;&gt;::with_capacity(v.len());
     for item in &amp;v {
@@ -271,11 +253,11 @@ fn main() {
 <p>But why is the Tokio requirement so strong ?<br />
 If the requirement was simply a regular lifetime we can do :</p>
 <pre><pre class="playground"><code class="language-rust run edition2021">fn compute&lt;'a&gt;(item: impl std::fmt::Debug + 'a) {
-    println!(&quot;{:?}&quot;, item)
+    println!("{:?}", item)
 }
 
 fn main() {
-    let v: Vec&lt;String&gt; = vec![String::from(&quot;john&quot;), String::from(&quot;doe&quot;)];
+    let v: Vec&lt;String&gt; = vec![String::from("john"), String::from("doe")];
 
     let mut v_ref = Vec::&lt;&amp;str&gt;::with_capacity(v.len());
     for item in &amp;v {
@@ -286,7 +268,7 @@ fn main() {
         compute(item);
     }
 }</code></pre></pre>
-<p>It turn out<sup class="footnote-reference"><a href="#ref2">2</a></sup> that the async executor has exactly this requirement.<br />
+<p>It turn out<sup class="footnote-reference" id="fr-ref2-1"><a href="#footnote-ref2">2</a></sup> that the async executor has exactly this requirement.<br />
 spawn in smol is defined ike this :</p>
 <pre><code class="language-rust ignore">fn spawn&lt;T: Send + 'a&gt;(&amp;self, future: impl Future&lt;Output = T&gt; + Send + 'a) -&gt; Task&lt;T&gt;</code></pre>
 <p>whereas Tokio spawn is defined ike this :</p>
@@ -300,12 +282,12 @@ spawn in smol is defined ike this :</p>
 <pre><code class="language-rust ignore">use async_executor::Executor;
 
 async fn compute&lt;'a&gt;(item: impl std::fmt::Debug + 'a) {
-    println!(&quot;{:?}&quot;, item)
+    println!("{:?}", item)
 }
 
 fn main() {
     let ex: Executor = Executor::new();
-    let v: Vec&lt;String&gt; = vec![String::from(&quot;john&quot;), String::from(&quot;doe&quot;)];
+    let v: Vec&lt;String&gt; = vec![String::from("john"), String::from("doe")];
 
     let mut v_ref: Vec&lt;&amp;str&gt; = Vec::&lt;&amp;str&gt;::with_capacity(v.len());
     for item in &amp;v {
@@ -318,11 +300,14 @@ fn main() {
         });
     }
 }</code></pre>
-<div class="footnote-definition" id="ref1"><sup class="footnote-definition-label">1</sup>
-<p><a href="https://doc.rust-lang.org/rust-by-example/scope/lifetime/static_lifetime.html#trait-bound">Lifetime as a trait bound</a><br />
-<sup class="footnote-reference"><a href="#ref2">2</a></sup>: <a href="https://stackoverflow.com/a/69963971">How to deal with tokio::spawn closure required to be 'static and &amp;self?</a></p>
-</div>
-
+<hr>
+<ol class="footnote-definition"><li id="footnote-ref1">
+<p><a href="https://doc.rust-lang.org/rust-by-example/scope/lifetime/static_lifetime.html#trait-bound">Lifetime as a trait bound</a> <a href="#fr-ref1-1">↩</a></p>
+</li>
+<li id="footnote-ref2">
+<p><a href="https://stackoverflow.com/a/69963971">How to deal with tokio::spawn closure required to be 'static and &amp;self?</a> <a href="#fr-ref2-1">↩</a></p>
+</li>
+</ol>
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
@@ -331,7 +316,7 @@ fn main() {
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next prefetch" href="../rustification.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="../not-obvious-at-first/type-driven-api.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -345,7 +330,7 @@ fn main() {
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next prefetch" href="../rustification.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="../not-obvious-at-first/type-driven-api.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>

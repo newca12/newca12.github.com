@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Cookbook - Rust Gallery : a journey with Rust by side roads</title>
+        <title>Type-Driven API - Rust Gallery : a journey with Rust by side roads</title>
 
 
         <!-- Custom HTML head -->
@@ -12,33 +12,33 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff">
 
-        <link rel="icon" href="favicon.svg">
-        <link rel="shortcut icon" href="favicon.png">
-        <link rel="stylesheet" href="css/variables.css">
-        <link rel="stylesheet" href="css/general.css">
-        <link rel="stylesheet" href="css/chrome.css">
-        <link rel="stylesheet" href="css/print.css" media="print">
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
 
         <!-- Fonts -->
-        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
-        <link rel="stylesheet" href="fonts/fonts.css">
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
 
         <!-- Highlight.js Stylesheets -->
-        <link rel="stylesheet" id="highlight-css" href="highlight.css">
-        <link rel="stylesheet" id="tomorrow-night-css" href="tomorrow-night.css">
-        <link rel="stylesheet" id="ayu-highlight-css" href="ayu-highlight.css">
+        <link rel="stylesheet" id="highlight-css" href="../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
 
 
         <!-- Provide site root and default themes to javascript -->
         <script>
-            const path_to_root = "";
+            const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc.js"></script>
+        <script src="../toc.js"></script>
     </head>
     <body>
     <div id="body-container">
@@ -91,7 +91,7 @@
             <!-- populated by js -->
             <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
             <noscript>
-                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
             </noscript>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -126,7 +126,7 @@
                     <h1 class="menu-title">Rust Gallery : a journey with Rust by side roads</h1>
 
                     <div class="right-buttons">
-                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
 
@@ -155,25 +155,135 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="cookbook"><a class="header" href="#cookbook">Cookbook</a></h1>
-<h2 id="1-convert-vecstring-to-vecstr"><a class="header" href="#1-convert-vecstring-to-vecstr">1. Convert Vec&lt;String&gt; to Vec&lt;&amp;str&gt;</a></h2>
-<pre><pre class="playground"><code class="language-rust run edition2021">fn main() {
-    let v: Vec&lt;String&gt; = vec![String::from("john"), String::from("doe")];
+                        <h1 id="type-driven-api"><a class="header" href="#type-driven-api">Type-Driven API</a></h1>
+<p>This is from Will Crichton <a href="https://www.youtube.com/watch?v=bnnacleqg6k">talk</a> at the Strange Loop Conference 2021</p>
+<pre><pre class="playground"><code class="language-rust mdbook-runnable ignore edition2021">use std::{thread::sleep, time::Duration};
 
-    let mut v_ref = Vec::&lt;&amp;str&gt;::with_capacity(v.len());
-    for item in &amp;v {
-        v_ref.push(item);
+const CLEAR: &amp;str = "\x1B[2J\x1B[1;1H";
+
+struct Unbounded;
+struct Bounded {
+    bound: usize,
+    delims: (char, char),
+}
+
+struct Progress&lt;Iter, Bound&gt; {
+    iter: Iter,
+    i: usize,
+    bound: Bound,
+}
+
+trait ProgressDisplay: Sized {
+    fn display&lt;Iter&gt;(&amp;self, progress: &amp;Progress&lt;Iter, Self&gt;);
+}
+
+impl ProgressDisplay for Unbounded {
+    fn display&lt;Iter&gt;(&amp;self, progress: &amp;Progress&lt;Iter, Self&gt;) {
+        print!("{}", "*".repeat(progress.i));
+    }
+}
+
+impl ProgressDisplay for Bounded {
+    fn display&lt;Iter&gt;(&amp;self, progress: &amp;Progress&lt;Iter, Self&gt;) {
+        print!(
+            "{}{}{}{}",
+            self.delims.0,
+            "*".repeat(progress.i),
+            " ".repeat(self.bound - progress.i),
+            self.delims.1
+        );
+        std::io::Write::flush(&amp;mut std::io::stdout()).unwrap();
+    }
+}
+
+impl&lt;Iter&gt; Progress&lt;Iter, Unbounded&gt; {
+    pub fn new(iter: Iter) -&gt; Self {
+        Progress {
+            iter,
+            i: 0,
+            bound: Unbounded,
+        }
+    }
+}
+
+impl&lt;Iter&gt; Progress&lt;Iter, Unbounded&gt;
+where
+    Iter: ExactSizeIterator,
+{
+    pub fn with_bound(self) -&gt; Progress&lt;Iter, Bounded&gt; {
+        let bound = Bounded {
+            bound: self.iter.len(),
+            delims: ('[', ']'),
+        };
+        Progress {
+            i: self.i,
+            iter: self.iter,
+            bound,
+        }
+    }
+}
+
+impl&lt;Iter&gt; Progress&lt;Iter, Bounded&gt; {
+    pub fn with_delims(mut self, delims: (char, char)) -&gt; Self {
+        self.bound.delims = delims;
+        self
+    }
+}
+
+impl&lt;Iter, Bound&gt; Iterator for Progress&lt;Iter, Bound&gt;
+where
+    Iter: Iterator,
+    Bound: ProgressDisplay,
+{
+    type Item = Iter::Item;
+
+    fn next(&amp;mut self) -&gt; Option&lt;Self::Item&gt; {
+        print!("{}", CLEAR);
+        self.bound.display(&amp;self);
+        self.i += 1;
+
+        self.iter.next()
+    }
+}
+
+trait ProgressIteratorExt: Sized {
+    fn progress(self) -&gt; Progress&lt;Self, Unbounded&gt;;
+}
+
+impl&lt;Iter&gt; ProgressIteratorExt for Iter {
+    fn progress(self) -&gt; Progress&lt;Self, Unbounded&gt; {
+        Progress::new(self)
+    }
+}
+
+fn expensive_calculations(_n: &amp;i32) {
+    sleep(Duration::from_secs(1));
+}
+
+fn main() {
+    let brkts = ('&lt;', '&gt;');
+    //  for n in (0 .. ).progress().with_delims(btkts) {
+    //     expensive_calculations(&amp;n);
+    //  }
+
+    let v = vec![1, 2, 3];
+    for n in v.iter().progress().with_bound().with_delims(brkts) {
+        expensive_calculations(n);
     }
 }</code></pre></pre>
+<p>See also <a href="https://willcrichton.net/rust-api-type-patterns/introduction.html">https://willcrichton.net/rust-api-type-patterns</a></p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="rustification/option-cheat-sheet.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../not-obvious-at-first/tokio-spawn-&amp;-lifetime.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
+                            <a rel="next prefetch" href="../rustification.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
 
                         <div style="clear: both"></div>
                     </nav>
@@ -181,10 +291,13 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="rustification/option-cheat-sheet.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../not-obvious-at-first/tokio-spawn-&amp;-lifetime.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
+                    <a rel="next prefetch" href="../rustification.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
             </nav>
 
         </div>
@@ -197,13 +310,13 @@
         </script>
 
 
-        <script src="elasticlunr.min.js"></script>
-        <script src="mark.min.js"></script>
-        <script src="searcher.js"></script>
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
 
-        <script src="clipboard.min.js"></script>
-        <script src="highlight.js"></script>
-        <script src="book.js"></script>
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
 
         <!-- Custom JS scripts -->
 

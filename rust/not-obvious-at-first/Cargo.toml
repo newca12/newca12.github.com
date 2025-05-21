@@ -1,21 +1,21 @@
 [package]
 name = "not-obvious-at-first"
 version = "0.1.0"
-edition = "2021"
+edition = "2024"
 
 [lib]
 doctest = false
 
 [dependencies]
-async-compression = { version = "0.4.5", features = ["tokio", "gzip", "futures-io"] }
-async-executor = "1.8.0"
-async-fs = "2.1.0"
-async-io = "2.2.2"
+async-compression = { version = "0.4.23", features = ["tokio", "gzip", "futures-io"] }
+async-executor = "1.13.2"
+async-fs = "2.1.2"
+async-io = "2.4.0"
 #async-std = "1.12.0"
-futures = "0.3.30"
+futures = "0.3.31"
 #itertools = "0.11.0""
-tokio = { version = "1.35.1", features = ["full"] }
-tokio-stream = { version = "0.1.14", features = ["io-util"] }
+tokio = { version = "1.45.0", features = ["full"] }
+tokio-stream = { version = "0.1.17", features = ["io-util"] }
 
 [dev-dependencies]
 gallery_rs_utils = { path = "../gallery_rs_utils" }
@@ -77,3 +77,7 @@ path = "examples/lifetimes/puzzle1_minimized_solution2.rs"
 [[example]]
 name = "recipe1"
 path = "examples/cookbook/recipe1.rs"
+
+[[example]]
+name = "type-driven-api"
+path = "examples/type-driven-api/type-driven-api.rs"

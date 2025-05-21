@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="en" class="light" dir="ltr">
+<html lang="en" class="light sidebar-visible" dir="ltr">
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
@@ -8,7 +8,7 @@
 
 
         <!-- Custom HTML head -->
-        
+
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff">
@@ -25,26 +25,29 @@
         <link rel="stylesheet" href="fonts/fonts.css">
 
         <!-- Highlight.js Stylesheets -->
-        <link rel="stylesheet" href="highlight.css">
-        <link rel="stylesheet" href="tomorrow-night.css">
-        <link rel="stylesheet" href="ayu-highlight.css">
+        <link rel="stylesheet" id="highlight-css" href="highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
 
-    </head>
-    <body class="sidebar-visible no-js">
-    <div id="body-container">
-        <!-- Provide site root to javascript -->
-        <script>
-            var path_to_root = "";
-            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
-        </script>
 
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
         <script>
             try {
-                var theme = localStorage.getItem('mdbook-theme');
-                var sidebar = localStorage.getItem('mdbook-sidebar');
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
 
                 if (theme.startsWith('"') && theme.endsWith('"')) {
                     localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
@@ -58,24 +61,22 @@
 
         <!-- Set the theme before any content is loaded, prevents flash -->
         <script>
-            var theme;
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
-            var html = document.querySelector('html');
+            const html = document.documentElement;
             html.classList.remove('light')
             html.classList.add(theme);
-            var body = document.querySelector('body');
-            body.classList.remove('no-js')
-            body.classList.add('js');
+            html.classList.add("js");
         </script>
 
         <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
 
         <!-- Hide / unhide sidebar before it is displayed -->
         <script>
-            var body = document.querySelector('body');
-            var sidebar = null;
-            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
             if (document.body.clientWidth >= 1080) {
                 try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
                 sidebar = sidebar || 'visible';
@@ -83,45 +84,25 @@
                 sidebar = 'hidden';
             }
             sidebar_toggle.checked = sidebar === 'visible';
-            body.classList.remove('sidebar-visible');
-            body.classList.add("sidebar-" + sidebar);
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="title-page.html">A journey with Rust by side roads</a></li><li class="chapter-item expanded "><a href="not-obvious-at-first.html"><strong aria-hidden="true">1.</strong> Not obvious at first</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="not-obvious-at-first/mutable-reference.html"><strong aria-hidden="true">1.1.</strong> Mutable reference</a></li><li class="chapter-item expanded "><a href="not-obvious-at-first/tokio-vs-futures.html"><strong aria-hidden="true">1.2.</strong> Tokio vs Futures</a></li><li class="chapter-item expanded "><a href="not-obvious-at-first/spurious-stream-lock.html"><strong aria-hidden="true">1.3.</strong> Spurious stream lock</a></li><li class="chapter-item expanded "><a href="not-obvious-at-first/tokio-spawn-&-lifetime.html"><strong aria-hidden="true">1.4.</strong> Tokio spawn & lifetime</a></li></ol></li><li class="chapter-item expanded "><a href="rustification.html"><strong aria-hidden="true">2.</strong> Rustification</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="rustification/option-cheat-sheet.html"><strong aria-hidden="true">2.1.</strong> Option Cheat Sheet</a></li></ol></li><li class="chapter-item expanded "><a href="cookbook.html"><strong aria-hidden="true">3.</strong> Cookbook</a></li></ol>
-            </div>
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
             </div>
         </nav>
 
-        <!-- Track and set sidebar scroll position -->
-        <script>
-            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
-            sidebarScrollbox.addEventListener('click', function(e) {
-                if (e.target.tagName === 'A') {
-                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
-                }
-            }, { passive: true });
-            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
-            sessionStorage.removeItem('sidebar-scroll');
-            if (sidebarScrollTop) {
-                // preserve sidebar scroll position when navigating via links within sidebar
-                sidebarScrollbox.scrollTop = sidebarScrollTop;
-            } else {
-                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
-                var activeSection = document.querySelector('#sidebar .active');
-                if (activeSection) {
-                    activeSection.scrollIntoView({ block: 'center' });
-                }
-            }
-        </script>
-
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
-                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar-hover-placeholder"></div>
                 <div id="menu-bar" class="menu-bar sticky">
                     <div class="left-buttons">
                         <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
@@ -131,6 +112,7 @@
                             <i class="fa fa-paint-brush"></i>
                         </button>
                         <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
@@ -175,7 +157,7 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="a-journey-with-rust-by-side-roads"><a class="header" href="#a-journey-with-rust-by-side-roads">A journey with Rust by side roads</a></h1>
-<p>This is the companion book for the Rust Language Code Gallery covering a variety of fields and programming styles </p>
+<p>This is the companion book for the Rust Language Code Gallery covering a variety of fields and programming styles</p>
 <p><img src="VW-1960.jpg?raw=true" alt="Image" /></p>
 <h2 id="acknowledgement"><a class="header" href="#acknowledgement">Acknowledgement</a></h2>
 <p>This book use the same organization of this <a href="https://github.com/jamesgraves/rust-cookbook">rust-cookbook fork</a>, as a consequence :</p>
@@ -189,7 +171,7 @@
 <p>Clarification never hurt even for trivial things.</p>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="mutable-reference"><a class="header" href="#mutable-reference">Mutable reference</a></h2>
 <h3 id="a-mutable-reference-can-be-store-in-an-immutable-variable"><a class="header" href="#a-mutable-reference-can-be-store-in-an-immutable-variable">A mutable reference can be store in an immutable variable</a></h3>
-<pre><code class="language-rust ignore"> let mut s = String::from(&quot;hello&quot;);
+<pre><code class="language-rust ignore"> let mut s = String::from("hello");
  let r1 = &amp;mut s;</code></pre>
 <p><code>r1</code> is inferred as <code>&amp;mut String</code> but using an immutable type is allowed by the compiler and</p>
 <pre><code class="language-rust.ignore"> let r1: &amp;String = &amp;mut s;</code></pre>
@@ -198,15 +180,15 @@
 <pre><code class="language-rust ignore"> let r1 = &amp;s;</code></pre>
 <p>Let's compare</p>
 <pre><code class="language-rust ignore">pub fn review() {
-    let mut s = String::from(&quot;hello&quot;);
+    let mut s = String::from("hello");
     let r1: &amp;String = &amp;mut s;
-    println!(&quot;{}&quot;,r1);
+    println!("{}",r1);
 }</code></pre>
 <p>and</p>
 <pre><code class="language-rust ignore">pub fn review() {
-    let mut s = String::from(&quot;hello&quot;);
+    let mut s = String::from("hello");
     let r1 = &amp;s; 
-    println!(&quot;{}&quot;,r1);
+    println!("{}",r1);
 }</code></pre>
 <p>with <code>cargo-asm asm experiment::review</code></p>
 <p>As intended the asm code is exactly the same in both cases :</p>
@@ -273,28 +255,28 @@ Fortunatly <a href="https://docs.rs/tokio-stream/0.1.14/tokio_stream/wrappers/st
 <pre><code class="language-rust ignore">use std::future;
 
 use async_compression::futures::bufread::GzipDecoder;
-use futures::{io::BufReader, AsyncBufReadExt, StreamExt};
+use futures::{AsyncBufReadExt, StreamExt, io::BufReader};
 
 use async_fs::File;
 use gallery_rs_utils::locate;
 
 #[tokio::main]
 async fn main() {
-    let file = File::open(locate(&quot;123.gz&quot;)).await.unwrap();
+    let file = File::open(locate("123.gz")).await.unwrap();
     let decoder = BufReader::new(file);
 
     //this is an iterator
     let lines = BufReader::new(GzipDecoder::new(decoder)).lines();
 
-    let res = lines.for_each(|l| {
-        println!(&quot;{:?}&quot;, l);
-        future::ready(())
+    // let res = lines.for_each(|l| {
+    //     println!("{:?}", l);
+    //     future::ready(())
+    // });
+    // res.await
+    let sum = lines.fold(0, |acc, n| async move {
+        acc + n.unwrap().trim().parse::&lt;u32&gt;().unwrap()
     });
-    res.await
-    //let sum = lines.fold(0, |acc, n| async move {
-    //    acc + n.unwrap().trim().parse::&lt;u32&gt;().unwrap()
-    //});
-    //assert_eq!(sum.await, 6);
+    assert_eq!(sum.await, 6);
 }</code></pre>
 <h2 id="implementation-with-tokio"><a class="header" href="#implementation-with-tokio">Implementation with Tokio</a></h2>
 <p><a href="https://docs.rs/async-compression/"><img src="https://badge-cache.kominick.com/crates/v/async-compression.svg?label=async-compression" alt="async-compression-badge" /></a> <a href="https://docs.rs/tokio/"><img src="https://badge-cache.kominick.com/crates/v/tokio.svg?label=tokio" alt="tokio-badge" /></a></p>
@@ -308,15 +290,15 @@ use tokio::{
 
 #[tokio::main]
 async fn main() {
-    let file = File::open(locate(&quot;123.gz&quot;)).await.unwrap();
+    let file = File::open(locate("123.gz")).await.unwrap();
     let decoder = BufReader::new(file);
 
     //this is not an iterator
     let mut lines = BufReader::new(GzipDecoder::new(decoder)).lines();
 
-    assert_eq!(lines.next_line().await.unwrap().unwrap(), &quot;1&quot;);
-    assert_eq!(lines.next_line().await.unwrap().unwrap(), &quot;2&quot;);
-    assert_eq!(lines.next_line().await.unwrap().unwrap(), &quot;3&quot;);
+    assert_eq!(lines.next_line().await.unwrap().unwrap(), "1");
+    assert_eq!(lines.next_line().await.unwrap().unwrap(), "2");
+    assert_eq!(lines.next_line().await.unwrap().unwrap(), "3");
 }</code></pre>
 <h2 id="implementation-with-tokio-stream"><a class="header" href="#implementation-with-tokio-stream">Implementation with Tokio Stream</a></h2>
 <p><a href="https://docs.rs/async-compression/"><img src="https://badge-cache.kominick.com/crates/v/async-compression.svg?label=async-compression" alt="async-compression-badge" /></a> <a href="https://docs.rs/tokio/"><img src="https://badge-cache.kominick.com/crates/v/tokio.svg?label=tokio" alt="tokio-badge" /></a> <a href="https://docs.rs/tokio-stream/"><img src="https://badge-cache.kominick.com/crates/v/tokio-stream.svg?label=tokio-stream" alt="tokio-stream-badge" /></a></p>
@@ -332,7 +314,7 @@ use tokio_stream::wrappers::LinesStream;
 
 #[tokio::main]
 async fn main() {
-    let file = File::open(locate(&quot;123.gz&quot;)).await.unwrap();
+    let file = File::open(locate("123.gz")).await.unwrap();
     let decoder = BufReader::new(file);
 
     //this is not an iterator
@@ -358,15 +340,15 @@ use std::fs::File;
 use std::io::{self, BufRead};
 
 fn main() {
-    let file = File::open(locate(&quot;corrupted_utf8&quot;)).unwrap();
+    let file = File::open(locate("corrupted_utf8")).unwrap();
     let stream = io::BufReader::new(file).lines();
-    stream.for_each(|line| println!(&quot;{}&quot;, line.unwrap()));
+    stream.for_each(|line| println!("{}", line.unwrap()));
 }</code></pre>
 <p>Does filter bad lines when unvalid UTF-8 line is encountered</p>
 <p><a href="https://docs.rs/tokio/"><img src="https://badge-cache.kominick.com/crates/v/tokio.svg?label=tokio" alt="tokio-badge" /></a> <a href="https://docs.rs/tokio-stream/"><img src="https://badge-cache.kominick.com/crates/v/tokio-stream.svg?label=tokio-stream" alt="tokio-stream-badge" /></a></p>
 <pre><code class="language-rust ignore">use gallery_rs_utils::locate;
 
-use futures::{pin_mut, stream, Stream, StreamExt};
+use futures::{Stream, StreamExt, pin_mut, stream};
 use tokio::fs::File;
 use tokio::io::{AsyncBufReadExt, BufReader};
 use tokio_stream::wrappers::LinesStream;
@@ -374,7 +356,7 @@ use tokio_stream::wrappers::LinesStream;
 //lock not reproduced
 #[tokio::main]
 async fn main() {
-    let file = File::open(locate(&quot;corrupted_utf8&quot;)).await.unwrap();
+    let file = File::open(locate("corrupted_utf8")).await.unwrap();
 
     let decoder = BufReader::new(file).lines();
     let lines = LinesStream::new(decoder);
@@ -387,7 +369,7 @@ pub async fn process(stream: impl Stream&lt;Item = String&gt;) {
     pin_mut!(stream);
     let mut total = 0;
     while let Some(line) = tokio_stream::StreamExt::next(&amp;mut stream).await {
-        println!(&quot;{} {}&quot;, total, line);
+        println!("{} {}", total, line);
         total += 1;
     }
 }</code></pre>
@@ -396,12 +378,12 @@ pub async fn process(stream: impl Stream&lt;Item = String&gt;) {
 <pre><code class="language-rust ignore">use gallery_rs_utils::locate;
 
 use async_fs::File;
-use futures::{io::BufReader, pin_mut, stream, AsyncBufReadExt, Stream, StreamExt};
+use futures::{AsyncBufReadExt, Stream, StreamExt, io::BufReader, pin_mut, stream};
 
 //lock reproduced
 #[tokio::main]
 async fn main() {
-    let file = File::open(locate(&quot;corrupted_utf8&quot;)).await.unwrap();
+    let file = File::open(locate("corrupted_utf8")).await.unwrap();
 
     let stream = BufReader::new(file).lines().flat_map(stream::iter);
 
@@ -412,7 +394,7 @@ pub async fn process(stream: impl Stream&lt;Item = String&gt;) {
     pin_mut!(stream);
     let mut total = 0;
     while let Some(line) = tokio_stream::StreamExt::next(&amp;mut stream).await {
-        println!(&quot;{} {}&quot;, total, line);
+        println!("{} {}", total, line);
         total += 1;
     }
 }</code></pre>
@@ -427,12 +409,12 @@ pub async fn process(stream: impl Stream&lt;Item = String&gt;) {
 use tokio::time::{sleep, Duration};
 
 async fn compute(item: &amp;str) {
-    println!(&quot;{}&quot;, item);
+    println!("{}", item);
 }
 
 #[tokio::main]
 async fn main() {
-    let v: Vec&lt;String&gt; = vec![String::from(&quot;john&quot;), String::from(&quot;doe&quot;)];
+    let v: Vec&lt;String&gt; = vec![String::from("john"), String::from("doe")];
 
     let mut v_ref = Vec::&lt;&amp;str&gt;::with_capacity(v.len());
     for item in &amp;v {
@@ -445,22 +427,22 @@ async fn main() {
     }
     sleep(Duration::from_millis(100)).await;
 }</code></pre></pre>
-<p>The fact that the drop of v after main is not compatible with <code>&quot;argument requires that `v` is borrowed for `'static`&quot;</code> is not obvious.<br />
-The issue is that v has the lifetime defined by the scope of main() and not the 'static lifetime required by the Trait bound<sup class="footnote-reference"><a href="#ref1">1</a></sup> of the spawn function.</p>
+<p>The fact that the drop of v after main is not compatible with <code>"argument requires that `v` is borrowed for `'static`"</code> is not obvious.<br />
+The issue is that v has the lifetime defined by the scope of main() and not the 'static lifetime required by the Trait bound<sup class="footnote-reference" id="fr-ref1-1"><a href="#footnote-ref1">1</a></sup> of the spawn function.</p>
 <p>The solution for Tokio API is <code>Arc</code>.</p>
 <p><a href="https://docs.rs/tokio/"><img src="https://badge-cache.kominick.com/crates/v/tokio.svg?label=tokio" alt="tokio-badge" /></a></p>
 <pre><pre class="playground"><code class="language-rust mdbook-runnable ignore edition2021">use std::sync::Arc;
 
 use tokio::task::JoinSet;
-use tokio::time::{sleep, Duration};
+use tokio::time::{Duration, sleep};
 
 async fn compute(item: Arc&lt;str&gt;) {
-    println!(&quot;{}&quot;, item)
+    println!("{}", item)
 }
 
 #[tokio::main]
 async fn main() {
-    let v: Vec&lt;String&gt; = vec![String::from(&quot;john&quot;), String::from(&quot;doe&quot;)];
+    let v: Vec&lt;String&gt; = vec![String::from("john"), String::from("doe")];
 
     let mut v_ref = Vec::&lt;Arc&lt;str&gt;&gt;::with_capacity(v.len());
     for item in &amp;v {
@@ -477,11 +459,11 @@ async fn main() {
 <pre><pre class="playground"><code class="language-rust compile_fail edition2021">use std::fmt::Debug;
 
 fn compute(item: impl Debug + 'static) {
-    println!(&quot;{:?}&quot;, item);
+    println!("{:?}", item);
 }
 
 fn main() {
-    let v: Vec&lt;String&gt; = vec![String::from(&quot;john&quot;), String::from(&quot;doe&quot;)];
+    let v: Vec&lt;String&gt; = vec![String::from("john"), String::from("doe")];
 
     let mut v_ref = Vec::&lt;&amp;str&gt;::with_capacity(v.len());
     for item in &amp;v {
@@ -496,11 +478,11 @@ fn main() {
 <pre><pre class="playground"><code class="language-rust run edition2021">use std::{fmt::Debug, sync::Arc};
 
 fn compute(item: impl Debug + 'static) {
-    println!(&quot;{:?}&quot;, item);
+    println!("{:?}", item);
 }
 
 fn main() {
-    let v: Vec&lt;String&gt; = vec![String::from(&quot;john&quot;), String::from(&quot;doe&quot;)];
+    let v: Vec&lt;String&gt; = vec![String::from("john"), String::from("doe")];
 
     let mut v_ref = Vec::&lt;Arc&lt;str&gt;&gt;::with_capacity(v.len());
     for item in &amp;v {
@@ -514,11 +496,11 @@ fn main() {
 <p>But why is the Tokio requirement so strong ?<br />
 If the requirement was simply a regular lifetime we can do :</p>
 <pre><pre class="playground"><code class="language-rust run edition2021">fn compute&lt;'a&gt;(item: impl std::fmt::Debug + 'a) {
-    println!(&quot;{:?}&quot;, item)
+    println!("{:?}", item)
 }
 
 fn main() {
-    let v: Vec&lt;String&gt; = vec![String::from(&quot;john&quot;), String::from(&quot;doe&quot;)];
+    let v: Vec&lt;String&gt; = vec![String::from("john"), String::from("doe")];
 
     let mut v_ref = Vec::&lt;&amp;str&gt;::with_capacity(v.len());
     for item in &amp;v {
@@ -529,7 +511,7 @@ fn main() {
         compute(item);
     }
 }</code></pre></pre>
-<p>It turn out<sup class="footnote-reference"><a href="#ref2">2</a></sup> that the async executor has exactly this requirement.<br />
+<p>It turn out<sup class="footnote-reference" id="fr-ref2-1"><a href="#footnote-ref2">2</a></sup> that the async executor has exactly this requirement.<br />
 spawn in smol is defined ike this :</p>
 <pre><code class="language-rust ignore">fn spawn&lt;T: Send + 'a&gt;(&amp;self, future: impl Future&lt;Output = T&gt; + Send + 'a) -&gt; Task&lt;T&gt;</code></pre>
 <p>whereas Tokio spawn is defined ike this :</p>
@@ -543,12 +525,12 @@ spawn in smol is defined ike this :</p>
 <pre><code class="language-rust ignore">use async_executor::Executor;
 
 async fn compute&lt;'a&gt;(item: impl std::fmt::Debug + 'a) {
-    println!(&quot;{:?}&quot;, item)
+    println!("{:?}", item)
 }
 
 fn main() {
     let ex: Executor = Executor::new();
-    let v: Vec&lt;String&gt; = vec![String::from(&quot;john&quot;), String::from(&quot;doe&quot;)];
+    let v: Vec&lt;String&gt; = vec![String::from("john"), String::from("doe")];
 
     let mut v_ref: Vec&lt;&amp;str&gt; = Vec::&lt;&amp;str&gt;::with_capacity(v.len());
     for item in &amp;v {
@@ -561,10 +543,130 @@ fn main() {
         });
     }
 }</code></pre>
-<div class="footnote-definition" id="ref1"><sup class="footnote-definition-label">1</sup>
-<p><a href="https://doc.rust-lang.org/rust-by-example/scope/lifetime/static_lifetime.html#trait-bound">Lifetime as a trait bound</a><br />
-<sup class="footnote-reference"><a href="#ref2">2</a></sup>: <a href="https://stackoverflow.com/a/69963971">How to deal with tokio::spawn closure required to be 'static and &amp;self?</a></p>
-</div>
+<hr>
+<ol class="footnote-definition"><li id="footnote-ref1">
+<p><a href="https://doc.rust-lang.org/rust-by-example/scope/lifetime/static_lifetime.html#trait-bound">Lifetime as a trait bound</a> <a href="#fr-ref1-1">↩</a></p>
+</li>
+<li id="footnote-ref2">
+<p><a href="https://stackoverflow.com/a/69963971">How to deal with tokio::spawn closure required to be 'static and &amp;self?</a> <a href="#fr-ref2-1">↩</a></p>
+</li>
+</ol><div style="break-before: page; page-break-before: always;"></div><h1 id="type-driven-api"><a class="header" href="#type-driven-api">Type-Driven API</a></h1>
+<p>This is from Will Crichton <a href="https://www.youtube.com/watch?v=bnnacleqg6k">talk</a> at the Strange Loop Conference 2021</p>
+<pre><pre class="playground"><code class="language-rust mdbook-runnable ignore edition2021">use std::{thread::sleep, time::Duration};
+
+const CLEAR: &amp;str = "\x1B[2J\x1B[1;1H";
+
+struct Unbounded;
+struct Bounded {
+    bound: usize,
+    delims: (char, char),
+}
+
+struct Progress&lt;Iter, Bound&gt; {
+    iter: Iter,
+    i: usize,
+    bound: Bound,
+}
+
+trait ProgressDisplay: Sized {
+    fn display&lt;Iter&gt;(&amp;self, progress: &amp;Progress&lt;Iter, Self&gt;);
+}
+
+impl ProgressDisplay for Unbounded {
+    fn display&lt;Iter&gt;(&amp;self, progress: &amp;Progress&lt;Iter, Self&gt;) {
+        print!("{}", "*".repeat(progress.i));
+    }
+}
+
+impl ProgressDisplay for Bounded {
+    fn display&lt;Iter&gt;(&amp;self, progress: &amp;Progress&lt;Iter, Self&gt;) {
+        print!(
+            "{}{}{}{}",
+            self.delims.0,
+            "*".repeat(progress.i),
+            " ".repeat(self.bound - progress.i),
+            self.delims.1
+        );
+        std::io::Write::flush(&amp;mut std::io::stdout()).unwrap();
+    }
+}
+
+impl&lt;Iter&gt; Progress&lt;Iter, Unbounded&gt; {
+    pub fn new(iter: Iter) -&gt; Self {
+        Progress {
+            iter,
+            i: 0,
+            bound: Unbounded,
+        }
+    }
+}
+
+impl&lt;Iter&gt; Progress&lt;Iter, Unbounded&gt;
+where
+    Iter: ExactSizeIterator,
+{
+    pub fn with_bound(self) -&gt; Progress&lt;Iter, Bounded&gt; {
+        let bound = Bounded {
+            bound: self.iter.len(),
+            delims: ('[', ']'),
+        };
+        Progress {
+            i: self.i,
+            iter: self.iter,
+            bound,
+        }
+    }
+}
+
+impl&lt;Iter&gt; Progress&lt;Iter, Bounded&gt; {
+    pub fn with_delims(mut self, delims: (char, char)) -&gt; Self {
+        self.bound.delims = delims;
+        self
+    }
+}
+
+impl&lt;Iter, Bound&gt; Iterator for Progress&lt;Iter, Bound&gt;
+where
+    Iter: Iterator,
+    Bound: ProgressDisplay,
+{
+    type Item = Iter::Item;
+
+    fn next(&amp;mut self) -&gt; Option&lt;Self::Item&gt; {
+        print!("{}", CLEAR);
+        self.bound.display(&amp;self);
+        self.i += 1;
+
+        self.iter.next()
+    }
+}
+
+trait ProgressIteratorExt: Sized {
+    fn progress(self) -&gt; Progress&lt;Self, Unbounded&gt;;
+}
+
+impl&lt;Iter&gt; ProgressIteratorExt for Iter {
+    fn progress(self) -&gt; Progress&lt;Self, Unbounded&gt; {
+        Progress::new(self)
+    }
+}
+
+fn expensive_calculations(_n: &amp;i32) {
+    sleep(Duration::from_secs(1));
+}
+
+fn main() {
+    let brkts = ('&lt;', '&gt;');
+    //  for n in (0 .. ).progress().with_delims(btkts) {
+    //     expensive_calculations(&amp;n);
+    //  }
+
+    let v = vec![1, 2, 3];
+    for n in v.iter().progress().with_bound().with_delims(brkts) {
+        expensive_calculations(n);
+    }
+}</code></pre></pre>
+<p>See also <a href="https://willcrichton.net/rust-api-type-patterns/introduction.html">https://willcrichton.net/rust-api-type-patterns</a></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="rustification"><a class="header" href="#rustification">Rustification</a></h1>
 <p>Articles adapted to rust.</p>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="option-cheat-sheet"><a class="header" href="#option-cheat-sheet">Option Cheat Sheet</a></h2>
@@ -663,7 +765,7 @@ fn main() {
 <div style="break-before: page; page-break-before: always;"></div><h1 id="cookbook"><a class="header" href="#cookbook">Cookbook</a></h1>
 <h2 id="1-convert-vecstring-to-vecstr"><a class="header" href="#1-convert-vecstring-to-vecstr">1. Convert Vec&lt;String&gt; to Vec&lt;&amp;str&gt;</a></h2>
 <pre><pre class="playground"><code class="language-rust run edition2021">fn main() {
-    let v: Vec&lt;String&gt; = vec![String::from(&quot;john&quot;), String::from(&quot;doe&quot;)];
+    let v: Vec&lt;String&gt; = vec![String::from("john"), String::from("doe")];
 
     let mut v_ref = Vec::&lt;&amp;str&gt;::with_capacity(v.len());
     for item in &amp;v {

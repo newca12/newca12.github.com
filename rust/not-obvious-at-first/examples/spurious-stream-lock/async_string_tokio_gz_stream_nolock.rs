@@ -1,7 +1,7 @@
 use gallery_rs_utils::locate;
 
 use async_compression::tokio::bufread::GzipDecoder;
-use futures::{pin_mut, stream, Stream, StreamExt};
+use futures::{Stream, StreamExt, pin_mut, stream};
 use tokio::fs::File;
 use tokio::io::{AsyncBufReadExt, BufReader};
 use tokio_stream::wrappers::LinesStream;

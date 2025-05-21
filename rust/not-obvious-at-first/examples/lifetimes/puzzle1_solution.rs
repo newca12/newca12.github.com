@@ -1,7 +1,7 @@
 use std::sync::Arc;
 
 use tokio::task::JoinSet;
-use tokio::time::{sleep, Duration};
+use tokio::time::{Duration, sleep};
 
 async fn compute(item: Arc<str>) {
     println!("{}", item)
