@@ -80,7 +80,7 @@ where
 
     fn next(&mut self) -> Option<Self::Item> {
         print!("{}", CLEAR);
-        self.bound.display(&self);
+        self.bound.display(self);
         self.i += 1;
 
         self.iter.next()
@@ -107,7 +107,7 @@ fn main() {
     //     expensive_calculations(&n);
     //  }
 
-    let v = vec![1, 2, 3];
+    let v = [1, 2, 3];
     for n in v.iter().progress().with_bound().with_delims(brkts) {
         expensive_calculations(n);
     }

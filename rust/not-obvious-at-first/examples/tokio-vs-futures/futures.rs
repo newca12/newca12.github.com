@@ -1,5 +1,3 @@
-use std::future;
-
 use async_compression::futures::bufread::GzipDecoder;
 use futures::{AsyncBufReadExt, StreamExt, io::BufReader};
 

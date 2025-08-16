@@ -37,11 +37,23 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "searchindex.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="toc.js"></script>
     </head>
     <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
     <div id="body-container">
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
         <script>
@@ -82,10 +94,13 @@
                 sidebar = sidebar || 'visible';
             } else {
                 sidebar = 'hidden';
+                sidebar_toggle.checked = false;
             }
-            sidebar_toggle.checked = sidebar === 'visible';
-            html.classList.remove('sidebar-visible');
-            html.classList.add("sidebar-" + sidebar);
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
@@ -119,7 +134,7 @@
                             <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
                         </ul>
-                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
                             <i class="fa fa-search"></i>
                         </button>
                     </div>
@@ -136,7 +151,12 @@
 
                 <div id="search-wrapper" class="hidden">
                     <form id="searchbar-outer" class="searchbar-outer">
-                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                        <div class="search-wrapper">
+                            <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <i class="fa fa-spinner fa-spin"></i>
+                            </div>
+                        </div>
                     </form>
                     <div id="searchresults-outer" class="searchresults-outer hidden">
                         <div id="searchresults-header" class="searchresults-header"></div>
@@ -162,9 +182,12 @@
 <h2 id="acknowledgement"><a class="header" href="#acknowledgement">Acknowledgement</a></h2>
 <p>This book use the same organization of this <a href="https://github.com/jamesgraves/rust-cookbook">rust-cookbook fork</a>, as a consequence :</p>
 <ul>
-<li>All examples are runnable via cargo run --example</li>
-<li>All examples are also run via cargo test</li>
-<li>This makes it easier for users to run the examples that are incompatible with the Rust Playground</li>
+<li>All examples are runnable via <code>cargo run --example</code></li>
+</ul>
+<p>This makes it easier for users to run the examples that are incompatible with the Rust Playground</p>
+<ul>
+<li>All examples are testable via <code>cargo test</code></li>
+<li>All examples are checkable with clippy via <code>cargo clippy --all-targets</code></li>
 </ul>
 <p><a href="https://github.com/newca12/gallery-rs">Source code</a></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="not-obvious-at-first"><a class="header" href="#not-obvious-at-first">Not obvious at first</a></h1>
@@ -252,9 +275,7 @@ LBB2_5:
 Fortunatly <a href="https://docs.rs/tokio-stream/0.1.14/tokio_stream/wrappers/struct.LinesStream.html"><code>tokio_stream::wrappers::LinesStream</code></a> is a wrapper around <a href="https://docs.rs/tokio/1.28.0/tokio/io/struct.Lines.html"><code>tokio::io::Lines</code></a> that implements <a href="https://docs.rs/futures-core/0.3.28/futures_core/stream/trait.Stream.html"><code>Stream</code></a>.</p>
 <h2 id="implementation-with-futures"><a class="header" href="#implementation-with-futures">Implementation with Futures</a></h2>
 <p><a href="https://docs.rs/async-compression/"><img src="https://badge-cache.kominick.com/crates/v/async-compression.svg?label=async-compression" alt="async-compression-badge" /></a> <a href="https://docs.rs/async-fs/"><img src="https://badge-cache.kominick.com/crates/v/async-fs.svg?label=async-fs" alt="async-fs-badge" /></a> <a href="https://docs.rs/futures/"><img src="https://badge-cache.kominick.com/crates/v/futures.svg?label=futures" alt="futures-badge" /></a></p>
-<pre><code class="language-rust ignore">use std::future;
-
-use async_compression::futures::bufread::GzipDecoder;
+<pre><code class="language-rust ignore">use async_compression::futures::bufread::GzipDecoder;
 use futures::{AsyncBufReadExt, StreamExt, io::BufReader};
 
 use async_fs::File;
@@ -374,7 +395,7 @@ pub async fn process(stream: impl Stream&lt;Item = String&gt;) {
     }
 }</code></pre>
 <p><del>Does <strong>lock</strong> when unvalid UTF-8 line is encountered</del></p>
-<p><a href="https://badge-cache.kominick.com/badge/futures-0.3.28-orange.svg"><img src="https://badge-cache.kominick.com/badge/futures-0.3.28-orange.svg" alt="futures-0.3.28-badge" /></a></p>
+<p><a href="https://docs.rs/futures/"><img src="https://badge-cache.kominick.com/crates/v/futures.svg?label=futures" alt="futures-badge" /></a></p>
 <pre><code class="language-rust ignore">use gallery_rs_utils::locate;
 
 use async_fs::File;
@@ -405,7 +426,7 @@ pub async fn process(stream: impl Stream&lt;Item = String&gt;) {
 </blockquote>
 <p>Run this to show the compiler error when this requirement is no met.</p>
 <p><a href="https://docs.rs/tokio/"><img src="https://badge-cache.kominick.com/crates/v/tokio.svg?label=tokio" alt="tokio-badge" /></a></p>
-<pre><pre class="playground"><code class="language-rust compile_fail edition2021">use tokio::task::JoinSet;
+<pre><pre class="playground"><code class="language-rust compile_fail edition2024">use tokio::task::JoinSet;
 use tokio::time::{sleep, Duration};
 
 async fn compute(item: &amp;str) {
@@ -431,7 +452,7 @@ async fn main() {
 The issue is that v has the lifetime defined by the scope of main() and not the 'static lifetime required by the Trait bound<sup class="footnote-reference" id="fr-ref1-1"><a href="#footnote-ref1">1</a></sup> of the spawn function.</p>
 <p>The solution for Tokio API is <code>Arc</code>.</p>
 <p><a href="https://docs.rs/tokio/"><img src="https://badge-cache.kominick.com/crates/v/tokio.svg?label=tokio" alt="tokio-badge" /></a></p>
-<pre><pre class="playground"><code class="language-rust mdbook-runnable ignore edition2021">use std::sync::Arc;
+<pre><pre class="playground"><code class="language-rust mdbook-runnable ignore edition2024">use std::sync::Arc;
 
 use tokio::task::JoinSet;
 use tokio::time::{Duration, sleep};
@@ -456,7 +477,7 @@ async fn main() {
     sleep(Duration::from_millis(100)).await;
 }</code></pre></pre>
 <p>We can minimize the same issue without Tokio.</p>
-<pre><pre class="playground"><code class="language-rust compile_fail edition2021">use std::fmt::Debug;
+<pre><pre class="playground"><code class="language-rust compile_fail edition2024">use std::fmt::Debug;
 
 fn compute(item: impl Debug + 'static) {
     println!("{:?}", item);
@@ -475,7 +496,7 @@ fn main() {
     }
 }</code></pre></pre>
 <p>And solved it the same way with <code>Arc</code>.</p>
-<pre><pre class="playground"><code class="language-rust run edition2021">use std::{fmt::Debug, sync::Arc};
+<pre><pre class="playground"><code class="language-rust run edition2024">use std::{fmt::Debug, sync::Arc};
 
 fn compute(item: impl Debug + 'static) {
     println!("{:?}", item);
@@ -495,7 +516,7 @@ fn main() {
 }</code></pre></pre>
 <p>But why is the Tokio requirement so strong ?<br />
 If the requirement was simply a regular lifetime we can do :</p>
-<pre><pre class="playground"><code class="language-rust run edition2021">fn compute&lt;'a&gt;(item: impl std::fmt::Debug + 'a) {
+<pre><pre class="playground"><code class="language-rust run edition2024">fn compute&lt;'a&gt;(item: impl std::fmt::Debug + 'a) {
     println!("{:?}", item)
 }
 
@@ -552,7 +573,7 @@ fn main() {
 </li>
 </ol><div style="break-before: page; page-break-before: always;"></div><h1 id="type-driven-api"><a class="header" href="#type-driven-api">Type-Driven API</a></h1>
 <p>This is from Will Crichton <a href="https://www.youtube.com/watch?v=bnnacleqg6k">talk</a> at the Strange Loop Conference 2021</p>
-<pre><pre class="playground"><code class="language-rust mdbook-runnable ignore edition2021">use std::{thread::sleep, time::Duration};
+<pre><pre class="playground"><code class="language-rust mdbook-runnable ignore edition2024">use std::{thread::sleep, time::Duration};
 
 const CLEAR: &amp;str = "\x1B[2J\x1B[1;1H";
 
@@ -634,7 +655,7 @@ where
 
     fn next(&amp;mut self) -&gt; Option&lt;Self::Item&gt; {
         print!("{}", CLEAR);
-        self.bound.display(&amp;self);
+        self.bound.display(self);
         self.i += 1;
 
         self.iter.next()
@@ -661,7 +682,7 @@ fn main() {
     //     expensive_calculations(&amp;n);
     //  }
 
-    let v = vec![1, 2, 3];
+    let v = [1, 2, 3];
     for n in v.iter().progress().with_bound().with_delims(brkts) {
         expensive_calculations(n);
     }
@@ -670,7 +691,7 @@ fn main() {
 <div style="break-before: page; page-break-before: always;"></div><h1 id="rustification"><a class="header" href="#rustification">Rustification</a></h1>
 <p>Articles adapted to rust.</p>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="option-cheat-sheet"><a class="header" href="#option-cheat-sheet">Option Cheat Sheet</a></h2>
-<p>Adapted from <a href="https://web.archive.org/web/20130429013704/http://blog.tmorris.net/posts/scalaoption-cheat-sheet/">λ Tony's blog λ scala.Option Cheat Sheet</a></p>
+<p>Adapted from <a href="https://blog.tmorris.net/posts/scalaoption-cheat-sheet/">λ Tony's blog λ scala.Option Cheat Sheet</a></p>
 <hr />
 <p><strong>and_then</strong> (aka flatMap in Scala)</p>
 <pre><code class="language-rust ignore">match option {
@@ -764,7 +785,7 @@ fn main() {
 <p><a href="https://rust-unofficial.github.io/patterns/idioms/option-iter.html">Iterating over an Option</a></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="cookbook"><a class="header" href="#cookbook">Cookbook</a></h1>
 <h2 id="1-convert-vecstring-to-vecstr"><a class="header" href="#1-convert-vecstring-to-vecstr">1. Convert Vec&lt;String&gt; to Vec&lt;&amp;str&gt;</a></h2>
-<pre><pre class="playground"><code class="language-rust run edition2021">fn main() {
+<pre><pre class="playground"><code class="language-rust run edition2024">fn main() {
     let v: Vec&lt;String&gt; = vec![String::from("john"), String::from("doe")];
 
     let mut v_ref = Vec::&lt;&amp;str&gt;::with_capacity(v.len());
@@ -813,6 +834,7 @@ fn main() {
             window.setTimeout(window.print, 100);
         });
         </script>
+
 
     </div>
     </body>
