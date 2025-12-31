@@ -7,7 +7,7 @@
 
 <head>
     <!-- change this to your project name -->
-    <title>eframe template</title>
+    <title>GourmandWebViewer</title>
 
     <!-- config for our rust wasm binary. go to https://trunkrs.dev/assets/#rust for more customization -->
     
@@ -127,7 +127,7 @@ dispatchEvent(new CustomEvent("TrunkApplicationStarted", {detail: {wasm}}));
             }
         }
     </style>
-<link rel="modulepreload" href="/gourmand-web-viewer.js" crossorigin="anonymous" integrity="sha384-ZDhDup0pbzpLauk4aEjR4Y6tNH16LGZ1BPxAG2yp0Hgv8lSZdhz5YGK4OU22hyrO"><link rel="preload" href="/gourmand-web-viewer_bg.wasm" crossorigin="anonymous" integrity="sha384-tSRk2hwYjfBeffrVtGV4IE+2XI1UP7jEGURYURSSG6Tw+RUdFzg7dBG2uyX0M6tN" as="fetch" type="application/wasm"><link rel="modulepreload" href="/gourmand-web-viewer.js" crossorigin="anonymous" integrity="sha384-K6jdEkytVAMWBHOOwVkZXBJgVoDaisA+vvwI+cWmfkuFgT99sn7OjW2hERpY/ozH"><link rel="preload" href="/gourmand-web-viewer_bg.wasm" crossorigin="anonymous" integrity="sha384-tevkjyCW0hd44e1YFcw4Iy5bYeaJlxhlYArwlhHlul2SX1UL8K54sLZDO3IJj6mB" as="fetch" type="application/wasm"></head>
+<link rel="modulepreload" href="/gourmand-web-viewer.js" crossorigin="anonymous" integrity="sha384-ofMJLXm3hReAo8zuHSAOyJ7BOjKW5C6Ev2u5fOuADu00LxRVn020v+zjJDciIwJq"><link rel="preload" href="/gourmand-web-viewer_bg.wasm" crossorigin="anonymous" integrity="sha384-O3eEXlI8ZcblrluDweZw2tys1GQsxQOpbMlFbp8hEjzI7rakPRVrBsg9nDdM2DYI" as="fetch" type="application/wasm"></head>
 
 <body>
     <!-- The WASM code will resize the canvas dynamically -->
@@ -153,18 +153,7 @@ dispatchEvent(new CustomEvent("TrunkApplicationStarted", {detail: {wasm}}));
             });
         }
     </script>
-
-<script type="module">
-import init, * as bindings from '/gourmand-web-viewer.js';
-const wasm = await init({ module_or_path: '/gourmand-web-viewer_bg.wasm' });
-
-
-window.wasmBindings = bindings;
-
-
-dispatchEvent(new CustomEvent("TrunkApplicationStarted", {detail: {wasm}}));
-
-</script></body>
+</body>
 
 </html>
 
